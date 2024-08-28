@@ -8,6 +8,19 @@ package com.grupo7.espotify.modelo;
  *
  * @author Law
  */
-public class artista {
-    
+public class artista extends usuario {
+
+    private String biografia;
+    private String dirWeb;
+
+    public artista(String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
+        super(nickname, nombre, apellido, email, fecha_naci);
+        this.biografia = biografia;
+        this.dirWeb = dirWeb;
+    }
+
+    @Override
+    public void mostrarInformacion() {
+        System.out.println("Artista: " + nombre + " " + apellido + ". Biografía: " + biografia);
+    }
 }

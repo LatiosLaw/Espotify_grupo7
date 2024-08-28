@@ -8,6 +8,15 @@ package com.grupo7.espotify.modelo;
  *
  * @author Law
  */
-public class cliente {
-    
+
+public class cliente extends usuario {
+
+    public cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
+        super(nickname, nombre, apellido, email, fecha_naci);
+    }
+
+    @Override
+    public void mostrarInformacion() {
+        System.out.println("Cliente: " + nombre + " " + apellido);
+    }
 }
