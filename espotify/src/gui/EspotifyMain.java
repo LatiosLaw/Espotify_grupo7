@@ -17,10 +17,9 @@ import servicios.DatabaseConnector;
 public class EspotifyMain {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Espotify");
-        frame.setSize(200, 300);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+        FormularioPrincipal fp = new FormularioPrincipal();
+        fp.setVisible(true);
 
         // Cargar el driver JDBC
         try {
