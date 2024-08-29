@@ -7,18 +7,28 @@ package logica;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
  * @author Law
  */
-public abstract class usuario {
+@Entity
+public abstract class Usuario {
+    @Id
     protected String nickname;
     protected String nombre;
     protected String apellido;
     protected String correo;
     protected LocalDate fecha_nac;
+    
+    public Usuario(){
+    }
 
-    public usuario(String nickname, String nombre, String apellido, String correo, String fecha_naci) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, String fecha_naci) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;

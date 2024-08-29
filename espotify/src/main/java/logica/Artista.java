@@ -16,24 +16,21 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Artista extends usuario {
+public class Artista extends Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Clave primaria
     private String biografia;
     private String dirWeb;
 
+    // Constructor por defecto
+    public Artista() {
+        // Constructor vacío necesario para JPA
+    }
 
     public Artista(String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
         super(nickname, nombre, apellido, email, fecha_naci);
         this.biografia = biografia;
         this.dirWeb = dirWeb;
-    }
-
-    // Getters y Setters
-    public Long getId() {
-        return id;
     }
 
     public String getBiografia() {

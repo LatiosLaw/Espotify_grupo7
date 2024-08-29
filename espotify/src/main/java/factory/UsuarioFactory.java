@@ -9,15 +9,15 @@ package factory;
  * @author Law
  */
 
-import logica.usuario;
-import logica.cliente;
+import logica.Usuario;
+import logica.Cliente;
 import logica.Artista;
 
 public class UsuarioFactory {
 
-    public static usuario createUsuario(String tipo, String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
+    public static Usuario createUsuario(String tipo, String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
         if ("Cliente".equalsIgnoreCase(tipo)) {
-            return new cliente(nickname, nombre, apellido, email, fecha_naci);
+            return new Cliente(nickname, nombre, apellido, email, fecha_naci);
         } else if ("Artista".equalsIgnoreCase(tipo)) {
             return new Artista(nickname, nombre, apellido, email, fecha_naci, biografia, dirWeb);
         } else {

@@ -4,14 +4,24 @@
  */
 package logica;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
- * @author Law
+ * @author Nico
  */
+@Entity
+public class Cliente extends Usuario {
+    
+    public Cliente(){
+        
+    }
 
-public class cliente extends usuario {
-
-    public cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
+    public Cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
         super(nickname, nombre, apellido, email, fecha_naci);
     }
 

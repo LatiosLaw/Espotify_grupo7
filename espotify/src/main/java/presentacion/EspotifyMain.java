@@ -10,7 +10,7 @@ package presentacion;
  */
 
 import logica.Artista;
-import javax.swing.JFrame;
+import logica.Cliente;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,10 +31,15 @@ public class EspotifyMain {
        
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
+        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
 
         // Guardar el Artista en la base de datos
         em.getTransaction().begin();
         em.persist(art1);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
+        em.persist(cli1);
         em.getTransaction().commit();
         
         // Cierre del EntityManager y EntityManagerFactory (opcional)
