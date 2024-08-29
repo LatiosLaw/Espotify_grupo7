@@ -1,1 +1,0 @@
-Posiblemente aca dejemos todas las conexiones con el servidor web y la logica de la conexion con los clientes mas adelante.
