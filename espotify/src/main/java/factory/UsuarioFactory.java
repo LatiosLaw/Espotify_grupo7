@@ -11,7 +11,7 @@ package factory;
 
 import logica.usuario;
 import logica.cliente;
-import logica.artista;
+import logica.Artista;
 
 public class UsuarioFactory {
 
@@ -19,7 +19,7 @@ public class UsuarioFactory {
         if ("Cliente".equalsIgnoreCase(tipo)) {
             return new cliente(nickname, nombre, apellido, email, fecha_naci);
         } else if ("Artista".equalsIgnoreCase(tipo)) {
-            return new artista(nickname, nombre, apellido, email, fecha_naci, biografia, dirWeb);
+            return new Artista(nickname, nombre, apellido, email, fecha_naci, biografia, dirWeb);
         } else {
             throw new IllegalArgumentException("Tipo de usuario desconocido: " + tipo);
         }

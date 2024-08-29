@@ -8,48 +8,37 @@ package presentacion;
  *
  * @author Law
  */
+
+import logica.Artista;
 import javax.swing.JFrame;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import servicios.DatabaseConnector;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class EspotifyMain {
 
     public static void main(String[] args) {
-    
+        // Crear el EntityManagerFactory
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
+        
+        // Crear el EntityManager
+        EntityManager em = emf.createEntityManager();
+
+        // Iniciar el formulario
         FormularioPrincipal fp = new FormularioPrincipal();
         fp.setVisible(true);
+        
+       
+        // Crear un nuevo Artista
+        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
 
-        // Cargar el driver JDBC
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Driver no encontrado: " + e.getMessage());
-            return; // Salir si no se puede cargar el driver
-        }
-
-        try (Connection conn = DatabaseConnector.getConnection()) {
-            if (conn != null) {
-                System.out.println("Conexion establecida.");
-
-                // Inserción de datos
-                String sql = "INSERT INTO usuarios (user, pass) VALUES (?, ?)";
-                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                    pstmt.setString(1, "admin");
-                    pstmt.setString(2, "admin");
-                    int rowsInserted = pstmt.executeUpdate();
-                    if (rowsInserted > 0) {
-                        System.out.println("Insercion exitosa.");
-                    } else {
-                        System.out.println("No se insertaron filas.");
-                    }
-                }
-            } else {
-                System.out.println("No se pudo establecer la conexion.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error de conexion: " + e.getMessage());
-        }
+        // Guardar el Artista en la base de datos
+        em.getTransaction().begin();
+        em.persist(art1);
+        em.getTransaction().commit();
+        
+        // Cierre del EntityManager y EntityManagerFactory (opcional)
+        // em.close();
+        // emf.close();
     }
 }
