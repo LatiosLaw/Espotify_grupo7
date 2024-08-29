@@ -8,48 +8,61 @@ package presentacion;
  *
  * @author Law
  */
-import javax.swing.JFrame;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import servicios.DatabaseConnector;
+import logica.artista;
+import logica.cliente;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import persistencia.HibernateUtil;
 
 public class EspotifyMain {
 
     public static void main(String[] args) {
-    
+    // Crear el EntityManagerFactory
+   
+
+        // Iniciar el formulario
         FormularioPrincipal fp = new FormularioPrincipal();
         fp.setVisible(true);
+        
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        
+        // Start a session
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
 
-        // Cargar el driver JDBC
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Driver no encontrado: " + e.getMessage());
-            return; // Salir si no se puede cargar el driver
-        }
+            // Begin a transaction
+            transaction = session.beginTransaction();
 
-        try (Connection conn = DatabaseConnector.getConnection()) {
-            if (conn != null) {
-                System.out.println("Conexion establecida.");
+            // Perform operations, e.g., save an entity
+            artista entity = new artista();
+            entity.setNickname("Pepe");
+            entity.setNombre("Pepe");
+            entity.setApellido("Pepe");
+            session.save(entity);
+            
+            cliente entity2 = new cliente();
+            entity2.setNickname("Pepez");
+            entity2.setNombre("Pepez");
+            entity2.setApellido("Pepez");
+            session.save(entity2);
 
-                // Inserción de datos
-                String sql = "INSERT INTO usuarios (user, pass) VALUES (?, ?)";
-                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                    pstmt.setString(1, "admin");
-                    pstmt.setString(2, "admin");
-                    int rowsInserted = pstmt.executeUpdate();
-                    if (rowsInserted > 0) {
-                        System.out.println("Insercion exitosa.");
-                    } else {
-                        System.out.println("No se insertaron filas.");
-                    }
-                }
-            } else {
-                System.out.println("No se pudo establecer la conexion.");
+            // Commit the transaction
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
-            System.err.println("Error de conexion: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the session
+            session.close();
         }
-    }
+
+        // Shutdown the SessionFactory
+        HibernateUtil.shutdown();
+
+}
 }

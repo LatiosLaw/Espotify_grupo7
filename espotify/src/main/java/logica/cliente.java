@@ -4,16 +4,17 @@
  */
 package logica;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.persistence.Entity;
+
 /**
  *
  * @author Law
  */
 
+@Entity
 public class cliente extends usuario {
-
-    public cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
-        super(nickname, nombre, apellido, email, fecha_naci);
-    }
 
     @Override
     public void mostrarInformacion() {

@@ -14,16 +14,15 @@
     <dependencies>
     <!-- Dependencia JPA -->
     <dependency>
-        <groupId>javax.persistence</groupId>
-        <artifactId>javax.persistence-api</artifactId>
-        <version>2.2</version> <!-- O la versión de JPA que estés usando -->
+<groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.4.10.Final</version>
     </dependency>
-    
-    <!-- Dependencia EclipseLink -->
     <dependency>
-        <groupId>org.eclipse.persistence</groupId>
-        <artifactId>eclipselink</artifactId>
-        <version>3.0.2</version> <!-- Verifica la versión más reciente -->
-    </dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.16</version>
+</dependency>
+    <!-- Dependencia EclipseLink -->
 </dependencies>
 </project>

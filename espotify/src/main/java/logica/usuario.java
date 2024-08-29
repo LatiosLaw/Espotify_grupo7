@@ -6,26 +6,21 @@ package logica;
  */
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 /**
  *
  * @author Law
  */
-public abstract class usuario {
+@Entity
+public abstract class usuario implements Serializable {
+    @Id
     protected String nickname;
     protected String nombre;
     protected String apellido;
     protected String correo;
     protected LocalDate fecha_nac;
-
-    public usuario(String nickname, String nombre, String apellido, String correo, String fecha_naci) {
-        this.nickname = nickname;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.correo = correo;
-        LocalDate fechaNacimiento = LocalDate.parse(fecha_naci, DateTimeFormatter.ISO_LOCAL_DATE);
-        this.fecha_nac = fechaNacimiento;
-    }
 
     // Métodos comunes a todos los usuarios
     public String getNickname() {
@@ -47,6 +42,26 @@ public abstract class usuario {
     public LocalDate getNacimiento() {
         return fecha_nac;
     }
+    
+    public void setNickname(String nickname) {
+    this.nickname = nickname;
+}
+
+public void setNombre(String nombre) {
+    this.nombre = nombre;
+}
+
+public void setApellido(String apellido) {
+    this.apellido = apellido;
+}
+
+public void setEmail(String correo) {
+    this.correo = correo;
+}
+
+public void setNacimiento(LocalDate fecha_nac) {
+    this.fecha_nac = fecha_nac;
+}
 
     // Método abstracto para que las subclases implementen
     public abstract void mostrarInformacion();

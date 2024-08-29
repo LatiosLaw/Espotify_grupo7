@@ -3,24 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Law
  */
+@Entity
 public class artista extends usuario {
 
     private String biografia;
     private String dirWeb;
 
-    public artista(String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
-        super(nickname, nombre, apellido, email, fecha_naci);
-        this.biografia = biografia;
-        this.dirWeb = dirWeb;
-    }
-
     @Override
     public void mostrarInformacion() {
-        System.out.println("Artista: " + nombre + " " + apellido + ". Biografía: " + biografia);
+        System.out.println("Artista: " + nombre + " " + apellido + ". Biografía: " + biografia + ". direccion Web: " + dirWeb);
     }
 }
