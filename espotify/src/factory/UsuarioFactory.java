@@ -9,9 +9,9 @@ package factory;
  * @author Law
  */
 
-import modelo.usuario;
-import modelo.cliente;
-import modelo.artista;
+import logica.usuario;
+import logica.cliente;
+import logica.artista;
 
 public class UsuarioFactory {
 
