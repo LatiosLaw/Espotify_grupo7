@@ -7,23 +7,25 @@ package logica;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.persistence.ManyToMany;
 /**
  *
  * @author Law
  */
 @Entity
-public abstract class Usuario {
-    @Id
-    protected String nickname;
+public abstract class Usuario implements Serializable {
+    @Id protected String nickname;
     protected String nombre;
     protected String apellido;
     protected String correo;
     protected LocalDate fecha_nac;
+    @ManyToMany(mappedBy="seguidos")
+    protected Collection<Cliente> seguidores = new ArrayList<Cliente>();
     
     public Usuario(){
     }

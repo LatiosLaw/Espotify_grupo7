@@ -5,6 +5,7 @@
     <class>logica.Artista</class>
     <class>logica.Usuario</class>
     <class>logica.Cliente</class>
+    <class>logica.Tema</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/espotify?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

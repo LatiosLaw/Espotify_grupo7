@@ -4,11 +4,12 @@
  */
 package logica;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -17,12 +18,22 @@ import javax.persistence.Id;
 @Entity
 public class Cliente extends Usuario {
     
+    @ManyToMany
+    @JoinTable(name="seguidos",
+    joinColumns=@JoinColumn(name="id_seguidor"),
+    inverseJoinColumns=@JoinColumn(name="id_seguido"))
+    protected Collection<Usuario> seguidos = new ArrayList<Usuario>();
+    
     public Cliente(){
         
     }
 
     public Cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
         super(nickname, nombre, apellido, email, fecha_naci);
+    }
+    
+    public void Seguir(Usuario usuario) {
+        this.seguidos.add(usuario);
     }
 
     @Override

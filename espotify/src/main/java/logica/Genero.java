@@ -5,62 +5,51 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Law
  */
 @Entity
-public class Tema implements Serializable {
+public class Genero implements Serializable {
 
-    @Id private String nickname;
-    
-    private Integer duracion;
-    
-     public Tema(){
-        
-    }
-    
-    public Tema(String nickname, Integer duracion) {
-        this.nickname = nickname;
-        this.duracion = duracion;
-    }
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
 
     public String getId() {
-        return nickname;
+        return id;
     }
 
     public void setId(String id) {
-        this.nickname = id;
-    }
-    
-    public Integer getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(Integer duracion) {
-        this.duracion = duracion;
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nickname != null ? nickname.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tema)) {
+        if (!(object instanceof Genero)) {
             return false;
         }
-        Tema other = (Tema) object;
-        if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
+        Genero other = (Genero) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -68,7 +57,7 @@ public class Tema implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.tema[ id=" + nickname + " ]";
+        return "logica.Genero[ id=" + id + " ]";
     }
     
 }
