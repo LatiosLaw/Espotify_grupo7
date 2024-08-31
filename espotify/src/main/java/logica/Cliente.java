@@ -20,9 +20,24 @@ public class Cliente extends Usuario {
     
     @ManyToMany
     @JoinTable(name="seguidos",
-    joinColumns=@JoinColumn(name="id_seguidor"),
-    inverseJoinColumns=@JoinColumn(name="id_seguido"))
+    joinColumns=@JoinColumn(name="nick_seguidor"),
+    inverseJoinColumns=@JoinColumn(name="nick_seguido"))
     protected Collection<Usuario> seguidos = new ArrayList<Usuario>();
+    @ManyToMany
+    @JoinTable(name="temas_favoritos",
+    joinColumns=@JoinColumn(name="nick_cliente"),
+    inverseJoinColumns=@JoinColumn(name="nombre_tema"))
+    protected Collection<Tema> temas_favoritos = new ArrayList<Tema>();
+    @ManyToMany
+    @JoinTable(name="albumes_favoritos",
+    joinColumns=@JoinColumn(name="nick_cliente"),
+    inverseJoinColumns=@JoinColumn(name="nombre_album"))
+    protected Collection<Album> albumes_favoritos = new ArrayList<Album>();
+    @ManyToMany
+    @JoinTable(name="listas_favoritas",
+    joinColumns=@JoinColumn(name="nick_cliente"),
+    inverseJoinColumns=@JoinColumn(name="nombre_lista"))
+    protected Collection<ListaReproduccion> listas_favoritas = new ArrayList<ListaReproduccion>();
     
     public Cliente(){
         
@@ -35,6 +50,19 @@ public class Cliente extends Usuario {
     public void Seguir(Usuario usuario) {
         this.seguidos.add(usuario);
     }
+    
+    public void TemaFav(Tema tema) {
+        this.temas_favoritos.add(tema);
+    }
+    
+    public void AlbumFav(Album album) {
+        this.albumes_favoritos.add(album);
+    }
+    
+    public void ListasFav(ListaReproduccion lista) {
+        this.listas_favoritas.add(lista);
+    }
+
 
     @Override
     public void mostrarInformacion() {

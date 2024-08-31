@@ -36,7 +36,6 @@ public class EspotifyMain {
         FormularioPrincipal fp = new FormularioPrincipal();
         fp.setVisible(true);
         
-       
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
@@ -49,18 +48,14 @@ public class EspotifyMain {
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false);
         
-       
-                
+        cli1.TemaFav(tem1);
         cli1.Seguir(art1);
+        cli1.AlbumFav(alb1);
+        cli1.ListasFav(lista1);
         
         // Guardar el Artista en la base de datos
         em.getTransaction().begin();
         em.persist(art1);
-        em.getTransaction().commit();
-        
-        // Guardar el Cliente en la base de datos
-        em.getTransaction().begin();
-        em.persist(cli1);
         em.getTransaction().commit();
         
         // Guardar el Tema en la base de datos
@@ -79,7 +74,6 @@ public class EspotifyMain {
         em.persist(alb1);
         em.getTransaction().commit();
         
-        
         // Guardar los Generos en la base de datos
         em.getTransaction().begin();
         em.persist(g1);
@@ -93,7 +87,10 @@ public class EspotifyMain {
         em.persist(lista2);
         em.getTransaction().commit();
         
-       
+       // Guardar el Cliente en la base de datos
+        em.getTransaction().begin();
+        em.persist(cli1);
+        em.getTransaction().commit();
       
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
