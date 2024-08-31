@@ -5,35 +5,31 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 /**
  *
- * @author Law
+ * @author Nico
  */
 @Entity
-public class Genero implements Serializable {
+public abstract class ListaReproduccion implements Serializable {
 
-   
     @Id
-    private String nombre;
-    private Collection<Genero>subgenero = new ArrayList<Genero>();
+    protected String nombre;
     
-    public Genero(){
+    public ListaReproduccion(){
     
     }
-
-    public Genero(String nombre){
+    
+    public ListaReproduccion(String nombre){
         this.nombre = nombre;
     }
+    
+    
+
     public String getNombre() {
         return nombre;
     }
@@ -41,22 +37,23 @@ public class Genero implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public void agregarSubgenero(String nombre) {
-        Genero g = new Genero(nombre);
-        this.subgenero.add(g);
-    }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Genero)) {
+        if (!(object instanceof ListaReproduccion)) {
             return false;
         }
-        Genero other = (Genero) object;
+        ListaReproduccion other = (ListaReproduccion) object;
         if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "logica.ListaReproduccion[ nombre=" + nombre + " ]";
+    }
+    
 }

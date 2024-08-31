@@ -14,6 +14,11 @@ import logica.Artista;
 import logica.Cliente;
 import logica.Tema;
 import logica.Album;
+import logica.Genero;
+import logica.ListaReproduccion;
+import logica.ListaParticular;
+import logica.ListaPorDefecto;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -39,6 +44,10 @@ public class EspotifyMain {
         Tema tem2 = new Tema("Despacito",50);
         Tema tem3 = new Tema("Velociraptor",34);
         Album alb1 = new Album("Wachiturros2",2020);
+        Genero g1 = new Genero("Tango");
+        Genero g2 = new Genero("Cumbia");
+        ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
+        ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false);
         
        
                 
@@ -68,6 +77,20 @@ public class EspotifyMain {
         // Guardar el Album en la base de datos
         em.getTransaction().begin();
         em.persist(alb1);
+        em.getTransaction().commit();
+        
+        
+        // Guardar los Generos en la base de datos
+        em.getTransaction().begin();
+        em.persist(g1);
+        em.persist(g2);
+        em.getTransaction().commit();
+        
+        
+        // Guardar las Listas en la base de datos
+        em.getTransaction().begin();
+        em.persist(lista1);
+        em.persist(lista2);
         em.getTransaction().commit();
         
        
