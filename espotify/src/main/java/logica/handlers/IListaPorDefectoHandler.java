@@ -4,10 +4,15 @@
  */
 package logica.handlers;
 
+import logica.Genero;
+
 /**
  *
  * @author Nico
  */
 public interface IListaPorDefectoHandler {
-    
+    void crearLista(String nombre, Genero genero);
+    void agregarTema(String nombre_lista, String nombre_tema);
+    void quitarTema(String nombre_lista, String nombre_tema);
+    void devolverInformacion(String nombre_lista);
 }

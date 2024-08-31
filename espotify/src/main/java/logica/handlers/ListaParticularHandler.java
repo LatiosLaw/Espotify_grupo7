@@ -10,4 +10,28 @@ package logica.handlers;
  */
 public class ListaParticularHandler implements IListaParticularHandler{
     
+    @Override
+    public void crearLista(String nombre, String nickname_cliente){
+        
+    }
+    
+    @Override
+    public void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema){
+        
+    }
+    
+    @Override
+    public void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema){
+        
+    }
+    
+    @Override
+    public void publicarLista(String nick_cliente, String nombre_lista){
+        
+    }
+    
+    @Override
+    public void devolverInformacion(String nombre_lista){
+        
+    }
 }

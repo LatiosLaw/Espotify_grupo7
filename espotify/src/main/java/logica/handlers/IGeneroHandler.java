@@ -4,10 +4,15 @@
  */
 package logica.handlers;
 
+import logica.Genero;
+import logica.Album;
+import logica.ListaReproduccion;
 /**
  *
  * @author Nico
  */
 public interface IGeneroHandler {
-    
+    void crearGenero(String nombre, Genero genero_padre);
+    ListaReproduccion buscarListasPorGenero(Genero genero_filtro);
+    Album buscarAlbumesPorGenero(Genero genero_filtro);
 }
