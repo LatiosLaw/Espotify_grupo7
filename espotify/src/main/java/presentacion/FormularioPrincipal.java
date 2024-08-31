@@ -4,12 +4,18 @@
  */
 package presentacion;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Nico
  */
 public class FormularioPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form FormularioPrincipal
      */
@@ -29,6 +35,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,20 +47,38 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenido");
 
+        jButton3.setText("Subir Tema");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("nada seleccionado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jButton3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(66, 66, 66))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,11 +89,49 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(62, 62, 62))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+                System.out.println("Botón clickeado");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                fileChooser.setDialogTitle("Selecciona un archivo MP3");
+
+                // Filtro para que sólo se muestren archivos MP3
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
+
+                int result = fileChooser.showOpenDialog(null);
+
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    jLabel2.setText("Archivo seleccionado: " + selectedFile.getName());
+                    File destinationDir = new File("C:\\Users\\Law\\Documents\\GitHub\\Espotify_grupo7\\espotify\\src\\main\\java\\temas");
+    
+    if (!destinationDir.exists()) {
+        destinationDir.mkdirs(); // Crear la carpeta si no existe
+    }
+    
+    // Crear el archivo de destino con el mismo nombre que el seleccionado
+    File destinationFile = new File(destinationDir, selectedFile.getName());
+    
+    // Copiar el archivo al destino
+    try {
+        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+    } catch (IOException i) {
+        System.out.println("Error al guardar el archivo.");
+    }
+                }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,6 +162,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FormularioPrincipal().setVisible(true);
             }
@@ -107,6 +172,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
