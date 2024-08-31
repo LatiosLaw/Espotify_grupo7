@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -17,9 +19,13 @@ import javax.persistence.Id;
 @Entity
 public class Tema implements Serializable {
 
-    @Id private String nickname;
-    
+    @Id
+    private String nickname;
     private Integer duracion;
+    
+    @ManyToOne
+    @JoinColumn(name = "ALBUM_NOMBRE")
+    private Album album;
     
      public Tema(){
         
@@ -44,6 +50,14 @@ public class Tema implements Serializable {
 
     public void setDuracion(Integer duracion) {
         this.duracion = duracion;
+    }
+    
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
     @Override

@@ -13,6 +13,7 @@ import logica.Usuario;
 import logica.Artista;
 import logica.Cliente;
 import logica.Tema;
+import logica.Album;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,6 +36,11 @@ public class EspotifyMain {
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
         Tema tem1 = new Tema("Midnight Mayoi",20);
+        Tema tem2 = new Tema("Despacito",50);
+        Tema tem3 = new Tema("Velociraptor",34);
+        Album alb1 = new Album("Wachiturros2",2020);
+        
+       
                 
         cli1.Seguir(art1);
         
@@ -51,7 +57,20 @@ public class EspotifyMain {
         // Guardar el Tema en la base de datos
         em.getTransaction().begin();
         em.persist(tem1);
+        em.persist(tem2);
+        em.persist(tem3);
         em.getTransaction().commit();
+        
+        alb1.agregarTema(tem1);
+        alb1.agregarTema(tem2);
+        alb1.agregarTema(tem3);
+        
+        // Guardar el Album en la base de datos
+        em.getTransaction().begin();
+        em.persist(alb1);
+        em.getTransaction().commit();
+        
+       
       
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
