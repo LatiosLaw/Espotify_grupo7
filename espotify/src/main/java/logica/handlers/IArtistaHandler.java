@@ -4,10 +4,13 @@
  */
 package logica.handlers;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Nico
  */
 public interface IArtistaHandler {
     
+    public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb);
 }

@@ -4,10 +4,42 @@
  */
 package logica.handlers;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Nico
  */
 public interface IClienteHandler {
+    
+    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac);
+    
+    
+    /**
+     * 
+     * @param nickname1 nickname de la persona que sigue
+     * @param nickname2 nickname de la persona que es seguida
+     */
+    public void seguirUsuario(String nickname1, String nickname2);
+    
+    public void dejarDeSeguirUsuario(String nickname1, String nickname2);
+    
+    public void consultarPerfilCliente();
+    
+    public void consultarPerfilArtista();
+    
+    public void agregarTema(String nickname);
+    
+    public void agregarLista(String nickname);
+    
+    public void agregarAlbum(String nickname);
+    
+    public void eliminarTema(String nickname);
+    
+    public void eliminarLista(String nickname);
+    
+    public void eliminarAlbum(String nickname);
+    
+    public void consultarListaReproduccion(String nickname);
     
 }
