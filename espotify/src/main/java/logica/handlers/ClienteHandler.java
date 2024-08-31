@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class ClienteHandler {
+public class ClienteHandler implements IClienteHandler{
     
 }

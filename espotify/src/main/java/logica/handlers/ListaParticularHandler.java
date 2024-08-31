@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class ListaParticularHandler {
+public class ListaParticularHandler implements IListaParticularHandler{
     
 }

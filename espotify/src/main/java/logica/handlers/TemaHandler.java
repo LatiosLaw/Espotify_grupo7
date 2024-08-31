@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class TemaHandler {
+public class TemaHandler implements ITemaHandler{
     
 }

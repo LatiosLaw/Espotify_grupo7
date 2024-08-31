@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class ArtistaHandler {
+public class ArtistaHandler implements IArtistaHandler{
     
 }

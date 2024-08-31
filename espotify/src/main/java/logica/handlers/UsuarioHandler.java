@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class UsuarioHandler {
+public class UsuarioHandler implements IUsuarioHandler{
     
 }

@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class GeneroHandler {
+public class GeneroHandler implements IGeneroHandler{
     
 }

@@ -8,6 +8,6 @@ package logica.handlers;
  *
  * @author Nico
  */
-public class ListaPorDefectoHandler {
+public class ListaPorDefectoHandler implements IListaPorDefectoHandler{
     
 }
