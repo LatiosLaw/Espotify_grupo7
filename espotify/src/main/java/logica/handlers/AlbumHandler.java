@@ -4,10 +4,17 @@
  */
 package logica.handlers;
 
+import java.util.Collection;
+import logica.Genero;
+
 /**
  *
  * @author Nico
  */
 public class AlbumHandler implements IAlbumHandler{
     
+    @Override
+    public void agregarAlbum(String nickArtista, String nombAlbum, int anioCreacion, Collection<Genero>generos){
+    
+    }
 }
