@@ -7,12 +7,9 @@ package logica;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -22,11 +19,13 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Genero implements Serializable {
 
-   
     @Id
     private String nombre;
-    private Collection<Genero>subgenero = new ArrayList<Genero>();
+    private Collection<Genero> subgenero = new ArrayList<Genero>();
     
+    @ManyToMany
+    private Collection<Album> albumes_del_genero = new ArrayList<Album>();
+            
     public Genero(){
     
     }
@@ -42,9 +41,12 @@ public class Genero implements Serializable {
         this.nombre = nombre;
     }
     
-    public void agregarSubgenero(String nombre) {
-        Genero g = new Genero(nombre);
+    public void agregarSubgenero(Genero g) {
         this.subgenero.add(g);
+    }
+    
+    public void agregarAlbumDelGenero(Album album) {
+        this.albumes_del_genero.add(album);
     }
 
     @Override

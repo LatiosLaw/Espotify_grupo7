@@ -9,19 +9,21 @@ package presentacion;
  * @author Law
  */
 
-import logica.Usuario;
+import java.util.ArrayList;
+import java.util.Collection;
 import logica.Artista;
 import logica.Cliente;
 import logica.Tema;
 import logica.Album;
 import logica.Genero;
-import logica.ListaReproduccion;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import logica.handlers.AlbumHandler;
+import logica.handlers.IAlbumHandler;
 
 public class EspotifyMain {
 
@@ -42,6 +44,7 @@ public class EspotifyMain {
         Tema tem1 = new Tema("Midnight Mayoi",20);
         Tema tem2 = new Tema("Despacito",50);
         Tema tem3 = new Tema("Velociraptor",34);
+        Tema tem4 = new Tema("DONMAI",25);
         Album alb1 = new Album("Wachiturros2",2020);
         Genero g1 = new Genero("Tango");
         Genero g2 = new Genero("Cumbia");
@@ -52,7 +55,9 @@ public class EspotifyMain {
         cli1.Seguir(art1);
         cli1.AlbumFav(alb1);
         cli1.ListasFav(lista1);
-        
+        alb1.agregarGenero(g2);
+        g1.agregarSubgenero(g2);
+                
         // Guardar el Artista en la base de datos
         em.getTransaction().begin();
         em.persist(art1);
@@ -92,6 +97,28 @@ public class EspotifyMain {
         em.persist(cli1);
         em.getTransaction().commit();
       
+        // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
+        IAlbumHandler manejador_album = new AlbumHandler();
+        Collection<Genero> g = new ArrayList<Genero>();
+        g.add(g1);
+        g.add(g2);
+        Collection<Tema> t = new ArrayList<Tema>();
+        t.add(tem1);
+        t.add(tem4);
+        Album prueba;
+        prueba = manejador_album.agregarAlbum(art1, "Phantomime", 2024, g, t);
+        // JUSTO DESPUES DE AGREGAR TENGO QUE MANDARLE AL GENERO QUE SUME EL ALBUM Y PERSISTA DE NUEVO
+        if(prueba!=null){
+        g1.agregarAlbumDelGenero(prueba);
+        g2.agregarAlbumDelGenero(prueba);
+        em.getTransaction().begin();
+        em.merge(g1);
+        em.merge(g2);
+        em.getTransaction().commit();
+        }
+        /////////////////////////////////////////
+        
+        
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
         // emf.close();

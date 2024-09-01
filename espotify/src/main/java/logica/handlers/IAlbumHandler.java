@@ -5,6 +5,7 @@
 package logica.handlers;
 
 import java.util.Collection;
+import logica.Album;
 import logica.Artista;
 import logica.Genero;
 import logica.Tema;
@@ -15,6 +16,6 @@ import logica.Tema;
  */
 public interface IAlbumHandler {
     
-    public void agregarAlbum(Artista artista, String nombAlbum, int anioCreacion, Collection<Genero>generos, Collection<Tema>temas);
+    public Album agregarAlbum(Artista artista, String nombAlbum, int anioCreacion, Collection<Genero>generos, Collection<Tema>temas);
     
 }

@@ -5,6 +5,7 @@
 package logica.handlers;
 
 import java.util.Collection;
+import java.util.Iterator;
 import logica.Album;
 import logica.Artista;
 import logica.Genero;
@@ -18,12 +19,16 @@ import persistencia.DAO_Album;
 public class AlbumHandler implements IAlbumHandler{
     
     @Override
-    public void agregarAlbum(Artista artista, String nombAlbum, int anioCreacion, Collection<Genero>generos, Collection<Tema>temas){
+    public Album agregarAlbum(Artista artista, String nombAlbum, int anioCreacion, Collection<Genero>generos, Collection<Tema>temas){
     Album nuevo_album = new Album(nombAlbum, anioCreacion, artista);
-        for (Genero genero : generos) {
+        Iterator<Genero> iterator = generos.iterator();
+        while (iterator.hasNext()) {
+            Genero genero  = iterator.next();
             nuevo_album.agregarGenero(genero);
         }
-        for (Tema tema : temas) {
+        Iterator<Tema> iterator2 = temas.iterator();
+        while (iterator2.hasNext()) {
+            Tema tema  = iterator2.next();
             nuevo_album.agregarTema(tema);
         }
         DAO_Album persistence = new DAO_Album();
@@ -31,8 +36,10 @@ public class AlbumHandler implements IAlbumHandler{
         
         if (persistence.find(nuevo_album.getNombre()) != null) {
         System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
+        return nuevo_album;
     } else {
         System.out.println("El album no fue persistido correctamente.");
+        return null;
     }
     }
 }
