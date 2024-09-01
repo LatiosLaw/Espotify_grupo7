@@ -6,11 +6,8 @@ package logica.handlers;
 
 import java.time.LocalDate;
 import logica.Artista;
-<<<<<<< Updated upstream
 import logica.Usuario;
 import persistencia.DAO_Usuario;
-=======
->>>>>>> Stashed changes
 
 /**
  *
