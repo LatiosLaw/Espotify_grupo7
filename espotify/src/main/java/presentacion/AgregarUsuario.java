@@ -60,6 +60,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
         lblFechaNaci.setText("Fecha Naci");
 
+        txtNickName.setColumns(10);
+
+        txtNombre.setColumns(10);
+
+        txtApellido.setColumns(10);
+
+        txtCorreo.setColumns(10);
+
         cbxTipoUsr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Artista" }));
 
         jLabel5.setText("Biografia");

@@ -28,36 +28,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Component id="jButton5" min="-2" pref="135" max="-2" attributes="0"/>
+              <Component id="btnAdUs" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" pref="135" max="-2" attributes="0"/>
+              <Component id="btnAdTe" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" pref="135" max="-2" attributes="0"/>
+              <Component id="btnAdLi" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-              <Component id="jButton4" min="-2" pref="135" max="-2" attributes="0"/>
+              <Component id="btnAdAl" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
           </Group>
-          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+          <Component id="pnlPrin" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jButton3" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jButton4" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jButton5" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdTe" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdLi" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdAl" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdUs" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Component id="pnlPrin" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="585" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel2">
+    <Container class="javax.swing.JPanel" name="pnlPrin">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="ff" red="99" type="rgb"/>
@@ -80,27 +80,30 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnAdTe">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrar Tema"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdTeActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnAdLi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrar Lista"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="btnAdAl">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administar Album"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="btnAdUs">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrar Usuario"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdUsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

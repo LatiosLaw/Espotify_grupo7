@@ -15,6 +15,16 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
      */
     public ConsultarPerfilDeUsuario() {
         initComponents();
+        txtPaginaWeb.setVisible(false);
+               txtaBiografia.setVisible(false);
+               lstAlbum.setVisible(false);
+               lstSeguidores.setVisible(false);
+               lblNroSeguidores.setVisible(false);
+               lblSegui.setVisible(false);
+               txtNumeroDeSeguidoresPosta.setVisible(false);
+               lblAlbum.setVisible(false);
+               this.revalidate();
+               this.repaint();
     }
 
     /**
@@ -35,19 +45,19 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtaBiografia = new javax.swing.JTextArea();
         txtPaginaWeb = new javax.swing.JTextField();
-        txtSegui = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblSegui = new javax.swing.JLabel();
+        lblAlbum = new javax.swing.JLabel();
         lblNroSeguidores = new javax.swing.JLabel();
         txtNumeroDeSeguidoresPosta = new javax.swing.JLabel();
         cbxOpt = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstSeguidores = new javax.swing.JList<>();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lstAlbum = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        btnOK = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -80,29 +90,39 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtPaginaWeb.setEditable(false);
 
-        txtSegui.setText("Seguidores ");
+        lblSegui.setText("Seguidores ");
 
-        jLabel1.setText("Albumes");
+        lblAlbum.setText("Albumes");
 
         lblNroSeguidores.setText("Numero de Seguidores:");
 
         txtNumeroDeSeguidoresPosta.setText("0");
 
         cbxOpt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Cliente", "Artista" }));
+        cbxOpt.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxOptItemStateChanged(evt);
+            }
+        });
+        cbxOpt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxOptActionPerformed(evt);
+            }
+        });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstSeguidores.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane6.setViewportView(jList1);
+        jScrollPane6.setViewportView(lstSeguidores);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        lstAlbum.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane7.setViewportView(jList2);
+        jScrollPane7.setViewportView(lstAlbum);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -111,9 +131,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         });
         jScrollPane8.setViewportView(jList3);
 
-        jTextField1.setText("jTextField1");
+        txtBuscar.setColumns(10);
 
-        jButton1.setText("jButton1");
+        btnOK.setText("OK");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,10 +147,10 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -155,12 +175,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSegui)
+                                    .addComponent(lblSegui)
                                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
+                                    .addComponent(lblAlbum))
                                 .addGap(136, 136, 136))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNroSeguidores)
@@ -176,9 +196,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -196,10 +216,10 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(lblAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -209,36 +229,79 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                             .addComponent(txtNumeroDeSeguidoresPosta)
                             .addComponent(lblNroSeguidores))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSegui)
+                        .addComponent(lblSegui)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(691, 691, 691))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxOptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxOptItemStateChanged
+       
+    }//GEN-LAST:event_cbxOptItemStateChanged
 
+    private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
+        int token = cbxOpt.getSelectedIndex();
+       
+        switch (token) {
+            case 0:
+                 
+               txtPaginaWeb.setVisible(false);
+               txtaBiografia.setVisible(false);
+               lstAlbum.setVisible(false);
+               lstSeguidores.setVisible(false);
+               lblNroSeguidores.setVisible(false);
+               lblSegui.setVisible(false);
+               txtNumeroDeSeguidoresPosta.setVisible(false);
+               lblAlbum.setVisible(false);
+               
+            case 1:
+             txtPaginaWeb.setVisible(false);
+               txtaBiografia.setVisible(false);
+               lstAlbum.setVisible(false);
+               lstSeguidores.setVisible(false);
+               lblNroSeguidores.setVisible(false);
+               lblSegui.setVisible(false);
+               txtNumeroDeSeguidoresPosta.setVisible(false);
+               lblAlbum.setVisible(false);
+              
+                break;
+            case 2:
+               txtPaginaWeb.setVisible(true);
+               txtaBiografia.setVisible(true);
+               lstAlbum.setVisible(true);
+               lstSeguidores.setVisible(true);
+               lblNroSeguidores.setVisible(true);
+               lblSegui.setVisible(true);
+               txtNumeroDeSeguidoresPosta.setVisible(true);
+               
+                break;
+                
+    }//GEN-LAST:event_cbxOptActionPerformed
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblAlbum;
     private javax.swing.JLabel lblNroSeguidores;
+    private javax.swing.JLabel lblSegui;
+    private javax.swing.JList<String> lstAlbum;
+    private javax.swing.JList<String> lstSeguidores;
     private java.awt.Panel panel1;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCorreoElectronico;
     private javax.swing.JTextField txtFechaNaci1;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JLabel txtNumeroDeSeguidoresPosta;
     private javax.swing.JTextField txtPaginaWeb;
-    private javax.swing.JLabel txtSegui;
     private javax.swing.JTextArea txtaBiografia;
     // End of variables declaration//GEN-END:variables
 }
