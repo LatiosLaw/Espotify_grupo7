@@ -4,6 +4,7 @@
  */
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Artista extends Usuario {
         // Constructor vacío necesario para JPA
     }
 
-    public Artista(String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
+    public Artista(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci, String biografia, String dirWeb) {
         super(nickname, nombre, apellido, email, fecha_naci);
         this.biografia = biografia;
         this.dirWeb = dirWeb;

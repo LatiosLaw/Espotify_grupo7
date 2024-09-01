@@ -33,13 +33,24 @@ public class DAO_Usuario {
     public Usuario findUsuarioByNick(String nick_ingresado) {
         try {
             return entityManager.createQuery(
-                "SELECT * FROM usuario WHERE nickname = :nick_ingresado", Usuario.class)
-                .setParameter("nickname", nick_ingresado)
+                "SELECT u FROM Usuario u WHERE u.nickname = :nick_ingresado", Usuario.class)
+                .setParameter("nick_ingresado", nick_ingresado)
                 .getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ningún cliente con ese nombre
+            return null; // No se encontro ningún cliente con ese nombre
         }
     }
+    
+    public Usuario findUsuarioByMail(String mail_ingresado) {
+    try {
+        return entityManager.createQuery(
+            "SELECT u FROM Usuario u WHERE u.correo = :mail_ingresado", Usuario.class)
+            .setParameter("mail_ingresado", mail_ingresado)
+            .getSingleResult();
+    } catch (NoResultException e) {
+        return null; // No se encontro ningún usuario con ese correo
+    }
+}
     
     public List<Usuario> findAll() {
         return entityManager.createQuery("SELECT * FROM USUARIO", Usuario.class).getResultList();

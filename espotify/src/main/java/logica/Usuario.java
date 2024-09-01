@@ -30,12 +30,12 @@ public abstract class Usuario implements Serializable {
     public Usuario(){
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, String fecha_naci) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fecha_naci) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        LocalDate fechaNacimiento = LocalDate.parse(fecha_naci, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate fechaNacimiento = fecha_naci;
         this.fecha_nac = fechaNacimiento;
     }
 

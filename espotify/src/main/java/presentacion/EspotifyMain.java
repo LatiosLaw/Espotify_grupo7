@@ -11,6 +11,8 @@ package presentacion;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.time.LocalDate;
+import logica.Usuario;
 import logica.Artista;
 import logica.Cliente;
 import logica.Tema;
@@ -24,6 +26,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.handlers.AlbumHandler;
 import logica.handlers.IAlbumHandler;
+import logica.handlers.ArtistaHandler;
+import logica.handlers.ClienteHandler;
+import logica.handlers.IArtistaHandler;
+import logica.handlers.IClienteHandler;
 
 public class EspotifyMain {
 
@@ -33,14 +39,22 @@ public class EspotifyMain {
         
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
+        
+        IArtistaHandler artHandler = new ArtistaHandler();
+        IClienteHandler cliHandler = new ClienteHandler();
+           
+        artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        
+        cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
 
         // Iniciar el formulario
         FormularioPrincipal fp = new FormularioPrincipal();
         fp.setVisible(true);
         
         // Crear un nuevo Artista
-        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
-        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
+        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
+        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com",LocalDate.of(2003, 2, 12));
         Tema tem1 = new Tema("Midnight Mayoi",20);
         Tema tem2 = new Tema("Despacito",50);
         Tema tem3 = new Tema("Velociraptor",34);
@@ -51,7 +65,7 @@ public class EspotifyMain {
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false);
         
-        cli1.TemaFav(tem1);
+        /* cli1.TemaFav(tem1);
         cli1.Seguir(art1);
         cli1.AlbumFav(alb1);
         cli1.ListasFav(lista1);
@@ -92,7 +106,7 @@ public class EspotifyMain {
         em.persist(lista2);
         em.getTransaction().commit();
         
-       // Guardar el Cliente en la base de datos
+        // Guardar el Cliente en la base de datos
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
@@ -118,9 +132,8 @@ public class EspotifyMain {
         }
         /////////////////////////////////////////
         
-        
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
-        // emf.close();
+        // emf.close();*/
     }
 }
