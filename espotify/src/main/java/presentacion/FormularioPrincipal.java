@@ -4,12 +4,14 @@
  */
 package presentacion;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.Mp3File;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import javax.swing.JFileChooser;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Nico
@@ -124,6 +126,24 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     File destinationFile = new File(destinationDir, selectedFile.getName());
     
     // Copiar el archivo al destino
+    if (selectedFile.getName().endsWith(".mp3")) {
+                        try {
+                            // Extract duration from the MP3 file
+                            Mp3File mp3File = new Mp3File(selectedFile.getAbsolutePath());
+                            if (mp3File.hasId3v2Tag()) {
+                                ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                                long durationInSeconds = mp3File.getLengthInSeconds();
+                                JOptionPane.showMessageDialog(jLabel2, "Duration: " + durationInSeconds + " seconds");
+                            } else {
+                                JOptionPane.showMessageDialog(jLabel2, "No ID3v2 tag found in the MP3 file");
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(jLabel2, "Error reading MP3 file: " + ex.getMessage());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(jLabel2, "Please select an MP3 file");
+                    }
+    
     try {
         Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
