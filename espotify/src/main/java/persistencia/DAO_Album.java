@@ -15,7 +15,7 @@ public class DAO_Album {
     private EntityManager entityManager;
 
     public DAO_Album() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
