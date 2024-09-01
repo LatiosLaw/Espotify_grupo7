@@ -18,15 +18,17 @@ import javax.persistence.Id;
 public class ListaParticular extends ListaReproduccion implements Serializable {
 
     private boolean visibilidad;
+    private Cliente creador;
     
     public ListaParticular(){
     
     }
     
     
-    public ListaParticular(String nombre, boolean visibilidad){
+    public ListaParticular(String nombre, boolean visibilidad, Cliente creador){
         super(nombre);
         this.visibilidad = visibilidad;
+        this.creador = creador;
     }
 
     public boolean getVisibilidad() {

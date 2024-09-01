@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import javax.persistence.NoResultException;
+import logica.ListaParticular;
 import logica.ListaReproduccion;
 
 public class DAO_ListaReproduccion {
@@ -36,6 +38,18 @@ public class DAO_ListaReproduccion {
 
     public List<ListaReproduccion> findAll() {
         return entityManager.createQuery("SELECT e FROM MyEntity e", ListaReproduccion.class).getResultList();
+    }
+    
+    public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
+        try {
+            return entityManager.createQuery(
+                "SELECT u FROM ListaReproduccion u WHERE u.nickname = :nick_lista AND u.creador = :nick_creador", ListaParticular.class)
+                .setParameter("nick_creador", nick_creador)
+                .setParameter("nick_lista", nick_lista)
+                .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
     }
 
     public void update(ListaReproduccion entity) {

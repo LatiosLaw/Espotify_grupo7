@@ -63,7 +63,7 @@ public class EspotifyMain {
         Genero g1 = new Genero("Tango");
         Genero g2 = new Genero("Cumbia");
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
-        ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false);
+        ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
         
         /* cli1.TemaFav(tem1);
         cli1.Seguir(art1);
