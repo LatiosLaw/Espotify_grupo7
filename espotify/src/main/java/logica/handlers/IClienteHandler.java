@@ -5,6 +5,8 @@
 package logica.handlers;
 
 import java.time.LocalDate;
+import logica.Cliente;
+import logica.Usuario;
 
 /**
  *
@@ -17,12 +19,12 @@ public interface IClienteHandler {
     
     /**
      * 
-     * @param nickname1 nickname de la persona que sigue
-     * @param nickname2 nickname de la persona que es seguida
+     * @param nick1 nickname de la persona que sigue
+     * @param nick2 nickname de la persona que es seguida
      */
-    public void seguirUsuario(String nickname1, String nickname2);
+    public void seguirUsuario(Cliente nick1, Usuario nick2);
     
-    public void dejarDeSeguirUsuario(String nickname1, String nickname2);
+    public void dejarDeSeguirUsuario(Cliente nick1, Usuario nick2);
     
     public void consultarPerfilCliente();
     

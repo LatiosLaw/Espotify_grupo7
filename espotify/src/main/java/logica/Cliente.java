@@ -48,19 +48,23 @@ public class Cliente extends Usuario {
         super(nickname, nombre, apellido, email, fecha_naci);
     }
     
-    public void Seguir(Usuario usuario) {
+    public void seguir(Usuario usuario) {
         this.seguidos.add(usuario);
     }
     
-    public void TemaFav(Tema tema) {
+    public void dejarDeSeguir(Usuario usuario) {
+        this.seguidos.remove(usuario);
+    }
+    
+    public void temaFav(Tema tema) {
         this.temas_favoritos.add(tema);
     }
     
-    public void AlbumFav(Album album) {
+    public void albumFav(Album album) {
         this.albumes_favoritos.add(album);
     }
     
-    public void ListasFav(ListaReproduccion lista) {
+    public void listasFav(ListaReproduccion lista) {
         this.listas_favoritas.add(lista);
     }
 

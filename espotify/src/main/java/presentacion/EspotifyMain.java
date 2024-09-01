@@ -129,7 +129,7 @@ public class EspotifyMain {
         em.merge(g1);
         em.merge(g2);
         em.getTransaction().commit();
-        }
+        
         /////////////////////////////////////////
         
         // Cierre del EntityManager y EntityManagerFactory (opcional)

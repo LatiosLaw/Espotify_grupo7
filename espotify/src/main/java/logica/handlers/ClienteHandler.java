@@ -8,6 +8,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import javax.persistence.PersistenceException;
 import logica.Cliente;
+import logica.Usuario;
 import persistencia.DAO_Usuario;
 
 /**
@@ -47,13 +48,17 @@ public class ClienteHandler implements IClienteHandler{
     }
     
     @Override
-    public void seguirUsuario(String nickname1, String nickname2){
-        
+    public void seguirUsuario(Cliente nick1, Usuario nick2){
+        DAO_Usuario persistence = new DAO_Usuario();
+        nick1.seguir(nick2);
+        persistence.update(nick1);
     }
     
     @Override
-    public void dejarDeSeguirUsuario(String nickname1, String nickname2){
-    
+    public void dejarDeSeguirUsuario(Cliente nick1, Usuario nick2){
+        DAO_Usuario persistence = new DAO_Usuario();
+        nick1.dejarDeSeguir(nick2);
+        persistence.update(nick1);
     }
     
     @Override
