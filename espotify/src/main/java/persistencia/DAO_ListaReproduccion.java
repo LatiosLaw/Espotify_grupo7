@@ -20,7 +20,7 @@ public class DAO_ListaReproduccion {
     private EntityManager entityManager;
 
     public DAO_ListaReproduccion() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }
 

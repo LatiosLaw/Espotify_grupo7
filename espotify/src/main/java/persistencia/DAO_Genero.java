@@ -19,7 +19,7 @@ public class DAO_Genero {
     private EntityManager entityManager;
 
     public DAO_Genero() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
