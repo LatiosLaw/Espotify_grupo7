@@ -4,7 +4,11 @@
  */
 package logica.handlers;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import javax.persistence.PersistenceException;
+import logica.Cliente;
+import persistencia.DAO_Usuario;
 
 /**
  *
@@ -13,8 +17,33 @@ import java.time.LocalDate;
 public class ClienteHandler implements IClienteHandler{
     
     @Override
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac){
-    
+    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac) {
+        // Verificar si el nickname o el correo electronico ya estan en uso
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        if (persistence.findUsuarioByNick(nickname) != null) {
+            System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
+            return;
+        }
+
+        if (persistence.findUsuarioByMail(mail) != null) {
+            System.out.println("El correo electronico: " + mail + " ya esta en uso. Por favor, elige otro.");
+            return;
+        }
+
+        // Crear el nuevo cliente
+        Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, mail, fechaNac);
+
+        // Guardar el cliente en la base de datos
+        try {
+            persistence.save(nuevoCliente);
+            System.out.println("Cliente agregado exitosamente.");
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar el cliente: " + e.getMessage());
+            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
+            }
+        }
     }
     
     @Override

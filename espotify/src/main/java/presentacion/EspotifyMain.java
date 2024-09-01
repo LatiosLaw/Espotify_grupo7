@@ -23,6 +23,10 @@ import logica.ListaPorDefecto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import logica.handlers.ArtistaHandler;
+import logica.handlers.ClienteHandler;
+import logica.handlers.IArtistaHandler;
+import logica.handlers.IClienteHandler;
 
 public class EspotifyMain {
 
@@ -32,6 +36,14 @@ public class EspotifyMain {
         
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
+        
+        IArtistaHandler artHandler = new ArtistaHandler();
+        IClienteHandler cliHandler = new ClienteHandler();
+           
+        artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        
+        cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
 
         // Iniciar el formulario
         FormularioPrincipal fp = new FormularioPrincipal();
@@ -49,7 +61,7 @@ public class EspotifyMain {
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false);
         
-        cli1.TemaFav(tem1);
+        /* cli1.TemaFav(tem1);
         cli1.Seguir(art1);
         cli1.AlbumFav(alb1);
         cli1.ListasFav(lista1);
@@ -88,13 +100,13 @@ public class EspotifyMain {
         em.persist(lista2);
         em.getTransaction().commit();
         
-       // Guardar el Cliente en la base de datos
+        // Guardar el Cliente en la base de datos
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
-      
+        
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
-        // emf.close();
+        // emf.close();*/
     }
 }
