@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,6 +24,11 @@ public class Album implements Serializable {
     @Id
     private String nombre;
     private int anioCreacion;
+    @ManyToOne
+    private Artista creador;
+    
+    @ManyToMany
+    private Collection<Genero> generos = new ArrayList<Genero>();
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private Collection<Tema> temas = new ArrayList<Tema>();
@@ -34,6 +41,12 @@ public class Album implements Serializable {
         this.nombre = nombre;
         this.anioCreacion = anioCreacion;
     }
+    
+    public Album(String nombre, int anioCreacion, Artista artista){
+        this.nombre = nombre;
+        this.anioCreacion = anioCreacion;
+        this.creador = artista;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -42,9 +55,17 @@ public class Album implements Serializable {
         this.nombre = nombre;
     }
     
+    public void setCreador(Artista artista) {
+        this.creador = artista;
+    }
+    
     public void agregarTema(Tema t) {
         t.setAlbum(this);
         this.temas.add(t);
+    }
+    
+    public void agregarGenero(Genero g) {
+        this.generos.add(g);
     }
 
     @Override

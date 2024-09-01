@@ -7,7 +7,7 @@ package logica;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,6 +19,8 @@ public class Artista extends Usuario {
     
     private String biografia;
     private String dirWeb;
+    @OneToMany(mappedBy="creador")
+    private Collection<Album> albumes = new ArrayList<Album>();
 
     // Constructor por defecto
     public Artista() {
