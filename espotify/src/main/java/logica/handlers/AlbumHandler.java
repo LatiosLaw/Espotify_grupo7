@@ -32,7 +32,10 @@ public class AlbumHandler implements IAlbumHandler{
             nuevo_album.agregarTema(tema);
         }
         DAO_Album persistence = new DAO_Album();
-        persistence.save(nuevo_album);
+        Album album_vacio = new Album();
+        album_vacio.setNombre(nuevo_album.getNombre());
+        persistence.save(album_vacio);
+        persistence.update(nuevo_album);
         
         if (persistence.find(nuevo_album.getNombre()) != null) {
         System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");

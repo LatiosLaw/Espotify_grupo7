@@ -21,10 +21,7 @@ public class DAO_Album {
 
     public void save(Album entity) {
         entityManager.getTransaction().begin();
-        Album test = new Album();
-        test.setNombre(entity.getNombre());
-        entityManager.persist(test);
-        entityManager.merge(entity);
+        entityManager.persist(entity);
         entityManager.getTransaction().commit();
     }
 
