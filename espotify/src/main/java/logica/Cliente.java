@@ -4,6 +4,7 @@
  */
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -43,7 +44,7 @@ public class Cliente extends Usuario {
         
     }
 
-    public Cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
+    public Cliente(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci) {
         super(nickname, nombre, apellido, email, fecha_naci);
     }
     

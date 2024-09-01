@@ -6,8 +6,11 @@ package logica.handlers;
 
 import java.time.LocalDate;
 import logica.Artista;
+<<<<<<< Updated upstream
 import logica.Usuario;
 import persistencia.DAO_Usuario;
+=======
+>>>>>>> Stashed changes
 
 /**
  *
@@ -28,7 +31,7 @@ public class ArtistaHandler implements IArtistaHandler{
     
     @Override
     public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb){
-    
+    Artista art = new  Artista(nickname, nombre, apellido, mail, fechaNac, biografia, dirWeb);
     }
     
     

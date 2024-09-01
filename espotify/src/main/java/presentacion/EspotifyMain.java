@@ -9,6 +9,7 @@ package presentacion;
  * @author Law
  */
 
+import java.time.LocalDate;
 import logica.Usuario;
 import logica.Artista;
 import logica.Cliente;
@@ -37,8 +38,8 @@ public class EspotifyMain {
         fp.setVisible(true);
         
         // Crear un nuevo Artista
-        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
-        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
+        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
+        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com",LocalDate.of(2003, 2, 12));
         Tema tem1 = new Tema("Midnight Mayoi",20);
         Tema tem2 = new Tema("Despacito",50);
         Tema tem3 = new Tema("Velociraptor",34);
