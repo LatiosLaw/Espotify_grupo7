@@ -48,7 +48,7 @@ public class EspotifyMain {
         IClienteHandler cliHandler = new ClienteHandler();
         IListaPorDefectoHandler listHandler = new ListaPorDefectoHandler();
         IListaParticularHandler listPHandler = new ListaParticularHandler();
-
+        
         //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
@@ -59,16 +59,19 @@ public class EspotifyMain {
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
+        Cliente cli2 = new Cliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
         Tema tem1 = new Tema("Midnight Mayoi", 20);
         Tema tem2 = new Tema("Despacito", 50);
         Tema tem3 = new Tema("Velociraptor", 34);
         Tema tem4 = new Tema("DONMAI", 25);
+        Tema tem5 = new Tema("GIVE UP 今世 壊", 30);
         Album alb1 = new Album("Wachiturros2", 2020);
         Genero g1 = new Genero("Tango");
         Genero g2 = new Genero("Cumbia");
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas", g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
-
+        
+        cliHandler.agregarTema(cli2, tem5);
         /* cli1.TemaFav(tem1);
         cli1.Seguir(art1);
         cli1.AlbumFav(alb1);
@@ -111,6 +114,7 @@ public class EspotifyMain {
         em.getTransaction().commit();
          */
         // Guardar el Cliente en la base de datos
+       
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
