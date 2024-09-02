@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  * @author Law
  */
 @Entity
-public class tema implements Serializable {
+public class Tema implements Serializable {
 
     @Id
     private String nickname;
@@ -27,11 +27,11 @@ public class tema implements Serializable {
     @JoinColumn(name = "ALBUM_NOMBRE")
     private Album album;
     
-     public tema(){
+     public Tema(){
         
     }
     
-    public tema(String nickname, Integer duracion) {
+    public Tema(String nickname, Integer duracion) {
         this.nickname = nickname;
         this.duracion = duracion;
     }
@@ -70,10 +70,10 @@ public class tema implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof tema)) {
+        if (!(object instanceof Tema)) {
             return false;
         }
-        tema other = (tema) object;
+        Tema other = (Tema) object;
         if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
             return false;
         }

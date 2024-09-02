@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.time.LocalDate;
 import logica.Artista;
 import logica.Cliente;
-import logica.tema;
+import logica.Tema;
 import logica.Album;
 import logica.Genero;
 import logica.ListaParticular;
@@ -38,12 +38,6 @@ import logica.handlers.TemaHandler;
 public class EspotifyMain {
 
     public static void main(String[] args) {
-        
-        FormPrin fp = new FormPrin();
-        fp.setVisible(true);
-        
-    
-        /*
         // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
 
@@ -63,7 +57,6 @@ public class EspotifyMain {
         fp.setVisible(true);
 
         // Crear un nuevo Artista
-
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
         Cliente cli2 = new Cliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
@@ -77,7 +70,6 @@ public class EspotifyMain {
         Genero g2 = new Genero("Cumbia");
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas", g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
-
         
         cliHandler.agregarTema(cli2, tem5);
         /* cli1.TemaFav(tem1);
@@ -123,7 +115,6 @@ public class EspotifyMain {
          */
         // Guardar el Cliente en la base de datos
        
-
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
@@ -158,5 +149,4 @@ public class EspotifyMain {
             listHandler.crearLista("Primera lista", null);
             listPHandler.crearLista("Lista exitos 2022", cli1);
     }
-
 }
