@@ -24,7 +24,7 @@ public class Album implements Serializable {
     private int anioCreacion;
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
-    private Collection<Tema> temas = new ArrayList<Tema>();
+    private Collection<tema> temas = new ArrayList<tema>();
 
     public Album(){
         
@@ -42,7 +42,7 @@ public class Album implements Serializable {
         this.nombre = nombre;
     }
     
-    public void agregarTema(Tema t) {
+    public void agregarTema(tema t) {
         t.setAlbum(this);
         this.temas.add(t);
     }

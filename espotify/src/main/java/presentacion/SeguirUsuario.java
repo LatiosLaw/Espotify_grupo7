@@ -43,6 +43,11 @@ public class SeguirUsuario extends javax.swing.JPanel {
         lblUsuarioAseguir.setText("Usuario \na seguir");
 
         btnConfirmar.setText("OK");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         txtCliente.setColumns(10);
 
@@ -108,6 +113,15 @@ public class SeguirUsuario extends javax.swing.JPanel {
                 .addContainerGap(199, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        String nickCliente = txtCliente.getText();
+        String nickAseguir = txtUsuarioAseguir.getText();
+        
+        
+        
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

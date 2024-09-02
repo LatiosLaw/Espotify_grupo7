@@ -12,7 +12,7 @@ package presentacion;
 import logica.Usuario;
 import logica.Artista;
 import logica.Cliente;
-import logica.Tema;
+import logica.tema;
 import logica.Album;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +21,12 @@ import javax.persistence.Persistence;
 public class EspotifyMain {
 
     public static void main(String[] args) {
+        
+        FormPrin fp = new FormPrin();
+        fp.setVisible(true);
+        
+    
+        /*
         // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
         
@@ -35,9 +41,9 @@ public class EspotifyMain {
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "2000-01-01", "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com","2003-02-12");
-        Tema tem1 = new Tema("Midnight Mayoi",20);
-        Tema tem2 = new Tema("Despacito",50);
-        Tema tem3 = new Tema("Velociraptor",34);
+        tema tem1 = new tema("Midnight Mayoi",20);
+        tema tem2 = new tema("Despacito",50);
+        tema tem3 = new tema("Velociraptor",34);
         Album alb1 = new Album("Wachiturros2",2020);
         
        
@@ -75,5 +81,7 @@ public class EspotifyMain {
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
         // emf.close();
-    }
+   */
+}
+
 }

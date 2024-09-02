@@ -4,6 +4,14 @@
  */
 package presentacion;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+
 /**
  *
  * @author Urbina
@@ -15,6 +23,10 @@ public class AgregarUsuario extends javax.swing.JPanel {
      */
     public AgregarUsuario() {
         initComponents();
+         lblDirWeb.setVisible(false);
+               txtDirWeb.setVisible(false);
+               txtaBio.setVisible(false);
+               lblBiografia.setVisible(false);
     }
 
     /**
@@ -30,16 +42,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        sprDia = new javax.swing.JSpinner();
+        sprFecha = new javax.swing.JSpinner();
         lblFechaNaci = new javax.swing.JLabel();
-        sprAnio = new javax.swing.JSpinner();
-        sprMes = new javax.swing.JSpinner();
         txtNickName = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         cbxTipoUsr = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        lblBiografia = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaBio = new javax.swing.JTextArea();
         lblDirWeb = new javax.swing.JLabel();
@@ -56,11 +66,17 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
         jLabel4.setText("Correo");
 
-        sprDia.setEditor(new javax.swing.JSpinner.NumberEditor(sprDia, ""));
+        sprFecha.setModel(new javax.swing.SpinnerDateModel());
+        sprFecha.setEditor(new javax.swing.JSpinner.DateEditor(sprFecha, "dd.MM.yyyy"));
 
         lblFechaNaci.setText("Fecha Naci");
 
         txtNickName.setColumns(10);
+        txtNickName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNickNameActionPerformed(evt);
+            }
+        });
 
         txtNombre.setColumns(10);
 
@@ -68,9 +84,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
         txtCorreo.setColumns(10);
 
-        cbxTipoUsr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Artista" }));
+        cbxTipoUsr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Cliente", "Artista" }));
+        cbxTipoUsr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTipoUsrActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setText("Biografia");
+        lblBiografia.setText("Biografia");
 
         txtaBio.setColumns(20);
         txtaBio.setRows(5);
@@ -79,42 +100,42 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblDirWeb.setText("Direccion Web");
 
         btnConfirmar.setText("OK");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaNaci)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFechaNaci)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sprDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(sprMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(sprAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5)
+                            .addComponent(lblBiografia)
                             .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblDirWeb)
                         .addGap(18, 18, 18)
                         .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,16 +175,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sprDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaNaci)
-                            .addComponent(sprAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sprMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFechaNaci)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(lblBiografia)
                                 .addGap(134, 134, 134)))))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -175,6 +194,90 @@ public class AgregarUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        
+        
+        
+        if(cbxTipoUsr.getSelectedIndex() == 0){
+            System.out.println("No opt elegida");
+        }else{
+             String pattern = "MM/dd/yyyy";
+
+            DateFormat df = new SimpleDateFormat(pattern);
+
+        
+            Date today =(Date) sprFecha.getValue();        
+
+            String fechaString = df.format(today);
+
+            System.out.println("Today is: " + fechaString);
+
+            DateTimeFormatter formatter
+                = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+ 
+
+            LocalDate fechaFinal
+                = LocalDate.parse(fechaString, formatter);
+ 
+            String nick = txtNickName.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String correo = txtCorreo.getText();
+              System.out.println("Converted LocalDate: "  + fechaFinal);
+            
+            if(cbxTipoUsr.getSelectedIndex() == 2){
+                String biografia = txtaBio.getText();
+                String webPag = txtDirWeb.getText();
+                //deborlber cosas CON bio y web
+            }else{
+                //deborlber cosas SIN bio ni web
+            }
+        }
+          
+            
+            
+          
+
+        
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNickNameActionPerformed
+
+    private void cbxTipoUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUsrActionPerformed
+        int token = cbxTipoUsr.getSelectedIndex();
+       
+        switch (token) {
+         case 0:
+                 
+               lblDirWeb.setVisible(false);
+               txtDirWeb.setVisible(false);
+               txtaBio.setVisible(false);
+               lblBiografia.setVisible(false);
+             
+               
+            case 1:
+           lblDirWeb.setVisible(false);
+               txtDirWeb.setVisible(false);
+               txtaBio.setVisible(false);
+               lblBiografia.setVisible(false);
+             
+             
+                break;
+            case 2:
+                lblDirWeb.setVisible(true);
+               txtDirWeb.setVisible(true);
+               txtaBio.setVisible(true);
+               lblBiografia.setVisible(true);
+               
+                break;
+        
+        
+        
+    }//GEN-LAST:event_cbxTipoUsrActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
@@ -183,13 +286,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBiografia;
     private javax.swing.JLabel lblDirWeb;
     private javax.swing.JLabel lblFechaNaci;
-    private javax.swing.JSpinner sprAnio;
-    private javax.swing.JSpinner sprDia;
-    private javax.swing.JSpinner sprMes;
+    private javax.swing.JSpinner sprFecha;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDirWeb;
