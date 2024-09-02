@@ -70,24 +70,27 @@ public class Cliente extends Usuario {
     }
     
     public void listasFav(ListaReproduccion lista) {
-        
+        if(lista instanceof ListaParticular listaParticular){
+            if(listaParticular.getVisibilidad()==true){
+                this.listas_favoritas.add(lista);
+            }else{
+                 System.out.println("Esta lista particular es privada.");
+            }
+        }else{
+            this.listas_favoritas.add(lista);
+        }
     }
-
-
-    public void Seguir(Usuario usuario) {
-        this.seguidos.add(usuario);
+    
+    public void quitarTemaFav(Tema tema) {
+        this.temas_favoritos.remove(tema);
     }
-
-    public void TemaFav(Tema tema) {
-        this.temas_favoritos.add(tema);
+    
+    public void quitarAlbumFav(Album album) {
+        this.albumes_favoritos.remove(album);
     }
-
-    public void AlbumFav(Album album) {
-        this.albumes_favoritos.add(album);
-    }
-
-    public void ListasFav(ListaReproduccion lista) {
-        this.listas_favoritas.add(lista);
+    
+    public void quitarListasFav(ListaReproduccion lista) {
+        this.listas_favoritas.remove(lista);
     }
 
     @Override

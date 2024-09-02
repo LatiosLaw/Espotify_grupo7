@@ -5,7 +5,10 @@
 package logica.handlers;
 
 import java.time.LocalDate;
+import logica.Album;
 import logica.Cliente;
+import logica.ListaReproduccion;
+import logica.Tema;
 import logica.Usuario;
 
 /**
@@ -30,17 +33,17 @@ public interface IClienteHandler {
     
     public void consultarPerfilArtista();
     
-    public void agregarTema(String nickname);
+    public void agregarTema(Cliente nickcli, Tema nicktem);
     
-    public void agregarLista(String nickname);
+    public void agregarLista(Cliente nickcli, ListaReproduccion nomlista);
     
-    public void agregarAlbum(String nickname);
+    public void agregarAlbum(Cliente nickcli, Album nomalbum);
     
-    public void eliminarTema(String nickname);
+    public void eliminarTema(Cliente nickcli, Tema nicktem);
     
-    public void eliminarLista(String nickname);
+    public void eliminarLista(Cliente nickcli, ListaReproduccion nomlista);
     
-    public void eliminarAlbum(String nickname);
+    public void eliminarAlbum(Cliente nickcli, Album nomalbum);
     
     public void consultarListaReproduccion(String nickname);
     

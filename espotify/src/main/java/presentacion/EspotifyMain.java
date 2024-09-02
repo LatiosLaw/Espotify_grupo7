@@ -30,8 +30,10 @@ import logica.handlers.IArtistaHandler;
 import logica.handlers.IClienteHandler;
 import logica.handlers.IListaParticularHandler;
 import logica.handlers.IListaPorDefectoHandler;
+import logica.handlers.ITemaHandler;
 import logica.handlers.ListaParticularHandler;
 import logica.handlers.ListaPorDefectoHandler;
+import logica.handlers.TemaHandler;
 
 public class EspotifyMain {
 
@@ -121,18 +123,19 @@ public class EspotifyMain {
         Collection<Tema> t = new ArrayList<Tema>();
         t.add(tem1);
         t.add(tem4);
-        Album prueba;
-        prueba = manejador_album.agregarAlbum(art1, "Phantomime", 2024, g, t);
+        Album resultado;
+        resultado = manejador_album.agregarAlbum(art1, "Phantomime", 2024, g, t);
         // JUSTO DESPUES DE AGREGAR TENGO QUE MANDARLE AL GENERO QUE SUME EL ALBUM Y PERSISTA DE NUEVO
-        if (prueba != null) {
-            g1.agregarAlbumDelGenero(prueba);
-            g2.agregarAlbumDelGenero(prueba);
-            em.getTransaction().begin();
-            em.merge(g1);
-            em.merge(g2);
-            em.getTransaction().commit();
-
-            /////////////////////////////////////////
+        if (resultado != null) {
+            ITemaHandler manejador_tema = new TemaHandler();
+        manejador_tema.crearTemaDefault("Last Days", 30);
+        Tema tema_a_actualizar;
+        tema_a_actualizar = manejador_tema.retornarTema("Last Days");
+        if(tema_a_actualizar instanceof Tema){
+        manejador_tema.actualizarTema(tema_a_actualizar, resultado);
+        }
+        }
+        /////////////////////////////////////////
             //em.getTransaction().begin();
             //em.persist(cli1);
             // em.getTransaction().commit();
@@ -141,6 +144,5 @@ public class EspotifyMain {
             // emf.close();
             listHandler.crearLista("Primera lista", null);
             listPHandler.crearLista("Lista exitos 2022", cli1);
-        }
     }
 }

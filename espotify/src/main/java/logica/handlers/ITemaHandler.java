@@ -4,10 +4,15 @@
  */
 package logica.handlers;
 
+import logica.Album;
+import logica.Tema;
+
 /**
  *
  * @author Nico
  */
 public interface ITemaHandler {
-    
+    public boolean crearTemaDefault(String nombre_tema, int duracion);
+    public Tema retornarTema(String nickname);
+    public void actualizarTema(Tema tema, Album album);
 }

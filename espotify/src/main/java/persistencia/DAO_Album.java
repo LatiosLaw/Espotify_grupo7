@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import logica.Album;
+import org.eclipse.persistence.queries.DataModifyQuery;
 
 public class DAO_Album {
     private EntityManagerFactory entityManagerFactory;
@@ -52,4 +53,5 @@ public class DAO_Album {
         if (entityManager != null) entityManager.close();
         if (entityManagerFactory != null) entityManagerFactory.close();
     }
+    
 }

@@ -36,7 +36,7 @@ public class Tema implements Serializable {
         this.duracion = duracion;
     }
 
-    public String getId() {
+    public String getNickname() {
         return nickname;
     }
 

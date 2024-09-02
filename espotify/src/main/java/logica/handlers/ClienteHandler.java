@@ -7,7 +7,10 @@ package logica.handlers;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import javax.persistence.PersistenceException;
+import logica.Album;
 import logica.Cliente;
+import logica.ListaReproduccion;
+import logica.Tema;
 import logica.Usuario;
 import persistencia.DAO_Usuario;
 
@@ -72,33 +75,45 @@ public class ClienteHandler implements IClienteHandler{
     }
     
     @Override
-    public void agregarTema(String nickname){
-    
+    public void agregarTema(Cliente nickcli, Tema nicktem){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.temaFav(nicktem);
+    persistence.update(nickcli);
     }
     
     @Override
-    public void agregarLista(String nickname){
-    
+    public void agregarLista(Cliente nickcli, ListaReproduccion nomlista){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.listasFav(nomlista);
+    persistence.update(nickcli);
     }
     
     @Override
-    public void agregarAlbum(String nickname){
-    
+    public void agregarAlbum(Cliente nickcli, Album nomalbum){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.albumFav(nomalbum);
+    persistence.update(nickcli);
     }
     
     @Override
-    public void eliminarTema(String nickname){
-    
+    public void eliminarTema(Cliente nickcli, Tema nicktem){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.quitarTemaFav(nicktem);
+    persistence.update(nickcli);
     }
     
     @Override
-    public void eliminarLista(String nickname){
-    
+    public void eliminarLista(Cliente nickcli, ListaReproduccion nomlista){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.quitarListasFav(nomlista);
+    persistence.update(nickcli);
     }
     
     @Override
-    public void eliminarAlbum(String nickname){
-    
+    public void eliminarAlbum(Cliente nickcli, Album nomalbum){
+    DAO_Usuario persistence = new DAO_Usuario();
+    nickcli.quitarAlbumFav(nomalbum);
+    persistence.update(nickcli);
     }
     
     @Override
