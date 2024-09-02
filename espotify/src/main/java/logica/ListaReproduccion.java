@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,6 +21,10 @@ public abstract class ListaReproduccion implements Serializable {
 
     @Id
     protected String nombre;
+    
+    @ManyToOne
+    @JoinColumn(name = "creador_nickname")
+    protected Cliente creador;
     
     public ListaReproduccion(){
     

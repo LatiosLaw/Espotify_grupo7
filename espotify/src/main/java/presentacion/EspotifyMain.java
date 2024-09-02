@@ -8,11 +8,9 @@ package presentacion;
  *
  * @author Law
  */
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.time.LocalDate;
-import logica.Usuario;
 import logica.Artista;
 import logica.Cliente;
 import logica.Tema;
@@ -30,41 +28,45 @@ import logica.handlers.ArtistaHandler;
 import logica.handlers.ClienteHandler;
 import logica.handlers.IArtistaHandler;
 import logica.handlers.IClienteHandler;
+import logica.handlers.IListaParticularHandler;
+import logica.handlers.IListaPorDefectoHandler;
+import logica.handlers.ListaParticularHandler;
+import logica.handlers.ListaPorDefectoHandler;
 
 public class EspotifyMain {
 
     public static void main(String[] args) {
         // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
-        
+
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
-        
+
         IArtistaHandler artHandler = new ArtistaHandler();
         IClienteHandler cliHandler = new ClienteHandler();
-           
-        artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        
-        cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
+        IListaPorDefectoHandler listHandler = new ListaPorDefectoHandler();
+        IListaParticularHandler listPHandler = new ListaParticularHandler();
 
+        //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
         // Iniciar el formulario
         FormularioPrincipal fp = new FormularioPrincipal();
         fp.setVisible(true);
-        
+
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
-        Cliente cli1 = new Cliente("pepe12","Pepe","Suarez","example@yourmother.com",LocalDate.of(2003, 2, 12));
-        Tema tem1 = new Tema("Midnight Mayoi",20);
-        Tema tem2 = new Tema("Despacito",50);
-        Tema tem3 = new Tema("Velociraptor",34);
-        Tema tem4 = new Tema("DONMAI",25);
-        Album alb1 = new Album("Wachiturros2",2020);
+        Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
+        Tema tem1 = new Tema("Midnight Mayoi", 20);
+        Tema tem2 = new Tema("Despacito", 50);
+        Tema tem3 = new Tema("Velociraptor", 34);
+        Tema tem4 = new Tema("DONMAI", 25);
+        Album alb1 = new Album("Wachiturros2", 2020);
         Genero g1 = new Genero("Tango");
         Genero g2 = new Genero("Cumbia");
-        ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas",g1);
+        ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas", g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
-        
+
         /* cli1.TemaFav(tem1);
         cli1.Seguir(art1);
         cli1.AlbumFav(alb1);
@@ -105,12 +107,12 @@ public class EspotifyMain {
         em.persist(lista1);
         em.persist(lista2);
         em.getTransaction().commit();
-        
+         */
         // Guardar el Cliente en la base de datos
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
-      
+
         // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
         IAlbumHandler manejador_album = new AlbumHandler();
         Collection<Genero> g = new ArrayList<Genero>();
@@ -122,18 +124,23 @@ public class EspotifyMain {
         Album prueba;
         prueba = manejador_album.agregarAlbum(art1, "Phantomime", 2024, g, t);
         // JUSTO DESPUES DE AGREGAR TENGO QUE MANDARLE AL GENERO QUE SUME EL ALBUM Y PERSISTA DE NUEVO
-        if(prueba!=null){
-        g1.agregarAlbumDelGenero(prueba);
-        g2.agregarAlbumDelGenero(prueba);
-        em.getTransaction().begin();
-        em.merge(g1);
-        em.merge(g2);
-        em.getTransaction().commit();
-        
-        /////////////////////////////////////////
-        
-        // Cierre del EntityManager y EntityManagerFactory (opcional)
-        // em.close();
-        // emf.close();*/
+        if (prueba != null) {
+            g1.agregarAlbumDelGenero(prueba);
+            g2.agregarAlbumDelGenero(prueba);
+            em.getTransaction().begin();
+            em.merge(g1);
+            em.merge(g2);
+            em.getTransaction().commit();
+
+            /////////////////////////////////////////
+            //em.getTransaction().begin();
+            //em.persist(cli1);
+            // em.getTransaction().commit();
+            // Cierre del EntityManager y EntityManagerFactory (opcional)
+            // em.close();
+            // emf.close();
+            listHandler.crearLista("Primera lista", null);
+            listPHandler.crearLista("Lista exitos 2022", cli1);
+        }
     }
 }

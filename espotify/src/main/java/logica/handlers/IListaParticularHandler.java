@@ -4,12 +4,14 @@
  */
 package logica.handlers;
 
+import logica.Cliente;
+
 /**
  *
  * @author Nico
  */
 public interface IListaParticularHandler {
-    void crearLista(String nombre, String nickname_cliente);
+    void crearLista(String nombre, Cliente cli);
     void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void publicarLista(String nick_cliente, String nombre_lista);

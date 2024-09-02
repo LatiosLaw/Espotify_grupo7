@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
+import logica.Cliente;
 import logica.Usuario;
 
 public class DAO_Usuario {
@@ -75,4 +76,35 @@ public class DAO_Usuario {
         if (entityManager != null) entityManager.close();
         if (entityManagerFactory != null) entityManagerFactory.close();
     }
+
+    public Usuario merge(Cliente cli) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    try {
+        entityManager.getTransaction().begin();
+        // Buscar el cliente existente
+        Usuario existingClient = findUsuarioByNick(cli.getNickname());
+        if (existingClient != null) {
+            // Actualizar los campos necesarios del cliente existente
+            existingClient.setNombre(cli.getNombre());
+            existingClient.setApellido(cli.getApellido());
+            existingClient.setCorreo(cli.getEmail());
+            existingClient.setFechaNac(cli.getNacimiento());
+            // Aquí puedes agregar otros campos que necesiten actualizarse
+            existingClient = entityManager.merge(existingClient);
+        } else {
+            // Si no existe, persistir el nuevo cliente
+            existingClient = entityManager.merge(cli);
+        }
+        entityManager.getTransaction().commit();
+        return existingClient;
+    } catch (Exception e) {
+        if (entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
+        }
+        e.printStackTrace();
+        return null;
+    } finally {
+        entityManager.close();
+    }
+}
 }

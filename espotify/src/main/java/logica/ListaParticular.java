@@ -5,10 +5,14 @@
 package logica;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,13 +23,17 @@ public class ListaParticular extends ListaReproduccion implements Serializable {
 
     private boolean visibilidad;
     private Cliente creador;
-    
-    public ListaParticular(){
-    
+
+    public ListaParticular() {
+
     }
-    
-    
-    public ListaParticular(String nombre, boolean visibilidad, Cliente creador){
+
+    public ListaParticular(String nombre, Cliente cliente) {
+        super(nombre);
+        this.creador = cliente;
+    }
+
+    public ListaParticular(String nombre, boolean visibilidad, Cliente creador) {
         super(nombre);
         this.visibilidad = visibilidad;
         this.creador = creador;
@@ -39,11 +47,9 @@ public class ListaParticular extends ListaReproduccion implements Serializable {
         this.visibilidad = visibilidad;
     }
 
-  
-
     @Override
     public String toString() {
         return "logica.ListaParticular[ visibilidad=" + visibilidad + " ]";
     }
-    
+
 }
