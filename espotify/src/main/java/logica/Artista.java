@@ -4,10 +4,11 @@
  */
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,13 +20,15 @@ public class Artista extends Usuario {
     
     private String biografia;
     private String dirWeb;
+    @OneToMany(mappedBy="creador")
+    private Collection<Album> albumes = new ArrayList<Album>();
 
     // Constructor por defecto
     public Artista() {
         // Constructor vacío necesario para JPA
     }
 
-    public Artista(String nickname, String nombre, String apellido, String email, String fecha_naci, String biografia, String dirWeb) {
+    public Artista(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci, String biografia, String dirWeb) {
         super(nickname, nombre, apellido, email, fecha_naci);
         this.biografia = biografia;
         this.dirWeb = dirWeb;

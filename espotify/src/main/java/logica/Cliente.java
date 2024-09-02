@@ -4,12 +4,14 @@
  */
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -17,23 +19,78 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class Cliente extends Usuario {
-    
+
     @ManyToMany
-    @JoinTable(name="seguidos",
-    joinColumns=@JoinColumn(name="id_seguidor"),
-    inverseJoinColumns=@JoinColumn(name="id_seguido"))
+    @JoinTable(name = "seguidos",
+            joinColumns = @JoinColumn(name = "nick_seguidor"),
+            inverseJoinColumns = @JoinColumn(name = "nick_seguido"))
     protected Collection<Usuario> seguidos = new ArrayList<Usuario>();
-    
-    public Cliente(){
-        
+    @ManyToMany
+    @JoinTable(name = "temas_favoritos",
+            joinColumns = @JoinColumn(name = "nick_cliente"),
+            inverseJoinColumns = @JoinColumn(name = "nombre_tema"))
+    protected Collection<Tema> temas_favoritos = new ArrayList<Tema>();
+    @ManyToMany
+    @JoinTable(name = "albumes_favoritos",
+            joinColumns = @JoinColumn(name = "nick_cliente"),
+            inverseJoinColumns = @JoinColumn(name = "nombre_album"))
+    protected Collection<Album> albumes_favoritos = new ArrayList<Album>();
+    @ManyToMany
+    @JoinTable(name = "listas_favoritas",
+            joinColumns = @JoinColumn(name = "nick_cliente"),
+            inverseJoinColumns = @JoinColumn(name = "nombre_lista"))
+    protected Collection<ListaReproduccion> listas_favoritas = new ArrayList<ListaReproduccion>();
+
+    @OneToMany(mappedBy = "creador")
+    protected Collection<ListaReproduccion> listasReproduccion = new ArrayList<>();
+
+    public Cliente() {
+
     }
 
-    public Cliente(String nickname, String nombre, String apellido, String email, String fecha_naci) {
+    public Cliente(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci) {
         super(nickname, nombre, apellido, email, fecha_naci);
     }
+
     
-    public void Seguir(Usuario usuario) {
+    public void seguir(Usuario usuario) {
         this.seguidos.add(usuario);
+    }
+    
+    public void dejarDeSeguir(Usuario usuario) {
+        this.seguidos.remove(usuario);
+    }
+    
+    public void temaFav(Tema tema) {
+        this.temas_favoritos.add(tema);
+    }
+    
+    public void albumFav(Album album) {
+        this.albumes_favoritos.add(album);
+    }
+    
+    public void listasFav(ListaReproduccion lista) {
+        if(lista instanceof ListaParticular listaParticular){
+            if(listaParticular.getVisibilidad()==true){
+                this.listas_favoritas.add(lista);
+            }else{
+                 System.out.println("Esta lista particular es privada.");
+            }
+        }else{
+            this.listas_favoritas.add(lista);
+        }
+    }
+    
+    public void quitarTemaFav(Tema tema) {
+        this.temas_favoritos.remove(tema);
+    }
+    
+    public void quitarAlbumFav(Album album) {
+        this.albumes_favoritos.remove(album);
+    }
+    
+    public void quitarListasFav(ListaReproduccion lista) {
+        this.listas_favoritas.remove(lista);
     }
 
     @Override

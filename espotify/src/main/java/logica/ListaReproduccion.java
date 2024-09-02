@@ -5,34 +5,37 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Law
+ * @author Nico
  */
 @Entity
-public class Genero implements Serializable {
+public abstract class ListaReproduccion implements Serializable {
 
     @Id
-    private String nombre;
-    private Collection<Genero> subgenero = new ArrayList<Genero>();
+    protected String nombre;
     
-    @ManyToMany
-    private Collection<Album> albumes_del_genero = new ArrayList<Album>();
-            
-    public Genero(){
+    @ManyToOne
+    @JoinColumn(name = "creador_nickname")
+    protected Cliente creador;
+    
+    public ListaReproduccion(){
     
     }
-
-    public Genero(String nombre){
+    
+    public ListaReproduccion(String nombre){
         this.nombre = nombre;
     }
+    
+    
+
     public String getNombre() {
         return nombre;
     }
@@ -40,25 +43,23 @@ public class Genero implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public void agregarSubgenero(Genero g) {
-        this.subgenero.add(g);
-    }
-    
-    public void agregarAlbumDelGenero(Album album) {
-        this.albumes_del_genero.add(album);
-    }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Genero)) {
+        if (!(object instanceof ListaReproduccion)) {
             return false;
         }
-        Genero other = (Genero) object;
+        ListaReproduccion other = (ListaReproduccion) object;
         if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "logica.ListaReproduccion[ nombre=" + nombre + " ]";
+    }
+    
 }

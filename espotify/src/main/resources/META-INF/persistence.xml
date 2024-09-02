@@ -6,6 +6,10 @@
     <class>logica.Usuario</class>
     <class>logica.Cliente</class>
     <class>logica.Tema</class>
+    <class>logica.ListaReproduccion</class>
+    <class>logica.ListaPorDefecto</class>
+    <class>logica.ListaParticular</class>
+    <class>logica.Genero</class>
     <class>logica.Album</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/espotify?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
