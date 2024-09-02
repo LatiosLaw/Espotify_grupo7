@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author Urbina
  */
-public class AdministrarAlbum extends javax.swing.JPanel {
+public class AdministrarTemas extends javax.swing.JPanel {
 
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarAlbum() {
+    public AdministrarTemas() {
         initComponents();
     }
 
@@ -27,28 +27,28 @@ public class AdministrarAlbum extends javax.swing.JPanel {
     private void initComponents() {
 
         cbxOPT = new javax.swing.JComboBox<>();
-        pnlAdAl = new javax.swing.JPanel();
+        pnlAT = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(872, 579));
 
-        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Album", "Consultar Album", " ", " " }));
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Eliminar Tema de Fav", "Agregar Tema a Fav", " " }));
         cbxOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxOPTActionPerformed(evt);
             }
         });
 
-        pnlAdAl.setBackground(new java.awt.Color(153, 255, 153));
-        pnlAdAl.setPreferredSize(new java.awt.Dimension(860, 471));
+        pnlAT.setBackground(new java.awt.Color(255, 255, 153));
+        pnlAT.setPreferredSize(new java.awt.Dimension(860, 471));
 
-        javax.swing.GroupLayout pnlAdAlLayout = new javax.swing.GroupLayout(pnlAdAl);
-        pnlAdAl.setLayout(pnlAdAlLayout);
-        pnlAdAlLayout.setHorizontalGroup(
-            pnlAdAlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlATLayout = new javax.swing.GroupLayout(pnlAT);
+        pnlAT.setLayout(pnlATLayout);
+        pnlATLayout.setHorizontalGroup(
+            pnlATLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        pnlAdAlLayout.setVerticalGroup(
-            pnlAdAlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlATLayout.setVerticalGroup(
+            pnlATLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -62,7 +62,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 .addContainerGap(737, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlAdAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -71,53 +71,47 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 .addGap(44, 44, 44)
                 .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(pnlAdAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
         int token = cbxOPT.getSelectedIndex();
-       
-        switch (token) {
-            case 0:
-                 //No
-                pnlAdAl.removeAll();
-                pnlAdAl.revalidate();
-                pnlAdAl.repaint();
-            case 1:
-             
-                 AltaDeAlbum ada = new AltaDeAlbum();
-               ada.setLocation(0,0);
-               ada.setSize(860, 471);
-               
-               pnlAdAl.removeAll();
-               pnlAdAl.add(ada);
-               pnlAdAl.revalidate();
-               pnlAdAl.repaint();
-                break;
-            case 2:
-             
-                 ConsultaDeAlbum cda = new ConsultaDeAlbum();
+         String x = String.valueOf(cbxOPT.getSelectedItem());
+         /*
+               OPT
+               Eliminar Tema de Fav
+               Agregar Tema a Fav
+
+         */
+     
+             if("OPT".equals(x)){
+                  pnlAT.removeAll();
+                  pnlAT.repaint();
+                  
+             }else if("Eliminar Tema de Fav".equals(x)){
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum();
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
-               pnlAdAl.removeAll();
-               pnlAdAl.add(cda);
-               pnlAdAl.revalidate();
-               pnlAdAl.repaint();
-                break;
-                
-            case 3:
-             
-                break;
-            case 4:
-          
-                break;
-            default:
-                
-                break;
-        }
+               pnlAT.removeAll();
+               pnlAT.add(cda);
+               pnlAT.revalidate();
+               pnlAT.repaint();
+               
+             }else if ("Agregar Tema a Fav".equals(x)){
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum();
+               cda.setLocation(0,0);
+               cda.setSize(860, 471);
+               
+               pnlAT.removeAll();
+               pnlAT.add(cda);
+               pnlAT.revalidate();
+               pnlAT.repaint();
+             }
+              
+            
         
         
     }//GEN-LAST:event_cbxOPTActionPerformed
@@ -125,6 +119,6 @@ public class AdministrarAlbum extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxOPT;
-    private javax.swing.JPanel pnlAdAl;
+    private javax.swing.JPanel pnlAT;
     // End of variables declaration//GEN-END:variables
 }

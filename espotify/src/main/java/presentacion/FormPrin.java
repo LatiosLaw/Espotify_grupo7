@@ -27,7 +27,6 @@ public class FormPrin extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlPrin = new javax.swing.JPanel();
-        btnAdTe = new javax.swing.JButton();
         btnAdLi = new javax.swing.JButton();
         btnAdAl = new javax.swing.JButton();
         btnAdUs = new javax.swing.JButton();
@@ -49,16 +48,19 @@ public class FormPrin extends javax.swing.JFrame {
             .addGap(0, 579, Short.MAX_VALUE)
         );
 
-        btnAdTe.setText("Administrar Tema");
-        btnAdTe.addActionListener(new java.awt.event.ActionListener() {
+        btnAdLi.setText("Administrar Lista");
+        btnAdLi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdTeActionPerformed(evt);
+                btnAdLiActionPerformed(evt);
             }
         });
 
-        btnAdLi.setText("Administrar Lista");
-
         btnAdAl.setText("Administar Album");
+        btnAdAl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdAlActionPerformed(evt);
+            }
+        });
 
         btnAdUs.setText("Administrar Usuario");
         btnAdUs.addActionListener(new java.awt.event.ActionListener() {
@@ -74,11 +76,9 @@ public class FormPrin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(btnAdUs, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdTe, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(166, 166, 166)
                 .addComponent(btnAdLi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAdAl, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
             .addComponent(pnlPrin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -87,7 +87,6 @@ public class FormPrin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdTe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdLi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdUs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -114,21 +113,28 @@ public class FormPrin extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_btnAdUsActionPerformed
 
-    private void btnAdTeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdTeActionPerformed
-        
-               AgregarUsuario au = new AgregarUsuario();
-               au.setLocation(0,0);
-               au.setSize(860, 471);
+    private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
+      
+        AdministrarAlbum aa = new AdministrarAlbum();
+               aa.setLocation(0,0);
+               aa.setSize(860, 471);
                
                pnlPrin.removeAll();
-               pnlPrin.add(au);
+               pnlPrin.add(aa);
                pnlPrin.revalidate();
                pnlPrin.repaint();
-        
-        
-        
-        
-    }//GEN-LAST:event_btnAdTeActionPerformed
+    }//GEN-LAST:event_btnAdAlActionPerformed
+
+    private void btnAdLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdLiActionPerformed
+         AdministrarLista aL = new AdministrarLista();
+        aL.setLocation(0,0);
+               aL.setSize(860, 471);
+               
+               pnlPrin.removeAll();
+               pnlPrin.add(aL);
+               pnlPrin.revalidate();
+               pnlPrin.repaint();
+    }//GEN-LAST:event_btnAdLiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +174,6 @@ public class FormPrin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdAl;
     private javax.swing.JButton btnAdLi;
-    private javax.swing.JButton btnAdTe;
     private javax.swing.JButton btnAdUs;
     private javax.swing.JPanel pnlPrin;
     // End of variables declaration//GEN-END:variables

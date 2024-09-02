@@ -9,12 +9,12 @@ package presentacion;
  * @author Urbina
  */
 
-public class AdministrarUsuario extends javax.swing.JPanel {
+public class AdministrarLista extends javax.swing.JPanel {
 
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarUsuario() {
+    public AdministrarLista() {
         initComponents();
     }
 
@@ -27,32 +27,32 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        pnlAU = new javax.swing.JPanel();
+        cbxOPT = new javax.swing.JComboBox<>();
+        pnlAL = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         cbxPrin = new javax.swing.JComboBox<>();
         pnlAU1 = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(872, 579));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar Lista/Album/Tema de Fav", "Agregar Tema/Album/Lista a Fav" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", " " }));
+        cbxOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxOPTActionPerformed(evt);
             }
         });
 
-        pnlAU.setBackground(new java.awt.Color(255, 153, 153));
-        pnlAU.setPreferredSize(new java.awt.Dimension(860, 471));
+        pnlAL.setBackground(new java.awt.Color(153, 153, 255));
+        pnlAL.setPreferredSize(new java.awt.Dimension(860, 471));
 
-        javax.swing.GroupLayout pnlAULayout = new javax.swing.GroupLayout(pnlAU);
-        pnlAU.setLayout(pnlAULayout);
-        pnlAULayout.setHorizontalGroup(
-            pnlAULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlALLayout = new javax.swing.GroupLayout(pnlAL);
+        pnlAL.setLayout(pnlALLayout);
+        pnlALLayout.setHorizontalGroup(
+            pnlALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        pnlAULayout.setVerticalGroup(
-            pnlAULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlALLayout.setVerticalGroup(
+            pnlALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -113,11 +113,11 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(737, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -129,9 +129,9 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -141,98 +141,25 @@ public class AdministrarUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-         /*
-                OPT
-                Agregar Usuario
-                Seguir Usuario
-                Dejar de seguir Usuario
-                Consultar Perfil de Usuario
-                Eliminar Lista/Album/Tema de Fav
-                Agregar Tema/Album/Lista a Fav
-        */
-          String token= String.valueOf( jComboBox1.getSelectedItem());
-        
-       
-        switch (token) {
-            case "OPT":
-                 //No
-                pnlAU.removeAll();
-                pnlAU.repaint();
-            break;
-            case "Agregar Usuario":
-             
-                 AgregarUsuario au = new AgregarUsuario();
-               au.setLocation(0,0);
-               au.setSize(860, 471);
+    private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
+          int token = cbxOPT.getSelectedIndex();
+          String tokenx = String.valueOf(cbxOPT.getSelectedItem());
+          
+          if (tokenx == "OPT"){
+              pnlAL.removeAll();
+              pnlAL.repaint();
+          }else if (tokenx == "Publicar Lista"){
+                  PublicarLista pl = new PublicarLista();
+               pl.setLocation(0,0);
+               pl.setSize(860, 471);
                
-               pnlAU.removeAll();
-               pnlAU.add(au);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break;
-            case "Seguir Usuario":
-             
-                 SeguirUsuario su = new SeguirUsuario();
-               su.setLocation(0,0);
-               su.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(su);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break;
-                
-            case "Dejar de seguir Usuario":
-                 DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario();
-               ddsu.setLocation(0,0);
-               ddsu.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(ddsu);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break;
-            case "Consultar Perfil de Usuario":
-                 ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario();
-               cpdu.setLocation(0,0);
-               cpdu.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(cpdu);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break; 
-                 case "Eliminar Lista/Album/Tema de Fav":
-                 EliminarCosoFav ecf = new EliminarCosoFav();
-               ecf.setLocation(0,0);
-               ecf.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(ecf);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break;
-                 case "Agregar Tema/Album/Lista a Fav":
-                 AgregarCosoFav acf = new AgregarCosoFav();
-               acf.setLocation(0,0);
-               acf.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(acf);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break;
-                
-                
-                
-                
-                
-            default:
-                
-                break;
-        }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+               pnlAL.removeAll();
+               pnlAL.add(pl);
+               pnlAL.revalidate();
+               pnlAL.repaint();
+          }
+     
+    }//GEN-LAST:event_cbxOPTActionPerformed
 
     private void cbxPrinItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxPrinItemStateChanged
      
@@ -246,10 +173,10 @@ public class AdministrarUsuario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxOPT;
     private javax.swing.JComboBox<String> cbxPrin;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel pnlAU;
+    private javax.swing.JPanel pnlAL;
     private javax.swing.JPanel pnlAU1;
     // End of variables declaration//GEN-END:variables
 }
