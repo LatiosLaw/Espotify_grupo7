@@ -5,6 +5,7 @@
 package logica.handlers;
 
 import java.time.LocalDate;
+import java.util.List;
 import logica.Album;
 import logica.Cliente;
 import logica.ListaReproduccion;
@@ -29,7 +30,7 @@ public interface IClienteHandler {
     
     public void dejarDeSeguirUsuario(Cliente nick1, Usuario nick2);
     
-    public void consultarPerfilCliente();
+    public Usuario consultarPerfilCliente(String uchuario);
     
     public void consultarPerfilArtista();
     
@@ -46,5 +47,7 @@ public interface IClienteHandler {
     public void eliminarAlbum(Cliente nickcli, Album nomalbum);
     
     public void consultarListaReproduccion(String nickname);
+    
+    public List<Usuario> listarCliente();
     
 }

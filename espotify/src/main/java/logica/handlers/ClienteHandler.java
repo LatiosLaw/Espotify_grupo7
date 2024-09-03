@@ -6,6 +6,7 @@ package logica.handlers;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.PersistenceException;
 import logica.Album;
 import logica.Cliente;
@@ -65,10 +66,18 @@ public class ClienteHandler implements IClienteHandler{
     }
     
     @Override
-    public void consultarPerfilCliente(){
-    
+    public Usuario consultarPerfilCliente(String uchuario){
+        DAO_Usuario persistence = new DAO_Usuario();
+       Usuario usr =  persistence.findUsuarioByNick(uchuario);
+       return usr;
     }
-    
+    @Override
+    public List<Usuario>  listarCliente(){
+        
+        DAO_Usuario persistence = new DAO_Usuario();
+       List <Usuario> lista =  persistence.findAll();
+       return lista;
+    }
     @Override
     public void consultarPerfilArtista(){
     

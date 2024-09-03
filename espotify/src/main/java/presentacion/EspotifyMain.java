@@ -53,8 +53,9 @@ public class EspotifyMain {
         // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
         // Iniciar el formulario
-        FormularioPrincipal fp = new FormularioPrincipal();
-        fp.setVisible(true);
+        //FormularioPrincipal fp = new FormularioPrincipal();
+        FormPrin fpe = new FormPrin();
+        fpe.setVisible(true);
 
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
