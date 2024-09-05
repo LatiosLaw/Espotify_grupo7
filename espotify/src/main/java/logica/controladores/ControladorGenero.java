@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 import logica.Genero;
 import logica.Album;
@@ -12,7 +12,7 @@ import logica.ListaPorDefecto;
  *
  * @author Nico
  */
-public class GeneroHandler implements IGeneroHandler{
+public class ControladorGenero implements IControladorGenero{
     @Override
     public void crearGenero(String nombre, Genero genero_padre){
         

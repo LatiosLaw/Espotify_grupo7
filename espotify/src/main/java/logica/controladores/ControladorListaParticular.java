@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 
 import logica.ListaParticular;
@@ -21,7 +21,7 @@ import persistencia.DAO_Usuario;
  *
  * @author Nico
  */
-public class ListaParticularHandler implements IListaParticularHandler {
+public class ControladorListaParticular implements IControladorListaParticular {
 
     @Override    
     public void crearLista(String nombre, Cliente nicknameCliente) {

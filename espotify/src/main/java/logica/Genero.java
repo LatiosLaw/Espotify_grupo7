@@ -33,6 +33,7 @@ public class Genero implements Serializable {
     public Genero(String nombre){
         this.nombre = nombre;
     }
+
     public String getNombre() {
         return nombre;
     }

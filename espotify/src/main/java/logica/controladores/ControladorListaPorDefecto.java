@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 import logica.Genero;
 import logica.ListaPorDefecto;
@@ -13,7 +13,7 @@ import persistencia.DAO_ListaReproduccion;
  *
  * @author Nico
  */
-public class ListaPorDefectoHandler implements IListaPorDefectoHandler {
+public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
 
     @Override
     public void crearLista(String nombre, Genero genero) {

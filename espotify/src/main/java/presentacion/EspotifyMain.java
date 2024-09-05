@@ -22,18 +22,21 @@ import logica.ListaPorDefecto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import logica.handlers.AlbumHandler;
-import logica.handlers.IAlbumHandler;
-import logica.handlers.ArtistaHandler;
-import logica.handlers.ClienteHandler;
-import logica.handlers.IArtistaHandler;
-import logica.handlers.IClienteHandler;
-import logica.handlers.IListaParticularHandler;
-import logica.handlers.IListaPorDefectoHandler;
-import logica.handlers.ITemaHandler;
-import logica.handlers.ListaParticularHandler;
-import logica.handlers.ListaPorDefectoHandler;
-import logica.handlers.TemaHandler;
+import logica.controladores.ControladorAlbum;
+import logica.controladores.ControladorArtista;
+import logica.controladores.ControladorCliente;
+import logica.controladores.ControladorListaParticular;
+import logica.controladores.ControladorListaPorDefecto;
+import logica.controladores.ControladorTema;
+import logica.controladores.IControladorAlbum;
+import logica.controladores.IControladorArtista;
+import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
+import logica.dt.DataArtista;
+import logica.dt.DataGenero;
+import logica.dt.DataTema;
 
 public class EspotifyMain {
 
@@ -44,10 +47,10 @@ public class EspotifyMain {
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
 
-        IArtistaHandler artHandler = new ArtistaHandler();
-        IClienteHandler cliHandler = new ClienteHandler();
-        IListaPorDefectoHandler listHandler = new ListaPorDefectoHandler();
-        IListaParticularHandler listPHandler = new ListaParticularHandler();
+        IControladorArtista artHandler = new ControladorArtista();
+        IControladorCliente cliHandler = new ControladorCliente();
+        IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
+        IControladorListaParticular listPHandler = new ControladorListaParticular();
         
         //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
@@ -60,14 +63,15 @@ public class EspotifyMain {
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
         Cliente cli2 = new Cliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
-        Tema tem1 = new Tema("Midnight Mayoi", 20);
+        DataTema tem1 = new DataTema("Midnight Mayoi", 20);
         Tema tem2 = new Tema("Despacito", 50);
         Tema tem3 = new Tema("Velociraptor", 34);
-        Tema tem4 = new Tema("DONMAI", 25);
-        Tema tem5 = new Tema("GIVE UP 今世 壊", 30);
+        DataTema tem4 = new DataTema("DONMAI", 25);
+        DataTema tem5 = new DataTema("GIVE UP 今世 壊", 30);
         Album alb1 = new Album("Wachiturros2", 2020);
         Genero g1 = new Genero("Tango");
         Genero g2 = new Genero("Cumbia");
+        DataGenero g3 = new DataGenero("JPop");
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas", g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
         
@@ -120,24 +124,20 @@ public class EspotifyMain {
         em.getTransaction().commit();
 
         // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
-        IAlbumHandler manejador_album = new AlbumHandler();
-        Collection<Genero> g = new ArrayList<Genero>();
-        g.add(g1);
-        g.add(g2);
-        Collection<Tema> t = new ArrayList<Tema>();
+        DataArtista art11 = new DataArtista();
+        IControladorAlbum manejador_album = new ControladorAlbum();
+        Collection<DataGenero> g = new ArrayList<>();
+        g.add(g3);
+        Collection<DataTema> t = new ArrayList<>();
         t.add(tem1);
         t.add(tem4);
-        Album resultado;
-        resultado = manejador_album.agregarAlbum(art1, "Phantomime", 2024, g, t);
-        // JUSTO DESPUES DE AGREGAR TENGO QUE MANDARLE AL GENERO QUE SUME EL ALBUM Y PERSISTA DE NUEVO
-        if (resultado != null) {
-            ITemaHandler manejador_tema = new TemaHandler();
+        manejador_album.agregarAlbum(art11, "Phantomime", 2024, g, t);
+        IControladorTema manejador_tema = new ControladorTema();
         manejador_tema.crearTemaDefault("Last Days", 30);
         Tema tema_a_actualizar;
         tema_a_actualizar = manejador_tema.retornarTema("Last Days");
         if(tema_a_actualizar instanceof Tema){
         manejador_tema.actualizarTema(tema_a_actualizar, resultado);
-        }
         }
         /////////////////////////////////////////
             //em.getTransaction().begin();

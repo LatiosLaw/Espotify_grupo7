@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 import java.time.LocalDate;
 import logica.Album;
@@ -15,7 +15,7 @@ import logica.Usuario;
  *
  * @author Nico
  */
-public interface IClienteHandler {
+public interface IControladorCliente {
     
     public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac);
     

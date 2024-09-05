@@ -2,17 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 import logica.Album;
+import logica.Artista;
 import logica.Tema;
+import logica.dt.DataAlbum;
+import logica.dt.DataArtista;
+import logica.dt.DataTema;
 import persistencia.DAO_Tema;
 
 /**
  *
  * @author Nico
  */
-public class TemaHandler implements ITemaHandler{
+public class ControladorTema implements IControladorTema{
     
     @Override
     public boolean crearTemaDefault(String nombre_tema, int duracion){
@@ -34,21 +38,26 @@ public class TemaHandler implements ITemaHandler{
     }
     
     @Override
-    public Tema retornarTema(String nickname){
+    public DataTema retornarTema(String nickname){
         Tema retorno;
         DAO_Tema persistence = new DAO_Tema();
         retorno = persistence.find(nickname);
          if (retorno != null) {
-            return retorno;
+            Album albu_ret = retorno.getAlbum();
+            Artista arti = albu_ret.getCreador();
+            DataAlbum alb = new DataAlbum(albu_ret.getNombre(), albu_ret.getanioCreacion(), new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getEmail(), arti.getNacimiento(), arti.getBiografia(), arti.getDirWeb()));
+            return new DataTema(retorno.getNickname(), retorno.getDuracion(), alb); 
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }
     }
     
     @Override
-    public void actualizarTema(Tema tema, Album album){
-        tema.setAlbum(album);
+    public void actualizarTema(DataTema tema, DataAlbum album){
+        Album alb = new Album();
+        Tema tem = new Tema();
+        tem.setAlbum(alb);
         DAO_Tema persistence = new DAO_Tema();
-        persistence.update(tema);
+        persistence.update(tem);
     }
 }

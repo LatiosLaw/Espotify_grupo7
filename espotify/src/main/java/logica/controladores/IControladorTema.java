@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
-import logica.Album;
-import logica.Tema;
+import logica.dt.DataAlbum;
+import logica.dt.DataTema;
 
 /**
  *
  * @author Nico
  */
-public interface ITemaHandler {
+public interface IControladorTema {
     public boolean crearTemaDefault(String nombre_tema, int duracion);
-    public Tema retornarTema(String nickname);
-    public void actualizarTema(Tema tema, Album album);
+    public DataTema retornarTema(String nickname);
+    public void actualizarTema(DataTema tema, DataAlbum album);
 }

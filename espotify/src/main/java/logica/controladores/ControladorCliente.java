@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import persistencia.DAO_Usuario;
  *
  * @author Nico
  */
-public class ClienteHandler implements IClienteHandler{
+public class ControladorCliente implements IControladorCliente{
     
     @Override
     public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac) {
