@@ -23,7 +23,7 @@ import persistencia.DAO_Album;
 public class ControladorAlbum implements IControladorAlbum{
     
     @Override
-    public void agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero>generos, Collection<DataTema>temas){
+    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero>generos, Collection<DataTema>temas){
     Artista art = new Artista(artista.getNickname(), artista.getNombre(), artista.getApellido(), artista.getCorreo(), artista.getFechaNac(), artista.getBiografia(), artista.getDirWeb());
         Album nuevo_album = new Album(nombAlbum, anioCreacion, art);
         Iterator<DataGenero> iterator = generos.iterator();
@@ -44,8 +44,10 @@ public class ControladorAlbum implements IControladorAlbum{
         
         if (persistence.find(nuevo_album.getNombre()) != null) {
         System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
+        return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
     } else {
         System.out.println("El album no fue persistido correctamente.");
+        return null;
     }
     }
 

@@ -17,5 +17,5 @@ import logica.dt.DataTema;
  */
 public interface IControladorAlbum {
     
-    public void agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero>generos, Collection<DataTema>temas);
+    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero>generos, Collection<DataTema>temas);
 }

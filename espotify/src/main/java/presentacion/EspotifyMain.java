@@ -34,6 +34,7 @@ import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
+import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
@@ -131,13 +132,15 @@ public class EspotifyMain {
         Collection<DataTema> t = new ArrayList<>();
         t.add(tem1);
         t.add(tem4);
-        manejador_album.agregarAlbum(art11, "Phantomime", 2024, g, t);
-        IControladorTema manejador_tema = new ControladorTema();
+        DataAlbum retorno = manejador_album.agregarAlbum(art11, "Phantomime", 2024, g, t);
+        if(retorno != null){
+            IControladorTema manejador_tema = new ControladorTema();
         manejador_tema.crearTemaDefault("Last Days", 30);
-        Tema tema_a_actualizar;
+        DataTema tema_a_actualizar;
         tema_a_actualizar = manejador_tema.retornarTema("Last Days");
-        if(tema_a_actualizar instanceof Tema){
-        manejador_tema.actualizarTema(tema_a_actualizar, resultado);
+        if(tema_a_actualizar != null){
+        manejador_tema.actualizarTema(tema_a_actualizar, retorno);
+        }
         }
         /////////////////////////////////////////
             //em.getTransaction().begin();
