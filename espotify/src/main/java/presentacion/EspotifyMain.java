@@ -36,6 +36,7 @@ import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
+import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
 
@@ -63,7 +64,7 @@ public class EspotifyMain {
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
-        Cliente cli2 = new Cliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
+        DataCliente cli2 = new DataCliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
         DataTema tem1 = new DataTema("Midnight Mayoi", 20);
         Tema tem2 = new Tema("Despacito", 50);
         Tema tem3 = new Tema("Velociraptor", 34);

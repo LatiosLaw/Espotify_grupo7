@@ -5,11 +5,11 @@
 package logica.controladores;
 
 import java.time.LocalDate;
-import logica.Album;
-import logica.Cliente;
-import logica.ListaReproduccion;
-import logica.Tema;
-import logica.Usuario;
+import logica.dt.DataAlbum;
+import logica.dt.DataCliente;
+import logica.dt.DataListaReproduccion;
+import logica.dt.DataTema;
+import logica.dt.DataUsuario;
 
 /**
  *
@@ -25,25 +25,25 @@ public interface IControladorCliente {
      * @param nick1 nickname de la persona que sigue
      * @param nick2 nickname de la persona que es seguida
      */
-    public void seguirUsuario(Cliente nick1, Usuario nick2);
+    public void seguirUsuario(DataCliente nick1, DataUsuario nick2);
     
-    public void dejarDeSeguirUsuario(Cliente nick1, Usuario nick2);
+    public void dejarDeSeguirUsuario(DataCliente nick1, DataUsuario nick2);
     
     public void consultarPerfilCliente();
     
     public void consultarPerfilArtista();
     
-    public void agregarTema(Cliente nickcli, Tema nicktem);
+    public void agregarTema(DataCliente nickcli, DataTema nicktem);
     
-    public void agregarLista(Cliente nickcli, ListaReproduccion nomlista);
+    public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista);
     
-    public void agregarAlbum(Cliente nickcli, Album nomalbum);
+    public void agregarAlbum(DataCliente nickcli, DataAlbum nomalbum);
     
-    public void eliminarTema(Cliente nickcli, Tema nicktem);
+    public void eliminarTema(DataCliente nickcli, DataTema nicktem);
     
-    public void eliminarLista(Cliente nickcli, ListaReproduccion nomlista);
+    public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista);
     
-    public void eliminarAlbum(Cliente nickcli, Album nomalbum);
+    public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum);
     
     public void consultarListaReproduccion(String nickname);
     

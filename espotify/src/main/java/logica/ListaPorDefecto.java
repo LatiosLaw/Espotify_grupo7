@@ -23,6 +23,10 @@ public class ListaPorDefecto extends ListaReproduccion implements Serializable {
    
    }
    
+   public ListaPorDefecto(String nombre){
+       super(nombre);
+   }
+   
    public ListaPorDefecto(String nombre, Genero g){
        super(nombre);
        this.genero = g;
