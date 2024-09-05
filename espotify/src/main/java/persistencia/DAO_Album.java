@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import logica.Album;
 import org.eclipse.persistence.queries.DataModifyQuery;
+import javax.persistence.NoResultException;
 
 public class DAO_Album {
     private EntityManagerFactory entityManagerFactory;
@@ -28,6 +29,17 @@ public class DAO_Album {
 
     public Album find(String nombre) {
         return entityManager.find(Album.class, nombre);
+    }
+    
+    public Album findAlbumByName(String nombre) {
+        try {
+            return entityManager.createQuery(
+                "SELECT a FROM Usuario a WHERE a.nombre = :nombre", Album.class)
+                .setParameter("nombre", nombre)
+                .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese nombre
+        }
     }
 
     public List<Album> findAll() {

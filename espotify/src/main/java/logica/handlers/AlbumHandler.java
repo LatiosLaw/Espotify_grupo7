@@ -49,8 +49,8 @@ public class AlbumHandler implements IAlbumHandler{
     @Override
     public Album consultarAlbum(String alb){
         DAO_Album persistence = new DAO_Album();
-        Album abm = 
-        //return abm;
+        Album abm = persistence.findAlbumByName(alb);
+        return abm;
     }
 
 }
