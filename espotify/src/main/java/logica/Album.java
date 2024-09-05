@@ -55,6 +55,10 @@ public class Album implements Serializable {
         this.nombre = nombre;
     }
     
+    public int getAnioCreacion(){
+        return anioCreacion;
+    }
+    
     public void setCreador(Artista artista) {
         this.creador = artista;
     }

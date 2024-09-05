@@ -17,4 +17,6 @@ import logica.Tema;
 public interface IAlbumHandler {
     
     public Album agregarAlbum(Artista artista, String nombAlbum, int anioCreacion, Collection<Genero>generos, Collection<Tema>temas);
+    
+    public Album consultarAlbum(String alb);
 }
