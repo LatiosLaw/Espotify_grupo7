@@ -33,7 +33,12 @@ public class Genero implements Serializable {
     public Genero(String nombre){
         this.nombre = nombre;
     }
-
+    
+    public Genero(String nombre, Collection<Genero>subgeneros){
+        this.nombre = nombre;
+        this.subgenero = subgeneros;
+    }
+     
     public String getNombre() {
         return nombre;
     }

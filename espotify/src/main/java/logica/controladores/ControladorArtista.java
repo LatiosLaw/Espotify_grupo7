@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -23,8 +19,8 @@ public class ControladorArtista implements IControladorArtista{
         Usuario retorno;
         DAO_Usuario persistence = new DAO_Usuario();
         retorno = persistence.findUsuarioByNick(nickname);
-         if (retorno instanceof Artista) {
-            return new DataArtista(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento(),((Artista) retorno).getBiografia(), ((Artista) retorno).getDirWeb());
+         if (retorno instanceof Artista artista) {
+            return new DataArtista(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento(),artista.getBiografia(), artista.getDirWeb());
         } else {
             throw new IllegalArgumentException("El usuario con nickname " + nickname + " no es un Artista.");
         }
@@ -60,7 +56,3 @@ public class ControladorArtista implements IControladorArtista{
         }
     }
 }
-
- /*else if (persistence.findUsuarioByNick(mail) != null) {
-        throw new IllegalArgumentException("El mail ya está en uso.");
-        }*/

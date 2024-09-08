@@ -4,14 +4,14 @@
  */
 package logica.controladores;
 
-import logica.Cliente;
+import logica.dt.DataCliente;
 
 /**
  *
  * @author Nico
  */
 public interface IControladorListaParticular {
-    void crearLista(String nombre, Cliente cli);
+    void crearLista(String nombre, DataCliente cli);
     void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void publicarLista(String nick_cliente, String nombre_lista);

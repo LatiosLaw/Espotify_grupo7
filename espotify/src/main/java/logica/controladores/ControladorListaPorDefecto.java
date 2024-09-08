@@ -7,6 +7,8 @@ package logica.controladores;
 import logica.Genero;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
+import logica.dt.DataGenero;
+import persistencia.DAO_Genero;
 import persistencia.DAO_ListaReproduccion;
 
 /**
@@ -16,20 +18,40 @@ import persistencia.DAO_ListaReproduccion;
 public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
 
     @Override
-    public void crearLista(String nombre, Genero genero) {
+    public void crearLista(String nombre, DataGenero dGenero) {
         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
+        DAO_Genero gdao = new DAO_Genero();
 
         // Verificar si la lista ya existe
         ListaReproduccion listaExistente = dao.find(nombre);
         if (listaExistente != null) {
-            throw new IllegalArgumentException("La lista de reproduccion ya existe.");
+            throw new IllegalArgumentException("La lista de reproducción ya existe.");
         }
 
-        ListaPorDefecto nuevaLista = new ListaPorDefecto(nombre, genero);
+        if (dGenero == null) {
+            throw new IllegalArgumentException("DataGenero no puede ser nulo.");
+        }
+
+        // Verificar que exista el genero
+        Genero generoExistente = gdao.find(dGenero.getNombre());
+
+        if (generoExistente == null) {
+            throw new IllegalArgumentException("El genero especificado no existe.");
+        }
+
+        ListaPorDefecto nuevaLista = new ListaPorDefecto(nombre, generoExistente);
 
         // Guardar la nueva lista en la base de datos
-        dao.save(nuevaLista);
-        System.out.println("Lista Por Defecto creada exitosamente.");
+        try {
+            ListaPorDefecto ls = new ListaPorDefecto();
+            ls.setNombre(nuevaLista.getNombre());
+            dao.save(ls);
+            dao.update(nuevaLista);
+
+            System.out.println("Lista Por Defecto creada exitosamente.");
+        } catch (Exception e) {
+            System.err.println("Error al guardar la lista: " + e.getMessage());
+        }
     }
 
     @Override
