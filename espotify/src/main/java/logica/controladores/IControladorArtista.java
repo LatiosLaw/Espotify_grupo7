@@ -5,7 +5,7 @@
 package logica.controladores;
 
 import java.time.LocalDate;
-import logica.Artista;
+import java.util.Collection;
 import logica.dt.DataArtista;
 
 /**
@@ -15,4 +15,5 @@ import logica.dt.DataArtista;
 public interface IControladorArtista {
     public DataArtista retornarArtista(String nickname);
     public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb);
+    public Collection<DataArtista> mostrarArtistas();
 }

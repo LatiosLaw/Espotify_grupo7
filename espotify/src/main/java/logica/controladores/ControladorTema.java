@@ -43,10 +43,7 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         retorno = persistence.find(nickname);
         if (retorno != null) {
-            Album albu_ret = retorno.getAlbum();
-            Artista arti = albu_ret.getCreador();
-            DataAlbum alb = new DataAlbum(albu_ret.getNombre(), albu_ret.getanioCreacion(), new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getEmail(), arti.getNacimiento(), arti.getBiografia(), arti.getDirWeb()));
-            return new DataTema(retorno.getNickname(), retorno.getDuracion(), alb);
+            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"));
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }
@@ -54,8 +51,8 @@ public class ControladorTema implements IControladorTema {
 
     @Override
     public void actualizarTema(DataTema tema, DataAlbum album) {
-        Album alb = new Album();
-        Tema tem = new Tema();
+        Album alb = new Album(album.getNombre(), album.getAnioCreacion());
+        Tema tem = new Tema(tema.getNickname(), tema.getDuracion());
         tem.setAlbum(alb);
         DAO_Tema persistence = new DAO_Tema();
         persistence.update(tem);

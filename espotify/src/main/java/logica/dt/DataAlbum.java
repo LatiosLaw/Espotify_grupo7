@@ -7,8 +7,8 @@ public class DataAlbum {
     private String nombre;
     private int anioCreacion;
     private DataArtista creador; 
-    private Collection<DataGenero> generos;
-    private Collection<DataTema> temas;
+    private Collection<DataGenero> generos = new ArrayList<>();
+    private Collection<DataTema> temas = new ArrayList<>();
 
     public DataAlbum(String nombre, int anioCreacion, DataArtista creador) {
         this.nombre = nombre;
@@ -24,6 +24,10 @@ public class DataAlbum {
         this.creador = new DataArtista();
         this.agregarGenero(new DataGenero());
         this.agregarTema(new DataTema());
+    }
+    
+    public DataAlbum(String nombre){
+        this.nombre = nombre;
     }
 
     public String getNombre() {

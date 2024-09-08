@@ -4,15 +4,15 @@
  */
 package logica.controladores;
 
+import java.util.Collection;
 import logica.Genero;
 import logica.Album;
-import logica.ListaReproduccion;
+import logica.dt.DataGenero;
 /**
  *
  * @author Nico
  */
 public interface IControladorGenero {
     void crearGenero(String nombre, Genero genero_padre);
-    ListaReproduccion buscarListasPorGenero(Genero genero_filtro);
-    Album buscarAlbumesPorGenero(Genero genero_filtro);
+    public Collection<DataGenero> mostrarGeneros();
 }

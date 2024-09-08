@@ -4,10 +4,15 @@
  */
 package logica.controladores;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import logica.Genero;
 import logica.Album;
 import logica.ListaReproduccion;
 import logica.ListaPorDefecto;
+import logica.dt.DataGenero;
+import persistencia.DAO_Genero;
 /**
  *
  * @author Nico
@@ -19,15 +24,15 @@ public class ControladorGenero implements IControladorGenero{
     }
     
     @Override
-    
-    public ListaReproduccion buscarListasPorGenero(Genero genero_filtro){
-        ListaReproduccion coso = new ListaPorDefecto(); //Por ahora hasta que la logica exista de verdad
-        return coso;
-    }
-    
-    @Override
-    public Album buscarAlbumesPorGenero(Genero genero_filtro){
-        Album coso = new Album(); //Por ahora hasta que la logica exista de verdad
-        return coso;
+    public Collection<DataGenero> mostrarGeneros(){
+        Collection<DataGenero> lista = new ArrayList<>();
+        DAO_Genero persistence = new DAO_Genero();
+        Collection<Genero> gene = persistence.findAll();
+        Iterator<Genero> iterator = gene.iterator();
+        while (iterator.hasNext()) {
+            Genero genero = iterator.next();
+            lista.add(new DataGenero(genero.getNombre()));
+        }
+        return lista;
     }
 }

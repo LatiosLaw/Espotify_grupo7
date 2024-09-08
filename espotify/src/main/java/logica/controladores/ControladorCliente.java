@@ -14,6 +14,7 @@ import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.Tema;
+import logica.Usuario;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataCliente;
@@ -86,13 +87,15 @@ public class ControladorCliente implements IControladorCliente {
     }
 
     @Override
-    public void consultarPerfilCliente() {
-
-    }
-
-    @Override
-    public void consultarPerfilArtista() {
-
+    public DataCliente consultarPerfilCliente(String nick_cli) {
+        Usuario retorno;
+        DAO_Usuario persistence = new DAO_Usuario();
+        retorno = persistence.findUsuarioByNick(nick_cli);
+         if (retorno instanceof Cliente cliente) {
+            return new DataCliente(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento());
+        } else {
+            throw new IllegalArgumentException("El usuario con nickname " + nick_cli + " no es un Artista.");
+        }
     }
 
     @Override

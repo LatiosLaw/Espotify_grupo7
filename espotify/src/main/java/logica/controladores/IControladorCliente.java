@@ -29,9 +29,7 @@ public interface IControladorCliente {
     
     public void dejarDeSeguirUsuario(DataCliente nick1, DataUsuario nick2);
     
-    public void consultarPerfilCliente();
-    
-    public void consultarPerfilArtista();
+    public DataCliente consultarPerfilCliente(String nick_cli);
     
     public void agregarTema(DataCliente nickcli, DataTema nicktem);
     

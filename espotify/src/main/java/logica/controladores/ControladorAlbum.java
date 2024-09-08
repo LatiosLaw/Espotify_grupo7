@@ -1,5 +1,6 @@
 package logica.controladores;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import logica.Album;
@@ -11,6 +12,7 @@ import logica.dt.DataArtista;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
 import persistencia.DAO_Album;
+import persistencia.DAO_Genero;
 
 /**
  *
@@ -45,5 +47,38 @@ public class ControladorAlbum implements IControladorAlbum {
             System.out.println("El album no fue persistido correctamente.");
             return null;
         }
+    }
+    
+    @Override
+    public Collection<DataAlbum> retornarAlbumsDelGenero(String genero){
+        Collection<DataAlbum> lista = new ArrayList<>();
+        DAO_Album persistence = new DAO_Album();
+        Collection<Album> albu = persistence.findAllPorGenero(genero);
+        Iterator<Album> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            Album album = iterator.next();
+            lista.add(new DataAlbum(album.getNombre()));
+        }
+        return lista;
+    }
+    
+    @Override
+    public Collection<DataAlbum> retornarAlbumsDelArtista(String nick_arti){
+        Collection<DataAlbum> lista = new ArrayList<>();
+        DAO_Album persistence = new DAO_Album();
+        Collection<Album> albu = persistence.findAllPorArtista(nick_arti);
+        Iterator<Album> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            Album album = iterator.next();
+            lista.add(new DataAlbum(album.getNombre()));
+        }
+        return lista;
+    }
+    
+    @Override
+    public DataAlbum retornarAlbum(String nombre_album){
+         DAO_Album persistence = new DAO_Album();
+         Album testin = persistence.findAlbumByName(nombre_album);
+         return new DataAlbum();
     }
 }

@@ -2,6 +2,9 @@ package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Artista;
 import logica.Usuario;
@@ -55,4 +58,20 @@ public class ControladorArtista implements IControladorArtista{
             }
         }
     }
+    
+    @Override
+    public Collection<DataArtista> mostrarArtistas(){
+        Collection<DataArtista> lista = new ArrayList<>();
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> artist = persistence.findAll();
+        Iterator<Usuario> iterator = artist.iterator();
+        while (iterator.hasNext()) {
+            Usuario art = iterator.next();
+            if(art instanceof Artista arti){
+              lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
+            }
+        }
+        return lista;
+    }
+    
 }
