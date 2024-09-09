@@ -8,10 +8,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import logica.Usuario;
-import logica.handlers.ArtistaHandler;
-import logica.handlers.ClienteHandler;
-import logica.handlers.IArtistaHandler;
-import logica.handlers.IClienteHandler;
+import logica.dt.DataUsuario;
+import logica.dt.DataCliente;
+import logica.dt.DataArtista;
+import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorArtista;
+
+
+
 
 /**
  *
@@ -22,7 +26,15 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarPerfilDeUsuario
      */
-    public ConsultarPerfilDeUsuario() {
+    
+    private IControladorCliente controlCli;
+    private IControladorArtista controlArt;
+    
+    public ConsultarPerfilDeUsuario(IControladorCliente icc, IControladorArtista ica) {
+        
+        controlCli = icc;
+        controlArt = ica;
+        
         initComponents();
         txtPaginaWeb.setVisible(false);
                txtaBiografia.setVisible(false);
@@ -264,8 +276,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         
     }
     private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
-        IArtistaHandler artHandler = new ArtistaHandler();
-        IClienteHandler cliHandler = new ClienteHandler();
+       
         
         int token = cbxOpt.getSelectedIndex();
        
@@ -283,7 +294,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                
             case 1:
                 
-                List <Usuario> pepe = cliHandler.listarCliente();
+              //  List <Usuario> pepe = cliHandler.listarCliente();
                 
                 
                 
@@ -311,30 +322,34 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxOptActionPerformed
 }
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        IArtistaHandler artHandler = new ArtistaHandler();
-        IClienteHandler cliHandler = new ClienteHandler();
         
+         System.out.println("AAAAAAAAAAAAAAAAAAAA");
         String nickBuscar = txtBuscar.getText();
        String token= String.valueOf( cbxOpt.getSelectedItem());
        if(token == "OPT"){
                  //no
+                 
+                 
+                 
        }else if(token == "Cliente"){
-          Usuario usr =  cliHandler.consultarPerfilCliente(txtBuscar.getText());
-           txtNickName.setText(usr.getNickname());
+         // Usuario usr =  cliHandler.consultarPerfilCliente(txtBuscar.getText());
+         System.out.println("Se quiere mostrar los datos de un cliente");
+          DataUsuario usr = controlCli.consultarPerfilCliente(nickBuscar);
+         txtNickName.setText(usr.getNickname());
            txtNombre.setText(usr.getNombre());
            txtApellido.setText(usr.getApellido());
            
             DateTimeFormatter formatter
                 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            String formattedString = usr.getNacimiento().format(formatter);
+            String formattedString = usr.getFechaNac().format(formatter);
            
            
            
            txtFechaNaci1.setText(formattedString);
-           txtCorreoElectronico.setText(usr.getEmail());
+           txtCorreoElectronico.setText(usr.getCorreo());
            txtPaginaWeb.setText(token);
            txtaBiografia.setText(token);
-              
+           
        }else if(token == "Artista"){
            
        }

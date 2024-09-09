@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorArtista;
+import logica.controladores.IControladorCliente;
+
 /**
  *
  * @author Urbina
@@ -14,7 +17,12 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarUsuario() {
+     private IControladorCliente controlCli;
+    private IControladorArtista controlArt;
+    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica){
+          controlCli = icc;
+        controlArt = ica;
+        
         initComponents();
     }
 
@@ -162,7 +170,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             break;
             case "Agregar Usuario":
              
-                 AgregarUsuario au = new AgregarUsuario();
+                 AgregarUsuario au = new AgregarUsuario(controlCli, controlArt);
                au.setLocation(0,0);
                au.setSize(860, 471);
                
@@ -194,7 +202,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                pnlAU.repaint();
                 break;
             case "Consultar Perfil de Usuario":
-                 ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario();
+                 ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario(controlCli, controlArt);
                cpdu.setLocation(0,0);
                cpdu.setSize(860, 471);
                

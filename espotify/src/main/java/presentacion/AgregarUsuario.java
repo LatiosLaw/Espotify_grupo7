@@ -11,10 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-import logica.handlers.ArtistaHandler;
-import logica.handlers.ClienteHandler;
-import logica.handlers.IArtistaHandler;
-import logica.handlers.IClienteHandler;
+import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorArtista;
 
 /**
  *
@@ -25,7 +23,13 @@ public class AgregarUsuario extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-    public AgregarUsuario() {
+       private IControladorCliente controlCli;
+    private IControladorArtista controlArt;
+    public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
+          controlCli = icc;
+        controlArt = ica;
+        
+        
         initComponents();
         
          lblDirWeb.setVisible(false);
@@ -203,8 +207,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-        IArtistaHandler artHandler = new ArtistaHandler();
-        IClienteHandler cliHandler = new ClienteHandler();
+        
         
         if(cbxTipoUsr.getSelectedIndex() == 0){
             System.out.println("No opt elegida");
@@ -237,9 +240,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 String biografia = txtaBio.getText();
                 String webPag = txtDirWeb.getText();
                 //deborlber cosas CON bio y web
-                artHandler.agregarArtista(nick, nombre, apellido,correo, fechaFinal, biografia, webPag);
+                controlArt.agregarArtista(nick, nombre, apellido, correo, fechaFinal, biografia, webPag);
+               // artHandler.agregarArtista(nick, nombre, apellido,correo, fechaFinal, biografia, webPag);
             }else{
-                cliHandler.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
+                controlCli.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
+               // cliHandler.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
             }
         }
           
