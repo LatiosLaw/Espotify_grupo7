@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import javax.persistence.NoResultException;
 import logica.Tema;
+import logica.Usuario;
 
 public class DAO_Tema {
     private EntityManagerFactory entityManagerFactory;
@@ -31,6 +33,17 @@ public class DAO_Tema {
 
     public List<Tema> findAll() {
         return entityManager.createQuery("SELECT e FROM TEMA e", Tema.class).getResultList();
+    }
+    
+    public List<Tema> findFromAlbum(String nombre_album) {
+        try {
+            return entityManager.createQuery(
+                "SELECT t FROM Tema t WHERE t.ALBUM_NOMBRE = :nombre_album", Tema.class)
+                .setParameter("nombre_album", nombre_album)
+                .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún tema de este album
+        }
     }
 
     public void update(Tema entity) {

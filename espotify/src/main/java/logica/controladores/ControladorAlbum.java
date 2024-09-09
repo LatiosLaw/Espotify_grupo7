@@ -76,11 +76,14 @@ public class ControladorAlbum implements IControladorAlbum {
     }
     
     @Override
-    public DataAlbum retornarAlbum(String nombre_album){
+    public DataAlbum retornarInfoAlbum(String nombre_album){
          DAO_Album persistence = new DAO_Album();
-         Album testin = persistence.findAlbumByName(nombre_album);
-         // IDEA, PORQUE TENGO QUE RETORNAR ALGUNAS COSAS ESPECIICAS ACÁ, GENERO LO PUEDO BUSCAR EN REVERSA DEL NOMBRE DEL ALBUM, LUEGO CON EL NOMBRE EN EL MAIN BUSCO LA INFO DE TODOS LOS TEMAS
-         String generos;
-         return new DataAlbum();
+         Album album = persistence.findAlbumByName(nombre_album);
+         if(album != null){
+             Artista art = album.getCreador();
+             return new DataAlbum(album.getNombre(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+         }else{
+             return new DataAlbum("ALBUM NO EXISTE");
+         }
     }
 }
