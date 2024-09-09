@@ -79,6 +79,8 @@ public class ControladorAlbum implements IControladorAlbum {
     public DataAlbum retornarAlbum(String nombre_album){
          DAO_Album persistence = new DAO_Album();
          Album testin = persistence.findAlbumByName(nombre_album);
+         // IDEA, PORQUE TENGO QUE RETORNAR ALGUNAS COSAS ESPECIICAS ACÁ, GENERO LO PUEDO BUSCAR EN REVERSA DEL NOMBRE DEL ALBUM, LUEGO CON EL NOMBRE EN EL MAIN BUSCO LA INFO DE TODOS LOS TEMAS
+         String generos;
          return new DataAlbum();
     }
 }

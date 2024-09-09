@@ -135,7 +135,7 @@ public class EspotifyMain {
         listPHandler.crearLista("Lista exitos 2022", dcli1);
 
         // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
-        DataArtista art11 = new DataArtista();
+        DataArtista art11 = new DataArtista("CalliopeMori", "Karen", "Idk", "moricalliope.hololive@gmail.com", LocalDate.of(1996, 5, 30), "Nada", "Nada");
         IControladorAlbum manejador_album = new ControladorAlbum();
         Collection<DataGenero> g = new ArrayList<>();
         g.add(g3);
