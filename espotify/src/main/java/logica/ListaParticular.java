@@ -22,10 +22,18 @@ import javax.persistence.OneToMany;
 public class ListaParticular extends ListaReproduccion implements Serializable {
 
     private boolean visibilidad;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "creador_nickname")
     private Cliente creador;
 
     public ListaParticular() {
 
+    }
+    
+    public ListaParticular(String nombre, boolean visibilidad) {
+        super(nombre);
+        this.visibilidad = visibilidad;
     }
 
     public ListaParticular(String nombre, Cliente cliente) {

@@ -5,10 +5,9 @@
 package logica;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,11 +15,15 @@ import javax.persistence.Id;
  */
 @Entity
 public class ListaPorDefecto extends ListaReproduccion implements Serializable {
-
+   @ManyToOne(cascade = CascadeType.PERSIST)
    private Genero genero;
    
    public ListaPorDefecto(){
    
+   }
+   
+   public ListaPorDefecto(String nombre){
+       super(nombre);
    }
    
    public ListaPorDefecto(String nombre, Genero g){

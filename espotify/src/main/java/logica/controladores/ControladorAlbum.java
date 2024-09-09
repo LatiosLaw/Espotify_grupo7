@@ -1,0 +1,84 @@
+package logica.controladores;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import logica.Album;
+import logica.Artista;
+import logica.Genero;
+import logica.Tema;
+import logica.dt.DataAlbum;
+import logica.dt.DataArtista;
+import logica.dt.DataGenero;
+import logica.dt.DataTema;
+import persistencia.DAO_Album;
+import persistencia.DAO_Genero;
+
+/**
+ *
+ * @author Nico
+ */
+public class ControladorAlbum implements IControladorAlbum {
+
+    @Override
+    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero> generos, Collection<DataTema> temas) {
+        Artista art = new Artista(artista.getNickname(), artista.getNombre(), artista.getApellido(), artista.getCorreo(), artista.getFechaNac(), artista.getBiografia(), artista.getDirWeb());
+        Album nuevo_album = new Album(nombAlbum, anioCreacion, art);
+        Iterator<DataGenero> iterator = generos.iterator();
+        while (iterator.hasNext()) {
+            DataGenero genero = iterator.next();
+            nuevo_album.agregarGenero(new Genero(genero.getNombre()));
+        }
+        Iterator<DataTema> iterator2 = temas.iterator();
+        while (iterator2.hasNext()) {
+            DataTema tema = iterator2.next();
+            nuevo_album.agregarTema(new Tema(tema.getNickname(), tema.getDuracion()));
+        }
+        DAO_Album persistence = new DAO_Album();
+        Album album_vacio = new Album();
+        album_vacio.setNombre(nuevo_album.getNombre());
+        persistence.save(album_vacio);
+        persistence.update(nuevo_album);
+
+        if (persistence.find(nuevo_album.getNombre()) != null) {
+            System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
+            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+        } else {
+            System.out.println("El album no fue persistido correctamente.");
+            return null;
+        }
+    }
+    
+    @Override
+    public Collection<DataAlbum> retornarAlbumsDelGenero(String genero){
+        Collection<DataAlbum> lista = new ArrayList<>();
+        DAO_Album persistence = new DAO_Album();
+        Collection<Album> albu = persistence.findAllPorGenero(genero);
+        Iterator<Album> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            Album album = iterator.next();
+            lista.add(new DataAlbum(album.getNombre()));
+        }
+        return lista;
+    }
+    
+    @Override
+    public Collection<DataAlbum> retornarAlbumsDelArtista(String nick_arti){
+        Collection<DataAlbum> lista = new ArrayList<>();
+        DAO_Album persistence = new DAO_Album();
+        Collection<Album> albu = persistence.findAllPorArtista(nick_arti);
+        Iterator<Album> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            Album album = iterator.next();
+            lista.add(new DataAlbum(album.getNombre()));
+        }
+        return lista;
+    }
+    
+    @Override
+    public DataAlbum retornarAlbum(String nombre_album){
+         DAO_Album persistence = new DAO_Album();
+         Album testin = persistence.findAlbumByName(nombre_album);
+         return new DataAlbum();
+    }
+}

@@ -42,7 +42,7 @@ public class Cliente extends Usuario {
     protected Collection<ListaReproduccion> listas_favoritas = new ArrayList<ListaReproduccion>();
 
     @OneToMany(mappedBy = "creador")
-    protected Collection<ListaReproduccion> listasReproduccion = new ArrayList<>();
+    protected Collection<ListaParticular> listasReproduccion = new ArrayList<>();
 
     public Cliente() {
 

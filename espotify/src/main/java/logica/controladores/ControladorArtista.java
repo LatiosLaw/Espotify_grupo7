@@ -1,28 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package logica.handlers;
+package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Artista;
 import logica.Usuario;
+import logica.dt.DataArtista;
 import persistencia.DAO_Usuario;
 
 /**
  *
  * @author Nico
  */
-public class ArtistaHandler implements IArtistaHandler{
+public class ControladorArtista implements IControladorArtista{
+
     @Override
-    public Artista retornarArtista(String nickname){
+    public DataArtista retornarArtista(String nickname){
         Usuario retorno;
         DAO_Usuario persistence = new DAO_Usuario();
         retorno = persistence.findUsuarioByNick(nickname);
-         if (retorno instanceof Artista) {
-            return (Artista) retorno; // Casting dinámico
+         if (retorno instanceof Artista artista) {
+            return new DataArtista(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento(),artista.getBiografia(), artista.getDirWeb());
         } else {
             throw new IllegalArgumentException("El usuario con nickname " + nickname + " no es un Artista.");
         }
@@ -57,8 +58,20 @@ public class ArtistaHandler implements IArtistaHandler{
             }
         }
     }
+    
+    @Override
+    public Collection<DataArtista> mostrarArtistas(){
+        Collection<DataArtista> lista = new ArrayList<>();
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> artist = persistence.findAll();
+        Iterator<Usuario> iterator = artist.iterator();
+        while (iterator.hasNext()) {
+            Usuario art = iterator.next();
+            if(art instanceof Artista arti){
+              lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
+            }
+        }
+        return lista;
+    }
+    
 }
-
- /*else if (persistence.findUsuarioByNick(mail) != null) {
-        throw new IllegalArgumentException("El mail ya está en uso.");
-        }*/

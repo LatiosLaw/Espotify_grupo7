@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package logica.handlers;
+package logica.controladores;
 
-import logica.Cliente;
+import logica.dt.DataCliente;
 
 /**
  *
  * @author Nico
  */
-public interface IListaParticularHandler {
-    void crearLista(String nombre, Cliente cli);
+public interface IControladorListaParticular {
+    void crearLista(String nombre, DataCliente cli);
     void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void publicarLista(String nick_cliente, String nombre_lista);

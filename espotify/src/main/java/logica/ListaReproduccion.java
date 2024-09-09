@@ -6,35 +6,26 @@ package logica;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Nico
  */
+
 @Entity
 public abstract class ListaReproduccion implements Serializable {
 
     @Id
     protected String nombre;
-    
-    @ManyToOne
-    @JoinColumn(name = "creador_nickname")
-    protected Cliente creador;
-    
-    public ListaReproduccion(){
-    
+
+    public ListaReproduccion() {
+
     }
-    
-    public ListaReproduccion(String nombre){
+
+    public ListaReproduccion(String nombre) {
         this.nombre = nombre;
     }
-    
-    
 
     public String getNombre() {
         return nombre;
@@ -61,5 +52,4 @@ public abstract class ListaReproduccion implements Serializable {
     public String toString() {
         return "logica.ListaReproduccion[ nombre=" + nombre + " ]";
     }
-    
 }

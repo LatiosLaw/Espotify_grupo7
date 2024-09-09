@@ -47,6 +47,7 @@ public class Album implements Serializable {
         this.anioCreacion = anioCreacion;
         this.creador = artista;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -54,9 +55,21 @@ public class Album implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public int getanioCreacion() {
+        return anioCreacion;
+    }
+
+    public void setanioCreacion(int anio) {
+        this.anioCreacion = anio;
+    }
     
     public void setCreador(Artista artista) {
         this.creador = artista;
+    }
+
+    public Artista getCreador() {
+        return creador;
     }
     
     public void agregarTema(Tema t) {
