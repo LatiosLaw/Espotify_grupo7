@@ -12,7 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import javax.persistence.NoResultException;
 import logica.Genero;
+import logica.Tema;
 
 public class DAO_Genero {
     private EntityManagerFactory entityManagerFactory;
@@ -35,6 +37,19 @@ public class DAO_Genero {
 
     public List<Genero> findAll() {
         return entityManager.createQuery("SELECT * FROM genero", Genero.class).getResultList();
+
+    }
+    
+    public List<String> findfromAlbum(String nombre_album) {
+        try {
+            return entityManager.createQuery(
+                "SELECT g.generos_NOMBRE FROM genero_album g WHERE g.albumes_del_genero_NOMBRE = :nombre_album")
+                .setParameter("nombre_album", nombre_album)
+                .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún tema de este album
+        }
+
     }
 
     public void update(Genero entity) {
