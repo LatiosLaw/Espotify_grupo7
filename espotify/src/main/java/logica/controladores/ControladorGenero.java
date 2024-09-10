@@ -35,7 +35,7 @@ public class ControladorGenero implements IControladorGenero{
         }
         return lista;
     }
-    
+
     @Override
     public Collection<DataGenero> darGenerosDelAlbum(){
     Collection<DataGenero> lista = new ArrayList<>();
@@ -48,4 +48,5 @@ public class ControladorGenero implements IControladorGenero{
         }
         return lista;
     }
+
 }

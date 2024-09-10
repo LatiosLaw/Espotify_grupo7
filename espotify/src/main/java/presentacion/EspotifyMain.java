@@ -58,7 +58,7 @@ public class EspotifyMain {
         // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
         // Iniciar el formulario
-        FormularioPrincipal fp = new FormularioPrincipal();
+        FormPrin fp = new FormPrin(cliHandler,artHandler);
         fp.setVisible(true);
 
         // Crear un nuevo Artista

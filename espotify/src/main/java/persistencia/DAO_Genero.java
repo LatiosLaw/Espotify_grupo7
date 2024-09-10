@@ -37,6 +37,7 @@ public class DAO_Genero {
 
     public List<Genero> findAll() {
         return entityManager.createQuery("SELECT * FROM genero", Genero.class).getResultList();
+
     }
     
     public List<String> findfromAlbum(String nombre_album) {
@@ -48,6 +49,7 @@ public class DAO_Genero {
         } catch (NoResultException e) {
             return null; // No se encontro ningún tema de este album
         }
+
     }
 
     public void update(Genero entity) {
