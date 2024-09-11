@@ -35,6 +35,7 @@ public DataArtista retornarArtista(String nickname) {
                 retorno.getNombre(),
                 retorno.getApellido(),
                 retorno.getEmail(),
+                retorno.getFoto()
                 retorno.getNacimiento(),
                 artista.getBiografia(),
                 artista.getDirWeb()
@@ -50,7 +51,7 @@ public DataArtista retornarArtista(String nickname) {
 }
     
     @Override
-    public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb) {
+    public void agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb) {
         // Verificar que el nickname y el mail no esten en uso
         DAO_Usuario persistence = new DAO_Usuario();
 
@@ -65,7 +66,7 @@ public DataArtista retornarArtista(String nickname) {
         }
 
         // Crear el nuevo artista
-        Artista nuevoArtista = new Artista(nickname, nombre, apellido, mail, fechaNac, biografia, dirWeb);
+        Artista nuevoArtista = new Artista(nickname, nombre, apellido, mail, foto, fechaNac, biografia, dirWeb);
 
         // Guardar el artista en la base de datos
         try {
@@ -88,9 +89,11 @@ public DataArtista retornarArtista(String nickname) {
         while (iterator.hasNext()) {
             Usuario art = iterator.next();
             if(art instanceof Artista arti){
-              lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
+              lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), art.getFoto(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
             }
         }
+        
+        
         return lista;
     }
     

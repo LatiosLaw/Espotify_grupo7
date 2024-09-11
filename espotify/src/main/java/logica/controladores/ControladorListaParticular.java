@@ -81,6 +81,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
             cliente.getNombre(),     
             cliente.getApellido(),     
             cliente.getEmail(),
+            cliente.getFoto(),
             cliente.getNacimiento()
         );
         

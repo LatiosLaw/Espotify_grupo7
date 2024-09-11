@@ -29,7 +29,7 @@ public class Cliente extends Usuario {
     @JoinTable(name = "temas_favoritos",
             joinColumns = @JoinColumn(name = "nick_cliente"),
             inverseJoinColumns = @JoinColumn(name = "nombre_tema"))
-    protected Collection<Tema> temas_favoritos = new ArrayList<Tema>();
+    protected Collection<tema> temas_favoritos = new ArrayList<tema>();
     @ManyToMany
     @JoinTable(name = "albumes_favoritos",
             joinColumns = @JoinColumn(name = "nick_cliente"),
@@ -48,8 +48,8 @@ public class Cliente extends Usuario {
 
     }
 
-    public Cliente(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci) {
-        super(nickname, nombre, apellido, email, fecha_naci);
+    public Cliente(String nickname, String nombre, String apellido, String email, String foto_perfil, LocalDate fecha_naci) {
+        super(nickname, nombre, apellido, email, foto_perfil, fecha_naci);
     }
 
     
@@ -61,7 +61,7 @@ public class Cliente extends Usuario {
         this.seguidos.remove(usuario);
     }
     
-    public void temaFav(Tema tema) {
+    public void temaFav(tema tema) {
         this.temas_favoritos.add(tema);
     }
     
@@ -81,7 +81,7 @@ public class Cliente extends Usuario {
         }
     }
     
-    public void quitarTemaFav(Tema tema) {
+    public void quitarTemaFav(tema tema) {
         this.temas_favoritos.remove(tema);
     }
     

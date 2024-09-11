@@ -28,8 +28,8 @@ public class Artista extends Usuario {
         // Constructor vacío necesario para JPA
     }
 
-    public Artista(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci, String biografia, String dirWeb) {
-        super(nickname, nombre, apellido, email, fecha_naci);
+    public Artista(String nickname, String nombre, String apellido, String email, String foto_perfil, LocalDate fecha_naci, String biografia, String dirWeb) {
+        super(nickname, nombre, apellido, email, foto_perfil, fecha_naci);
         this.biografia = biografia;
         this.dirWeb = dirWeb;
     }

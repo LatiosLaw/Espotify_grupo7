@@ -6,7 +6,7 @@ import java.util.Iterator;
 import logica.Album;
 import logica.Artista;
 import logica.Genero;
-import logica.Tema;
+import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataGenero;
@@ -21,9 +21,9 @@ import persistencia.DAO_Genero;
 public class ControladorAlbum implements IControladorAlbum {
 
     @Override
-    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, int anioCreacion, Collection<DataGenero> generos, Collection<DataTema> temas) {
-        Artista art = new Artista(artista.getNickname(), artista.getNombre(), artista.getApellido(), artista.getCorreo(), artista.getFechaNac(), artista.getBiografia(), artista.getDirWeb());
-        Album nuevo_album = new Album(nombAlbum, anioCreacion, art);
+    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataGenero> generos, Collection<DataTema> temas) {
+        Artista art = new Artista(artista.getNickname(), artista.getNombre(), artista.getApellido(), artista.getCorreo(), artista.getFoto(), artista.getFechaNac(), artista.getBiografia(), artista.getDirWeb());
+        Album nuevo_album = new Album(nombAlbum, imagen, anioCreacion, art);
         Iterator<DataGenero> iterator = generos.iterator();
         while (iterator.hasNext()) {
             DataGenero genero = iterator.next();
@@ -32,7 +32,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(new Tema(tema.getNickname(), tema.getDuracion()));
+            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getDuracion()));
         }
         DAO_Album persistence = new DAO_Album();
         Album album_vacio = new Album();
@@ -42,7 +42,7 @@ public class ControladorAlbum implements IControladorAlbum {
 
         if (persistence.find(nuevo_album.getNombre()) != null) {
             System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
-            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
         } else {
             System.out.println("El album no fue persistido correctamente.");
             return null;
@@ -81,7 +81,7 @@ public class ControladorAlbum implements IControladorAlbum {
          Album album = persistence.findAlbumByName(nombre_album);
          if(album != null){
              Artista art = album.getCreador();
-             return new DataAlbum(album.getNombre(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+             return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
          }else{
              return new DataAlbum("ALBUM NO EXISTE");
          }

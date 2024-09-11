@@ -6,7 +6,7 @@ package logica.controladores;
 
 import logica.Album;
 import logica.Artista;
-import logica.Tema;
+import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataTema;
@@ -20,7 +20,7 @@ public class ControladorTema implements IControladorTema {
 
     @Override
     public boolean crearTemaDefault(String nombre_tema, int duracion) {
-        Tema nuevo_tema = new Tema(nombre_tema, duracion);
+        tema nuevo_tema = new tema(nombre_tema, duracion);
         DAO_Tema persistence = new DAO_Tema();
         if (persistence.find(nuevo_tema.getNickname()) != null) {
             System.out.println("El tema ya existe.");
@@ -39,7 +39,7 @@ public class ControladorTema implements IControladorTema {
 
     @Override
     public DataTema retornarTema(String nickname) {
-        Tema retorno;
+        tema retorno;
         DAO_Tema persistence = new DAO_Tema();
         retorno = persistence.find(nickname);
         if (retorno != null) {
@@ -52,7 +52,7 @@ public class ControladorTema implements IControladorTema {
     @Override
     public void actualizarTema(DataTema tema, DataAlbum album) {
         Album alb = new Album(album.getNombre(), album.getAnioCreacion());
-        Tema tem = new Tema(tema.getNickname(), tema.getDuracion());
+        tema tem = new tema(tema.getNickname(), tema.getDuracion());
         tem.setAlbum(alb);
         DAO_Tema persistence = new DAO_Tema();
         persistence.update(tem);

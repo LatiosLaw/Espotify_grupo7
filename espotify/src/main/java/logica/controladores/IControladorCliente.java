@@ -5,6 +5,7 @@
 package logica.controladores;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
@@ -17,7 +18,7 @@ import logica.dt.DataUsuario;
  */
 public interface IControladorCliente {
     
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac);
+    public void agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
     
     
     /**
@@ -46,5 +47,7 @@ public interface IControladorCliente {
     public void consultarListaReproduccion(String nickname);
     
     public int obtenerNumeroSeguidores(String nick);
+    
+    public Collection<DataCliente> mostrarClientes();
     
 }

@@ -23,6 +23,7 @@ public class Album implements Serializable {
 
     @Id
     private String nombre;
+    private String imagen;
     private int anioCreacion;
     @ManyToOne
     private Artista creador;
@@ -31,7 +32,7 @@ public class Album implements Serializable {
     private Collection<Genero> generos = new ArrayList<Genero>();
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
-    private Collection<Tema> temas = new ArrayList<Tema>();
+    private Collection<tema> temas = new ArrayList<tema>();
 
     public Album(){
         
@@ -42,8 +43,9 @@ public class Album implements Serializable {
         this.anioCreacion = anioCreacion;
     }
     
-    public Album(String nombre, int anioCreacion, Artista artista){
+    public Album(String nombre, String imagen, int anioCreacion, Artista artista){
         this.nombre = nombre;
+        this.imagen = imagen;
         this.anioCreacion = anioCreacion;
         this.creador = artista;
     }
@@ -68,11 +70,19 @@ public class Album implements Serializable {
         this.creador = artista;
     }
 
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
+    public String getImagen() {
+        return imagen;
+    }
+
     public Artista getCreador() {
         return creador;
     }
     
-    public void agregarTema(Tema t) {
+    public void agregarTema(tema t) {
         t.setAlbum(this);
         this.temas.add(t);
     }

@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
-import logica.Tema;
+import logica.tema;
 import logica.Usuario;
 
 public class DAO_Tema {
@@ -21,24 +21,23 @@ public class DAO_Tema {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
-    public void save(Tema entity) {
+    public void save(tema entity) {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
     }
 
-    public Tema find(String nombre) {
-        return entityManager.find(Tema.class, nombre);
+    public tema find(String nombre) {
+        return entityManager.find(tema.class, nombre);
     }
 
-    public List<Tema> findAll() {
-        return entityManager.createQuery("SELECT e FROM TEMA e", Tema.class).getResultList();
+    public List<tema> findAll() {
+        return entityManager.createQuery("SELECT e FROM TEMA e", tema.class).getResultList();
     }
     
-    public List<Tema> findFromAlbum(String nombre_album) {
+    public List<tema> findFromAlbum(String nombre_album) {
         try {
-            return entityManager.createQuery(
-                "SELECT t FROM Tema t WHERE t.ALBUM_NOMBRE = :nombre_album", Tema.class)
+            return entityManager.createQuery("SELECT t FROM Tema t WHERE t.ALBUM_NOMBRE = :nombre_album", tema.class)
                 .setParameter("nombre_album", nombre_album)
                 .getResultList();
         } catch (NoResultException e) {
@@ -46,14 +45,14 @@ public class DAO_Tema {
         }
     }
 
-    public void update(Tema entity) {
+    public void update(tema entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
     }
 
     public void delete(String nombre) {
-        Tema entity = find(nombre);
+        tema entity = find(nombre);
         if (entity != null) {
             entityManager.getTransaction().begin();
             entityManager.remove(entity);
