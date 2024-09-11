@@ -16,4 +16,5 @@ public interface IControladorArtista {
     public DataArtista retornarArtista(String nickname);
     public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb);
     public Collection<DataArtista> mostrarArtistas();
+    public int obtenerNumeroSeguidores(String nick);
 }

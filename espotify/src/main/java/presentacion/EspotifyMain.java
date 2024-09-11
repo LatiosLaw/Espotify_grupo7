@@ -45,28 +45,30 @@ import logica.dt.DataTema;
 public class EspotifyMain {
 
     public static void main(String[] args) {
-        // Crear el EntityManagerFactory
+        
+        IControladorArtista artHandler = new ControladorArtista();
+        IControladorCliente cliHandler = new ControladorCliente();
+        
+         // Iniciar el formulario
+        FormPrin fp = new FormPrin(cliHandler,artHandler);
+        fp.setVisible(true);
+    /*   // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
 
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
         
-         IControladorArtista artHandler = new ControladorArtista();
-        IControladorCliente cliHandler = new ControladorCliente();
+       
         IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
         IControladorListaParticular listPHandler = new ControladorListaParticular();
         
-         // Iniciar el formulario
-        FormPrin fp = new FormPrin(cliHandler,artHandler);
-        fp.setVisible(true);
-      /*  
-        
        
-        
-        //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
        
+
+        artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
+       /* 
         
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");

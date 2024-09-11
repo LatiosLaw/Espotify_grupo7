@@ -119,17 +119,30 @@ public class ControladorCliente implements IControladorCliente {
         persistence.update(cliente);
     }
 
-    @Override
-    public DataCliente consultarPerfilCliente(String nick_cli) {
-        Usuario retorno;
-        DAO_Usuario persistence = new DAO_Usuario();
+@Override
+public DataCliente consultarPerfilCliente(String nick_cli) {
+    Usuario retorno;
+    DAO_Usuario persistence = new DAO_Usuario();
+    
+    try {
         retorno = persistence.findUsuarioByNick(nick_cli);
-        if (retorno instanceof Cliente cliente) {
-            return new DataCliente(retorno.getNickname(), retorno.getNombre(), retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento());
+        if (retorno != null && retorno instanceof Cliente cliente) {
+            return new DataCliente(
+                retorno.getNickname(),
+                retorno.getNombre(),
+                retorno.getApellido(),
+                retorno.getEmail(),
+                retorno.getNacimiento()
+            );
         } else {
-            throw new IllegalArgumentException("El usuario con nickname " + nick_cli + " no es un Artista.");
+            System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");
+            return null;
         }
+    } catch (Exception e) {
+        System.err.println("Error al buscar el cliente: " + e.getMessage());
+        return null;
     }
+}
 
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
@@ -198,5 +211,11 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public void consultarListaReproduccion(String nickname) {
 
+    }
+    
+    @Override
+    public int obtenerNumeroSeguidores(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerCantidadSeguidores(nick);
     }
 }

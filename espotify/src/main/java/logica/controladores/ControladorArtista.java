@@ -17,17 +17,37 @@ import persistencia.DAO_Usuario;
  */
 public class ControladorArtista implements IControladorArtista{
 
+    /**
+     *
+     * @param nickname
+     * @return
+     */
     @Override
-    public DataArtista retornarArtista(String nickname){
-        Usuario retorno;
-        DAO_Usuario persistence = new DAO_Usuario();
+public DataArtista retornarArtista(String nickname) {
+    Usuario retorno;
+    DAO_Usuario persistence = new DAO_Usuario();
+    
+    try {
         retorno = persistence.findUsuarioByNick(nickname);
-         if (retorno instanceof Artista artista) {
-            return new DataArtista(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento(),artista.getBiografia(), artista.getDirWeb());
+        if (retorno != null && retorno instanceof Artista artista) {
+            return new DataArtista(
+                retorno.getNickname(),
+                retorno.getNombre(),
+                retorno.getApellido(),
+                retorno.getEmail(),
+                retorno.getNacimiento(),
+                artista.getBiografia(),
+                artista.getDirWeb()
+            );
         } else {
-            throw new IllegalArgumentException("El usuario con nickname " + nickname + " no es un Artista.");
+            System.out.println("El usuario con nickname " + nickname + " no es un Artista.");
+            return null;
         }
+    } catch (Exception e) {
+        System.err.println("Error al buscar el artista: " + e.getMessage());
+        return null;
     }
+}
     
     @Override
     public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb) {
@@ -74,4 +94,9 @@ public class ControladorArtista implements IControladorArtista{
         return lista;
     }
     
+    @Override
+    public int obtenerNumeroSeguidores(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerCantidadSeguidores(nick);
+    }
 }

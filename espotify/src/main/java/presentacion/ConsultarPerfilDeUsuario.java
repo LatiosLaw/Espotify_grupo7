@@ -4,18 +4,15 @@
  */
 package presentacion;
 
-import java.time.LocalDate;
+import static java.lang.String.valueOf;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import logica.Usuario;
-import logica.dt.DataUsuario;
 import logica.dt.DataCliente;
 import logica.dt.DataArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
-
-
-
 
 /**
  *
@@ -26,26 +23,25 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarPerfilDeUsuario
      */
-    
     private IControladorCliente controlCli;
     private IControladorArtista controlArt;
-    
+
     public ConsultarPerfilDeUsuario(IControladorCliente icc, IControladorArtista ica) {
-        
+
         controlCli = icc;
         controlArt = ica;
-        
+
         initComponents();
         txtPaginaWeb.setVisible(false);
-               txtaBiografia.setVisible(false);
-               lstAlbum.setVisible(false);
-               lstSeguidores.setVisible(false);
-               lblNroSeguidores.setVisible(false);
-               lblSegui.setVisible(false);
-               txtNumeroDeSeguidoresPosta.setVisible(false);
-               lblAlbum.setVisible(false);
-               this.revalidate();
-               this.repaint();
+        txtaBiografia.setVisible(false);
+        lstAlbum.setVisible(false);
+        lstSeguidores.setVisible(false);
+        lblNroSeguidores.setVisible(false);
+        lblSegui.setVisible(false);
+        txtNumeroDeSeguidoresPosta.setVisible(false);
+        lblAlbum.setVisible(false);
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -268,109 +264,116 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxOptItemStateChanged
-       
+
     }//GEN-LAST:event_cbxOptItemStateChanged
-    private void lenarLista(List <Usuario> lista){
-        
+    private void lenarLista(List<Usuario> lista) {
+
         //lstUsuarios.add("a");
-        
     }
     private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
-       
-        
+
         int token = cbxOpt.getSelectedIndex();
-       
+
         switch (token) {
-            case 0:
-                 
-               txtPaginaWeb.setVisible(false);
-               txtaBiografia.setVisible(false);
-               lstAlbum.setVisible(false);
-               lstSeguidores.setVisible(false);
-               lblNroSeguidores.setVisible(false);
-               lblSegui.setVisible(false);
-               txtNumeroDeSeguidoresPosta.setVisible(false);
-               lblAlbum.setVisible(false);
-               
-            case 1:
-                
-              //  List <Usuario> pepe = cliHandler.listarCliente();
-                
-                
-                
-             txtPaginaWeb.setVisible(false);
-               txtaBiografia.setVisible(false);
-               lstAlbum.setVisible(false);
-               lstSeguidores.setVisible(false);
-               lblNroSeguidores.setVisible(false);
-               lblSegui.setVisible(false);
-               txtNumeroDeSeguidoresPosta.setVisible(false);
-               lblAlbum.setVisible(false);
-              
+            case 0: // OPT
+                limpiarCampos();
                 break;
-            case 2:
-               txtPaginaWeb.setVisible(true);
-               txtaBiografia.setVisible(true);
-               lstAlbum.setVisible(true);
-               lstSeguidores.setVisible(true);
-               lblNroSeguidores.setVisible(true);
-               lblSegui.setVisible(true);
-               txtNumeroDeSeguidoresPosta.setVisible(true);
-               
+
+            case 1: // Cliente
+                limpiarCampos();
+                txtPaginaWeb.setVisible(true);
+                txtaBiografia.setVisible(true);
+                lstAlbum.setVisible(true);
+                lstSeguidores.setVisible(true);
+                lblNroSeguidores.setVisible(true);
+                lblSegui.setVisible(true);
+                txtNumeroDeSeguidoresPosta.setVisible(true);
+                lblAlbum.setVisible(true);
                 break;
-                
+
+            case 2: // Artista
+                limpiarCampos();
+                txtPaginaWeb.setVisible(true);
+                txtaBiografia.setVisible(true);
+                lstAlbum.setVisible(true);
+                lstSeguidores.setVisible(true);
+                lblNroSeguidores.setVisible(true);
+                lblSegui.setVisible(true);
+                txtNumeroDeSeguidoresPosta.setVisible(true);
+                lblAlbum.setVisible(true);
+                break;
+        }
     }//GEN-LAST:event_cbxOptActionPerformed
-}
+
+    private void limpiarCampos() {
+        txtNickName.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtFechaNaci1.setText("");
+        txtCorreoElectronico.setText("");
+        txtPaginaWeb.setText("");
+        txtaBiografia.setText("");
+        lstAlbum.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de albumes
+        lstSeguidores.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de seguidores
+
+        txtPaginaWeb.setVisible(false);
+        txtaBiografia.setVisible(false);
+        lstAlbum.setVisible(false);
+        lstSeguidores.setVisible(false);
+        lblNroSeguidores.setVisible(false);
+        lblSegui.setVisible(false);
+        txtNumeroDeSeguidoresPosta.setVisible(false);
+        lblAlbum.setVisible(false);
+    }
+
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        
-         System.out.println("AAAAAAAAAAAAAAAAAAAA");
+
         String nickBuscar = txtBuscar.getText();
-       String token= String.valueOf( cbxOpt.getSelectedItem());
-       if(token == "OPT"){
-                 //no
-                 
-                 
-                 
-       }else if(token == "Cliente"){
-         // Usuario usr =  cliHandler.consultarPerfilCliente(txtBuscar.getText());
-         System.out.println("Se quiere mostrar los datos de un cliente");
-          DataUsuario usr = controlCli.consultarPerfilCliente(nickBuscar);
-         txtNickName.setText(usr.getNickname());
-           txtNombre.setText(usr.getNombre());
-           txtApellido.setText(usr.getApellido());
-           
-            DateTimeFormatter formatter
-                = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            String formattedString = usr.getFechaNac().format(formatter);
-           
-           
-           
-           txtFechaNaci1.setText(formattedString);
-           txtCorreoElectronico.setText(usr.getCorreo());
-           txtPaginaWeb.setText(token);
-           txtaBiografia.setText(token);
-           
-       }else if(token == "Artista"){
-           
-       }
-       
-       //mandar mierda
-       
-       
-       //recibir mierda()
-       
-       
-       
-       
+        String token = String.valueOf(cbxOpt.getSelectedItem());
+        if (nickBuscar.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+        } else {
+            limpiarCampos(); // Limpia los campos antes de buscar
+
+            if (!"OPT".equals(token)) {
+                if ("Cliente".equals(token)) {
+                    DataCliente usr = controlCli.consultarPerfilCliente(nickBuscar);
+                    if (usr != null) {
+                        txtNickName.setText(usr.getNickname());
+                        txtNombre.setText(usr.getNombre());
+                        txtApellido.setText(usr.getApellido());
+                        txtFechaNaci1.setText(usr.getFechaNac().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                        txtCorreoElectronico.setText(usr.getCorreo());
+                        txtPaginaWeb.setText("");
+                        txtaBiografia.setText("");
+                        txtNumeroDeSeguidoresPosta.setText(valueOf(controlCli.obtenerNumeroSeguidores(usr.getNickname())));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
+                    }
+                } else if ("Artista".equals(token)) {
+                    DataArtista art = controlArt.retornarArtista(nickBuscar);
+                    if (art != null) {
+                        txtNickName.setText(art.getNickname());
+                        txtNombre.setText(art.getNombre());
+                        txtApellido.setText(art.getApellido());
+                        txtFechaNaci1.setText(art.getFechaNac().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                        txtCorreoElectronico.setText(art.getCorreo());
+                        txtPaginaWeb.setText(art.getDirWeb());
+                        txtaBiografia.setText(art.getBiografia());
+                        txtNumeroDeSeguidoresPosta.setText(valueOf(controlArt.obtenerNumeroSeguidores(art.getNickname())));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el artista.");
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void txtCorreoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoElectronicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
 
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;

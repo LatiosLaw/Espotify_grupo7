@@ -26,8 +26,12 @@ public class AgregarUsuario extends javax.swing.JPanel {
        private IControladorCliente controlCli;
     private IControladorArtista controlArt;
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
-          controlCli = icc;
+        controlCli = icc;
         controlArt = ica;
+        
+        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
         
         
         initComponents();
@@ -195,11 +199,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblBiografia)
                                 .addGap(134, 134, 134)))))
-                .addGap(27, 27, 27)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDirWeb)
                     .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -273,7 +277,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
              
                
             case 1:
-           lblDirWeb.setVisible(false);
+               lblDirWeb.setVisible(false);
                txtDirWeb.setVisible(false);
                txtaBio.setVisible(false);
                lblBiografia.setVisible(false);
@@ -281,15 +285,13 @@ public class AgregarUsuario extends javax.swing.JPanel {
              
                 break;
             case 2:
-                lblDirWeb.setVisible(true);
+               lblDirWeb.setVisible(true);
                txtDirWeb.setVisible(true);
                txtaBio.setVisible(true);
                lblBiografia.setVisible(true);
                
-                break;
-        
-        
-        
+               
+                break;    
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
 
