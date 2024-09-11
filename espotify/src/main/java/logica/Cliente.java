@@ -29,7 +29,7 @@ public class Cliente extends Usuario {
     @JoinTable(name = "temas_favoritos",
             joinColumns = @JoinColumn(name = "nick_cliente"),
             inverseJoinColumns = @JoinColumn(name = "nombre_tema"))
-    protected Collection<Tema> temas_favoritos = new ArrayList<Tema>();
+    protected Collection<tema> temas_favoritos = new ArrayList<tema>();
     @ManyToMany
     @JoinTable(name = "albumes_favoritos",
             joinColumns = @JoinColumn(name = "nick_cliente"),
@@ -61,7 +61,7 @@ public class Cliente extends Usuario {
         this.seguidos.remove(usuario);
     }
     
-    public void temaFav(Tema tema) {
+    public void temaFav(tema tema) {
         this.temas_favoritos.add(tema);
     }
     
@@ -81,7 +81,7 @@ public class Cliente extends Usuario {
         }
     }
     
-    public void quitarTemaFav(Tema tema) {
+    public void quitarTemaFav(tema tema) {
         this.temas_favoritos.remove(tema);
     }
     

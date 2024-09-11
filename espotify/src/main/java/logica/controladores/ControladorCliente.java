@@ -13,7 +13,7 @@ import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
-import logica.Tema;
+import logica.tema;
 import logica.Usuario;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
@@ -135,7 +135,7 @@ public class ControladorCliente implements IControladorCliente {
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
         Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        Tema tem = new Tema(nicktem.getNickname(), nicktem.getDuracion());
+        tema tem = new tema(nicktem.getNickname(), nicktem.getDuracion());
         cli.temaFav(tem);
         persistence.update(cli);
     }
@@ -167,7 +167,7 @@ public class ControladorCliente implements IControladorCliente {
     public void eliminarTema(DataCliente nickcli, DataTema nicktem) {
         Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        Tema tem = new Tema(nicktem.getNickname(), nicktem.getDuracion());
+        tema tem = new tema(nicktem.getNickname(), nicktem.getDuracion());
         cli.quitarTemaFav(tem);
         persistence.update(cli);
     }

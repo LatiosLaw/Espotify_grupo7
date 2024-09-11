@@ -21,7 +21,7 @@ import logica.Cliente;
 import logica.Genero;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
-import logica.Tema;
+import logica.tema;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;

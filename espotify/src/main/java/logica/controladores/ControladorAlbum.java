@@ -6,7 +6,7 @@ import java.util.Iterator;
 import logica.Album;
 import logica.Artista;
 import logica.Genero;
-import logica.Tema;
+import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataGenero;
@@ -32,7 +32,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(new Tema(tema.getNickname(), tema.getDuracion()));
+            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getDuracion()));
         }
         DAO_Album persistence = new DAO_Album();
         Album album_vacio = new Album();

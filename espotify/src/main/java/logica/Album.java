@@ -32,7 +32,7 @@ public class Album implements Serializable {
     private Collection<Genero> generos = new ArrayList<Genero>();
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
-    private Collection<Tema> temas = new ArrayList<Tema>();
+    private Collection<tema> temas = new ArrayList<tema>();
 
     public Album(){
         
@@ -82,7 +82,7 @@ public class Album implements Serializable {
         return creador;
     }
     
-    public void agregarTema(Tema t) {
+    public void agregarTema(tema t) {
         t.setAlbum(this);
         this.temas.add(t);
     }
