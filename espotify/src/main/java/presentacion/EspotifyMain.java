@@ -8,20 +8,20 @@ package presentacion;
  *
  * @author Law
  */
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.time.LocalDate;
-import logica.Artista;
-import logica.Cliente;
-import logica.Tema;
-import logica.Album;
-import logica.Genero;
-import logica.ListaParticular;
-import logica.ListaPorDefecto;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import logica.Album;
+import logica.Artista;
+import logica.Cliente;
+import logica.Genero;
+import logica.ListaParticular;
+import logica.ListaPorDefecto;
+import logica.Tema;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;
@@ -38,6 +38,8 @@ import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
+import logica.dt.DataListaParticular;
+import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
 
 public class EspotifyMain {
@@ -48,19 +50,24 @@ public class EspotifyMain {
 
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
-
-        IControladorArtista artHandler = new ControladorArtista();
+        
+         IControladorArtista artHandler = new ControladorArtista();
         IControladorCliente cliHandler = new ControladorCliente();
         IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
         IControladorListaParticular listPHandler = new ControladorListaParticular();
-
+        
+         // Iniciar el formulario
+        FormPrin fp = new FormPrin(cliHandler,artHandler);
+        fp.setVisible(true);
+        
+        
+       
+        
         //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
-        // Iniciar el formulario
-        FormPrin fp = new FormPrin(cliHandler,artHandler);
-        fp.setVisible(true);
-
+       
+        
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
         Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
@@ -78,7 +85,7 @@ public class EspotifyMain {
         DataGenero g4 = new DataGenero(g1.getNombre());
         ListaPorDefecto lista1 = new ListaPorDefecto("Canciones Epicas", g1);
         ListaParticular lista2 = new ListaParticular("Mis canciones nostalgicas", false, cli1);
-
+        
         cliHandler.agregarTema(cli2, tem5);
         
         // Guardar los Generos en la base de datos
@@ -87,35 +94,35 @@ public class EspotifyMain {
         em.persist(g2);
         em.getTransaction().commit();
         
-        /* cli1.TemaFav(tem1);
-        cli1.Seguir(art1);
-        cli1.AlbumFav(alb1);
-        cli1.ListasFav(lista1);
-        alb1.agregarGenero(g2);
-        g1.agregarSubgenero(g2);
-                
+        //cli1.TemaFav(tem1);
+        //cli1.Seguir(art1);
+        //cli1.AlbumFav(alb1);
+        //cli1.ListasFav(lista1);
+        //alb1.agregarGenero(g2);
+        //g1.agregarSubgenero(g2);
+        
         // Guardar el Artista en la base de datos
         em.getTransaction().begin();
         em.persist(art1);
         em.getTransaction().commit();
         
         // Guardar el Tema en la base de datos
-        em.getTransaction().begin();
-        em.persist(tem1);
-        em.persist(tem2);
-        em.persist(tem3);
-        em.getTransaction().commit();
+      //  em.getTransaction().begin();
+       // em.persist(tem1);
+       // em.persist(tem2);
+       // em.persist(tem3);
+       // em.getTransaction().commit();
         
-        alb1.agregarTema(tem1);
-        alb1.agregarTema(tem2);
-        alb1.agregarTema(tem3);
+      //  alb1.agregarTema(tem1);
+        //alb1.agregarTema(tem2);
+        //alb1.agregarTema(tem3);
         
         // Guardar el Album en la base de datos
         em.getTransaction().begin();
         em.persist(alb1);
         em.getTransaction().commit();
         
-       
+        
         
         
         // Guardar las Listas en la base de datos
@@ -123,9 +130,9 @@ public class EspotifyMain {
         em.persist(lista1);
         em.persist(lista2);
         em.getTransaction().commit();
-         */
+        
         // Guardar el Cliente en la base de datos
-
+        
         em.getTransaction().begin();
         em.persist(cli1);
         em.getTransaction().commit();
@@ -133,7 +140,7 @@ public class EspotifyMain {
         
         listHandler.crearLista("Primera lista", g4);
         listPHandler.crearLista("Lista exitos 2022", dcli1);
-
+        
         // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
         DataArtista art11 = new DataArtista("CalliopeMori", "Karen", "Idk", "moricalliope.hololive@gmail.com", LocalDate.of(1996, 5, 30), "Nada", "Nada");
         IControladorAlbum manejador_album = new ControladorAlbum();
@@ -159,6 +166,40 @@ public class EspotifyMain {
         // Cierre del EntityManager y EntityManagerFactory (opcional)
         // em.close();
         // emf.close();
+        
+        
+        // Llamar al método
+        DataListaParticular dataLista = listPHandler.devolverInformacion("Lista exitos 2022", cli1.getNickname());
+       
+        
+        
+        //PRUEBA CONSULTA DE LISTA PARTICULAR
+        
+        // Lista particular
+        if (dataLista != null) {
+            System.out.println("Nombre de la lista: " + dataLista.getNombre());
+            System.out.println("Visibilidad: " + dataLista.getVisibilidad());
+            DataCliente dataCliente = dataLista.getDataCliente(); // Obtener el DataCliente
 
+            System.out.println("Cliente:");
+            System.out.println("  Nickname: " + dataCliente.getNickname());
+            System.out.println("  Nombre: " + dataCliente.getNombre());
+            System.out.println("  Apellido: " + dataCliente.getApellido());
+            System.out.println("  Email: " + dataCliente.getCorreo());
+            System.out.println("  Fecha de Nacimiento: " + dataCliente.getFechaNac());
+        } else {
+            System.out.println("No se encontro la lista para el cliente: " + cli1.getNickname());
+        }
+        
+         DataListaPorDefecto dataLista2 = listHandler.devolverInformacion("Primera lista", g4.getNombre());
+        
+         // Lista por defecto
+        if (dataLista2 != null) {
+            System.out.println("Nombre de la lista: " + dataLista2.getNombre());
+            DataGenero dataGenero = dataLista2.getGenero(); // Obtener el DataCliente
+            System.out.println("Genero: " + dataGenero.getNombre());
+        } else {
+            System.out.println("No se encontro la lista.");
+        }  
     }
 }

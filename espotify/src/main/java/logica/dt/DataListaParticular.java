@@ -20,6 +20,10 @@ public class DataListaParticular extends DataListaReproduccion {
     public boolean getVisibilidad() {
         return visibilidad;
     }
+    
+    public DataCliente getDataCliente(){
+        return this.creador;
+    }
 
     public void setVisibilidad(boolean visibilidad) {
         this.visibilidad = visibilidad;

@@ -54,6 +54,10 @@ public class ListaParticular extends ListaReproduccion implements Serializable {
     public void setVisibilidad(boolean visibilidad) {
         this.visibilidad = visibilidad;
     }
+    
+    public Cliente getCliente(){
+        return this.creador;
+    }
 
     @Override
     public String toString() {

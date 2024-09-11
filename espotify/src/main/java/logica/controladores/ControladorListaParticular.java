@@ -5,6 +5,7 @@ import logica.ListaParticular;
 import logica.ListaReproduccion;
 import logica.Usuario;
 import logica.dt.DataCliente;
+import logica.dt.DataListaParticular;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Usuario;
 
@@ -66,7 +67,33 @@ public class ControladorListaParticular implements IControladorListaParticular {
     }
 
     @Override
-    public void devolverInformacion(String nombre_lista) {
-
-    }
+    public DataListaParticular devolverInformacion(String nombre_lista, String nick_cliente) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        ListaParticular ls = persistence.findListaPorNicks(nick_cliente, nombre_lista);
+        
+        if(ls != null){
+            // Obtener el cliente asociado a la lista
+        Cliente cliente = ls.getCliente(); // Suponiendo que getCliente() retorna un objeto Cliente
+        
+        // Crear el DataCliente con los atributos necesarios
+        DataCliente dataCliente = new DataCliente(
+            cliente.getNickname(),     
+            cliente.getNombre(),     
+            cliente.getApellido(),     
+            cliente.getEmail(),
+            cliente.getNacimiento()
+        );
+        
+        System.out.println("DataLista retornado correctamente.");
+        // Crear y retornar DataListaParticular
+        return new DataListaParticular(
+            ls.getNombre(),           // Suponiendo que hay un método getNombre()
+            dataCliente,              // Pasar el DataCliente creado
+            ls.getVisibilidad()       // Suponiendo que hay un método getVisibilidad()
+       );
+        }else {
+            System.out.println("No existe, error.");
+            return null;
+        }
+     }
 }
