@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import logica.controladores.IControladorCliente;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
@@ -21,9 +22,12 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-    public AgregarCosoFav() {
+    private IControladorCliente controlCli;
+   
+    public AgregarCosoFav(IControladorCliente icc) {
         initComponents();
-    
+        controlCli = icc;
+       
     }
 
     /**
@@ -66,6 +70,11 @@ public class AgregarCosoFav extends javax.swing.JPanel {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -88,13 +97,13 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                         .addGap(136, 136, 136)
                         .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(btnBuscar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(btnBuscar)))
                 .addGap(122, 122, 122)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
@@ -119,9 +128,9 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnBuscar))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +146,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
         
         String token= String.valueOf( cbxTipoCoso.getSelectedItem());
         if(token == "Lista"){
-            
+            //controlCli.
         }else if(token == "Album"){
             
         }else if (token == "Tema"){
@@ -150,6 +159,28 @@ public class AgregarCosoFav extends javax.swing.JPanel {
        
  
     }//GEN-LAST:event_cbxTipoCosoActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+         String token= String.valueOf( cbxTipoCoso.getSelectedItem());
+        
+       
+        switch (token) {
+            case "OPT":
+                 //No
+               // pnlAU.removeAll();
+              //  pnlAU.repaint();
+            break;
+            case "Tema":
+             
+                 
+                break;
+            case "Lista":
+                break;
+            case "album":
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

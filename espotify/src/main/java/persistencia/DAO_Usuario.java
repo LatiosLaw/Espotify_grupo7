@@ -54,7 +54,7 @@ public class DAO_Usuario {
 }
     
     public List<Usuario> findAll() {
-        return entityManager.createQuery("SELECT * FROM USUARIO", Usuario.class).getResultList();
+        return entityManager.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
 
     public void update(Usuario entity) {

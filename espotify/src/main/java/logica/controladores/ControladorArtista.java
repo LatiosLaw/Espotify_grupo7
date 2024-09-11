@@ -71,6 +71,8 @@ public class ControladorArtista implements IControladorArtista{
               lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
             }
         }
+        
+        
         return lista;
     }
     

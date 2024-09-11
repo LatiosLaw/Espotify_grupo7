@@ -5,6 +5,7 @@
 package logica.controladores;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
@@ -44,5 +45,7 @@ public interface IControladorCliente {
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum);
     
     public void consultarListaReproduccion(String nickname);
+    
+    public Collection<DataCliente> mostrarClientes();
     
 }

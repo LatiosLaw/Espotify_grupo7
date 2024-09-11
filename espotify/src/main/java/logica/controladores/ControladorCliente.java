@@ -6,6 +6,9 @@ package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Album;
 import logica.Artista;
@@ -165,5 +168,22 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public void consultarListaReproduccion(String nickname) {
 
+    }
+    
+    @Override
+    public Collection<DataCliente> mostrarClientes(){
+        Collection<DataCliente> lista = new ArrayList<>();
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> cliente = persistence.findAll();
+        Iterator<Usuario> iterator = cliente.iterator();
+        while (iterator.hasNext()) {
+            Usuario usr = iterator.next();
+            if(usr instanceof Cliente cli){
+              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getNacimiento()));
+            }
+        }
+        
+        
+        return lista;
     }
 }
