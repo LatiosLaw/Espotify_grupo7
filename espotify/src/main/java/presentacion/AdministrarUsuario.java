@@ -181,7 +181,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 break;
             case "Seguir Usuario":
              
-                 SeguirUsuario su = new SeguirUsuario();
+                 SeguirUsuario su = new SeguirUsuario(controlCli);
                su.setLocation(0,0);
                su.setSize(860, 471);
                
@@ -192,7 +192,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 break;
                 
             case "Dejar de seguir Usuario":
-                 DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario();
+                DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario(controlCli);
                ddsu.setLocation(0,0);
                ddsu.setSize(860, 471);
                

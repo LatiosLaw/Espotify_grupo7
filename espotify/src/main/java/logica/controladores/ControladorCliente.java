@@ -62,28 +62,61 @@ public class ControladorCliente implements IControladorCliente {
     }
 
     @Override
-    public void seguirUsuario(DataCliente nick1, DataUsuario nick2) {
-        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFechaNac());
+    public void seguirUsuario(String nick1, String nick2) {
         DAO_Usuario persistence = new DAO_Usuario();
-        if (nick2 instanceof DataCliente) {
-            cli.seguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac()));
-        } else {
-            cli.seguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
+
+        // Obtener Usuario usando nick1
+        Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
+        if (usuarioBase == null) {
+            throw new IllegalArgumentException("Cliente no encontrado.");
         }
 
-        persistence.update(cli);
+        // Hacer el cast a Cliente
+        if (!(usuarioBase instanceof Cliente cliente)) {
+            throw new IllegalArgumentException("El usuario encontrado no es un cliente.");
+        }
+
+        Usuario usuario = persistence.findUsuarioByNick(nick2);
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuario a seguir no encontrado.");
+        }
+
+        if (usuario instanceof Cliente dataCliente) {
+            cliente.seguir(new Cliente(dataCliente.getNickname(), dataCliente.getNombre(), dataCliente.getApellido(), dataCliente.getEmail(), dataCliente.getNacimiento()));
+        } else if (usuario instanceof Artista dataArtista) {
+            cliente.seguir(new Artista(dataArtista.getNickname(), dataArtista.getNombre(), dataArtista.getApellido(), dataArtista.getEmail(), dataArtista.getNacimiento(), dataArtista.getBiografia(), dataArtista.getDirWeb()));
+        } else {
+            // Manejar el caso donde usuario no es ni un DataCliente ni un DataArtista
+            throw new IllegalArgumentException("El usuario a seguir no es ni un cliente ni un artista.");
+        }
+
+        persistence.update(cliente);
     }
 
     @Override
-    public void dejarDeSeguirUsuario(DataCliente nick1, DataUsuario nick2) {
-        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFechaNac());
+    public void dejarDeSeguirUsuario(String nick1, String nick2) {
         DAO_Usuario persistence = new DAO_Usuario();
-        if (nick2 instanceof DataCliente) {
-            cli.dejarDeSeguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac()));
-        } else if (nick2 instanceof DataArtista) {
-            cli.dejarDeSeguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
+
+        // Obtener Usuario usando nick1
+        Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
+        if (usuarioBase == null) {
+            throw new IllegalArgumentException("Cliente no encontrado.");
         }
-        persistence.update(cli);
+
+        // Hacer el cast a Cliente
+        if (!(usuarioBase instanceof Cliente cliente)) {
+            throw new IllegalArgumentException("El usuario encontrado no es un cliente.");
+        }
+
+        Usuario usuario = persistence.findUsuarioByNick(nick2);
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuario a dejar de seguir no encontrado.");
+        }
+        
+        cliente.dejarDeSeguir(usuario);
+ 
+        // Actualizar la tabla
+        persistence.update(cliente);
     }
 
     @Override
@@ -91,8 +124,8 @@ public class ControladorCliente implements IControladorCliente {
         Usuario retorno;
         DAO_Usuario persistence = new DAO_Usuario();
         retorno = persistence.findUsuarioByNick(nick_cli);
-         if (retorno instanceof Cliente cliente) {
-            return new DataCliente(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento());
+        if (retorno instanceof Cliente cliente) {
+            return new DataCliente(retorno.getNickname(), retorno.getNombre(), retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento());
         } else {
             throw new IllegalArgumentException("El usuario con nickname " + nick_cli + " no es un Artista.");
         }

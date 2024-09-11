@@ -4,17 +4,25 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorCliente;
+import logica.dt.DataCliente;
+import logica.dt.DataUsuario;
+
 /**
  *
  * @author Urbina
  */
 public class SeguirUsuario extends javax.swing.JPanel {
-
+    
+     private IControladorCliente controlador;
     /**
      * Creates new form SeguirUsuario
      */
-    public SeguirUsuario() {
+    public SeguirUsuario(IControladorCliente controlador) {
+        
+        this.controlador = controlador;
         initComponents();
+        
     }
 
     /**
@@ -118,9 +126,8 @@ public class SeguirUsuario extends javax.swing.JPanel {
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAseguir.getText();
         
-        
-        
-        
+        controlador.seguirUsuario(nickCliente, nickAseguir); 
+        System.out.print("Seguir Usuario ejecutado correctamente.");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
 

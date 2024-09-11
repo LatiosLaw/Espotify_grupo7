@@ -25,9 +25,9 @@ public interface IControladorCliente {
      * @param nick1 nickname de la persona que sigue
      * @param nick2 nickname de la persona que es seguida
      */
-    public void seguirUsuario(DataCliente nick1, DataUsuario nick2);
+    public void seguirUsuario(String nick1, String nick2);
     
-    public void dejarDeSeguirUsuario(DataCliente nick1, DataUsuario nick2);
+    public void dejarDeSeguirUsuario(String nick1, String nick2);
     
     public DataCliente consultarPerfilCliente(String nick_cli);
     

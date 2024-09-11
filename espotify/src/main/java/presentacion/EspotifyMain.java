@@ -59,7 +59,7 @@ public class EspotifyMain {
          // Iniciar el formulario
         FormPrin fp = new FormPrin(cliHandler,artHandler);
         fp.setVisible(true);
-        
+      /*  
         
        
         
@@ -201,5 +201,7 @@ public class EspotifyMain {
         } else {
             System.out.println("No se encontro la lista.");
         }  
+
+        */
     }
 }
