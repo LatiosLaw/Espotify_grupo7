@@ -23,6 +23,7 @@ public class Album implements Serializable {
 
     @Id
     private String nombre;
+    private String imagen;
     private int anioCreacion;
     @ManyToOne
     private Artista creador;
@@ -42,8 +43,9 @@ public class Album implements Serializable {
         this.anioCreacion = anioCreacion;
     }
     
-    public Album(String nombre, int anioCreacion, Artista artista){
+    public Album(String nombre, String imagen, int anioCreacion, Artista artista){
         this.nombre = nombre;
+        this.imagen = imagen;
         this.anioCreacion = anioCreacion;
         this.creador = artista;
     }
@@ -66,6 +68,14 @@ public class Album implements Serializable {
     
     public void setCreador(Artista artista) {
         this.creador = artista;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
+    public String getImagen() {
+        return imagen;
     }
 
     public Artista getCreador() {

@@ -69,10 +69,10 @@ public class EspotifyMain {
        
         
         // Crear un nuevo Artista
-        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
-        Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
-        DataCliente dcli1 = new DataCliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", LocalDate.of(2003, 2, 12));
-        DataCliente cli2 = new DataCliente("law", "Martin", "Mainentti", "testin@yourmother.com", LocalDate.of(2004, 11, 27));
+        Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "sampleimage", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");
+        Cliente cli1 = new Cliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", "sampleimage2", LocalDate.of(2003, 2, 12));
+        DataCliente dcli1 = new DataCliente("pepe12", "Pepe", "Suarez", "example@yourmother.com", "sampleimage3", LocalDate.of(2003, 2, 12));
+        DataCliente cli2 = new DataCliente("law", "Martin", "Mainentti", "testin@yourmother.com", "staringatyoursoul", LocalDate.of(2004, 11, 27));
         DataTema tem1 = new DataTema("Midnight Mayoi", 20);
         Tema tem2 = new Tema("Despacito", 50);
         Tema tem3 = new Tema("Velociraptor", 34);
@@ -142,14 +142,14 @@ public class EspotifyMain {
         listPHandler.crearLista("Lista exitos 2022", dcli1);
         
         // PRUEBA DE FUNCIONAMIENTO DE ALTA ALBUM
-        DataArtista art11 = new DataArtista("CalliopeMori", "Karen", "Idk", "moricalliope.hololive@gmail.com", LocalDate.of(1996, 5, 30), "Nada", "Nada");
+        DataArtista art11 = new DataArtista("CalliopeMori", "Karen", "Idk", "moricalliope.hololive@gmail.com", "https://static.zerochan.net/Mori.Calliope.full.3070887.jpg", LocalDate.of(1996, 5, 30), "Nada", "Nada");
         IControladorAlbum manejador_album = new ControladorAlbum();
         Collection<DataGenero> g = new ArrayList<>();
         g.add(g3);
         Collection<DataTema> t = new ArrayList<>();
         t.add(tem1);
         t.add(tem4);
-        DataAlbum retorno = manejador_album.agregarAlbum(art11, "Phantomime", 2024, g, t);
+        DataAlbum retorno = manejador_album.agregarAlbum(art11, "Phantomime", "https://i.scdn.co/image/ab67616d0000b2734decfba07e62fcd26eaedc6c", 2024, g, t);
         if (retorno != null) {
             IControladorTema manejador_tema = new ControladorTema();
             manejador_tema.crearTemaDefault("Last Days", 30);
