@@ -15,5 +15,5 @@ import logica.dt.DataGenero;
 public interface IControladorGenero {
     void crearGenero(String nombre, Genero genero_padre);
     public Collection<DataGenero> mostrarGeneros();
-    public Collection<DataGenero> darGenerosDelAlbum();
+    public Collection<DataGenero> darGenerosDelAlbum(String nombre_album);
 }

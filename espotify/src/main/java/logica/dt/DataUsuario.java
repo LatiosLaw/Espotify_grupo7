@@ -7,13 +7,15 @@ public class DataUsuario {
     private String nombre;
     private String apellido;
     private String correo;
+    private String foto_perfil;
     private LocalDate fechaNac;
 
-    public DataUsuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac) {
+    public DataUsuario(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fechaNac) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+        this.foto_perfil = foto_perfil;
         this.fechaNac = fechaNac;
     }
 
@@ -22,6 +24,7 @@ public class DataUsuario {
         this.setNombre(new String());
         this.setApellido(new String());
         this.setCorreo(new String());
+        this.setFoto(new String());
         this.setFechaNac(null);
     }
 
@@ -43,6 +46,14 @@ public class DataUsuario {
 
     public LocalDate getFechaNac() {
         return fechaNac;
+    }
+    
+    public String getFoto() {
+        return foto_perfil;
+    }
+
+    public void setFoto(String nueva_foto) {
+        this.foto_perfil = nueva_foto;
     }
 
     public void setNickname(String nickname) {

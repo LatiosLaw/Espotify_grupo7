@@ -32,7 +32,7 @@ import persistencia.DAO_Usuario;
 public class ControladorCliente implements IControladorCliente {
 
     @Override
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac) {
+    public void agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
         // Verificar si el nickname o el correo electronico ya estan en uso
         DAO_Usuario persistence = new DAO_Usuario();
 
@@ -47,7 +47,7 @@ public class ControladorCliente implements IControladorCliente {
         }
 
         // Crear el nuevo cliente
-        Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, mail, fechaNac);
+        Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, mail, foto, fechaNac);
 
         // Guardar el cliente en la base de datos
         try {
@@ -63,12 +63,12 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void seguirUsuario(DataCliente nick1, DataUsuario nick2) {
-        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFechaNac());
+        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFoto(), nick1.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         if (nick2 instanceof DataCliente) {
-            cli.seguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac()));
+            cli.seguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFoto(), nick2.getFechaNac()));
         } else {
-            cli.seguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
+            cli.seguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFoto(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
         }
 
         persistence.update(cli);
@@ -76,12 +76,12 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void dejarDeSeguirUsuario(DataCliente nick1, DataUsuario nick2) {
-        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFechaNac());
+        Cliente cli = new Cliente(nick1.getNickname(), nick1.getNombre(), nick1.getApellido(), nick1.getCorreo(), nick1.getFoto(), nick1.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         if (nick2 instanceof DataCliente) {
-            cli.dejarDeSeguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac()));
+            cli.dejarDeSeguir(new Cliente(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFoto(), nick2.getFechaNac()));
         } else if (nick2 instanceof DataArtista) {
-            cli.dejarDeSeguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
+            cli.dejarDeSeguir(new Artista(nick2.getNickname(), nick2.getNombre(), nick2.getApellido(), nick2.getCorreo(), nick2.getFoto(), nick2.getFechaNac(), ((DataArtista) nick2).getBiografia(), ((DataArtista) nick2).getDirWeb()));
         }
         persistence.update(cli);
     }
@@ -92,7 +92,7 @@ public class ControladorCliente implements IControladorCliente {
         DAO_Usuario persistence = new DAO_Usuario();
         retorno = persistence.findUsuarioByNick(nick_cli);
          if (retorno instanceof Cliente cliente) {
-            return new DataCliente(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getNacimiento());
+            return new DataCliente(retorno.getNickname(),retorno.getNombre(),retorno.getApellido(), retorno.getEmail(), retorno.getEmail(), retorno.getNacimiento());
         } else {
             throw new IllegalArgumentException("El usuario con nickname " + nick_cli + " no es un Artista.");
         }
@@ -100,7 +100,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         Tema tem = new Tema(nicktem.getNickname(), nicktem.getDuracion());
         cli.temaFav(tem);
@@ -109,7 +109,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         if (nomlista instanceof DataListaParticular) {
             ListaReproduccion lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
@@ -123,7 +123,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void agregarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         Album alb = new Album(nomalbum.getNombre(), nomalbum.getAnioCreacion());
         cli.albumFav(alb);
@@ -132,7 +132,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void eliminarTema(DataCliente nickcli, DataTema nicktem) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         Tema tem = new Tema(nicktem.getNickname(), nicktem.getDuracion());
         cli.quitarTemaFav(tem);
@@ -141,7 +141,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         if (nomlista instanceof DataListaParticular) {
             ListaReproduccion lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
@@ -155,7 +155,7 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFechaNac());
+        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
         Album alb = new Album(nomalbum.getNombre(), nomalbum.getAnioCreacion());
         cli.quitarAlbumFav(alb);

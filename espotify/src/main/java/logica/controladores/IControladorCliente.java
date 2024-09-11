@@ -17,7 +17,7 @@ import logica.dt.DataUsuario;
  */
 public interface IControladorCliente {
     
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac);
+    public void agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
     
     
     /**

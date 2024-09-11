@@ -48,8 +48,8 @@ public class Cliente extends Usuario {
 
     }
 
-    public Cliente(String nickname, String nombre, String apellido, String email, LocalDate fecha_naci) {
-        super(nickname, nombre, apellido, email, fecha_naci);
+    public Cliente(String nickname, String nombre, String apellido, String email, String foto_perfil, LocalDate fecha_naci) {
+        super(nickname, nombre, apellido, email, foto_perfil, fecha_naci);
     }
 
     

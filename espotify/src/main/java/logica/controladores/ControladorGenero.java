@@ -37,14 +37,14 @@ public class ControladorGenero implements IControladorGenero{
     }
 
     @Override
-    public Collection<DataGenero> darGenerosDelAlbum(){
+    public Collection<DataGenero> darGenerosDelAlbum(String nombre_album){
     Collection<DataGenero> lista = new ArrayList<>();
     DAO_Genero persistence = new DAO_Genero();
-    Collection<Genero> gene = persistence.findfromAlbum();
-    Iterator<Genero> iterator = gene.iterator();
+    Collection<String> gene = persistence.findfromAlbum(nombre_album);
+    Iterator<String> iterator = gene.iterator();
         while (iterator.hasNext()) {
-            Genero genero = iterator.next();
-            lista.add(new DataGenero(genero.getNombre()));
+            String genero = iterator.next();
+            lista.add(new DataGenero(genero));
         }
         return lista;
     }

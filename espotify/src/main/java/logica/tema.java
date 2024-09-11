@@ -22,6 +22,7 @@ public class Tema implements Serializable {
     @Id
     private String nickname;
     private Integer duracion;
+    private Integer posicion_album;
     
     @ManyToOne
     @JoinColumn(name = "ALBUM_NOMBRE")
@@ -35,6 +36,12 @@ public class Tema implements Serializable {
         this.nickname = nickname;
         this.duracion = duracion;
     }
+    
+    public Tema(String nickname, Integer duracion, Integer posicion_album) {
+        this.nickname = nickname;
+        this.duracion = duracion;
+        this.posicion_album = posicion_album;
+    }
 
     public String getNickname() {
         return nickname;
@@ -42,6 +49,14 @@ public class Tema implements Serializable {
 
     public void setId(String id) {
         this.nickname = id;
+    }
+    
+    public Integer getPos() {
+        return posicion_album;
+    }
+
+    public void setPos(Integer posicion) {
+        this.posicion_album = posicion;
     }
     
     public Integer getDuracion() {
