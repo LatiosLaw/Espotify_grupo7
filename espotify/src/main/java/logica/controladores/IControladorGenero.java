@@ -5,6 +5,7 @@
 package logica.controladores;
 
 import java.util.Collection;
+import java.util.Iterator;
 import logica.Genero;
 import logica.Album;
 import logica.dt.DataGenero;
