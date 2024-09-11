@@ -5,13 +5,15 @@ import java.util.Collection;
 
 public class DataAlbum {
     private String nombre;
+    private String imagen;
     private int anioCreacion;
     private DataArtista creador; 
     private Collection<DataGenero> generos = new ArrayList<>();
     private Collection<DataTema> temas = new ArrayList<>();
 
-    public DataAlbum(String nombre, int anioCreacion, DataArtista creador) {
+    public DataAlbum(String nombre, String imagen, int anioCreacion, DataArtista creador) {
         this.nombre = nombre;
+        this.imagen = imagen;
         this.anioCreacion = anioCreacion;
         this.creador = creador;
         this.generos = new ArrayList<>();
@@ -44,6 +46,14 @@ public class DataAlbum {
 
     public Collection<DataTema> getTemas() {
         return temas;
+    }
+    
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public void setNombre(String nombre) {

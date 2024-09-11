@@ -1,6 +1,8 @@
 
 package presentacion;
 
+import logica.controladores.IControladorCliente;
+
 /**
  *
  * @author Urbina
@@ -10,7 +12,10 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
     /**
      * Creates new form SeguirUsuario
      */
-    public DejarDeSeguirUsuario() {
+    private IControladorCliente controlador;
+    
+    public DejarDeSeguirUsuario(IControladorCliente controlador) {
+        this.controlador = controlador; 
         initComponents();
     }
 
@@ -116,8 +121,11 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-         String nickCliente = txtCliente.getText();
+        String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAdejarDeSeguir.getText();
+        
+        controlador.dejarDeSeguirUsuario(nickCliente, nickAseguir);
+        System.out.print("Dejar De Seguir Usuario ejecutado correctamente.");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
 

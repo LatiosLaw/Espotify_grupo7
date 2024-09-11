@@ -14,6 +14,6 @@ import logica.dt.DataArtista;
  */
 public interface IControladorArtista {
     public DataArtista retornarArtista(String nickname);
-    public void agregarArtista(String nickname, String nombre, String apellido, String mail, LocalDate fechaNac, String biografia, String dirWeb);
+    public void agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb);
     public Collection<DataArtista> mostrarArtistas();
 }

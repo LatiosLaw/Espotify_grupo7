@@ -2,6 +2,7 @@ package logica.dt;
 
 public class DataTema {
     private String nickname;
+    private Integer posicion_album;
     private Integer duracion;
     private DataAlbum album; 
 
@@ -14,6 +15,13 @@ public class DataTema {
         this.nickname = nickname;
         this.duracion = duracion;
         this.album = album;
+    }
+    
+    public DataTema(String nickname, Integer duracion, DataAlbum album, Integer posicion_album) {
+        this.nickname = nickname;
+        this.duracion = duracion;
+        this.album = album;
+        this.posicion_album = posicion_album;
     }
 
     public DataTema(){
@@ -32,6 +40,14 @@ public class DataTema {
 
     public DataAlbum getAlbum() {
         return album;
+    }
+    
+    public Integer getPos() {
+        return posicion_album;
+    }
+
+    public void setPos(Integer posicion) {
+        this.posicion_album = posicion;
     }
 
     public void setNickname(String nickname) {

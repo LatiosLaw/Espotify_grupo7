@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Genero;
-import logica.Tema;
+import logica.tema;
 
 public class DAO_Genero {
     private EntityManagerFactory entityManagerFactory;
@@ -36,7 +36,7 @@ public class DAO_Genero {
     }
 
     public List<Genero> findAll() {
-        return entityManager.createQuery("SELECT * FROM genero", Genero.class).getResultList();
+        return entityManager.createQuery("SELECT g FROM genero g", Genero.class).getResultList();
 
     }
     

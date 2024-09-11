@@ -24,14 +24,14 @@ public class ControladorGenero implements IControladorGenero{
     }
     
     @Override
-    public Collection<DataGenero> mostrarGeneros(){
-        Collection<DataGenero> lista = new ArrayList<>();
+    public Collection<String> mostrarGeneros(){
+        Collection<String> lista = new ArrayList<>();
         DAO_Genero persistence = new DAO_Genero();
         Collection<Genero> gene = persistence.findAll();
         Iterator<Genero> iterator = gene.iterator();
         while (iterator.hasNext()) {
             Genero genero = iterator.next();
-            lista.add(new DataGenero(genero.getNombre()));
+            lista.add(genero.getNombre());
         }
         return lista;
     }
