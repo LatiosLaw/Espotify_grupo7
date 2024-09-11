@@ -5,6 +5,7 @@
 package logica.controladores;
 
 import logica.dt.DataCliente;
+import logica.dt.DataListaParticular;
 
 /**
  *
@@ -15,5 +16,5 @@ public interface IControladorListaParticular {
     void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema);
     void publicarLista(String nick_cliente, String nombre_lista);
-    void devolverInformacion(String nombre_lista);
+    DataListaParticular devolverInformacion(String nombre_lista, String nick_cliente);
 }

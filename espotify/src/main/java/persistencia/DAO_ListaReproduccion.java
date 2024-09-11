@@ -8,16 +8,19 @@ package persistencia;
  *
  * @author Nico
  */
- 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.NoSuchElementException;
 import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import logica.ListaParticular;
+import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 
 public class DAO_ListaReproduccion {
+
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
@@ -39,16 +42,36 @@ public class DAO_ListaReproduccion {
     public List<ListaReproduccion> findAll() {
         return entityManager.createQuery("SELECT e FROM MyEntity e", ListaReproduccion.class).getResultList();
     }
-    
+
     public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
         try {
             return entityManager.createQuery(
-                "SELECT u FROM ListaReproduccion u WHERE u.nickname = :nick_lista AND u.creador = :nick_creador", ListaParticular.class)
-                .setParameter("nick_creador", nick_creador)
-                .setParameter("nick_lista", nick_lista)
-                .getSingleResult();
+                    "SELECT u FROM ListaParticular u WHERE u.nombre = :nick_lista AND u.creador.nickname = :nick_creador",
+                    ListaParticular.class)
+                    .setParameter("nick_creador", nick_creador)
+                    .setParameter("nick_lista", nick_lista)
+                    .getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontro ningún cliente con ese nombre
+            return null; // No se encontró ninguna lista con esos parámetros
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depuración
+            return null;
+        }
+    }
+
+    public ListaPorDefecto findListaPorGeneroYNombre(String generoNombre, String nombreLista) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaPorDefecto u WHERE u.genero.nombre = :generoNombre AND u.nombre = :nombreLista",
+                    ListaPorDefecto.class)
+                    .setParameter("generoNombre", generoNombre)
+                    .setParameter("nombreLista", nombreLista)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró ninguna lista con esos parámetros
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depuración
+            return null;
         }
     }
 
@@ -68,7 +91,11 @@ public class DAO_ListaReproduccion {
     }
 
     public void close() {
-        if (entityManager != null) entityManager.close();
-        if (entityManagerFactory != null) entityManagerFactory.close();
+        if (entityManager != null) {
+            entityManager.close();
+        }
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
+        }
     }
 }

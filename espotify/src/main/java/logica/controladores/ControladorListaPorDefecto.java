@@ -8,6 +8,7 @@ import logica.Genero;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.dt.DataGenero;
+import logica.dt.DataListaPorDefecto;
 import persistencia.DAO_Genero;
 import persistencia.DAO_ListaReproduccion;
 
@@ -65,7 +66,29 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     }
 
     @Override
-    public void devolverInformacion(String nombre_lista) {
+    public DataListaPorDefecto devolverInformacion(String nombre_lista, String nombre_genero) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        // Obtener la lista particular por nombre de lista y el nickname del creador
+        ListaPorDefecto ls = persistence.findListaPorGeneroYNombre(nombre_genero, nombre_lista);
 
+        if (ls != null) {
+            // Obtener el género asociado a la lista
+            Genero gen = ls.getGenero(); // Asegúrate de que hay un método getGenero()
+
+            // Crear el DataGenero
+            DataGenero dataGenero = new DataGenero(
+                    gen.getNombre() // Suponiendo que existe un método getNombre() en Genero
+            );
+
+            System.out.println("DataLista retornado correctamente.");
+            // Crear y retornar DataListaPorDefecto
+            return new DataListaPorDefecto(
+                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    dataGenero // Pasar el DataGenero creado
+            );
+        } else {
+            System.out.println("No existe, error.");
+            return null;
+        }
     }
 }
