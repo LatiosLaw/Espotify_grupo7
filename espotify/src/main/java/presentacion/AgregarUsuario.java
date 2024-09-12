@@ -29,9 +29,9 @@ public class AgregarUsuario extends javax.swing.JPanel {
         controlCli = icc;
         controlArt = ica;
         
-        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
+        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", "pepe", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", "pepe", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", "pepe", LocalDate.of(2002, 3, 1));
         
         
         initComponents();
@@ -244,10 +244,10 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 String biografia = txtaBio.getText();
                 String webPag = txtDirWeb.getText();
                 //deborlber cosas CON bio y web
-                controlArt.agregarArtista(nick, nombre, apellido, correo, fechaFinal, biografia, webPag);
+                controlArt.agregarArtista(nick, nombre, apellido, correo, new String("a"), fechaFinal, biografia, webPag);
                // artHandler.agregarArtista(nick, nombre, apellido,correo, fechaFinal, biografia, webPag);
             }else{
-                controlCli.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
+                controlCli.agregarCliente(nick, nombre, apellido, correo, new String("a"), fechaFinal);
                // cliHandler.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
             }
         }

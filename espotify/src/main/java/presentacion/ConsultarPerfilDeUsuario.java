@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -20,6 +19,7 @@ import logica.dt.DataCliente;
 import logica.dt.DataArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
+import logica.dt.DataUsuario;
 
 /**
  *
@@ -281,7 +281,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         //lstUsuarios.add("a");
     }
-    private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
+    private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {                                       
 
         String token = String.valueOf( cbxOpt.getSelectedItem());
 

@@ -36,7 +36,7 @@ public class DAO_Genero {
     }
 
     public List<Genero> findAll() {
-        return entityManager.createQuery("SELECT g FROM genero g", Genero.class).getResultList();
+        return entityManager.createQuery("SELECT g FROM Genero g", Genero.class).getResultList();
 
     }
     

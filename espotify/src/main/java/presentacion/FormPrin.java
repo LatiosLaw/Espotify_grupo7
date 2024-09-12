@@ -4,8 +4,10 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorGenero;
 
 /**
  *
@@ -16,14 +18,18 @@ public class FormPrin extends javax.swing.JFrame {
     /**
      * Creates new form FormPrin
      */
+    private IControladorAlbum controlAlb;
+        private IControladorGenero controlGen;
      private IControladorCliente controlCli;
     private IControladorArtista controlArt;
-    public FormPrin(IControladorCliente icc, IControladorArtista ica) {
+    public FormPrin(IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg) {
          controlCli = icc;
         controlArt = ica;
+        controlAlb = icalb;
+        controlGen = icg;
         
         initComponents();
-         
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,7 +47,6 @@ public class FormPrin extends javax.swing.JFrame {
         btnAdUs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(872, 579));
 
         pnlPrin.setBackground(new java.awt.Color(153, 255, 204));
         pnlPrin.setPreferredSize(new java.awt.Dimension(872, 579));
@@ -100,8 +105,7 @@ public class FormPrin extends javax.swing.JFrame {
                     .addComponent(btnAdAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdUs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(585, 585, 585))
+                .addComponent(pnlPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -124,9 +128,9 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
       
-        AdministrarAlbum aa = new AdministrarAlbum();
+        AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen);
                aa.setLocation(0,0);
-               aa.setSize(860, 471);
+               aa.setSize(872, 579);
                
                pnlPrin.removeAll();
                pnlPrin.add(aa);
@@ -137,7 +141,7 @@ public class FormPrin extends javax.swing.JFrame {
     private void btnAdLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdLiActionPerformed
          AdministrarLista aL = new AdministrarLista();
         aL.setLocation(0,0);
-               aL.setSize(860, 471);
+               aL.setSize(872, 579);
                
                pnlPrin.removeAll();
                pnlPrin.add(aL);

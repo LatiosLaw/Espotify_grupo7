@@ -222,7 +222,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                pnlAU.repaint();
                 break;
                  case "Agregar Tema/Album/Lista a Fav":
-                 AgregarCosoFav acf = new AgregarCosoFav();
+                 AgregarCosoFav acf = new AgregarCosoFav(controlCli);
                acf.setLocation(0,0);
                acf.setSize(860, 471);
                
