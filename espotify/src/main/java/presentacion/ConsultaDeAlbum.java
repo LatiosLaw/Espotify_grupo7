@@ -80,7 +80,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         txtDurTem.setText("*Duracion*");
 
-        lblDurTem.setText("Duracion:");
+        lblDurTem.setText("Duracion :");
 
         panel1.setBackground(new java.awt.Color(255, 102, 102));
         panel1.setPreferredSize(new java.awt.Dimension(149, 149));
@@ -118,7 +118,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Introduzca el genero o artista:");
+        jLabel1.setText("Introduzca el genero o artista :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

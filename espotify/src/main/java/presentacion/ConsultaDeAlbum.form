@@ -226,7 +226,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblDurTem">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Duracion:"/>
+        <Property name="text" type="java.lang.String" value="Duracion :"/>
       </Properties>
     </Component>
     <Container class="java.awt.Panel" name="panel1">
@@ -314,7 +314,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca el genero o artista:"/>
+        <Property name="text" type="java.lang.String" value="Introduzca el genero o artista :"/>
       </Properties>
     </Component>
   </SubComponents>
