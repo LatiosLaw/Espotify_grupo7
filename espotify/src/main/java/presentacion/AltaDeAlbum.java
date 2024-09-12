@@ -53,6 +53,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         cargarGeneros();
         
         txtTipMus.setVisible(false);
+        lblMsjArch.setVisible(false);
     }
 
     /**
