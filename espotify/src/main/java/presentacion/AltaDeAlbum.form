@@ -238,7 +238,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblNomTemaAlb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese el nombre del tema del album"/>
+        <Property name="text" type="java.lang.String" value="Ingrese el nombre del tema "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomTemaAlb">

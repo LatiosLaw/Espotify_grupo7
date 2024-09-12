@@ -89,7 +89,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
         lblGenAlb1.setText("Inserte link de imagen (opcional)");
 
-        lblNomTemaAlb.setText("Ingrese el nombre del tema del album");
+        lblNomTemaAlb.setText("Ingrese el nombre del tema ");
 
         txtNomTemaAlb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,6 +291,10 @@ public class AltaDeAlbum extends javax.swing.JPanel {
        }else{
            controlTem.crearTemaDefault(nombre_tema, 69); //CALCULO DE DURACIONES
        }
+       
+       // DENTRO DE ACA REINICIO DE CAMPOS PARA LOS TEMAS
+       
+       //
     }//GEN-LAST:event_btnConfTemActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
@@ -309,7 +313,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         temas.add(new DataTema("ALREDEDOR DE ESTO BUCLEAR POR CADA TEMA ELEGIDO", 100, 1));
         //// 
         
-        if(imagen != ""){
+        if(imagen != " "){
             controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, generos, temas);
         }else{
             controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, generos, temas);
