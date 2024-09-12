@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -20,6 +19,7 @@ import logica.dt.DataCliente;
 import logica.dt.DataArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
+import logica.dt.DataUsuario;
 
 /**
  *
@@ -34,6 +34,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private IControladorArtista controlArt;
     private JComboBox<DataUsuario> comboBoxUsuarios;
     private JList<DataUsuario> listUsuarios;
+
     public ConsultarPerfilDeUsuario(IControladorCliente icc, IControladorArtista ica) {
 
         controlCli = icc;
@@ -41,7 +42,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         initComponents();
         //lstUsuarios = new javax.swing.JList<DataUsuario>();
-        
+
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
         lstAlbum.setVisible(false);
@@ -54,7 +55,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         this.repaint();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -281,16 +281,19 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         //lstUsuarios.add("a");
     }
-    private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
 
-        String token = String.valueOf( cbxOpt.getSelectedItem());
+    private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {
+
+        int token = cbxOpt.getSelectedIndex();
 
         switch (token) {
-            case "OPT": // OPT
+            case 0 -> {// OPT
                 limpiarCampos();
                 break;
+            }
 
-            case "Cliente": // Cliente
+            case 1 -> {
+                // Cliente
                 limpiarCampos();
                 Collection<DataCliente> cole = controlCli.mostrarClientes();
                 cargarUsuarios(cole);
@@ -303,8 +306,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 txtNumeroDeSeguidoresPosta.setVisible(true);
                 lblAlbum.setVisible(true);
                 break;
-
-            case "Artista": // Artista
+            }
+            case 2 -> {
+                // Artista
                 limpiarCampos();
                 txtPaginaWeb.setVisible(true);
                 txtaBiografia.setVisible(true);
@@ -315,6 +319,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 txtNumeroDeSeguidoresPosta.setVisible(true);
                 lblAlbum.setVisible(true);
                 break;
+            }
         }
     }
 
@@ -351,6 +356,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 if ("Cliente".equals(token)) {
                     DataCliente usr = controlCli.consultarPerfilCliente(nickBuscar);
                     if (usr != null) {
+                        txtNumeroDeSeguidoresPosta.setVisible(true);
+                        lblNroSeguidores.setVisible(true);
+                        lblSegui.setVisible(true);
                         txtNickName.setText(usr.getNickname());
                         txtNombre.setText(usr.getNombre());
                         txtApellido.setText(usr.getApellido());
@@ -365,6 +373,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 } else if ("Artista".equals(token)) {
                     DataArtista art = controlArt.retornarArtista(nickBuscar);
                     if (art != null) {
+                        txtNumeroDeSeguidoresPosta.setVisible(true);
+                        lblNroSeguidores.setVisible(true);
+                        lblSegui.setVisible(true);
                         txtNickName.setText(art.getNickname());
                         txtNombre.setText(art.getNombre());
                         txtApellido.setText(art.getApellido());
@@ -387,20 +398,18 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarUsuarios(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-           // ArrayList<String> pepee = dataUsrToString(cole);
+        // ArrayList<String> pepee = dataUsrToString(cole);
 
-            model = new DefaultListModel<String>();
-            
-            for (DataCliente elemento : cole) {
-               String nick =  elemento.getNickname();
-               model.addElement(nick);
-            }
-            lstUsuarios.setModel(model);
-            
+        model = new DefaultListModel<String>();
+
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        lstUsuarios.setModel(model);
 
     }
-    
-    
+
     /*
     lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Larry", "Capaja", "El", "Hombre", "Que ", "No ", "Te", "Engaña" };
@@ -408,23 +417,21 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             public String getElementAt(int i) { return strings[i]; }
         });
     
-    */
-    public ArrayList<String> dataUsrToString(Collection<DataCliente> cole){
-         
+     */
+    public ArrayList<String> dataUsrToString(Collection<DataCliente> cole) {
+
         ArrayList<String> pepe = new ArrayList<String>();
         Iterator<DataCliente> iterator = cole.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             DataCliente cli = iterator.next();
-           pepe.add(cli.getNickname());
- 
+            pepe.add(cli.getNickname());
+
         }
-        
-   
-        
-       return pepe;
-        
+
+        return pepe;
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;

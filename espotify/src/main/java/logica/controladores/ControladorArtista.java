@@ -35,7 +35,7 @@ public DataArtista retornarArtista(String nickname) {
                 retorno.getNombre(),
                 retorno.getApellido(),
                 retorno.getEmail(),
-                retorno.getFoto()
+                retorno.getFoto(),
                 retorno.getNacimiento(),
                 artista.getBiografia(),
                 artista.getDirWeb()

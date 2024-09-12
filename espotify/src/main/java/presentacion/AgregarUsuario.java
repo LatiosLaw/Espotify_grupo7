@@ -8,9 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
@@ -23,15 +21,15 @@ public class AgregarUsuario extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-       private IControladorCliente controlCli;
+    private IControladorCliente controlCli;
     private IControladorArtista controlArt;
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
         controlArt = ica;
         
-        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
+        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", "dirFoto" , LocalDate.of(2002, 3, 1));
         
         
         initComponents();
@@ -238,16 +236,17 @@ public class AgregarUsuario extends javax.swing.JPanel {
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String correo = txtCorreo.getText();
+            String foto = "foto"; //DE MOMENTO
               System.out.println("Converted LocalDate: "  + fechaFinal);
             
             if(cbxTipoUsr.getSelectedIndex() == 2){
                 String biografia = txtaBio.getText();
                 String webPag = txtDirWeb.getText();
                 //deborlber cosas CON bio y web
-                controlArt.agregarArtista(nick, nombre, apellido, correo, fechaFinal, biografia, webPag);
+                controlArt.agregarArtista(nick, nombre, apellido, correo, foto, fechaFinal, biografia, webPag);
                // artHandler.agregarArtista(nick, nombre, apellido,correo, fechaFinal, biografia, webPag);
             }else{
-                controlCli.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
+                controlCli.agregarCliente(nick, nombre, apellido, correo, foto, fechaFinal);
                // cliHandler.agregarCliente(nick, nombre, apellido, correo, fechaFinal);
             }
         }

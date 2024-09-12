@@ -134,7 +134,7 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
                 retorno.getNickname(),
                 retorno.getNombre(),
                 retorno.getApellido(),
-                retorno.getFoto()
+                retorno.getFoto(),
                 retorno.getEmail(),
                 retorno.getNacimiento()
             );
@@ -231,11 +231,10 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
             if(usr instanceof Cliente cli){
-              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getNacimiento()));
+              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
             }
-        }
-        
-        
+        }       
         return lista;
     }
+}
 
