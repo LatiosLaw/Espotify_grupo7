@@ -26,88 +26,68 @@ public class AltaDeGenero extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblNomGen = new javax.swing.JLabel();
+        txtNomGen = new javax.swing.JTextField();
+        lblInsPad = new javax.swing.JLabel();
+        lblNomGen1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        arbolGen = new javax.swing.JTree();
-        txtNomGen = new javax.swing.JLabel();
-        lblNomGen = new javax.swing.JTextField();
-        txtNomGenPa = new javax.swing.JLabel();
-        txtDisc1 = new javax.swing.JLabel();
-        txtDisc2 = new javax.swing.JLabel();
+        listGen = new javax.swing.JList<>();
+        btnCarGen = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Genero");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Cumbia");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Rap");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Instrumntal");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        arbolGen.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        arbolGen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        arbolGen.setFocusCycleRoot(true);
-        arbolGen.setInheritsPopupMenu(true);
-        jScrollPane1.setViewportView(arbolGen);
+        lblNomGen.setText("Inserte el nombre del genero");
 
-        txtNomGen.setText("Inserte el nombre del genero");
+        lblInsPad.setText("Inserte el nombre del genero padre");
 
-        txtNomGenPa.setText("Seleccone el genero padre");
+        jScrollPane1.setViewportView(listGen);
 
-        txtDisc1.setText("  En caso de no seleccionar un genero");
-        txtDisc1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtDisc2.setText("padre, este sera tomado como Genero");
-        txtDisc2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCarGen.setText("Cargar Genero");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNomGen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomGenPa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNomGen)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDisc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDisc2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(lblNomGen, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInsPad))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCarGen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNomGen1)
+                    .addComponent(txtNomGen)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(txtNomGen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNomGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(txtNomGenPa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDisc1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDisc2)
-                .addGap(20, 20, 20))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomGen)
+                    .addComponent(txtNomGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInsPad)
+                    .addComponent(lblNomGen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnCarGen, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
-
-        txtDisc1.getAccessibleContext().setAccessibleName("En caso de no seleccionar un genero");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTree arbolGen;
+    private javax.swing.JButton btnCarGen;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField lblNomGen;
-    private javax.swing.JLabel txtDisc1;
-    private javax.swing.JLabel txtDisc2;
-    private javax.swing.JLabel txtNomGen;
-    private javax.swing.JLabel txtNomGenPa;
+    private javax.swing.JLabel lblInsPad;
+    private javax.swing.JLabel lblNomGen;
+    private javax.swing.JTextField lblNomGen1;
+    private javax.swing.JList<String> listGen;
+    private javax.swing.JTextField txtNomGen;
     // End of variables declaration//GEN-END:variables
 }
