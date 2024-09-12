@@ -31,6 +31,10 @@ public abstract class Usuario implements Serializable {
 
     public Usuario() {
     }
+    
+    public Usuario(String nickname) {
+        this.nickname = nickname;
+    }
 
     public Usuario(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fecha_naci) {
         this.nickname = nickname;

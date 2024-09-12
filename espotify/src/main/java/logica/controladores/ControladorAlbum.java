@@ -21,8 +21,8 @@ import persistencia.DAO_Genero;
 public class ControladorAlbum implements IControladorAlbum {
 
     @Override
-    public DataAlbum agregarAlbum(DataArtista artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataGenero> generos, Collection<DataTema> temas) {
-        Artista art = new Artista(artista.getNickname(), artista.getNombre(), artista.getApellido(), artista.getCorreo(), artista.getFoto(), artista.getFechaNac(), artista.getBiografia(), artista.getDirWeb());
+    public DataAlbum agregarAlbum(String artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataGenero> generos, Collection<DataTema> temas) {
+        Artista art  = new Artista(artista);
         Album nuevo_album = new Album(nombAlbum, imagen, anioCreacion, art);
         Iterator<DataGenero> iterator = generos.iterator();
         while (iterator.hasNext()) {

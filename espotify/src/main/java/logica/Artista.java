@@ -27,6 +27,10 @@ public class Artista extends Usuario {
     public Artista() {
         // Constructor vacío necesario para JPA
     }
+    
+    public Artista(String nickname) {
+    super(nickname);
+    }
 
     public Artista(String nickname, String nombre, String apellido, String email, String foto_perfil, LocalDate fecha_naci, String biografia, String dirWeb) {
         super(nickname, nombre, apellido, email, foto_perfil, fecha_naci);

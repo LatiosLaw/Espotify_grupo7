@@ -9,22 +9,20 @@ package presentacion;
  * @author Law
  */
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import logica.Genero;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;
 import logica.controladores.ControladorGenero;
 import logica.controladores.ControladorListaParticular;
 import logica.controladores.ControladorListaPorDefecto;
+import logica.controladores.ControladorTema;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
 
 public class EspotifyMain {
 
@@ -36,9 +34,10 @@ public class EspotifyMain {
         IControladorGenero genHandler = new ControladorGenero();
         IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
         IControladorListaParticular listPHandler = new ControladorListaParticular();
+        IControladorTema temHandler = new ControladorTema();
         
          // Iniciar el formulario
-        FormPrin fp = new FormPrin(cliHandler,artHandler, albHandler, genHandler);
+        FormPrin fp = new FormPrin(cliHandler,artHandler, albHandler, genHandler, temHandler);
         fp.setVisible(true);
     /*   // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml

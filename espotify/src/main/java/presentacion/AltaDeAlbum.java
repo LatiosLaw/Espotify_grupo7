@@ -4,11 +4,15 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorTema;
+import logica.dt.DataGenero;
+import logica.dt.DataTema;
 
 /**
  *
@@ -21,14 +25,15 @@ public class AltaDeAlbum extends javax.swing.JPanel {
      */
         private IControladorAlbum controlAlb;
         private IControladorGenero controlGen;
-        
+        private IControladorTema controlTem;
 
-    public AltaDeAlbum(IControladorAlbum ica, IControladorGenero icg) {
+    public AltaDeAlbum(IControladorAlbum ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = ica;
         controlGen = icg;
+        controlTem = ict;
         
         initComponents();
-        
+        cargarGeneros();
         
     }
 
@@ -84,7 +89,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
         lblGenAlb1.setText("Inserte link de imagen (opcional)");
 
-        lblNomTemaAlb.setText("Ingrese los temas del album");
+        lblNomTemaAlb.setText("Ingrese el nombre del tema del album");
 
         txtNomTemaAlb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,12 +118,22 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         cbxTipMus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Archivo musica", "Direccion musica" }));
 
         btnConfirmar.setText("Dar de Alta Album");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         lblMsjArch.setText("El archivo no se reconoce como un mp3");
 
         btnArch.setText("Subir Archivo");
 
         btnConfTem.setText("Confirmar Tema");
+        btnConfTem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfTemActionPerformed(evt);
+            }
+        });
 
         btnCarGen.setText("Cargar Generos");
         btnCarGen.addActionListener(new java.awt.event.ActionListener() {
@@ -266,17 +281,44 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_jList1HierarchyChanged
 
     private void btnCarGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarGenActionPerformed
+        
+    }//GEN-LAST:event_btnCarGenActionPerformed
+
+    private void btnConfTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfTemActionPerformed
+       String nombre_tema = txtNomTemaAlb.getText();
+       if(cbxTipMus.getSelectedItem() == "Archivo musica"){
+           controlTem.crearTemaDefault(nombre_tema, 420); //CALCULO DE DURACIONES Y FILE LISTENER
+       }else{
+           controlTem.crearTemaDefault(nombre_tema, 69); //CALCULO DE DURACIONES
+       }
+    }//GEN-LAST:event_btnConfTemActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        String nick_artista = txtArt.getText();
+        String nombre_album = txtNomAlb.getText();
+        String imagen = txtLinkImg.getText();
+        Integer año_album = sprAnio.getComponentCount();
+        
+        //// CALCULAR TEMAS
+        Collection<DataGenero> generos = new ArrayList<>();
+        generos.add(new DataGenero("ALREDEDOR DE ESTO BUCLEAR POR CADA GENERO ELEGIDO"));
+        ////
+        
+        //// CALCULAR GENEROS SELECCIONADOS
+        Collection<DataTema> temas = new ArrayList<>();
+        temas.add(new DataTema("ALREDEDOR DE ESTO BUCLEAR POR CADA TEMA ELEGIDO", 100, 1));
+        //// 
+        
+        if(imagen != ""){
+            controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, generos, temas);
+        }else{
+            controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, generos, temas);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+    
+    public void cargarGeneros(){
         DefaultListModel<String> model = new DefaultListModel();
-        try {
-            Collection<String> retorno;
-            if(controlGen.mostrarGeneros() != null){
-                retorno = controlGen.mostrarGeneros();
-            }else{
-                retorno = null;
-            }
-            
-            
-            if(retorno != null){
+        Collection<String> retorno = controlGen.mostrarGeneros();
                 if(retorno.isEmpty()){
                     model.addElement("No hay generos");
                 }else{
@@ -285,15 +327,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         model.addElement(iterator.next());
                     }
                 }
-            }else{
-                model.addElement("Un error ha ocurrido");
-            }
             listGen.setModel(model);
-        } catch (Exception e) {
-            
-        }
-    }//GEN-LAST:event_btnCarGenActionPerformed
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArch;
     private javax.swing.JToggleButton btnCarGen;

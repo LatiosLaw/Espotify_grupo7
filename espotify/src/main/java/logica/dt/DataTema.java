@@ -5,7 +5,13 @@ public class DataTema {
     private Integer posicion_album;
     private Integer duracion;
     private DataAlbum album; 
-
+    
+    public DataTema(String nickname, Integer duracion, Integer posicion) {
+        this.nickname = nickname;
+        this.duracion = duracion;
+        this.posicion_album = posicion_album;
+    }
+    
     public DataTema(String nickname, Integer duracion) {
         this.nickname = nickname;
         this.duracion = duracion;

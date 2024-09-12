@@ -8,6 +8,7 @@ import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorTema;
 
 /**
  *
@@ -22,11 +23,13 @@ public class FormPrin extends javax.swing.JFrame {
         private IControladorGenero controlGen;
      private IControladorCliente controlCli;
     private IControladorArtista controlArt;
-    public FormPrin(IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg) {
+    private IControladorTema controlTem;
+    public FormPrin(IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict) {
          controlCli = icc;
         controlArt = ica;
         controlAlb = icalb;
         controlGen = icg;
+        controlTem = ict;
         
         initComponents();
         setLocationRelativeTo(null);
@@ -128,7 +131,7 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
       
-        AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen);
+        AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen, controlTem);
                aa.setLocation(0,0);
                aa.setSize(872, 579);
                

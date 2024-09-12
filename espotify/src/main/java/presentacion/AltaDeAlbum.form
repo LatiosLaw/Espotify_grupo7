@@ -238,7 +238,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblNomTemaAlb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese los temas del album"/>
+        <Property name="text" type="java.lang.String" value="Ingrese el nombre del tema del album"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomTemaAlb">
@@ -312,6 +312,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de Alta Album"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMsjArch">
       <Properties>
@@ -327,6 +330,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar Tema"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfTemActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLinkImg">
     </Component>
