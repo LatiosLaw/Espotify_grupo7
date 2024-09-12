@@ -212,7 +212,7 @@ public class ControladorCliente implements IControladorCliente {
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
             if(usr instanceof Cliente cli){
-              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getNacimiento()));
+              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(),cli.getFoto(), cli.getNacimiento()));
             }
         }
         
