@@ -9,64 +9,47 @@ package presentacion;
  * @author Law
  */
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import logica.Album;
-import logica.Artista;
-import logica.Cliente;
 import logica.Genero;
-import logica.ListaParticular;
-import logica.ListaPorDefecto;
-import logica.tema;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;
+import logica.controladores.ControladorGenero;
 import logica.controladores.ControladorListaParticular;
 import logica.controladores.ControladorListaPorDefecto;
-import logica.controladores.ControladorTema;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
-import logica.controladores.IControladorTema;
-import logica.dt.DataAlbum;
-import logica.dt.DataArtista;
-import logica.dt.DataCliente;
-import logica.dt.DataGenero;
-import logica.dt.DataListaParticular;
-import logica.dt.DataListaPorDefecto;
-import logica.dt.DataTema;
 
 public class EspotifyMain {
 
     public static void main(String[] args) {
-        // Crear el EntityManagerFactory
+        
+        IControladorArtista artHandler = new ControladorArtista();
+        IControladorCliente cliHandler = new ControladorCliente();
+        IControladorAlbum albHandler = new ControladorAlbum();
+        IControladorGenero genHandler = new ControladorGenero();
+        IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
+        IControladorListaParticular listPHandler = new ControladorListaParticular();
+        
+         // Iniciar el formulario
+        FormPrin fp = new FormPrin(cliHandler,artHandler, albHandler, genHandler);
+        fp.setVisible(true);
+    /*   // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml
 
         // Crear el EntityManager
         EntityManager em = emf.createEntityManager();
         
-         IControladorArtista artHandler = new ControladorArtista();
-        IControladorCliente cliHandler = new ControladorCliente();
-        IControladorListaPorDefecto listHandler = new ControladorListaPorDefecto();
-        IControladorListaParticular listPHandler = new ControladorListaParticular();
-        
-         // Iniciar el formulario
-        FormPrin fp = new FormPrin(cliHandler,artHandler);
-        fp.setVisible(true);
-      /*  
-        
-       
-        
-        //  artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        // artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        //  cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
-       
+        artHandler.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        artHandler.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        cliHandler.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", LocalDate.of(2002, 3, 1));
+       /* 
         
         // Crear un nuevo Artista
         Artista art1 = new Artista("nickname", "Nombre", "Apellido", "email@example.com", "sampleimage", LocalDate.of(2005, 5, 11), "Biografía del artista", "http://example.com");

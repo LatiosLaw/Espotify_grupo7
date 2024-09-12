@@ -46,6 +46,8 @@ public interface IControladorCliente {
     
     public void consultarListaReproduccion(String nickname);
     
+    public int obtenerNumeroSeguidores(String nick);
+    
     public Collection<DataCliente> mostrarClientes();
     
 }

@@ -8,9 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
@@ -23,11 +21,15 @@ public class AgregarUsuario extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-       private IControladorCliente controlCli;
+    private IControladorCliente controlCli;
     private IControladorArtista controlArt;
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
-          controlCli = icc;
+        controlCli = icc;
         controlArt = ica;
+        
+        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
+        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", "dirFoto" , LocalDate.of(2002, 3, 1));
         
         
         initComponents();
@@ -263,6 +265,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String correo = txtCorreo.getText();
+            String foto = "foto"; //DE MOMENTO
               System.out.println("Converted LocalDate: "  + fechaFinal);
             
             if(cbxTipoUsr.getSelectedIndex() == 2){
@@ -306,7 +309,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
              
                
             case 1:
-           lblDirWeb.setVisible(false);
+               lblDirWeb.setVisible(false);
                txtDirWeb.setVisible(false);
                txtaBio.setVisible(false);
                lblBiografia.setVisible(false);
@@ -314,15 +317,13 @@ public class AgregarUsuario extends javax.swing.JPanel {
              
                 break;
             case 2:
-                lblDirWeb.setVisible(true);
+               lblDirWeb.setVisible(true);
                txtDirWeb.setVisible(true);
                txtaBio.setVisible(true);
                lblBiografia.setVisible(true);
                
-                break;
-        
-        
-        
+               
+                break;    
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
     private void txtNullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNullActionPerformed

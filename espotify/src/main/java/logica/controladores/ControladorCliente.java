@@ -122,17 +122,31 @@ public class ControladorCliente implements IControladorCliente {
         persistence.update(cliente);
     }
 
-    @Override
-    public DataCliente consultarPerfilCliente(String nick_cli) {
-        Usuario retorno;
-        DAO_Usuario persistence = new DAO_Usuario();
+@Override
+public DataCliente consultarPerfilCliente(String nick_cli) {
+    Usuario retorno;
+    DAO_Usuario persistence = new DAO_Usuario();
+    
+    try {
         retorno = persistence.findUsuarioByNick(nick_cli);
-        if (retorno instanceof Cliente cliente) {
-            return new DataCliente(retorno.getNickname(), retorno.getNombre(), retorno.getApellido(), retorno.getFoto(), retorno.getEmail(), retorno.getNacimiento());
+        if (retorno != null && retorno instanceof Cliente cliente) {
+            return new DataCliente(
+                retorno.getNickname(),
+                retorno.getNombre(),
+                retorno.getApellido(),
+                retorno.getFoto(),
+                retorno.getEmail(),
+                retorno.getNacimiento()
+            );
         } else {
-            throw new IllegalArgumentException("El usuario con nickname " + nick_cli + " no es un Artista.");
+            System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");
+            return null;
         }
+    } catch (Exception e) {
+        System.err.println("Error al buscar el cliente: " + e.getMessage());
+        return null;
     }
+}
 
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
@@ -204,6 +218,11 @@ public class ControladorCliente implements IControladorCliente {
     }
     
     @Override
+    public int obtenerNumeroSeguidores(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerCantidadSeguidores(nick);
+    }
+    
     public Collection<DataCliente> mostrarClientes(){
         Collection<DataCliente> lista = new ArrayList<>();
         DAO_Usuario persistence = new DAO_Usuario();
@@ -212,11 +231,10 @@ public class ControladorCliente implements IControladorCliente {
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
             if(usr instanceof Cliente cli){
-              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(),cli.getFoto(), cli.getNacimiento()));
+              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
             }
-        }
-        
-        
+        }       
         return lista;
     }
 }
+

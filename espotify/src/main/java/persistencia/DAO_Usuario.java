@@ -30,6 +30,21 @@ public class DAO_Usuario {
     public Usuario find(Usuario user) {
         return entityManager.find(Usuario.class, user);
     }
+    
+public int obtenerCantidadSeguidores(String nickname) {
+    try {
+        Long count = entityManager.createQuery(
+                "SELECT COUNT(s) FROM Usuario u JOIN u.seguidores s WHERE u.nickname = :nickname", Long.class)
+                .setParameter("nickname", nickname)
+                .getSingleResult();
+        return count.intValue();
+    } catch (NoResultException e) {
+        return 0; // Si no se encontró ningún seguidor, retorna 0
+    } catch (Exception e) {
+        e.printStackTrace(); // Para depuración
+        return -1; // Retorna -1 en caso de error
+    }
+}
 
     public Usuario findUsuarioByNick(String nick_ingresado) {
         try {
@@ -78,7 +93,6 @@ public class DAO_Usuario {
     }
 
     public Usuario merge(Cliente cli) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
     try {
         entityManager.getTransaction().begin();
         // Buscar el cliente existente

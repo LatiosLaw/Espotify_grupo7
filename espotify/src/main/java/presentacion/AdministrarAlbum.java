@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorAlbum;
+import logica.controladores.IControladorGenero;
+
 /**
  *
  * @author Urbina
@@ -13,7 +16,14 @@ public class AdministrarAlbum extends javax.swing.JPanel {
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarAlbum() {
+    
+    private IControladorAlbum controlAlb;
+    private IControladorGenero controlGen;
+        
+    public AdministrarAlbum(IControladorAlbum ica, IControladorGenero icg) {
+        controlAlb = ica;
+        controlGen = icg;
+        
         initComponents();
     }
 
@@ -87,7 +97,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 pnlAdAl.repaint();
             case 1:
              
-                 AltaDeAlbum ada = new AltaDeAlbum();
+                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen);
                ada.setLocation(0,0);
                ada.setSize(860, 471);
                

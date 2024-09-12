@@ -11,18 +11,18 @@ import logica.controladores.IControladorCliente;
  *
  * @author Urbina
  */
-
 public class AdministrarUsuario extends javax.swing.JPanel {
 
     /**
      * Creates new form AdministrarUsuario
      */
-     private IControladorCliente controlCli;
+    private IControladorCliente controlCli;
     private IControladorArtista controlArt;
-    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica){
-          controlCli = icc;
+
+    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica) {
+        controlCli = icc;
         controlArt = ica;
-        
+
         initComponents();
     }
 
@@ -150,7 +150,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-         /*
+        /*
                 OPT
                 Agregar Usuario
                 Seguir Usuario
@@ -158,98 +158,92 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 Consultar Perfil de Usuario
                 Eliminar Lista/Album/Tema de Fav
                 Agregar Tema/Album/Lista a Fav
-        */
-          String token= String.valueOf( jComboBox1.getSelectedItem());
-        
-       
+         */
+        String token = String.valueOf(jComboBox1.getSelectedItem());
+
         switch (token) {
             case "OPT":
-                 //No
+                //No
                 pnlAU.removeAll();
                 pnlAU.repaint();
-            break;
+                break;
             case "Agregar Usuario":
-             
-                 AgregarUsuario au = new AgregarUsuario(controlCli, controlArt);
-               au.setLocation(0,0);
-               au.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(au);
-               pnlAU.revalidate();
-               pnlAU.repaint();
+
+                AgregarUsuario au = new AgregarUsuario(controlCli, controlArt);
+                au.setLocation(0, 0);
+                au.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(au);
+                pnlAU.revalidate();
+                pnlAU.repaint();
                 break;
             case "Seguir Usuario":
-             
-                 SeguirUsuario su = new SeguirUsuario(controlCli);
-               su.setLocation(0,0);
-               su.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(su);
-               pnlAU.revalidate();
-               pnlAU.repaint();
+
+                SeguirUsuario su = new SeguirUsuario(controlCli);
+                su.setLocation(0, 0);
+                su.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(su);
+                pnlAU.revalidate();
+                pnlAU.repaint();
                 break;
-                
+
             case "Dejar de seguir Usuario":
                 DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario(controlCli);
-               ddsu.setLocation(0,0);
-               ddsu.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(ddsu);
-               pnlAU.revalidate();
-               pnlAU.repaint();
+                ddsu.setLocation(0, 0);
+                ddsu.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(ddsu);
+                pnlAU.revalidate();
+                pnlAU.repaint();
                 break;
             case "Consultar Perfil de Usuario":
-                 ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario(controlCli, controlArt);
-               cpdu.setLocation(0,0);
-               cpdu.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(cpdu);
-               pnlAU.revalidate();
-               pnlAU.repaint();
-                break; 
-                 case "Eliminar Lista/Album/Tema de Fav":
-                 EliminarCosoFav ecf = new EliminarCosoFav();
-               ecf.setLocation(0,0);
-               ecf.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(ecf);
-               pnlAU.revalidate();
-               pnlAU.repaint();
+                ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario(controlCli, controlArt);
+                cpdu.setLocation(0, 0);
+                cpdu.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(cpdu);
+                pnlAU.revalidate();
+                pnlAU.repaint();
                 break;
-                 case "Agregar Tema/Album/Lista a Fav":
-                 AgregarCosoFav acf = new AgregarCosoFav(controlCli);
-               acf.setLocation(0,0);
-               acf.setSize(860, 471);
-               
-               pnlAU.removeAll();
-               pnlAU.add(acf);
-               pnlAU.revalidate();
-               pnlAU.repaint();
+            case "Eliminar Lista/Album/Tema de Fav":
+                EliminarCosoFav ecf = new EliminarCosoFav();
+                ecf.setLocation(0, 0);
+                ecf.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(ecf);
+                pnlAU.revalidate();
+                pnlAU.repaint();
                 break;
-                
-                
-                
-                
-                
+            case "Agregar Tema/Album/Lista a Fav":
+                AgregarCosoFav acf = new AgregarCosoFav(controlCli);
+                acf.setLocation(0, 0);
+                acf.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(acf);
+                pnlAU.revalidate();
+                pnlAU.repaint();
+                break;
+
             default:
-                
+
                 break;
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void cbxPrinItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxPrinItemStateChanged
-     
-    }//GEN-LAST:event_cbxPrinItemStateChanged
-    
 
-    
+    }//GEN-LAST:event_cbxPrinItemStateChanged
+
+
     private void cbxPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPrinActionPerformed
-        
+
     }//GEN-LAST:event_cbxPrinActionPerformed
 
 
