@@ -15,6 +15,17 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
      */
     public ConsultaDeAlbum() {
         initComponents();
+        
+        txtNomAlb.setVisible(false);
+        txtAnioCre.setVisible(false);
+        lblGenDeAlb.setVisible(false);
+        listGenAlb.setVisible(false);
+        lblTemDeAlb.setVisible(false);
+        listTemAlb.setVisible(false);
+        txtNomTemAlb.setVisible(false);
+        lblDurTem.setVisible(false);
+        txtDurTem.setVisible(false);
+        fotoAlb.setVisible(false);
     }
 
     /**
@@ -39,7 +50,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtNomTemAlb = new javax.swing.JTextField();
         txtDurTem = new javax.swing.JTextField();
         lblDurTem = new javax.swing.JLabel();
-        panel1 = new java.awt.Panel();
+        fotoAlb = new java.awt.Panel();
         jScrollPane4 = new javax.swing.JScrollPane();
         listGenOrArt = new javax.swing.JList<>();
         btnMostrarAlb = new javax.swing.JButton();
@@ -83,17 +94,17 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         lblDurTem.setText("Duracion :");
 
-        panel1.setBackground(new java.awt.Color(255, 102, 102));
-        panel1.setPreferredSize(new java.awt.Dimension(149, 149));
+        fotoAlb.setBackground(new java.awt.Color(255, 102, 102));
+        fotoAlb.setPreferredSize(new java.awt.Dimension(149, 149));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout fotoAlbLayout = new javax.swing.GroupLayout(fotoAlb);
+        fotoAlb.setLayout(fotoAlbLayout);
+        fotoAlbLayout.setHorizontalGroup(
+            fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 149, Short.MAX_VALUE)
         );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        fotoAlbLayout.setVerticalGroup(
+            fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 149, Short.MAX_VALUE)
         );
 
@@ -122,6 +133,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         jLabel1.setText("Introduzca el genero o artista :");
 
         btnGenConsult.setText("Mostrar Datos");
+        btnGenConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenConsultActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -160,7 +176,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                             .addComponent(lblGenDeAlb)
                             .addComponent(txtNomAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
@@ -178,7 +194,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                                 .addComponent(lblGenDeAlb)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(lblTemDeAlb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,11 +230,29 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomGenOrArtActionPerformed
 
+    private void btnGenConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenConsultActionPerformed
+        /*if(No existe un album con ese nombre){
+            no cambia nada y muestra un mensaje
+        }else{
+            txtNomAlb.setVisible(true);
+            txtAnioCre.setVisible(true);
+            lblGenDeAlb.setVisible(true);
+            listGenAlb.setVisible(true);
+            lblTemDeAlb.setVisible(true);
+            listTemAlb.setVisible(true);
+            txtNomTemAlb.setVisible(true);
+            lblDurTem.setVisible(true);
+            txtDurTem.setVisible(true);
+            fotoAlb.setVisible(true);
+        }*/
+    }//GEN-LAST:event_btnGenConsultActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenConsult;
     private javax.swing.JButton btnMostrarAlb;
     private javax.swing.JComboBox<String> cbxConAlb;
+    private java.awt.Panel fotoAlb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -233,7 +267,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JList<String> listGenOrArt;
     private javax.swing.JList<String> listTemAlb;
     private javax.swing.JTextField nomGenOrArt;
-    private java.awt.Panel panel1;
     private javax.swing.JTextField txtAnioCre;
     private javax.swing.JTextField txtDurTem;
     private javax.swing.JTextField txtNomAlb;
