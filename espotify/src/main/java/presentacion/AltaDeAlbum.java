@@ -4,15 +4,24 @@
  */
 package presentacion;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorTema;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.Mp3File;
+import logica.dt.DataAlbum;
 
 /**
  *
@@ -26,14 +35,20 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         private IControladorAlbum controlAlb;
         private IControladorGenero controlGen;
         private IControladorTema controlTem;
+        private JFileChooser fileChooser;
 
     public AltaDeAlbum(IControladorAlbum ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = ica;
         controlGen = icg;
         controlTem = ict;
+        fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setDialogTitle("Selecciona un archivo MP3");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
         
         initComponents();
         cargarGeneros();
+        
         
     }
 
@@ -127,6 +142,11 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         lblMsjArch.setText("El archivo no se reconoce como un mp3");
 
         btnArch.setText("Subir Archivo");
+        btnArch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchActionPerformed(evt);
+            }
+        });
 
         btnConfTem.setText("Confirmar Tema");
         btnConfTem.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +307,42 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private void btnConfTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfTemActionPerformed
        String nombre_tema = txtNomTemaAlb.getText();
        if(cbxTipMus.getSelectedItem() == "Archivo musica"){
-           controlTem.crearTemaDefault(nombre_tema, 420); //CALCULO DE DURACIONES Y FILE LISTENER
+            File selectedFile = fileChooser.getSelectedFile();
+            File destinationDir = new File("Espotify_grupo7\\espotify\\src\\main\\java\\temas");
+    
+            if (!destinationDir.exists()) {
+                destinationDir.mkdirs(); // Crear la carpeta si no existe
+            }
+    
+            // Crear el archivo de destino con el mismo nombre que el seleccionado
+            File destinationFile = new File(destinationDir, selectedFile.getName());
+    
+            // Copiar el archivo al destino
+            if (selectedFile.getName().endsWith(".mp3")) {
+                try {
+                // Extract duration from the MP3 file
+                Mp3File mp3File = new Mp3File(selectedFile.getAbsolutePath());
+                if (mp3File.hasId3v2Tag()) {
+                    ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                    long durationInSeconds = mp3File.getLengthInSeconds();
+                    JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
+                    controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds);
+                    try {
+                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+                    } catch (IOException i) {
+                        System.out.println("Error al guardar el archivo.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido.");
+                }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Error al leer el archivo MP3");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
+            }
        }else{
            controlTem.crearTemaDefault(nombre_tema, 69); //CALCULO DE DURACIONES
        }
@@ -313,25 +368,37 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         temas.add(new DataTema("ALREDEDOR DE ESTO BUCLEAR POR CADA TEMA ELEGIDO", 100, 1));
         //// 
         
-        if(imagen != " "){
-            controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, generos, temas);
-        }else{
+        if(txtLinkImg.getText().isEmpty()){
             controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, generos, temas);
+        }else{
+            controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, generos, temas);
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchActionPerformed
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile.getName().endsWith(".mp3")) {
+                lblMsjArch.setText("Archivo seleccionado: " + selectedFile.getName());  
+            }else{
+            lblMsjArch.setText("Archivo seleccionado no valido");
+            }
+        }
+    }//GEN-LAST:event_btnArchActionPerformed
     
     public void cargarGeneros(){
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
-                if(retorno.isEmpty()){
-                    model.addElement("No hay generos");
-                }else{
-                    Iterator<String> iterator = retorno.iterator();
-                    while (iterator.hasNext()) {
-                        model.addElement(iterator.next());
-                    }
+            if(retorno.isEmpty()){
+                model.addElement("No hay generos");
+            }else{
+                Iterator<String> iterator = retorno.iterator();
+                while (iterator.hasNext()) {
+                    model.addElement(iterator.next());
                 }
-            listGen.setModel(model);
+            }
+        listGen.setModel(model);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArch;
