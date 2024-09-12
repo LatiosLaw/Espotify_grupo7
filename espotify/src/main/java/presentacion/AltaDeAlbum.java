@@ -36,6 +36,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         private IControladorGenero controlGen;
         private IControladorTema controlTem;
         private JFileChooser fileChooser;
+        private Collection<String> generos_seleccionados;
 
     public AltaDeAlbum(IControladorAlbum ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = ica;
@@ -45,6 +46,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setDialogTitle("Selecciona un archivo MP3");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
+        
+        generos_seleccionados = new ArrayList<>();
         
         initComponents();
         cargarGeneros();
@@ -84,6 +87,11 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         btnConfTem = new javax.swing.JButton();
         txtLinkImg = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listGenSelect = new javax.swing.JList<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -151,6 +159,30 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Seleccionar Genero");
+        jButton1.setToolTipText("Selecciona con un click el genero en la lista de la derecha, luego presiona seleccionar genero");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Reinicar Generos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Generos Seleccionados : ");
+
+        listGenSelect.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(listGenSelect);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +193,14 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblGenAlb)
-                            .addComponent(lblAnioAlb))
+                            .addComponent(lblAnioAlb)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGenAlb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,7 +236,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                 .addComponent(txtNomTemaAlb)
                                 .addComponent(txtTipMus)
                                 .addComponent(btnConfTem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,8 +265,17 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             .addComponent(lblGenAlb)
                             .addComponent(txtGenAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(94, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -239,12 +287,12 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnArch)
                             .addComponent(btnConfTem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblMsjArch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))))
         );
@@ -352,6 +400,31 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             btnArch.setVisible(false);
         }
     }//GEN-LAST:event_cbxTipMusActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(generos_seleccionados.contains(listGen.getSelectedValue())){
+            // AGREGAR ACA ALGUNA WARN O ALGO////////////////////////////////
+        }else{
+        generos_seleccionados.add(listGen.getSelectedValue());
+        DefaultListModel<String> model = new DefaultListModel();
+            if(generos_seleccionados.isEmpty()){
+                model.addElement("No hay generos seleccionados");
+            }else{
+                Iterator<String> iterator = generos_seleccionados.iterator();
+                while (iterator.hasNext()) {
+                    model.addElement(iterator.next());
+                }
+            }
+        listGenSelect.setModel(model);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       DefaultListModel<String> model = new DefaultListModel();
+       model.addElement("No hay generos seleccionados");
+       listGenSelect.setModel(model);
+       generos_seleccionados.clear();
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     public void cargarGeneros(){
         DefaultListModel<String> model = new DefaultListModel();
@@ -371,9 +444,13 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JButton btnConfTem;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JComboBox<String> cbxTipMus;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAnioAlb;
     private javax.swing.JLabel lblArt;
     private javax.swing.JLabel lblGenAlb;
@@ -383,6 +460,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JLabel lblNomTemaAlb;
     private javax.swing.JLabel lblNomTemaAlb1;
     private javax.swing.JList<String> listGen;
+    private javax.swing.JList<String> listGenSelect;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtArt;
     private javax.swing.JTextField txtGenAlb;
