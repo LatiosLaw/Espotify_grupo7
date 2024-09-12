@@ -61,7 +61,7 @@
                           <Component id="txtNomAlb" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="panel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblTemDeAlb" min="-2" max="-2" attributes="0"/>
@@ -229,7 +229,7 @@
         <Property name="text" type="java.lang.String" value="Duracion :"/>
       </Properties>
     </Component>
-    <Container class="java.awt.Panel" name="panel1">
+    <Container class="java.awt.Panel" name="fotoAlb">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -321,6 +321,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mostrar Datos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenConsultActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
