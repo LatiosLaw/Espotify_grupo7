@@ -131,7 +131,7 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
       
-        AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen, controlTem);
+        AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen, controlTem, controlArt);
                aa.setLocation(0,0);
                aa.setSize(872, 579);
                

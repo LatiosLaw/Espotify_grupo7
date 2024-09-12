@@ -32,7 +32,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getDuracion()));
+            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos()));
         }
         DAO_Album persistence = new DAO_Album();
         Album album_vacio = new Album();
