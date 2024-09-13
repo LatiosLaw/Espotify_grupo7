@@ -5,6 +5,7 @@
 package presentacion;
 
 import logica.controladores.IControladorAlbum;
+import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorTema;
 
@@ -21,11 +22,13 @@ public class AdministrarAlbum extends javax.swing.JPanel {
     private IControladorAlbum controlAlb;
     private IControladorGenero controlGen;
     private IControladorTema controlTem;
+    private IControladorArtista controlArt;
         
-    public AdministrarAlbum(IControladorAlbum ica, IControladorGenero icg, IControladorTema ict) {
-        controlAlb = ica;
+    public AdministrarAlbum(IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict, IControladorArtista ica) {
+        controlAlb = icalb;
         controlGen = icg;
         controlTem = ict;
+        controlArt = ica;
         
         initComponents();
     }
@@ -100,7 +103,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 pnlAdAl.repaint();
             case 1:
              
-                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem);
+                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
                ada.setLocation(0,0);
                ada.setSize(860, 471);
                

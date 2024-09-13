@@ -21,50 +21,60 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNomGen" max="32767" attributes="0"/>
-                          <Component id="txtNomGenPa" alignment="1" max="32767" attributes="0"/>
-                          <Component id="lblNomGen" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" pref="174" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtDisc1" max="32767" attributes="0"/>
-                          <Component id="txtDisc2" pref="210" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lblNomGen" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                  <Component id="lblInsPad" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnCarGen" max="32767" attributes="0"/>
+                  <Component id="lblNomGen1" max="32767" attributes="0"/>
+                  <Component id="txtNomGen" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="288" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-              <Component id="txtNomGen" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="lblNomGen" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="txtNomGenPa" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="223" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtDisc1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtDisc2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNomGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNomGen" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblInsPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNomGen1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="btnCarGen" min="-2" pref="63" max="-2" attributes="0"/>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblNomGen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserte el nombre del genero"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomGen">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInsPad">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserte el nombre del genero padre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lblNomGen1">
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -72,45 +82,21 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTree" name="arbolGen">
+        <Component class="javax.swing.JList" name="listGen">
           <Properties>
-            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Genero&#xa; Cumbia&#xa; Rap&#xa;  Instrumntal"/>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
             </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
-            </Property>
-            <Property name="focusCycleRoot" type="boolean" value="true"/>
-            <Property name="inheritsPopupMenu" type="boolean" value="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="txtNomGen">
+    <Component class="javax.swing.JButton" name="btnCarGen">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inserte el nombre del genero"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="lblNomGen">
-    </Component>
-    <Component class="javax.swing.JLabel" name="txtNomGenPa">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccone el genero padre"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="txtDisc1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="  En caso de no seleccionar un genero"/>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="En caso de no seleccionar un genero"/>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="txtDisc2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="padre, este sera tomado como Genero"/>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Cargar Genero"/>
       </Properties>
     </Component>
   </SubComponents>

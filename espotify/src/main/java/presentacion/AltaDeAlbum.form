@@ -22,37 +22,41 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblGenAlb" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAnioAlb" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblArt" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNomAlb" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGenAlb1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAnioAlb" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtGenAlb" alignment="1" min="-2" pref="151" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="1" min="-2" pref="151" max="-2" attributes="0"/>
-                          <Component id="txtAnio" alignment="1" min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtAnio" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="txtLinkImg" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="txtNomAlb" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="txtArt" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblGenAlb1" min="-2" pref="221" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtLinkImg" min="-2" pref="151" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblNomAlb" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtNomAlb" min="-2" pref="151" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblArt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtArt" min="-2" pref="151" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnReiGen" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblGenSel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane3" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="lblGenDelSis" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSelGen" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblMsjArch" min="-2" pref="293" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
@@ -60,11 +64,11 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblNomTemaAlb" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblNomTemaAlb1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="btnArch" alignment="0" max="32767" attributes="0"/>
                                   <Component id="cbxTipMus" alignment="0" pref="120" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="lblNomTemaAlb1" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -76,7 +80,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="102" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,6 +89,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtNomTemaAlb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNomTemaAlb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cbxTipMus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTipMus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblArt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -106,39 +123,39 @@
                           <Component id="lblAnioAlb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtAnio" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblGenAlb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtGenAlb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNomTemaAlb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNomTemaAlb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbxTipMus" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTipMus" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnArch" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConfTem" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblMsjArch" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
-                      <Component id="btnConfirmar" min="-2" pref="59" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblGenSel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGenDelSis" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnSelGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnReiGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnArch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnConfTem" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Component id="lblMsjArch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
+                      <Component id="btnConfirmar" min="-2" pref="59" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -162,13 +179,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingrese el a&#xf1;o del album"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGenAlb">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese los generos del album"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtGenAlb">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -214,13 +224,7 @@
         <Component class="javax.swing.JList" name="jList1">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Tema 1"/>
-                <StringItem index="1" value="Tema 2"/>
-                <StringItem index="2" value="Tema 3"/>
-                <StringItem index="3" value="Tema 4"/>
-                <StringItem index="4" value="Tema 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
@@ -287,6 +291,52 @@
     <Component class="javax.swing.JTextField" name="txtLinkImg">
     </Component>
     <Component class="javax.swing.JTextField" name="txtAnio">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSelGen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seleccionar Genero"/>
+        <Property name="toolTipText" type="java.lang.String" value="Selecciona con un click el genero en la lista de la derecha, luego presiona seleccionar genero"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelGenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReiGen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reinicar Generos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReiGenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGenSel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generos Seleccionados : "/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="listGenSelect">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblGenDelSis">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generos del Sistema : "/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
