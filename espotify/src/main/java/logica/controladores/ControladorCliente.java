@@ -222,7 +222,21 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerCantidadSeguidores(nick);
     }
-    
+    @Override
+    public Collection<String> obtenerSeguidoresUsuario(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerSeguidoresDeUsuario(nick);
+    }
+     @Override
+    public Collection<String> obtenerSeguidosUsuario(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerSeguidosDeUsuario(nick);
+    }
+     @Override
+    public Collection<String> obtenerListasDeUsuario(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerListasDeUsuario(nick);
+    }
     public Collection<DataCliente> mostrarClientes(){
         Collection<DataCliente> lista = new ArrayList<>();
         DAO_Usuario persistence = new DAO_Usuario();
@@ -236,5 +250,30 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
         }       
         return lista;
     }
+     @Override
+    public Collection<String> obtenerListasFavCliente(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerListasFavCliente(nick);
+    }
+     @Override
+    public Collection<String> obtenerTemaFavCliente(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerTemaFavCliente(nick);
+    }
+     @Override
+    public Collection<String> obtenerAlbumFavCliente(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerAlbumFavCliente(nick);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

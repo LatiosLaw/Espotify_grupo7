@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
@@ -21,9 +23,15 @@ public class PublicarLista extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-    public PublicarLista() {
+      private IControladorListaParticular controlListPart;
+    private IControladorListaPorDefecto controlListPD;
+    public PublicarLista(IControladorListaPorDefecto iclpd,IControladorListaParticular iclp) {
         initComponents();
        
+        controlListPart =iclp;
+        controlListPD = iclpd;
+        
+        controlListPart.agregarTema("El listo", "Para Septiembre sin S.S", "temon");
     }
 
     /**

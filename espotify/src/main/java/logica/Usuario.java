@@ -50,7 +50,6 @@ public abstract class Usuario implements Serializable {
     public String getNickname() {
         return nickname;
     }
-
     public String getNombre() {
         return nombre;
     }

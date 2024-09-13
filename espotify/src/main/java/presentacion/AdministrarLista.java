@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+
 /**
  *
  * @author Urbina
@@ -14,8 +17,14 @@ public class AdministrarLista extends javax.swing.JPanel {
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarLista() {
+    private IControladorListaParticular controlListPart;
+    private IControladorListaPorDefecto controlListPD;
+    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp) {
         initComponents();
+        
+        
+        controlListPart = iclp;
+        controlListPD = iclpd;
     }
 
     /**
@@ -149,7 +158,7 @@ public class AdministrarLista extends javax.swing.JPanel {
               pnlAL.removeAll();
               pnlAL.repaint();
           }else if (tokenx == "Publicar Lista"){
-                  PublicarLista pl = new PublicarLista();
+                  PublicarLista pl = new PublicarLista(controlListPD,controlListPart );
                pl.setLocation(0,0);
                pl.setSize(860, 471);
                

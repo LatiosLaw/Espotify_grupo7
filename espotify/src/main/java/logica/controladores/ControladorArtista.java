@@ -102,4 +102,17 @@ public DataArtista retornarArtista(String nickname) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerCantidadSeguidores(nick);
     }
+    @Override
+    public Collection<String> obtenerAlbumsArt(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerAlbumArt(nick);
+    }
+    @Override
+    public Collection<String> obtenerSeguidoresArt(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+        return dao.obtenerSeguidoresDeUsuario(nick);
+    }
+    
+    
+    
 }

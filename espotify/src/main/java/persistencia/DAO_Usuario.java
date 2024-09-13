@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -45,6 +46,91 @@ public int obtenerCantidadSeguidores(String nickname) {
         return -1; // Retorna -1 en caso de error
     }
 }
+public Collection<String> obtenerSeguidoresDeUsuario(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                "SELECT s.nickname FROM Usuario u JOIN u.seguidores s WHERE u.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+          
+    
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+public Collection<String> obtenerSeguidosDeUsuario(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT u.nickname FROM Usuario u JOIN u.seguidores s WHERE s.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+public Collection<String> obtenerListasDeUsuario(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT l.nombre FROM Cliente u JOIN u.listasReproduccion l WHERE u.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+public Collection<String> obtenerAlbumArt(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT l.nombre FROM Artista a JOIN a.albumes l WHERE a.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+
+public Collection<String> obtenerListasFavCliente(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT l.nombre FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+public Collection<String> obtenerTemaFavCliente(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT g.nickname FROM Cliente u JOIN u.temas_favoritos g WHERE u.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+public Collection<String> obtenerAlbumFavCliente(String nick_usuario) {
+    try {
+    return entityManager.createQuery(
+                 "SELECT a.nombre FROM Cliente u JOIN u.albumes_favoritos a l WHERE u.nickname = :nickname ", String.class)
+                .setParameter("nickname", nick_usuario)
+                .getResultList();
+    } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
     public Usuario findUsuarioByNick(String nick_ingresado) {
         try {
@@ -121,4 +207,8 @@ public int obtenerCantidadSeguidores(String nickname) {
         entityManager.close();
     }
 }
+
+    
+    
+    
 }

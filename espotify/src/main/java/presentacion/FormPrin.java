@@ -8,6 +8,8 @@ import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
 
 /**
@@ -20,17 +22,25 @@ public class FormPrin extends javax.swing.JFrame {
      * Creates new form FormPrin
      */
     private IControladorAlbum controlAlb;
-        private IControladorGenero controlGen;
-     private IControladorCliente controlCli;
+    private IControladorGenero controlGen;
+    private IControladorCliente controlCli;
     private IControladorArtista controlArt;
     private IControladorTema controlTem;
-    public FormPrin(IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict) {
-         controlCli = icc;
+    
+    private IControladorListaParticular controlListPar;
+    private IControladorListaPorDefecto controlListPD;
+    
+    public FormPrin(IControladorListaParticular iclp,IControladorListaPorDefecto iclpd,IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict) {
+        controlCli = icc;
         controlArt = ica;
         controlAlb = icalb;
         controlGen = icg;
         controlTem = ict;
-        
+        controlListPD =iclpd;
+        controlListPar =iclp;
+                
+                
+                
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -142,7 +152,7 @@ public class FormPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdAlActionPerformed
 
     private void btnAdLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdLiActionPerformed
-         AdministrarLista aL = new AdministrarLista();
+         AdministrarLista aL = new AdministrarLista(controlListPD,controlListPar);
         aL.setLocation(0,0);
                aL.setSize(872, 579);
                

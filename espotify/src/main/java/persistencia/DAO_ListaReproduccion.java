@@ -8,6 +8,7 @@ package persistencia;
  *
  * @author Nico
  */
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -98,4 +99,5 @@ public class DAO_ListaReproduccion {
             entityManagerFactory.close();
         }
     }
+
 }

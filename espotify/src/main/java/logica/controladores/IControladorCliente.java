@@ -50,4 +50,18 @@ public interface IControladorCliente {
     
     public Collection<DataCliente> mostrarClientes();
     
+    public Collection<String> obtenerSeguidosUsuario(String nick);
+    
+    public Collection<String> obtenerSeguidoresUsuario(String nick);
+    
+    public Collection<String> obtenerListasDeUsuario(String nick);
+    
+     public Collection<String> obtenerListasFavCliente(String nick);
+     
+      public Collection<String> obtenerTemaFavCliente(String nick);
+     
+     public Collection<String> obtenerAlbumFavCliente(String nick) ;
+    
+
+    
 }

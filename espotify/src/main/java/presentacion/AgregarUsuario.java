@@ -30,6 +30,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
         ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
         icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", "dirFoto" , LocalDate.of(2002, 3, 1));
+        icc.agregarCliente("El listo", "Larry", "Capaja", "larricapaja@gaymail.com", "defoult" , LocalDate.of(1969, 6, 9));
         
         
         initComponents();

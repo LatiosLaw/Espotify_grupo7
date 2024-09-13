@@ -45,12 +45,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
-        lstAlbum.setVisible(false);
+        lstListas.setVisible(false);
         lstSeguidores.setVisible(false);
         lblNroSeguidores.setVisible(false);
-        lblSegui.setVisible(false);
+        lblSeguidores.setVisible(false);
         txtNumeroDeSeguidoresPosta.setVisible(false);
-        lblAlbum.setVisible(false);
+        lblAlbumSiguiendo.setVisible(false);
         this.revalidate();
         this.repaint();
     }
@@ -68,19 +68,26 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtaBiografia = new javax.swing.JTextArea();
         txtPaginaWeb = new javax.swing.JTextField();
-        lblSegui = new javax.swing.JLabel();
-        lblAlbum = new javax.swing.JLabel();
+        lblSeguidores = new javax.swing.JLabel();
+        lblAlbumSiguiendo = new javax.swing.JLabel();
         lblNroSeguidores = new javax.swing.JLabel();
         txtNumeroDeSeguidoresPosta = new javax.swing.JLabel();
         cbxOpt = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
         lstSeguidores = new javax.swing.JList<>();
         jScrollPane7 = new javax.swing.JScrollPane();
-        lstAlbum = new javax.swing.JList<>();
+        lstListas = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         lstUsuarios = new javax.swing.JList<>();
         txtBuscar = new javax.swing.JTextField();
         btnOK = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        lstAlbumSiguiendo1 = new javax.swing.JList<>();
+        lblListas = new javax.swing.JLabel();
+        lblFavs = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        lstFavs = new javax.swing.JList<>();
+        cbxFavss = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -118,9 +125,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtPaginaWeb.setEditable(false);
 
-        lblSegui.setText("Seguidores ");
+        lblSeguidores.setText("Seguidores ");
 
-        lblAlbum.setText("Albumes");
+        lblAlbumSiguiendo.setText("Albumes");
 
         lblNroSeguidores.setText("Numero de Seguidores:");
 
@@ -145,12 +152,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(lstSeguidores);
 
-        lstAlbum.setModel(new javax.swing.AbstractListModel<String>() {
+        lstListas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane7.setViewportView(lstAlbum);
+        jScrollPane7.setViewportView(lstListas);
 
         lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Larry", "Capaja", "El", "Hombre", "Que ", "No ", "Te", "Engaña" };
@@ -165,6 +172,31 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
+            }
+        });
+
+        lstAlbumSiguiendo1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane9.setViewportView(lstAlbumSiguiendo1);
+
+        lblListas.setText("Listas");
+
+        lblFavs.setText("Favs");
+
+        lstFavs.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane10.setViewportView(lstFavs);
+
+        cbxFavss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temas", "Albums", "Listas" }));
+        cbxFavss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFavssActionPerformed(evt);
             }
         });
 
@@ -184,12 +216,36 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNroSeguidores)
+                            .addComponent(lblSeguidores)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblListas)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAlbumSiguiendo))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblFavs)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbxFavss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNumeroDeSeguidoresPosta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
@@ -197,80 +253,74 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                                     .addComponent(txtNombre)
                                     .addComponent(txtApellido)
                                     .addComponent(txtFechaNaci1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSegui)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblAlbum))
-                                .addGap(136, 136, 136))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNroSeguidores)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumeroDeSeguidoresPosta)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNumeroDeSeguidoresPosta)
+                    .addComponent(lblNroSeguidores))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSeguidores)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(697, 697, 697))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNumeroDeSeguidoresPosta)
-                            .addComponent(lblNroSeguidores))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSegui)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(22, 22, 22)
+                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(24, 24, 24)
-                                        .addComponent(txtFechaNaci1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(txtFechaNaci1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblFavs)
+                                        .addGap(6, 6, 6))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(cbxFavss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAlbum)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(691, 691, 691))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblAlbumSiguiendo)
+                                    .addComponent(lblListas))
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(697, 697, 697))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,29 +345,35 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             case 1 -> {
                 // Cliente
                 limpiarCampos();
+                lblAlbumSiguiendo.setText("Siguiendo");
                 Collection<DataCliente> cole = controlCli.mostrarClientes();
-                cargarUsuarios(cole);
+                cargarUsuariosLstBuscar(cole);
                 txtPaginaWeb.setVisible(true);
-                txtaBiografia.setVisible(true);
-                lstAlbum.setVisible(true);
+                txtaBiografia.setVisible(false);
+                lstListas.setVisible(true);
                 lstSeguidores.setVisible(true);
                 lblNroSeguidores.setVisible(true);
-                lblSegui.setVisible(true);
+                lblSeguidores.setVisible(true);
                 txtNumeroDeSeguidoresPosta.setVisible(true);
-                lblAlbum.setVisible(true);
+                lblAlbumSiguiendo.setVisible(true);
+                lstFavs.setVisible(true);
+                lblFavs.setVisible(true);
                 break;
             }
             case 2 -> {
                 // Artista
+                 lblAlbumSiguiendo.setText("Album");
                 limpiarCampos();
                 txtPaginaWeb.setVisible(true);
                 txtaBiografia.setVisible(true);
-                lstAlbum.setVisible(true);
+                lstListas.setVisible(true);
                 lstSeguidores.setVisible(true);
                 lblNroSeguidores.setVisible(true);
-                lblSegui.setVisible(true);
+                lblSeguidores.setVisible(true);
                 txtNumeroDeSeguidoresPosta.setVisible(true);
-                lblAlbum.setVisible(true);
+                lblAlbumSiguiendo.setVisible(true);
+                lstFavs.setVisible(false);
+                lblFavs.setVisible(false);
                 break;
             }
         }
@@ -331,17 +387,18 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         txtCorreoElectronico.setText("");
         txtPaginaWeb.setText("");
         txtaBiografia.setText("");
-        lstAlbum.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de albumes
+        lstListas.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de albumes
         lstSeguidores.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de seguidores
-
+        /*
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
-        lstAlbum.setVisible(false);
+        lstAlbumSiguiendo.setVisible(false);
         lstSeguidores.setVisible(false);
         lblNroSeguidores.setVisible(false);
-        lblSegui.setVisible(false);
+        lblSeguidores.setVisible(false);
         txtNumeroDeSeguidoresPosta.setVisible(false);
-        lblAlbum.setVisible(false);
+        lblAlbumSiguiendo.setVisible(false);
+        */
     }
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -356,9 +413,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 if ("Cliente".equals(token)) {
                     DataCliente usr = controlCli.consultarPerfilCliente(nickBuscar);
                     if (usr != null) {
-                        txtNumeroDeSeguidoresPosta.setVisible(true);
-                        lblNroSeguidores.setVisible(true);
-                        lblSegui.setVisible(true);
+                        
+                      
                         txtNickName.setText(usr.getNickname());
                         txtNombre.setText(usr.getNombre());
                         txtApellido.setText(usr.getApellido());
@@ -367,15 +423,48 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtPaginaWeb.setText("");
                         txtaBiografia.setText("");
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlCli.obtenerNumeroSeguidores(usr.getNickname())));
+                        
+                        Collection<String> coleSeguidores =controlCli.obtenerSeguidoresUsuario(usr.getNickname());
+                        Collection<String> coleSeguidos = controlCli.obtenerSeguidosUsuario(usr.getNickname());
+                        Collection<String> coleListas = controlCli.obtenerListasDeUsuario(usr.getNickname());
+                        cargarUsuariosLstSegudidores(coleSeguidores);
+                        cargarUsuariosLstSeguidos(coleSeguidos);
+                        cargarListasLst(coleListas);
+                        
+                         String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
+                        switch (tokenFav) {
+                            case "Temas":
+                           //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
+                                Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr.getNickname());
+                                cargarLstFav(favTema);
+                                
+                                break;
+                            case "Albums":
+                                Collection<String> favAlbum =controlCli.obtenerAlbumFavCliente(usr.getNickname());
+                                cargarLstFav(favAlbum);
+                                break;
+                            case "Listas":
+                                Collection<String> favLista =controlCli.obtenerListasFavCliente(usr.getNickname());
+                                cargarLstFav(favLista);
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        
+                        
+                       
+                       
+                       
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
                     }
                 } else if ("Artista".equals(token)) {
+ 
                     DataArtista art = controlArt.retornarArtista(nickBuscar);
                     if (art != null) {
-                        txtNumeroDeSeguidoresPosta.setVisible(true);
-                        lblNroSeguidores.setVisible(true);
-                        lblSegui.setVisible(true);
+                      
                         txtNickName.setText(art.getNickname());
                         txtNombre.setText(art.getNombre());
                         txtApellido.setText(art.getApellido());
@@ -384,6 +473,14 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtPaginaWeb.setText(art.getDirWeb());
                         txtaBiografia.setText(art.getBiografia());
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlArt.obtenerNumeroSeguidores(art.getNickname())));
+                        Collection<String> coleSeguidores =controlArt.obtenerSeguidoresArt(art.getNickname());
+                        cargarUsuariosLstSegudidores(coleSeguidores);
+                        
+                         Collection<String> favAlbum =controlArt.obtenerAlbumsArt(art.getNickname());
+                                cargarLstFav(favAlbum);
+                        
+                        
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el artista.");
                     }
@@ -396,7 +493,32 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
 
-    public void cargarUsuarios(Collection<DataCliente> cole) {
+    private void cbxFavssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFavssActionPerformed
+      String usr =  txtNickName.getText();
+      
+        String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
+      //  System.out.println(tokenFav);
+            switch (tokenFav) {
+           case "Temas":
+                           //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
+                                Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr);
+                                cargarLstFav(favTema);
+                                
+                                break;
+                            case "Albums":
+                                Collection<String> favAlbum =controlCli.obtenerAlbumFavCliente(usr);
+                                cargarLstFav(favAlbum);
+                                break;
+                            case "Listas":
+                                Collection<String> favLista =controlCli.obtenerListasFavCliente(usr);
+                                cargarLstFav(favLista);
+                                break;
+                            default:
+                                break;
+        }
+    }//GEN-LAST:event_cbxFavssActionPerformed
+
+    public void cargarUsuariosLstBuscar(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
 
         model = new DefaultListModel<String>();
@@ -408,33 +530,77 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstUsuarios.setModel(model);
 
     }
-    
-    
-    public ArrayList<String> dataUsrToString(Collection<DataCliente> cole){
-         
-        ArrayList<String> pepe = new ArrayList<String>();
-        Iterator<DataCliente> iterator = cole.iterator();
-        while (iterator.hasNext()) {
-            DataCliente cli = iterator.next();
-            pepe.add(cli.getNickname());
+     public void cargarUsuariosLstSegudidores(Collection<String> cole) {
+        DefaultListModel<String> model;
 
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+           // System.out.print("Elemento de lstSeguidores"+elemento);
+            String nick = elemento;
+            model.addElement(nick);
         }
+        lstSeguidores.setModel(model);
 
-        return pepe;
+    }
+    public void cargarListasLst(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+            //System.out.print("Elemento de lstSeguidores"+elemento);
+            String nombre = elemento;
+            model.addElement(nombre);
+        }
+        lstListas.setModel(model);
+
+    }
+    public void cargarUsuariosLstSeguidos(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+           // System.out.print("Elemento de lstSeguidos"+elemento);
+            String nick = elemento;
+            model.addElement(nick);
+        }
+        lstAlbumSiguiendo1.setModel(model);
+
+    }
+    public void cargarLstFav(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+          //  System.out.print("Elemento de lstSeguidos"+elemento);
+            String nombre = elemento;
+            model.addElement(nombre);
+        }
+        lstFavs.setModel(model);
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
+    private javax.swing.JComboBox<String> cbxFavss;
     private javax.swing.JComboBox<String> cbxOpt;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JLabel lblAlbum;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lblAlbumSiguiendo;
+    private javax.swing.JLabel lblFavs;
+    private javax.swing.JLabel lblListas;
     private javax.swing.JLabel lblNroSeguidores;
-    private javax.swing.JLabel lblSegui;
-    private javax.swing.JList<String> lstAlbum;
+    private javax.swing.JLabel lblSeguidores;
+    private javax.swing.JList<String> lstAlbumSiguiendo1;
+    private javax.swing.JList<String> lstFavs;
+    private javax.swing.JList<String> lstListas;
     private javax.swing.JList<String> lstSeguidores;
     private javax.swing.JList<String> lstUsuarios;
     private java.awt.Panel panel1;
