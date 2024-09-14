@@ -19,6 +19,7 @@ public class tema implements Serializable {
 
     @Id
     private String nickname;
+    private String metodo_de_acceso;
     private Integer duracion;
     private Integer posicion_album;
     
@@ -33,6 +34,19 @@ public class tema implements Serializable {
     public tema(String nickname, Integer duracion) {
         this.nickname = nickname;
         this.duracion = duracion;
+    }
+    
+    public tema(String nickname, Integer duracion, String metodo_de_acceso) {
+        this.nickname = nickname;
+        this.duracion = duracion;
+        this.metodo_de_acceso = metodo_de_acceso;
+    }
+    
+    public tema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso) {
+        this.nickname = nickname;
+        this.duracion = duracion;
+        this.posicion_album = posicion;
+        this.metodo_de_acceso = metodo_de_acceso;
     }
     
     public tema(String nickname, Integer duracion, Integer posicion_album) {
@@ -55,6 +69,14 @@ public class tema implements Serializable {
 
     public void setPos(Integer posicion) {
         this.posicion_album = posicion;
+    }
+    
+    public void setAcceso(String metodo_de_acceso) {
+        this.metodo_de_acceso = metodo_de_acceso;
+    }
+    
+    public String getAcceso() {
+        return metodo_de_acceso;
     }
     
     public Integer getDuracion() {

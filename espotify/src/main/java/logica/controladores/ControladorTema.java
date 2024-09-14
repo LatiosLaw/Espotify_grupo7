@@ -19,8 +19,8 @@ import persistencia.DAO_Tema;
 public class ControladorTema implements IControladorTema {
 
     @Override
-    public boolean crearTemaDefault(String nombre_tema, int duracion) {
-        tema nuevo_tema = new tema(nombre_tema, duracion);
+    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso) {
+        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso);
         DAO_Tema persistence = new DAO_Tema();
         if (persistence.find(nuevo_tema.getNickname()) != null) {
             System.out.println("El tema ya existe.");
@@ -28,7 +28,7 @@ public class ControladorTema implements IControladorTema {
         } else {
             persistence.save(nuevo_tema);
             if (persistence.find(nuevo_tema.getNickname()) != null) {
-                System.out.println("El tema con nickname" + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
                 return true;
             } else {
                 System.out.println("Un error ha ocurrido.");
@@ -43,7 +43,7 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         retorno = persistence.find(nickname);
         if (retorno != null) {
-            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"));
+            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }
@@ -56,5 +56,11 @@ public class ControladorTema implements IControladorTema {
         tem.setAlbum(alb);
         DAO_Tema persistence = new DAO_Tema();
         persistence.update(tem);
+    }
+    
+    @Override
+    public void BorrarTema(String nombre_tema){
+        DAO_Tema persistence = new DAO_Tema();
+        persistence.delete(nombre_tema);
     }
 }

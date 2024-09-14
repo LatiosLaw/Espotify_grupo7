@@ -37,7 +37,7 @@ public class EspotifyMain {
         IControladorTema temHandler = new ControladorTema();
         
          // Iniciar el formulario
-        FormPrin fp = new FormPrin(cliHandler,artHandler, albHandler, genHandler, temHandler);
+        FormPrin fp = new FormPrin(listPHandler, listHandler, cliHandler,artHandler, albHandler, genHandler, temHandler);
         fp.setVisible(true);
     /*   // Crear el EntityManagerFactory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("espotifyPU"); // Asegúrate de que "espotifyPU" coincida con tu archivo persistence.xml

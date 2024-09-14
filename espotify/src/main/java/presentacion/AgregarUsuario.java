@@ -273,21 +273,20 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 String biografia = txtaBio.getText();
                 String webPag = txtDirWeb.getText();
                 //deborlber cosas CON bio y web
-                if(lblIMGG.getText() == null){
-                    System.out.println ("SEXOOOOOOOOOOOOOO");
-                     controlArt.agregarArtista(nick, nombre, apellido, correo,"defoult", fechaFinal, biografia, webPag);
+                if(txtIMG.getText().isEmpty()){
+                     controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag);
               
                 }else{
-                    controlArt.agregarArtista(nick, nombre, apellido, correo,lblIMGG.getText(), fechaFinal, biografia, webPag);
+                    controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag);
                 }
                
             }else{
                 
-                if(lblIMGG.getText() == null){
+                if(txtIMG.getText().isEmpty()){
                     
-                     controlCli.agregarCliente(nick, nombre, apellido, correo,lblIMGG.getText(), fechaFinal);
+                     controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal);
                 }else{
-                     controlCli.agregarCliente(nick, nombre, apellido, correo,"defoult", fechaFinal);
+                     controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal);
                 }
             }
         }
