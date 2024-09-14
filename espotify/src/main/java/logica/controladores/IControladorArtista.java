@@ -19,5 +19,5 @@ public interface IControladorArtista {
     public int obtenerNumeroSeguidores(String nick);
         public Collection<String> obtenerSeguidoresArt(String nick);
         public Collection<String> obtenerAlbumsArt(String nick);
-    
+
 }

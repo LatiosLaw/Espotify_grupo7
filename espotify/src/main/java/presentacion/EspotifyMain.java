@@ -9,6 +9,9 @@ package presentacion;
  * @author Law
  */
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;
@@ -23,6 +26,8 @@ import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
+import logica.dt.DataGenero;
+import logica.dt.DataTema;
 
 public class EspotifyMain {
 
@@ -36,7 +41,24 @@ public class EspotifyMain {
         IControladorListaParticular listPHandler = new ControladorListaParticular();
         IControladorTema temHandler = new ControladorTema();
         
-         // Iniciar el formulario
+         cliHandler.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
+         cliHandler.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
+         artHandler.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
+         cliHandler.agregarCliente("Nick Furry", "Nikolas", "Furia" , "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
+         
+         
+         
+        cliHandler.seguirUsuario("El listo", "Jose");
+        cliHandler.seguirUsuario("El listo", "Jhon Black Soul");
+        cliHandler.seguirUsuario("Jose", "El listo");
+        cliHandler.seguirUsuario("Nick Furry", "El listo");
+        
+        Collection<DataGenero> gen = new ArrayList<>();
+        Collection<DataTema> tem = new ArrayList<>();
+        albHandler.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, gen, tem);
+        
+
+// Iniciar el formulario
         FormPrin fp = new FormPrin(listPHandler, listHandler, cliHandler,artHandler, albHandler, genHandler, temHandler);
         fp.setVisible(true);
     /*   // Crear el EntityManagerFactory

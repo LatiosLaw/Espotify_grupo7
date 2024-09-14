@@ -237,6 +237,7 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerListasDeUsuario(nick);
     }
+    @Override
     public Collection<DataCliente> mostrarClientes(){
         Collection<DataCliente> lista = new ArrayList<>();
         DAO_Usuario persistence = new DAO_Usuario();

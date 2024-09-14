@@ -113,6 +113,6 @@ public DataArtista retornarArtista(String nickname) {
         return dao.obtenerSeguidoresDeUsuario(nick);
     }
     
-    
+  
     
 }

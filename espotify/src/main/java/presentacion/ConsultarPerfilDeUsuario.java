@@ -206,16 +206,16 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -348,7 +348,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 lblAlbumSiguiendo.setText("Siguiendo");
                 Collection<DataCliente> cole = controlCli.mostrarClientes();
                 cargarUsuariosLstBuscar(cole);
-                txtPaginaWeb.setVisible(true);
+                txtPaginaWeb.setVisible(false);
                 txtaBiografia.setVisible(false);
                 lstListas.setVisible(true);
                 lstSeguidores.setVisible(true);
@@ -356,12 +356,19 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 lblSeguidores.setVisible(true);
                 txtNumeroDeSeguidoresPosta.setVisible(true);
                 lblAlbumSiguiendo.setVisible(true);
-                lstFavs.setVisible(true);
+                cbxFavss.setVisible(true);
                 lblFavs.setVisible(true);
+                lstListas.setVisible(true);
+                lblListas.setVisible(true);
+                lstFavs.setVisible(true);
                 break;
             }
             case 2 -> {
                 // Artista
+                
+                Collection<DataArtista> cole = controlArt.mostrarArtistas();
+                cargarArtistasLstBuscar(cole);
+                
                  lblAlbumSiguiendo.setText("Album");
                 limpiarCampos();
                 txtPaginaWeb.setVisible(true);
@@ -372,8 +379,11 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 lblSeguidores.setVisible(true);
                 txtNumeroDeSeguidoresPosta.setVisible(true);
                 lblAlbumSiguiendo.setVisible(true);
-                lstFavs.setVisible(false);
+                cbxFavss.setVisible(false);
                 lblFavs.setVisible(false);
+                lstListas.setVisible(false);
+                lstFavs.setVisible(false);
+                lblListas.setVisible(false);
                 break;
             }
         }
@@ -389,6 +399,11 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         txtaBiografia.setText("");
         lstListas.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de albumes
         lstSeguidores.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de seguidores
+        lstAlbumSiguiendo1.setModel(new javax.swing.DefaultListModel<>()); 
+        lstFavs.setModel(new javax.swing.DefaultListModel<>()); 
+        txtNumeroDeSeguidoresPosta.setText("0");
+        
+        
         /*
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
@@ -476,9 +491,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         Collection<String> coleSeguidores =controlArt.obtenerSeguidoresArt(art.getNickname());
                         cargarUsuariosLstSegudidores(coleSeguidores);
                         
-                         Collection<String> favAlbum =controlArt.obtenerAlbumsArt(art.getNickname());
-                                cargarLstFav(favAlbum);
-                        
+                         Collection<String> artAlbum =controlArt.obtenerAlbumsArt(art.getNickname());
+                                cargarUsuariosLstSeguidos(artAlbum);
                         
                         
                     } else {
@@ -530,6 +544,21 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstUsuarios.setModel(model);
 
     }
+    public void cargarArtistasLstBuscar(Collection<DataArtista> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (DataArtista elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        lstUsuarios.setModel(model);
+
+    }
+    
+    
+    
      public void cargarUsuariosLstSegudidores(Collection<String> cole) {
         DefaultListModel<String> model;
 
