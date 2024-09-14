@@ -1,7 +1,11 @@
 
 package presentacion;
 
+import java.util.Collection;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
+import logica.dt.DataCliente;
 
 /**
  *
@@ -12,11 +16,14 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
     /**
      * Creates new form SeguirUsuario
      */
-    private IControladorCliente controlador;
+    private IControladorCliente controlCli;
     
     public DejarDeSeguirUsuario(IControladorCliente controlador) {
-        this.controlador = controlador; 
+        this.controlCli = controlador; 
         initComponents();
+        this.cargarClientesLst(controlCli.mostrarClientes());
+        
+        this.cargarUsuariosLst(controlCli.mostrarUsuarios());
     }
 
     /**
@@ -34,9 +41,9 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
         txtCliente = new javax.swing.JTextField();
         txtUsuarioAdejarDeSeguir = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstUsuarios = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lstClientes = new javax.swing.JList<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -55,19 +62,19 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
 
         txtUsuarioAdejarDeSeguir.setColumns(10);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList1);
+        jScrollPane3.setViewportView(lstUsuarios);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        lstClientes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList2);
+        jScrollPane4.setViewportView(lstClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,19 +131,65 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAdejarDeSeguir.getText();
         
-        controlador.dejarDeSeguirUsuario(nickCliente, nickAseguir);
-        System.out.print("Dejar De Seguir Usuario ejecutado correctamente.");
+        if (nickCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+        } else{
+            
+            DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
+                    if (usr != null) {
+                         DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
+                        if (usr2 != null) {
+                            
+                            if(controlCli.corroborarSiEstaenSeguidos(nickCliente,nickAseguir) == true){
+                            controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir); 
+                        }else{JOptionPane.showMessageDialog(null, "Usuario a seguir no esta siendo seguido por el seguidor indicado");}
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
+                    }
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Seguidor no encontrado");
+                    }
+            
+            
+        }
+   
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+public void cargarClientesLst(Collection<DataCliente> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        lstClientes.setModel(model);
+
+}
+
+public void cargarUsuariosLst(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+            String nick = elemento;
+            model.addElement(nick);
+        }
+        lstUsuarios.setModel(model);
+
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblUsuarioAdejarDeSeguir;
+    private javax.swing.JList<String> lstClientes;
+    private javax.swing.JList<String> lstUsuarios;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtUsuarioAdejarDeSeguir;
     // End of variables declaration//GEN-END:variables

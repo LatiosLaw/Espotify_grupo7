@@ -51,7 +51,7 @@ public class EspotifyMain {
         cliHandler.seguirUsuario("El listo", "Jose");
         cliHandler.seguirUsuario("El listo", "Jhon Black Soul");
         cliHandler.seguirUsuario("Jose", "El listo");
-        cliHandler.seguirUsuario("Nick Furry", "El listo");
+       // cliHandler.seguirUsuario("Nick Furry", "El listo");
         
         Collection<DataGenero> gen = new ArrayList<>();
         Collection<DataTema> tem = new ArrayList<>();

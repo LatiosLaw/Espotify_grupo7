@@ -266,10 +266,37 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerAlbumFavCliente(nick);
     }
+     @Override
+    public Collection<String> mostrarUsuarios(){
+        Collection<String> lista = new ArrayList<>();
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> usuario = persistence.findAll();
+        Iterator<Usuario> iterator = usuario.iterator();
+        while (iterator.hasNext()) {
+            Usuario usr = iterator.next();
+              lista.add(usr.getNickname());
+        }       
+        return lista;
+        
+    }
     
-    
-    
-    
+    @Override
+    public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido){
+         DAO_Usuario persistence = new DAO_Usuario();
+        Collection<String> cole = persistence.obtenerSeguidosDeUsuario(nickCliente);
+        boolean token = false;
+         for (String elemento : cole) {
+            String nick = elemento;
+            System.out.println("Nick dentro de la lista: " +nick);
+            if(nick.equals(nickSeguido)){
+                System.out.println("Ah jah!");
+                token = true;
+                break;
+            }
+        }
+        
+        return token;
+    }
     
     
     

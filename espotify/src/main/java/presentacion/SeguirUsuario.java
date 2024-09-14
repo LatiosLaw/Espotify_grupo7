@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import java.util.Collection;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
 import logica.dt.DataCliente;
 import logica.dt.DataUsuario;
@@ -14,15 +17,18 @@ import logica.dt.DataUsuario;
  */
 public class SeguirUsuario extends javax.swing.JPanel {
     
-     private IControladorCliente controlador;
+     private IControladorCliente controlCli;
     /**
      * Creates new form SeguirUsuario
      */
     public SeguirUsuario(IControladorCliente controlador) {
         
-        this.controlador = controlador;
+        this.controlCli = controlador;
         initComponents();
+         this.cargarClientesLst(controlCli.mostrarClientes());
         
+        this.cargarUsuariosLst(controlCli.mostrarUsuarios());
+     
     }
 
     /**
@@ -40,9 +46,9 @@ public class SeguirUsuario extends javax.swing.JPanel {
         txtCliente = new javax.swing.JTextField();
         txtUsuarioAseguir = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lstUsuarios = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        lstClientes = new javax.swing.JList<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -61,19 +67,19 @@ public class SeguirUsuario extends javax.swing.JPanel {
 
         txtUsuarioAseguir.setColumns(10);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList2);
+        jScrollPane4.setViewportView(lstUsuarios);
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+        lstClientes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane5.setViewportView(jList3);
+        jScrollPane5.setViewportView(lstClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -126,19 +132,66 @@ public class SeguirUsuario extends javax.swing.JPanel {
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAseguir.getText();
         
-        controlador.seguirUsuario(nickCliente, nickAseguir); 
-        System.out.print("Seguir Usuario ejecutado correctamente.");
+        if (nickCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+        } else{
+            
+            DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
+                    if (usr != null) {
+                        
+                         DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
+                        if (usr2 != null) {
+                            if(controlCli.corroborarSiEstaenSeguidos(nickCliente,nickAseguir) == false){
+                            controlCli.seguirUsuario(nickCliente, nickAseguir); 
+                        }else{JOptionPane.showMessageDialog(null, "Usuario a seguir ya esta siendo seguido por el seguidor indicado");}
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
+                    }
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Seguidor no encontrado");
+                    }
+            
+            
+        }
+   
     }//GEN-LAST:event_btnConfirmarActionPerformed
+public void cargarClientesLst(Collection<DataCliente> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        lstClientes.setModel(model);
+
+}
+
+public void cargarUsuariosLst(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+            String nick = elemento;
+            model.addElement(nick);
+        }
+        lstUsuarios.setModel(model);
+
+}
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblUsuarioAseguir;
+    private javax.swing.JList<String> lstClientes;
+    private javax.swing.JList<String> lstUsuarios;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtUsuarioAseguir;
     // End of variables declaration//GEN-END:variables

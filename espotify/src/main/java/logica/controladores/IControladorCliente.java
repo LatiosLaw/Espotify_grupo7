@@ -62,6 +62,8 @@ public interface IControladorCliente {
      
      public Collection<String> obtenerAlbumFavCliente(String nick) ;
     
+     public Collection<String> mostrarUsuarios();
 
+    public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido);
     
 }
