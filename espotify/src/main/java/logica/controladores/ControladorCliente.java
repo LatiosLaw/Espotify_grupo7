@@ -230,7 +230,20 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
      @Override
     public Collection<String> obtenerSeguidosUsuario(String nick){
         DAO_Usuario dao = new DAO_Usuario();
-        return dao.obtenerSeguidosDeUsuario(nick);
+        Usuario usr;
+        Collection<String> cole = dao.obtenerSeguidosDeUsuario(nick);
+        Collection<String> cole2 = new ArrayList<>();
+        for (String elemento : cole) {
+          usr =  dao.findUsuarioByNick(elemento);
+            if(usr instanceof Cliente cli){
+                cole2.add(cli.getNickname() + "/Cliente");
+            }else{
+                cole2.add(usr.getNickname() + "/Artista");
+            }
+        }
+        
+        
+        return cole2;
     }
      @Override
     public Collection<String> obtenerListasDeUsuario(String nick){
