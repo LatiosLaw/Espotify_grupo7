@@ -9,9 +9,22 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorTema;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorAlbum;
+import logica.dt.DataAlbum;
+import logica.dt.DataCliente;
+import logica.dt.DataListaParticular;
+import logica.dt.DataListaPorDefecto;
+import logica.dt.DataTema;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+
 
 /**
  *
@@ -22,12 +35,30 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
+    
     private IControladorCliente controlCli;
-   
-    public AgregarCosoFav(IControladorCliente icc) {
+    private IControladorTema controlTema;
+    private IControladorListaParticular controlLipa;
+    private IControladorListaPorDefecto controlLiporde;
+    private IControladorAlbum controlAlb;
+    
+    
+    
+    
+    public AgregarCosoFav(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
-        controlCli = icc;
-       
+        lblFav.setVisible(false);
+        lstCoso.setVisible(false);
+        txtFav.setVisible(false);
+        btnConfirmar.setVisible(false);
+        
+        
+        
+       controlCli = icc;
+       controlAlb = ica;
+       controlLipa = iclp;
+       controlLiporde = iclpd;
+       controlTema = ict;
     }
 
     /**
@@ -45,9 +76,12 @@ public class AgregarCosoFav extends javax.swing.JPanel {
         btnConfirmar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstCoso = new javax.swing.JList<>();
         txtFav = new javax.swing.JTextField();
         lblFav = new javax.swing.JLabel();
+        txtCreadorGenero = new javax.swing.JTextField();
+        lblCreadorGenero = new javax.swing.JLabel();
+        cbxListasLPM = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -76,39 +110,32 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstCoso.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(lstCoso);
 
         txtFav.setColumns(10);
 
         lblFav.setText("A agregar a Fav:");
 
+        txtCreadorGenero.setColumns(10);
+
+        lblCreadorGenero.setText("Im going to Alice");
+
+        cbxListasLPM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lista por defecto", "Lista particular", " " }));
+        cbxListasLPM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxListasLPMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(btnBuscar)))
-                .addGap(122, 122, 122)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 396, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,25 +144,61 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                         .addComponent(txtFav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblFav))
                 .addGap(246, 246, 246))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(btnBuscar)))
+                        .addGap(122, 122, 122)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbxListasLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(94, 94, 94)
+                                    .addComponent(txtCreadorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblCreadorGenero)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnBuscar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnBuscar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxListasLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFav)
-                    .addComponent(txtFav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCreadorGenero)
+                    .addComponent(txtCreadorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -144,53 +207,173 @@ public class AgregarCosoFav extends javax.swing.JPanel {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-        String token= String.valueOf( cbxTipoCoso.getSelectedItem());
-        if(token == "Lista"){
-            //controlCli.
-        }else if(token == "Album"){
-            
-        }else if (token == "Tema"){
-            
-        }
+         String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
+        
+       if(nick.isBlank()){
+           JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+       }else{
+           DataCliente cli = controlCli.consultarPerfilCliente(nick);
+           if(cli != null){
+               switch (nick) {
+            case "OPT":
+                 //No
+               // pnlAU.removeAll();
+              //  pnlAU.repaint();
+                JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
+            break;
+            case "Tema":
+            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
+                DataTema tema = new DataTema(txtFav.getText(),0);
+                 controlCli.agregarTema(cli, tema);
+                break;
+            case "Lista":
+                this.cargarLstFav( controlCli.obtenerListasFavCliente(nick));
+                break;
+            case "Album":
+                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
+                break;
+            }
+            }else{JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");}
+       }
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void cbxTipoCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCosoActionPerformed
-       
+       String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
+        
+        switch (nick) {
+            case "OPT":
+                 //No
+               // pnlAU.removeAll();
+              //  pnlAU.repaint();
+                JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
+            break;
+            case "Tema":
+                  txtCreadorGenero.setVisible(false);
+                lblCreadorGenero.setVisible(false);
+                
+                
+            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
+                 
+                break;
+            case "Lista":
+                txtCreadorGenero.setVisible(true);
+                lblCreadorGenero.setVisible(true);
+                this.cargarLstFav( controlCli.obtenerListasFavCliente(nick));
+                String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
+                if("Lista por defecto".equals(tokenLista)){
+                    txtCreadorGenero.setText("Genero:");
+                }else{
+                    txtCreadorGenero.setText("Creador:");
+                }
+                
+                
+                break;
+            case "Album":
+                txtCreadorGenero.setVisible(false);
+                lblCreadorGenero.setVisible(false);
+                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
+                break;
+        }
  
     }//GEN-LAST:event_cbxTipoCosoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-         String token= String.valueOf( cbxTipoCoso.getSelectedItem());
+        lblFav.setVisible(true);
+        lstCoso.setVisible(true);
+        txtFav.setVisible(true);
+        btnConfirmar.setVisible(true);
         
-       
-        switch (token) {
+         String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
+        
+       if(nick.isBlank()){
+           JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+       }else{
+           DataCliente cli = controlCli.consultarPerfilCliente(nick);
+           if(cli != null){
+               switch (nick) {
             case "OPT":
                  //No
                // pnlAU.removeAll();
               //  pnlAU.repaint();
+                JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
             break;
             case "Tema":
-             
+            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
+                 DataTema tema = controlTema.retornarTema(txtFav.getText());
                  
+                 //algo.corroborarVlidezDeTema(tema)
+                 
+                 controlCli.agregarTema(cli, tema);
                 break;
             case "Lista":
+                String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
+                 if("Lista por defecto".equals(tokenLista)){
+                    DataListaPorDefecto lista = controlLiporde.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
+                    controlCli.agregarLista(cli, lista);
+                 }else{
+                    txtCreadorGenero.setText("Creador:");
+                    DataListaParticular lista = controlLipa.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
+                    if(lista.getVisibilidad() == false){
+                        JOptionPane.showMessageDialog(null, "Lista que se ingresó es provada, no se puede agregar a fav.");
+                    }else{
+                       controlCli.agregarLista(cli, lista);
+                    }
+                 }
+                 JOptionPane.showMessageDialog(null, "Las listas me estan dando problemas ayuda");
+                
                 break;
-            case "album":
+            case "Album":
+                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
+                
+                DataAlbum album = controlAlb.retornarInfoAlbum(txtFav.getText());
+                controlCli.agregarAlbum(cli, album);
+                
                 break;
-        }
+            }
+            }else{JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");}
+       }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void cbxListasLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxListasLPMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxListasLPMActionPerformed
+
+    public void cargarLstFav(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (String elemento : cole) {
+          //  System.out.print("Elemento de lstSeguidos"+elemento);
+            String nombre = elemento;
+            model.addElement(nombre);
+        }
+        lstCoso.setModel(model);
+
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JComboBox<String> cbxListasLPM;
     private javax.swing.JComboBox<String> cbxTipoCoso;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCreadorGenero;
     private javax.swing.JLabel lblFav;
+    private javax.swing.JList<String> lstCoso;
+    private javax.swing.JTextField txtCreadorGenero;
     private javax.swing.JTextField txtFav;
     private javax.swing.JTextField txtNick;
     // End of variables declaration//GEN-END:variables

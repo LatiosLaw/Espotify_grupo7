@@ -419,7 +419,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         String nickBuscar = txtBuscar.getText();
         String token = String.valueOf(cbxOpt.getSelectedItem());
-        if (nickBuscar.isEmpty()) {
+        if (nickBuscar.isBlank()) {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
         } else {
             limpiarCampos(); // Limpia los campos antes de buscar
