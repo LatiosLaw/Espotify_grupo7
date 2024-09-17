@@ -473,7 +473,11 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             }else{
                 Iterator<String> iterator = generos_seleccionados.iterator();
                 while (iterator.hasNext()) {
-                    generos.add(new DataGenero(iterator.next()));
+    String elemento = iterator.next();
+                    generos.add(new DataGenero(elemento));
+}
+                while (iterator.hasNext()) {
+                    
                 }
             }
         ////
@@ -524,8 +528,8 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
        DefaultListModel<String> model = new DefaultListModel();
        listGenSelect.setModel(model);
        jList1.setModel(model);
-       generos_seleccionados.clear();
-       temas_del_album.clear();
+       generos_seleccionados.removeAll(generos_seleccionados);
+       temas_del_album.removeAll(temas_del_album);
     }  
     
     private void btnArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchActionPerformed
@@ -602,6 +606,7 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             }else{
                 Iterator<String> iterator = retorno.iterator();
                 while (iterator.hasNext()) {
+                    
                     model.addElement(iterator.next());
                 }
             }

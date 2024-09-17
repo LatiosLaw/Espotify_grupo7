@@ -75,7 +75,6 @@ public class ControladorAlbum implements IControladorAlbum {
         return lista;
     }
     
-
     public DataAlbum retornarInfoAlbum(String nombre_album){
          DAO_Album persistence = new DAO_Album();
          Album album = persistence.findAlbumByName(nombre_album);
@@ -85,6 +84,5 @@ public class ControladorAlbum implements IControladorAlbum {
          }else{
              return new DataAlbum("ALBUM NO EXISTE");
          }
-
     }
 }
