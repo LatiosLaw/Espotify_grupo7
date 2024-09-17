@@ -8,6 +8,7 @@ package persistencia;
  *
  * @author Nico
  */
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -59,6 +60,21 @@ public class DAO_ListaReproduccion {
             return null;
         }
     }
+    
+    public Collection<ListaParticular> findListaPorCliente(String nick_creador) {
+    try {
+        return entityManager.createQuery(
+                "SELECT u FROM ListaParticular u WHERE u.creador.nickname = :nick_creador",
+                ListaParticular.class)
+                .setParameter("nick_creador", nick_creador)
+                .getResultList(); // Change here to getResultList()
+    } catch (NoResultException e) {
+        return new ArrayList<>(); // Return an empty list instead of null
+    } catch (Exception e) {
+        e.printStackTrace(); // For debugging
+        return new ArrayList<>(); // Return an empty list in case of an error
+    }
+}
 
     public ListaPorDefecto findListaPorGeneroYNombre(String generoNombre, String nombreLista) {
         try {

@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 
@@ -19,12 +20,14 @@ public class AdministrarLista extends javax.swing.JPanel {
      */
     private IControladorListaParticular controlListPart;
     private IControladorListaPorDefecto controlListPD;
-    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp) {
+    private IControladorCliente controlCli;
+    
+    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
         initComponents();
-        
-        
+
         controlListPart = iclp;
         controlListPD = iclpd;
+        controlCli = iclc;
     }
 
     /**
@@ -139,7 +142,7 @@ public class AdministrarLista extends javax.swing.JPanel {
             pnlAL.removeAll();
             pnlAL.repaint();
         }else if (tokenx == "Publicar Lista"){
-            PublicarLista pl = new PublicarLista(controlListPD,controlListPart );
+            PublicarLista pl = new PublicarLista(controlListPD,controlListPart, controlCli);
             pl.setLocation(0,0);
             pl.setSize(860, 471);
 

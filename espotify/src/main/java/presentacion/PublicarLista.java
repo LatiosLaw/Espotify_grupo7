@@ -4,15 +4,14 @@
  */
 package presentacion;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.Collection;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+import logica.dt.DataCliente;
+import logica.dt.DataListaParticular;
 
 /**
  *
@@ -23,15 +22,18 @@ public class PublicarLista extends javax.swing.JPanel {
     /**
      * Creates new form AgregarUsuario
      */
-      private IControladorListaParticular controlListPart;
+    private IControladorListaParticular controlListPart;
     private IControladorListaPorDefecto controlListPD;
-    public PublicarLista(IControladorListaPorDefecto iclpd,IControladorListaParticular iclp) {
+    private IControladorCliente controlCli;
+
+    public PublicarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
         initComponents();
-       
-        controlListPart =iclp;
+
+        controlListPart = iclp;
         controlListPD = iclpd;
+        controlCli = iclc;
         
-        controlListPart.agregarTema("El listo", "Para Septiembre sin S.S", "temon");
+        this.cargarClientesLst(controlCli.mostrarClientes()); 
     }
 
     /**
@@ -77,6 +79,11 @@ public class PublicarLista extends javax.swing.JPanel {
         lblLista.setText("Lista a Publicar");
 
         btnBuscarN.setText("Buscar");
+        btnBuscarN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,9 +94,7 @@ public class PublicarLista extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -128,11 +133,50 @@ public class PublicarLista extends javax.swing.JPanel {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-        
-     
-        
+        if(txtNombre.getText().equals("") || txtNombreLista.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "No debes dejar campos vacios.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            if(controlListPart.publicarLista(txtNombre.getText(), txtNombreLista.getText())){
+                JOptionPane.showMessageDialog(null, "La lista: '" + txtNombreLista.getText() + "' ahora es publica.",
+                "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro el cliente/lista.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }   
+      }
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
+
+        if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "El campo 'Nombre' no puede estar vacio.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            
+            Collection<DataListaParticular> listas = controlListPart.devolverListadeCliente(txtNombre.getText());
+            
+        if (listas != null && !listas.isEmpty()) {
+            System.out.println("Listas encontradas: " + listas.size());
+            
+            for (DataListaParticular lista : listas){
+            System.out.println(lista.getNombre());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron listas para el cliente con el nickname: " + txtNombre.getText(),
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+    }//GEN-LAST:event_btnBuscarNActionPerformed
     
+   public void cargarClientesLst(Collection<DataCliente> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        lstLista.setModel(model);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarN;
