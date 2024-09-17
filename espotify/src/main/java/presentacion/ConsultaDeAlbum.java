@@ -52,6 +52,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtNomTemAlb.setEditable(false);
         txtDurTem.setEditable(false);
         txtDireccionTema.setEditable(false);
+        jLabel1.setVisible(false);
     }
 
     /**
@@ -358,16 +359,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
        
         switch (token) {
          case 0:
-                 
-               jLabelInput.setText("Introduzca el genero o artista :");
-               
+
             case 1:
-               jLabelInput.setText("Introduzca el genero :");
                reinicarAlbumInfo();
                 cargarGeneros();
                 break;
             case 2:
-               jLabelInput.setText("Introduzca el artista :");
                reinicarAlbumInfo();
                 cargarArtistas();
                 break;    
@@ -401,8 +398,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     
     private void btnMostrarAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarAlbActionPerformed
        if(cbxConAlb.getSelectedIndex()==0){
-           
+           JOptionPane.showMessageDialog(null, "Seleccione si quiere buscar albumes por Generos o Artistas.");
        }else if(cbxConAlb.getSelectedIndex()==1){
+           if(!nomGenOrArt.getText().isEmpty()){
            DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlAlb.retornarAlbumsDelGenero(nomGenOrArt.getText());
                 Iterator<String> iterator = retorno.iterator();
@@ -410,7 +408,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                     model.addElement(iterator.next());
                 }
         listAlb.setModel(model);
+           }else{
+                JOptionPane.showMessageDialog(null, "Especifique el genero en el formulario.");
+           }
        }else{
+if(!nomGenOrArt.getText().isEmpty()){
            DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlAlb.retornarAlbumsDelArtista(nomGenOrArt.getText());
                 Iterator<String> iterator = retorno.iterator();
@@ -418,6 +420,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                     model.addElement(iterator.next());
                 }
         listAlb.setModel(model);
+        }else{
+                JOptionPane.showMessageDialog(null, "Especifique el artista en el formulario.");
+           }
        }
     }//GEN-LAST:event_btnMostrarAlbActionPerformed
 
@@ -457,11 +462,15 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
     private void btnGenConsult1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenConsult1ActionPerformed
+        if(!nomAlbum.getText().isEmpty()){
         DataAlbum album = controlAlb.retornarInfoAlbum(nomAlbum.getText());
         txtNomAlb.setText(album.getNombre());
         txtAnioCre.setText(Integer.toString(album.getAnioCreacion()));
         cargarGenerosDelAlbum(album.getNombre());
         cargarTemasDelAlbum(album.getNombre());
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, introduzca el album del que quiere saber la informacion en el formulario.");
+        }
     }//GEN-LAST:event_btnGenConsult1ActionPerformed
 
     private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
