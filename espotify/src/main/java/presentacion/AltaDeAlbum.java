@@ -498,11 +498,23 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
                 }
                 
                 if(txtLinkImg.getText().isEmpty()){
-            controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, generos, temas);
+            DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);        
+            Iterator<String> iterator_gen = generos_seleccionados.iterator();
+        while (iterator_gen.hasNext()) {
+            String genero = iterator_gen.next();
+            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
+            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
+        }
             JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
             reiniciarCampos();
         }else{
-            controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, generos, temas);
+            DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, temas); 
+            Iterator<String> iterator_gen = generos_seleccionados.iterator();
+        while (iterator_gen.hasNext()) {
+            String genero = iterator_gen.next();
+            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
+            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
+        }
             JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
             reiniciarCampos();
         }
@@ -563,7 +575,7 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
         generos_seleccionados.add(listGen.getSelectedValue());
         DefaultListModel<String> model = new DefaultListModel();
             if(generos_seleccionados.isEmpty()){
-                model.addElement("No hay generos seleccionados");
+             
             }else{
                 Iterator<String> iterator = generos_seleccionados.iterator();
                 while (iterator.hasNext()) {
@@ -602,7 +614,7 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
             if(retorno.isEmpty()){
-                model.addElement("No hay generos");
+                
             }else{
                 Iterator<String> iterator = retorno.iterator();
                 while (iterator.hasNext()) {

@@ -8,18 +8,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import logica.Genero;
-import logica.Album;
-import logica.ListaReproduccion;
-import logica.ListaPorDefecto;
+import logica.dt.DataAlbum;
 import logica.dt.DataGenero;
+import persistencia.DAO_Album;
 import persistencia.DAO_Genero;
 /**
  *
  * @author Nico
  */
 public class ControladorGenero implements IControladorGenero{
+    
     @Override
-    public void crearGenero(String nombre, Genero genero_padre){
+    public void crearGeneroUnico(String nombre){
+        DAO_Genero persistence = new DAO_Genero();
+        Genero nuevo_genero = new Genero(nombre);
+        persistence.save(nuevo_genero);
+    }
+    
+    @Override
+    public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre){
         
     }
     
@@ -48,5 +55,14 @@ public class ControladorGenero implements IControladorGenero{
         }
         return lista;
     }
-
+    
+    @Override
+    public void actualizarGenero(DataGenero genero, Collection<String> albumes_previos_del_genero, DataAlbum album){
+        DAO_Genero persistence = new DAO_Genero();
+        DAO_Album persistence_a = new DAO_Album();
+            Genero genero_actualizable = persistence.find(genero.getNombre());
+            genero_actualizable.agregarAlbumDelGenero(persistence_a.find(album.getNombre()));
+            persistence.update(genero_actualizable);
+        }
+    
 }

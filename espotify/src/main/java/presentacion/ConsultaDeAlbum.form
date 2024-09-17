@@ -36,42 +36,58 @@
                       <Component id="jLabelInput" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btnMostrarAlb" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnGenConsult" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="39" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblTemDeAlb" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane3" min="-2" pref="141" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtNomTemAlb" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblDurTem" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtDurTem" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtAnioCre" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                           <Component id="lblGenDeAlb" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomAlb" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="txtNomAlb" pref="200" max="32767" attributes="0"/>
+                          <Component id="txtAnioCre" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane3" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="lblTemDeAlb" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblDurTem" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtDurTem" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtDireccionTema" max="32767" attributes="0"/>
+                                  <Component id="btnDescargarTema" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <Component id="txtNomTemAlb" min="-2" pref="190" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                  <Component id="btnGenConsult1" min="-2" pref="126" max="-2" attributes="0"/>
+                  <EmptySpace pref="516" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,14 +112,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="nomAlbum" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnGenConsult" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="nomAlbum" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -124,17 +135,28 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="txtNomTemAlb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtDireccionTema" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnDescargarTema" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane3" min="-2" pref="131" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                  <Component id="btnGenConsult1" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -163,14 +185,8 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomAlb">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="*Nombre Album*"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAnioCre">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="*A&#xf1;o Creacion*"/>
-      </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -182,13 +198,7 @@
         <Component class="javax.swing.JList" name="listGenAlb">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Genero de Album 1"/>
-                <StringItem index="1" value="Genero de Album 2"/>
-                <StringItem index="2" value="Genero de Album 3"/>
-                <StringItem index="3" value="Genero de Album 4"/>
-                <StringItem index="4" value="Genero de Album 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -217,30 +227,25 @@
         <Component class="javax.swing.JList" name="listTemAlb">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Tema de Album 1"/>
-                <StringItem index="1" value="Tema de Album 2"/>
-                <StringItem index="2" value="Tema de Album 3"/>
-                <StringItem index="3" value="Tema de Album 4"/>
-                <StringItem index="4" value="Tema de Album 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listTemAlbMouseClicked"/>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listTemAlbValueChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtNomTemAlb">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="*Nombre Album*"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="txtDireccionTema">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDireccionTemaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDurTem">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="*Duracion*"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDurTem">
       <Properties>
@@ -326,12 +331,12 @@
         <Property name="text" type="java.lang.String" value="Introduzca el genero o artista :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGenConsult">
+    <Component class="javax.swing.JButton" name="btnDescargarTema">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mostrar Datos"/>
+        <Property name="text" type="java.lang.String" value="Descargar Tema"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenConsultActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDescargarTemaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomAlbum">
@@ -343,6 +348,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Introduzca el album :"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomTemAlb">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnGenConsult1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mostrar Datos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenConsult1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

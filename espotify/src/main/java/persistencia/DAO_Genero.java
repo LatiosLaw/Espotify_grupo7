@@ -43,7 +43,7 @@ public class DAO_Genero {
     public List<String> findfromAlbum(String nombre_album) {
         try {
             return entityManager.createQuery(
-                "SELECT g.generos_NOMBRE FROM genero_album g WHERE g.albumes_del_genero_NOMBRE = :nombre_album")
+                "SELECT g.nombre FROM Album a JOIN a.generos g WHERE a.nombre = :nombre_album", String.class)
                 .setParameter("nombre_album", nombre_album)
                 .getResultList();
         } catch (NoResultException e) {
