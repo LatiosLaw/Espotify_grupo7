@@ -123,6 +123,8 @@ public class AdministrarTemas extends javax.swing.JPanel {
                pnlAT.add(cda);
                pnlAT.revalidate();
                pnlAT.repaint();
+             }else{
+                 cbxOPT.setSelectedIndex(0);
              }
               
             

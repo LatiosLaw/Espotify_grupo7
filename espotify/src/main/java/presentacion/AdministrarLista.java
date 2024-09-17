@@ -147,6 +147,8 @@ public class AdministrarLista extends javax.swing.JPanel {
             pnlAL.add(pl);
             pnlAL.revalidate();
             pnlAL.repaint();
+        }else{
+            cbxOPT.setSelectedIndex(0);
         }
     }//GEN-LAST:event_cbxOPTActionPerformed
     

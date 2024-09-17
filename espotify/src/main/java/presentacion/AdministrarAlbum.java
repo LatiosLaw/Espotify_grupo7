@@ -93,18 +93,18 @@ public class AdministrarAlbum extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
-        int token = cbxOPT.getSelectedIndex();
-       
+        String token = String.valueOf(cbxOPT.getSelectedItem());
+        
         switch (token) {
-            case 0:
-                 //No
+            case "OPT":
+                //No
                 pnlAdAl.removeAll();
                 pnlAdAl.revalidate();
                 pnlAdAl.repaint();
                 break;
-            case 1:
-             
-                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
+            case "Agregar Album":
+
+                AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
                ada.setLocation(0,0);
                ada.setSize(860, 471);
                
@@ -113,9 +113,9 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                pnlAdAl.revalidate();
                pnlAdAl.repaint();
                 break;
-            case 2:
-             
-                 ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
+            case "Consultar Album":
+
+                ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
@@ -124,15 +124,8 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                pnlAdAl.revalidate();
                pnlAdAl.repaint();
                 break;
-                
-            case 3:
-             
-                break;
-            case 4:
-          
-                break;
             default:
-                
+            cbxOPT.setSelectedIndex(0);
                 break;
         }
         
