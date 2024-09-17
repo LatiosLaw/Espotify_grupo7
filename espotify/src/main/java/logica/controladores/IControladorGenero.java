@@ -5,16 +5,17 @@
 package logica.controladores;
 
 import java.util.Collection;
-import java.util.Iterator;
 import logica.Genero;
-import logica.Album;
+import logica.dt.DataAlbum;
 import logica.dt.DataGenero;
 /**
  *
  * @author Nico
  */
 public interface IControladorGenero {
-    void crearGenero(String nombre, Genero genero_padre);
+    public void crearGeneroUnico(String nombre);
+    public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre);
     public Collection<String> mostrarGeneros();
     public Collection<DataGenero> darGenerosDelAlbum(String nombre_album);
+    public void actualizarGenero(DataGenero genero, Collection<String> albumes_previos_del_genero, DataAlbum album);
 }

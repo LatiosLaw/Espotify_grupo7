@@ -4,11 +4,13 @@
  */
 package logica.controladores;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import logica.Album;
-import logica.Artista;
 import logica.tema;
 import logica.dt.DataAlbum;
-import logica.dt.DataArtista;
 import logica.dt.DataTema;
 import persistencia.DAO_Tema;
 
@@ -46,6 +48,24 @@ public class ControladorTema implements IControladorTema {
             return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
+        }
+    }
+    
+    @Override
+    public Collection<DataTema> retornarTemasDeAlbum(String nombre_album){
+        Collection<DataTema> listaDeTemas = new ArrayList<>();
+        List<tema> retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.findFromAlbum(nombre_album);
+        if (retorno != null) {
+        Iterator<tema> iterator = retorno.iterator();
+        while (iterator.hasNext()) {
+            tema temazo = iterator.next();
+            listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+        }
+        return listaDeTemas;
+        } else {
+            return null;
         }
     }
 

@@ -26,12 +26,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="btnAdUs" min="-2" pref="272" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnAdLi" min="-2" pref="276" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnAdAl" min="-2" pref="272" max="-2" attributes="0"/>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <Component id="btnAdUs" min="-2" pref="206" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnAdLi" min="-2" pref="206" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnAdAl" min="-2" pref="206" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnCarDat" min="-2" pref="206" max="-2" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
           <Component id="pnlPrin" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -43,6 +45,7 @@
                   <Component id="btnAdLi" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnAdAl" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnAdUs" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnCarDat" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlPrin" min="-2" max="-2" attributes="0"/>
@@ -77,6 +80,9 @@
     <Component class="javax.swing.JButton" name="btnAdLi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrar Lista"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[210, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdLiActionPerformed"/>
@@ -85,6 +91,9 @@
     <Component class="javax.swing.JButton" name="btnAdAl">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administar Album"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[210, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdAlActionPerformed"/>
@@ -93,9 +102,23 @@
     <Component class="javax.swing.JButton" name="btnAdUs">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrar Usuario"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[210, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdUsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCarDat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cargar Datos"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[210, 23]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCarDatActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

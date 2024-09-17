@@ -53,10 +53,11 @@ public class EspotifyMain {
         cliHandler.seguirUsuario("Jose", "El listo");
        // cliHandler.seguirUsuario("Nick Furry", "El listo");
         
-        Collection<DataGenero> gen = new ArrayList<>();
         Collection<DataTema> tem = new ArrayList<>();
-        albHandler.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, gen, tem);
-        
+        albHandler.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);
+        genHandler.crearGeneroUnico("Genero 1");
+        genHandler.crearGeneroUnico("Genero 2");
+        genHandler.crearGeneroUnico("Genero 3");
 
 // Iniciar el formulario
         FormPrin fp = new FormPrin(listPHandler, listHandler, cliHandler,artHandler, albHandler, genHandler, temHandler);

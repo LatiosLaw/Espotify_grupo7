@@ -7,6 +7,7 @@ package presentacion;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorTema;
 
 /**
  *
@@ -20,11 +21,13 @@ public class AdministrarTemas extends javax.swing.JPanel {
     private IControladorAlbum controlAlb;
     private IControladorArtista controlArt;
     private IControladorGenero controlGen;
-    public AdministrarTemas(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg) {
+    private IControladorTema controlTem;
+    public AdministrarTemas(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg, IControladorTema ict) {
         
         controlAlb = icalb;
         controlArt = ica;
         controlGen = icg;
+        controlTem = ict;
         initComponents();
     }
 
@@ -102,7 +105,7 @@ public class AdministrarTemas extends javax.swing.JPanel {
                   pnlAT.repaint();
                   
              }else if("Eliminar Tema de Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen);
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
@@ -112,7 +115,7 @@ public class AdministrarTemas extends javax.swing.JPanel {
                pnlAT.repaint();
                
              }else if ("Agregar Tema a Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen);
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
@@ -120,6 +123,8 @@ public class AdministrarTemas extends javax.swing.JPanel {
                pnlAT.add(cda);
                pnlAT.revalidate();
                pnlAT.repaint();
+             }else{
+                 cbxOPT.setSelectedIndex(0);
              }
               
             

@@ -204,7 +204,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 break;
 
             default:
-
+            jComboBox1.setSelectedIndex(0);
                 break;
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed

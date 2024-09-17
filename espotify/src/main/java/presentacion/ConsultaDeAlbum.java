@@ -4,12 +4,24 @@
  */
 package presentacion;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorTema;
+import logica.dt.DataAlbum;
+import logica.dt.DataGenero;
+import logica.dt.DataTema;
 
 /**
  *
@@ -23,24 +35,24 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private IControladorAlbum controlAlb;
     private IControladorArtista controlArt;
     private IControladorGenero controlGen;
+    private IControladorTema controlTem;
+    private DataTema tema_seleccionado;
     
-    public ConsultaDeAlbum(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg) {
+    public ConsultaDeAlbum(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = icalb;
         controlArt = ica;
         controlGen = icg;
+        controlTem = ict;
         
         initComponents();
-        
-        txtNomAlb.setVisible(false);
-        txtAnioCre.setVisible(false);
-        lblGenDeAlb.setVisible(false);
-        listGenAlb.setVisible(false);
-        lblTemDeAlb.setVisible(false);
-        listTemAlb.setVisible(false);
-        txtNomTemAlb.setVisible(false);
-        lblDurTem.setVisible(false);
-        txtDurTem.setVisible(false);
-        fotoAlb.setVisible(false);
+        txtDireccionTema.setVisible(false);
+        btnDescargarTema.setVisible(false);
+        txtNomAlb.setEditable(false);
+        txtAnioCre.setEditable(false);
+        txtNomTemAlb.setEditable(false);
+        txtDurTem.setEditable(false);
+        txtDireccionTema.setEditable(false);
+        jLabel1.setVisible(false);
     }
 
     /**
@@ -62,7 +74,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         lblTemDeAlb = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listTemAlb = new javax.swing.JList<>();
-        txtNomTemAlb = new javax.swing.JTextField();
+        txtDireccionTema = new javax.swing.JTextField();
         txtDurTem = new javax.swing.JTextField();
         lblDurTem = new javax.swing.JLabel();
         fotoAlb = new java.awt.Panel();
@@ -73,9 +85,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         listAlb = new javax.swing.JList<>();
         nomGenOrArt = new javax.swing.JTextField();
         jLabelInput = new javax.swing.JLabel();
-        btnGenConsult = new javax.swing.JButton();
+        btnDescargarTema = new javax.swing.JButton();
         nomAlbum = new javax.swing.JTextField();
         jLabelAlbum = new javax.swing.JLabel();
+        txtNomTemAlb = new javax.swing.JTextField();
+        btnGenConsult1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -88,31 +103,35 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             }
         });
 
-        txtNomAlb.setText("*Nombre Album*");
-
-        txtAnioCre.setText("*Año Creacion*");
-
-        listGenAlb.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Genero de Album 1", "Genero de Album 2", "Genero de Album 3", "Genero de Album 4", "Genero de Album 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listGenAlb);
 
         lblGenDeAlb.setText("Generos del album");
 
         lblTemDeAlb.setText("Temas del album");
 
-        listTemAlb.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Tema de Album 1", "Tema de Album 2", "Tema de Album 3", "Tema de Album 4", "Tema de Album 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listTemAlb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listTemAlbMouseClicked(evt);
+            }
+        });
+        listTemAlb.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listTemAlbValueChanged(evt);
+            }
         });
         jScrollPane3.setViewportView(listTemAlb);
 
-        txtNomTemAlb.setText("*Nombre Album*");
-
-        txtDurTem.setText("*Duracion*");
+        txtDireccionTema.setToolTipText("Haz clic para copiar el enlace!");
+        txtDireccionTema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDireccionTemaMouseClicked(evt);
+            }
+        });
+        txtDireccionTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDireccionTemaActionPerformed(evt);
+            }
+        });
 
         lblDurTem.setText("Duracion :");
 
@@ -149,10 +168,10 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         jLabelInput.setText("Introduzca el genero o artista :");
 
-        btnGenConsult.setText("Mostrar Datos");
-        btnGenConsult.addActionListener(new java.awt.event.ActionListener() {
+        btnDescargarTema.setText("Descargar Tema");
+        btnDescargarTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenConsultActionPerformed(evt);
+                btnDescargarTemaActionPerformed(evt);
             }
         });
 
@@ -163,6 +182,15 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         });
 
         jLabelAlbum.setText("Introduzca el album :");
+
+        btnGenConsult1.setText("Mostrar Datos");
+        btnGenConsult1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenConsult1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Link del tema : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,33 +209,47 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                         .addComponent(nomGenOrArt, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabelInput, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnMostrarAlb, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(nomAlbum, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelAlbum, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nomAlbum, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAlbum, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenConsult, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTemDeAlb)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNomTemAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblDurTem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAnioCre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGenDeAlb)
-                            .addComponent(txtNomAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNomAlb, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtAnioCre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTemDeAlb))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNomTemAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblDurTem)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnDescargarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(106, 106, 106))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(218, 218, 218)
+                    .addComponent(btnGenConsult1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(516, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,12 +271,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelAlbum)
-                                .addGap(4, 4, 4)
-                                .addComponent(nomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnGenConsult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabelAlbum)
+                        .addGap(4, 4, 4)
+                        .addComponent(nomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -255,9 +294,20 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDurTem)))
+                                    .addComponent(lblDurTem))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDescargarTema)
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(404, 404, 404)
+                    .addComponent(btnGenConsult1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(19, 19, 19)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -265,38 +315,56 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomGenOrArtActionPerformed
 
-    private void btnGenConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenConsultActionPerformed
-        /*if(No existe un album con ese nombre){
-            no cambia nada y muestra un mensaje
-        }else{
-            txtNomAlb.setVisible(true);
-            txtAnioCre.setVisible(true);
-            lblGenDeAlb.setVisible(true);
-            listGenAlb.setVisible(true);
-            lblTemDeAlb.setVisible(true);
-            listTemAlb.setVisible(true);
-            txtNomTemAlb.setVisible(true);
-            lblDurTem.setVisible(true);
-            txtDurTem.setVisible(true);
-            fotoAlb.setVisible(true);
-        }*/
-    }//GEN-LAST:event_btnGenConsultActionPerformed
+    private void btnDescargarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTemaActionPerformed
+        Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getAccess());
+        String userHome = System.getProperty("user.home");
+        Path descargas = Paths.get(userHome, "Downloads");
+        Path destino = descargas.resolve(tema_seleccionado.getAccess());
 
+        try {
+            // Copiar el archivo al directorio de destino
+            Files.copy(sourcePath, destino, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Archivo copiado con exito.");
+            JOptionPane.showMessageDialog(null, "Archivo de musica descargado correctamente.\nVerifique su carpeta de descargas");
+        } catch (Exception e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Un error ha ocurrido al descargar el archivo.");
+        }
+    }//GEN-LAST:event_btnDescargarTemaActionPerformed
+
+    private void cargarGenerosDelAlbum(String nombre_album){
+        Collection<DataGenero> generos_del_album = controlGen.darGenerosDelAlbum(nombre_album);
+        DefaultListModel<String> model = new DefaultListModel();
+                Iterator<DataGenero> iterator = generos_del_album.iterator();
+                while (iterator.hasNext()) {
+                    DataGenero genero_actual = iterator.next();
+                    model.addElement(genero_actual.getNombre());
+                }
+        listGenAlb.setModel(model);
+    }
+    
+    private void cargarTemasDelAlbum(String nombre_album){
+        Collection<DataTema> temas_del_album = controlTem.retornarTemasDeAlbum(nombre_album);
+        DefaultListModel<String> model = new DefaultListModel();
+                Iterator<DataTema> iterator = temas_del_album.iterator();
+                while (iterator.hasNext()) {
+                    DataTema tema_actual = iterator.next();
+                    model.addElement(tema_actual.getNickname());
+                }
+        listTemAlb.setModel(model);
+    }
+    
     private void cbxConAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxConAlbActionPerformed
         int token = cbxConAlb.getSelectedIndex();
        
         switch (token) {
          case 0:
-                 
-               jLabelInput.setText("Introduzca el genero o artista :");
-               
+
             case 1:
-               jLabelInput.setText("Introduzca el genero :");
                reinicarAlbumInfo();
                 cargarGeneros();
                 break;
             case 2:
-               jLabelInput.setText("Introduzca el artista :");
                reinicarAlbumInfo();
                 cargarArtistas();
                 break;    
@@ -330,8 +398,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     
     private void btnMostrarAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarAlbActionPerformed
        if(cbxConAlb.getSelectedIndex()==0){
-           
+           JOptionPane.showMessageDialog(null, "Seleccione si quiere buscar albumes por Generos o Artistas.");
        }else if(cbxConAlb.getSelectedIndex()==1){
+           if(!nomGenOrArt.getText().isEmpty()){
            DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlAlb.retornarAlbumsDelGenero(nomGenOrArt.getText());
                 Iterator<String> iterator = retorno.iterator();
@@ -339,7 +408,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                     model.addElement(iterator.next());
                 }
         listAlb.setModel(model);
+           }else{
+                JOptionPane.showMessageDialog(null, "Especifique el genero en el formulario.");
+           }
        }else{
+if(!nomGenOrArt.getText().isEmpty()){
            DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlAlb.retornarAlbumsDelArtista(nomGenOrArt.getText());
                 Iterator<String> iterator = retorno.iterator();
@@ -347,19 +420,79 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                     model.addElement(iterator.next());
                 }
         listAlb.setModel(model);
+        }else{
+                JOptionPane.showMessageDialog(null, "Especifique el artista en el formulario.");
+           }
        }
     }//GEN-LAST:event_btnMostrarAlbActionPerformed
 
     private void nomAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomAlbumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomAlbumActionPerformed
+
+    private void listTemAlbValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTemAlbValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listTemAlbValueChanged
+
+    private void listTemAlbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listTemAlbMouseClicked
+        String nomtem = listTemAlb.getSelectedValue();
+        tema_seleccionado = controlTem.retornarTema(nomtem);
+        txtNomTemAlb.setText(tema_seleccionado.getNickname());
+        
+        if(!tema_seleccionado.getAccess().endsWith(".mp3")){
+            txtDireccionTema.setVisible(true);
+            btnDescargarTema.setVisible(false);
+            jLabel1.setVisible(true);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+            
+        }else{
+            txtDireccionTema.setVisible(false);
+            btnDescargarTema.setVisible(true);
+            jLabel1.setVisible(false);
+    }
+        if(tema_seleccionado.getDuracion()!= 0){
+            txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
+        }else{
+            txtDurTem.setText(" - ");
+        }
+    }//GEN-LAST:event_listTemAlbMouseClicked
+
+    private void txtDireccionTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTemaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionTemaActionPerformed
+
+    private void btnGenConsult1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenConsult1ActionPerformed
+        if(!nomAlbum.getText().isEmpty()){
+        DataAlbum album = controlAlb.retornarInfoAlbum(nomAlbum.getText());
+        txtNomAlb.setText(album.getNombre());
+        txtAnioCre.setText(Integer.toString(album.getAnioCreacion()));
+        cargarGenerosDelAlbum(album.getNombre());
+        cargarTemasDelAlbum(album.getNombre());
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, introduzca el album del que quiere saber la informacion en el formulario.");
+        }
+    }//GEN-LAST:event_btnGenConsult1ActionPerformed
+
+    private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
+        StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
+
+        // Obtener el portapapeles del sistema
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+        // Copiar el texto al portapapeles
+        clipboard.setContents(stringSelection, null);
+        
+        JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
+    }//GEN-LAST:event_txtDireccionTemaMouseClicked
      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenConsult;
+    private javax.swing.JButton btnDescargarTema;
+    private javax.swing.JButton btnGenConsult1;
     private javax.swing.JButton btnMostrarAlb;
     private javax.swing.JComboBox<String> cbxConAlb;
     private java.awt.Panel fotoAlb;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAlbum;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JScrollPane jScrollPane1;
@@ -377,6 +510,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JTextField nomAlbum;
     private javax.swing.JTextField nomGenOrArt;
     private javax.swing.JTextField txtAnioCre;
+    private javax.swing.JTextField txtDireccionTema;
     private javax.swing.JTextField txtDurTem;
     private javax.swing.JTextField txtNomAlb;
     private javax.swing.JTextField txtNomTemAlb;

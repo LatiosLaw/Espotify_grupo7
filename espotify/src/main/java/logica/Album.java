@@ -38,6 +38,10 @@ public class Album implements Serializable {
         
     }
     
+    public Album(String nombre){
+        this.nombre = nombre;
+    }
+    
     public Album(String nombre, int anioCreacion){
         this.nombre = nombre;
         this.anioCreacion = anioCreacion;

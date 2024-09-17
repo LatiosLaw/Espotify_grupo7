@@ -50,7 +50,7 @@ public class DAO_Album {
     public List<String> findAllPorGenero(String nombre_genero) {
         try {
             return entityManager.createQuery(
-                "SELECT a.nombre FROM Album a JOIN a.generos g WHERE g.nombre = :nombre_genero", String.class)
+                "SELECT a.nombre FROM Album a JOIN a.generos g WHERE g.nombre = :nombre_genero" , String.class)
                 .setParameter("nombre_genero", nombre_genero)
                 .getResultList();
         } catch (NoResultException e) {
