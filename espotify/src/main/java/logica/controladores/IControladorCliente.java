@@ -10,7 +10,7 @@ import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
-import logica.dt.DataUsuario;
+import logica.dt.errorBundle;
 
 /**
  *
@@ -18,7 +18,7 @@ import logica.dt.DataUsuario;
  */
 public interface IControladorCliente {
     
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
+    public errorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
     
     
     /**

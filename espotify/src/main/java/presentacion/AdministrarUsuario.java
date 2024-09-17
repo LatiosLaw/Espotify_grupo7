@@ -4,8 +4,12 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
 
 /**
  *
@@ -18,11 +22,19 @@ public class AdministrarUsuario extends javax.swing.JPanel {
      */
     private IControladorCliente controlCli;
     private IControladorArtista controlArt;
+    private IControladorTema controlTem;
+    private IControladorAlbum controlAlb;
+    private IControladorListaParticular controlListPar;
+    private IControladorListaPorDefecto controlListPD;
 
-    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica) {
+    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorAlbum icalb) {
         controlCli = icc;
         controlArt = ica;
-
+        controlTem = ict;
+        controlAlb = icalb;
+        controlListPar = iclp;        
+        controlListPD = icld;
+                
         initComponents();
     }
 
@@ -221,7 +233,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.repaint();
                 break;
             case "Agregar Tema/Album/Lista a Fav":
-                AgregarCosoFav acf = new AgregarCosoFav(controlCli);
+                AgregarCosoFav acf = new AgregarCosoFav(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
                 acf.setLocation(0, 0);
                 acf.setSize(860, 471);
 

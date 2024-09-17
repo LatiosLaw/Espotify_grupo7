@@ -126,7 +126,7 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnAdUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdUsActionPerformed
         
-               AdministrarUsuario au = new  AdministrarUsuario(controlCli,controlArt);
+               AdministrarUsuario au = new  AdministrarUsuario(controlCli,controlArt,controlTem,controlListPar,controlListPD,controlAlb);
                au.setLocation(0,0);
                au.setSize(872, 579);
                

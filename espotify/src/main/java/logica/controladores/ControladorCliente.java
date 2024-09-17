@@ -19,13 +19,12 @@ import logica.ListaReproduccion;
 import logica.tema;
 import logica.Usuario;
 import logica.dt.DataAlbum;
-import logica.dt.DataArtista;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
-import logica.dt.DataUsuario;
+import logica.dt.errorBundle;
 import persistencia.DAO_Usuario;
 
 /**
@@ -35,18 +34,18 @@ import persistencia.DAO_Usuario;
 public class ControladorCliente implements IControladorCliente {
 
     @Override
-    public void agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
+    public errorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
         // Verificar si el nickname o el correo electronico ya estan en uso
         DAO_Usuario persistence = new DAO_Usuario();
 
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
-            return;
+            return new errorBundle(false,1);
         }
 
         if (persistence.findUsuarioByMail(mail) != null) {
             System.out.println("El correo electronico: " + mail + " ya esta en uso. Por favor, elige otro.");
-            return;
+            return new errorBundle(false,2);
         }
 
         // Crear el nuevo cliente
@@ -56,11 +55,13 @@ public class ControladorCliente implements IControladorCliente {
         try {
             persistence.save(nuevoCliente);
             System.out.println("Cliente agregado exitosamente.");
+            return new errorBundle(true,null);
         } catch (PersistenceException e) {
             System.out.println("Error al guardar el cliente: " + e.getMessage());
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
             }
+            return new errorBundle(true,null);
         }
     }
 

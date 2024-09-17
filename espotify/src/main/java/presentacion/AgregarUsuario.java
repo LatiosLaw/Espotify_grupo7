@@ -4,11 +4,14 @@
  */
 package presentacion;
 
+import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
@@ -23,6 +26,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
      */
     private IControladorCliente controlCli;
     private IControladorArtista controlArt;
+    private Component lblMsjArch;
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
         controlArt = ica;
@@ -70,10 +74,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblIMGG = new javax.swing.JLabel();
         txtIMG = new javax.swing.JTextField();
         txtNull = new javax.swing.JTextField();
+        lblIMGG1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        jLabel1.setText("NickName");
+        jLabel1.setText("Nickname");
 
         jLabel2.setText("Nombre");
 
@@ -84,7 +89,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
         sprFecha.setModel(new javax.swing.SpinnerDateModel());
         sprFecha.setEditor(new javax.swing.JSpinner.DateEditor(sprFecha, "dd.MM.yyyy"));
 
-        lblFechaNaci.setText("Fecha Naci");
+        lblFechaNaci.setText("Fecha Nacimiento");
 
         txtNickName.setColumns(10);
         txtNickName.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +128,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblIMGG.setText("url Imagen de perfil");
+        lblIMGG.setText("URL Perfil");
 
         txtIMG.setColumns(10);
 
@@ -134,106 +139,102 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
+        lblIMGG1.setText("Tipo de Usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFechaNaci)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
+                            .addComponent(jLabel4)
+                            .addComponent(lblIMGG))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblBiografia)
-                            .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblDirWeb))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblIMGG)
-                                .addGap(21, 21, 21)
-                                .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblFechaNaci)
+                            .addComponent(lblIMGG1))
                         .addGap(18, 18, 18)
-                        .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163)))
-                .addGap(81, 81, 81)
-                .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(382, 382, 382)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(176, 176, 176)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBiografia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDirWeb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addContainerGap(130, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaNaci)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblBiografia)
-                                .addGap(56, 56, 56)
-                                .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIMGG)
-                    .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addComponent(lblDirWeb)
                     .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblBiografia))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblIMGG)
+                                    .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFechaNaci)
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblIMGG1)
+                            .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 173, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -242,7 +243,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
         
         
         if(cbxTipoUsr.getSelectedIndex() == 0){
-            System.out.println("No opt elegida");
+            JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione el tipo de usuario.");
         }else{
              String pattern = "MM/dd/yyyy";
 
@@ -268,30 +269,82 @@ public class AgregarUsuario extends javax.swing.JPanel {
             String correo = txtCorreo.getText();
             String foto = "foto"; //DE MOMENTO
               System.out.println("Converted LocalDate: "  + fechaFinal);
-            
+            if(txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true){
             if(cbxTipoUsr.getSelectedIndex() == 2){
                 String biografia = txtaBio.getText();
                 String webPag = txtDirWeb.getText();
                 //deborlber cosas CON bio y web
+                if(txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true){
                 if(txtIMG.getText().isEmpty()){
-                     controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag);
-              
+                     if(controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag).getValor()){
+              JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
+              vaciarCampos();
+                     }else{
+                         if(controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag).getNumero() == 1){
+                             JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                         }else{
+                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                         }
+                     }
                 }else{
-                    controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag);
+                    if(controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag).getValor()){
+                JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
+                vaciarCampos();
+                     }else{
+                         if(controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag).getNumero() == 1){
+                         JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                         }else{
+                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                         }
+                     }
                 }
-               
+                }else{
+                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
+                }
             }else{
                 
                 if(txtIMG.getText().isEmpty()){
                     
-                     controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal);
+                     if(controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal).getValor() == true){
+                         JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
+                         vaciarCampos();
+                     }else{
+                         if(controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal).getNumero()==1){
+                             JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                         }else{
+                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                         }
+                     }
                 }else{
-                     controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal);
+                     if(controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal).getValor() == true){
+                     JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
+                     vaciarCampos();
+                     }else{
+                        if(controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal).getNumero()==1){
+                         JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                         }else{
+                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                         }
+                     }
                 }
+            }
+            }else{
+                JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos del formulario.");
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void vaciarCampos(){
+       txtNickName.setText(null);
+       txtNombre.setText(null);
+       txtCorreo.setText(null);
+       txtApellido.setText(null);
+       sprFecha.setValue(ui);
+       cbxTipoUsr.setSelectedIndex(0);
+       txtDirWeb.setText(null);
+       txtaBio.setText(null);
+    }
+    
     private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNickNameActionPerformed
@@ -343,6 +396,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel lblDirWeb;
     private javax.swing.JLabel lblFechaNaci;
     private javax.swing.JLabel lblIMGG;
+    private javax.swing.JLabel lblIMGG1;
     private javax.swing.JSpinner sprFecha;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
