@@ -60,6 +60,7 @@ public class FormPrin extends javax.swing.JFrame {
         btnAdUs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         pnlPrin.setBackground(new java.awt.Color(153, 255, 204));
         pnlPrin.setPreferredSize(new java.awt.Dimension(872, 579));
