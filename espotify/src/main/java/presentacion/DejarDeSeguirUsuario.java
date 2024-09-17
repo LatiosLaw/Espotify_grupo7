@@ -142,13 +142,16 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
                             
                             if(controlCli.corroborarSiEstaenSeguidos(nickCliente,nickAseguir) == true){
                             controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir); 
-                        }else{JOptionPane.showMessageDialog(null, "Usuario a seguir no esta siendo seguido por el seguidor indicado");}
+                            JOptionPane.showMessageDialog(null, "Seguimiento terminado con exito.");
+                        }else{
+                                JOptionPane.showMessageDialog(null, "El cliente " + txtCliente.getText() + " no esta siguiendo a " + txtUsuarioAdejarDeSeguir.getText());
+                            }
                     }else{
                         JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
                     }
                         
                     }else{
-                        JOptionPane.showMessageDialog(null, "Seguidor no encontrado");
+                        JOptionPane.showMessageDialog(null, "Cliente no encontrado");
                     }
             
             

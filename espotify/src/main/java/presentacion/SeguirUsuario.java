@@ -49,6 +49,8 @@ public class SeguirUsuario extends javax.swing.JPanel {
         lstUsuarios = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         lstClientes = new javax.swing.JList<>();
+        lblCliente1 = new javax.swing.JLabel();
+        lblCliente2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -81,12 +83,16 @@ public class SeguirUsuario extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(lstClientes);
 
+        lblCliente1.setText("Clientes");
+
+        lblCliente2.setText("Usuarios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+                .addContainerGap(115, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,11 +112,21 @@ public class SeguirUsuario extends javax.swing.JPanel {
                         .addGap(57, 57, 57)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(135, 135, 135))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(lblCliente1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCliente2)
+                .addGap(194, 194, 194))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCliente1)
+                    .addComponent(lblCliente2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,7 +140,7 @@ public class SeguirUsuario extends javax.swing.JPanel {
                             .addComponent(txtUsuarioAseguir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(58, 58, 58)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,7 +151,9 @@ public class SeguirUsuario extends javax.swing.JPanel {
         if (nickCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
         } else{
-            
+            if(nickCliente == nickAseguir){
+                JOptionPane.showMessageDialog(null, "Un cliente no puede seguirse a si mismo.");
+            }else{
             DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
                     if (usr != null) {
                         
@@ -143,16 +161,18 @@ public class SeguirUsuario extends javax.swing.JPanel {
                         if (usr2 != null) {
                             if(controlCli.corroborarSiEstaenSeguidos(nickCliente,nickAseguir) == false){
                             controlCli.seguirUsuario(nickCliente, nickAseguir); 
-                        }else{JOptionPane.showMessageDialog(null, "Usuario a seguir ya esta siendo seguido por el seguidor indicado");}
+                            JOptionPane.showMessageDialog(null, "Seguimiento realizado con exito.");
+                        }else{
+                       JOptionPane.showMessageDialog(null, "El usuario " + txtCliente.getText() + " ya sigue a " + txtUsuarioAseguir.getText());}
                     }else{
                         JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
                     }
                         
                     }else{
-                        JOptionPane.showMessageDialog(null, "Seguidor no encontrado");
+                        JOptionPane.showMessageDialog(null, "Cliente no encontrado");
                     }
             
-            
+            }
         }
    
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -189,6 +209,8 @@ public void cargarUsuariosLst(Collection<String> cole) {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblCliente1;
+    private javax.swing.JLabel lblCliente2;
     private javax.swing.JLabel lblUsuarioAseguir;
     private javax.swing.JList<String> lstClientes;
     private javax.swing.JList<String> lstUsuarios;
