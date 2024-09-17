@@ -381,7 +381,7 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
            File selectedFile;
            if(fileChooser.getSelectedFile() != null){
             selectedFile = fileChooser.getSelectedFile();
-            File destinationDir = new File("Espotify_grupo7\\espotify\\src\\main\\java\\temas");
+            File destinationDir = new File("espotify\\src\\main\\java\\temas");
     
             if (!destinationDir.exists()) {
                 destinationDir.mkdirs(); // Crear la carpeta si no existe

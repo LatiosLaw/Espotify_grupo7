@@ -4,9 +4,17 @@
  */
 package presentacion;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
@@ -28,6 +36,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private IControladorArtista controlArt;
     private IControladorGenero controlGen;
     private IControladorTema controlTem;
+    private DataTema tema_seleccionado;
     
     public ConsultaDeAlbum(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = icalb;
@@ -38,6 +47,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         initComponents();
         txtDireccionTema.setVisible(false);
         btnDescargarTema.setVisible(false);
+        txtNomAlb.setEditable(false);
+        txtAnioCre.setEditable(false);
+        txtNomTemAlb.setEditable(false);
+        txtDurTem.setEditable(false);
+        txtDireccionTema.setEditable(false);
     }
 
     /**
@@ -75,6 +89,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         jLabelAlbum = new javax.swing.JLabel();
         txtNomTemAlb = new javax.swing.JTextField();
         btnGenConsult1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -105,6 +120,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(listTemAlb);
 
+        txtDireccionTema.setToolTipText("Haz clic para copiar el enlace!");
+        txtDireccionTema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDireccionTemaMouseClicked(evt);
+            }
+        });
         txtDireccionTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionTemaActionPerformed(evt);
@@ -168,6 +189,8 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Link del tema : ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,7 +211,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(nomAlbum, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabelAlbum, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -203,20 +226,23 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTemDeAlb))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNomTemAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblDurTem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDireccionTema)
-                                    .addComponent(btnDescargarTema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(txtNomTemAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblDurTem)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnDescargarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(106, 106, 106))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -269,9 +295,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                                     .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblDurTem))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDescargarTema))
+                                .addComponent(btnDescargarTema)
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +315,20 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_nomGenOrArtActionPerformed
 
     private void btnDescargarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTemaActionPerformed
-        
+        Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getAccess());
+        String userHome = System.getProperty("user.home");
+        Path descargas = Paths.get(userHome, "Downloads");
+        Path destino = descargas.resolve(tema_seleccionado.getAccess());
+
+        try {
+            // Copiar el archivo al directorio de destino
+            Files.copy(sourcePath, destino, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Archivo copiado con exito.");
+            JOptionPane.showMessageDialog(null, "Archivo de musica descargado correctamente.\nVerifique su carpeta de descargas");
+        } catch (Exception e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Un error ha ocurrido al descargar el archivo.");
+        }
     }//GEN-LAST:event_btnDescargarTemaActionPerformed
 
     private void cargarGenerosDelAlbum(String nombre_album){
@@ -390,20 +431,22 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
     private void listTemAlbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listTemAlbMouseClicked
         String nomtem = listTemAlb.getSelectedValue();
-        DataTema tema_retornado = controlTem.retornarTema(nomtem);
-        txtNomTemAlb.setText(tema_retornado.getNickname());
+        tema_seleccionado = controlTem.retornarTema(nomtem);
+        txtNomTemAlb.setText(tema_seleccionado.getNickname());
         
-        if(!tema_retornado.getAccess().endsWith(".mp3")){
+        if(!tema_seleccionado.getAccess().endsWith(".mp3")){
             txtDireccionTema.setVisible(true);
             btnDescargarTema.setVisible(false);
-            txtDireccionTema.setText(tema_retornado.getAccess());
+            jLabel1.setVisible(true);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
             
         }else{
             txtDireccionTema.setVisible(false);
             btnDescargarTema.setVisible(true);
+            jLabel1.setVisible(false);
     }
-        if(tema_retornado.getDuracion()!= 0){
-            txtDurTem.setText(Integer.toString(tema_retornado.getDuracion()));
+        if(tema_seleccionado.getDuracion()!= 0){
+            txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
         }else{
             txtDurTem.setText(" - ");
         }
@@ -420,6 +463,18 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         cargarGenerosDelAlbum(album.getNombre());
         cargarTemasDelAlbum(album.getNombre());
     }//GEN-LAST:event_btnGenConsult1ActionPerformed
+
+    private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
+        StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
+
+        // Obtener el portapapeles del sistema
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+        // Copiar el texto al portapapeles
+        clipboard.setContents(stringSelection, null);
+        
+        JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
+    }//GEN-LAST:event_txtDireccionTemaMouseClicked
      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -428,6 +483,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JButton btnMostrarAlb;
     private javax.swing.JComboBox<String> cbxConAlb;
     private java.awt.Panel fotoAlb;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAlbum;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JScrollPane jScrollPane1;
