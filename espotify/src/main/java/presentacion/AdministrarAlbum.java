@@ -101,6 +101,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 pnlAdAl.removeAll();
                 pnlAdAl.revalidate();
                 pnlAdAl.repaint();
+                break;
             case 1:
              
                  AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
