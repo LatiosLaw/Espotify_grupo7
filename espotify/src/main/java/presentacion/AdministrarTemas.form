@@ -39,7 +39,7 @@
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="cbxOPT" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="pnlAT" max="32767" attributes="0"/>
+              <Component id="pnlAT" pref="467" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>

@@ -341,11 +341,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
        txtNickName.setText(null);
        txtNombre.setText(null);
        txtCorreo.setText(null);
+       txtIMG.setText(null);
        txtApellido.setText(null);
-       sprFecha.setValue(ui);
-       cbxTipoUsr.setSelectedIndex(0);
        txtDirWeb.setText(null);
        txtaBio.setText(null);
+       cbxTipoUsr.setSelectedIndex(0);
     }
     
     private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed

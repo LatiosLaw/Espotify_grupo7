@@ -50,27 +50,27 @@ public class ControladorAlbum implements IControladorAlbum {
     }
     
     @Override
-    public Collection<DataAlbum> retornarAlbumsDelGenero(String genero){
-        Collection<DataAlbum> lista = new ArrayList<>();
+    public Collection<String> retornarAlbumsDelGenero(String genero){
+        Collection<String> lista = new ArrayList<>();
         DAO_Album persistence = new DAO_Album();
-        Collection<Album> albu = persistence.findAllPorGenero(genero);
-        Iterator<Album> iterator = albu.iterator();
+        Collection<String> albu = persistence.findAllPorGenero(genero);
+        Iterator<String> iterator = albu.iterator();
         while (iterator.hasNext()) {
-            Album album = iterator.next();
-            lista.add(new DataAlbum(album.getNombre()));
+            String album = iterator.next();
+            lista.add(album);
         }
         return lista;
     }
     
     @Override
-    public Collection<DataAlbum> retornarAlbumsDelArtista(String nick_arti){
-        Collection<DataAlbum> lista = new ArrayList<>();
+    public Collection<String> retornarAlbumsDelArtista(String nick_arti){
+        Collection<String> lista = new ArrayList<>();
         DAO_Album persistence = new DAO_Album();
         Collection<Album> albu = persistence.findAllPorArtista(nick_arti);
         Iterator<Album> iterator = albu.iterator();
         while (iterator.hasNext()) {
             Album album = iterator.next();
-            lista.add(new DataAlbum(album.getNombre()));
+            lista.add(album.getNombre());
         }
         return lista;
     }

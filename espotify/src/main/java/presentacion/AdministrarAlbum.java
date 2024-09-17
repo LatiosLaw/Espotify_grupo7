@@ -114,7 +114,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 break;
             case 2:
              
-                 ConsultaDeAlbum cda = new ConsultaDeAlbum();
+                 ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                

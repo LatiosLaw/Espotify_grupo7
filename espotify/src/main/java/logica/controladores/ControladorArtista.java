@@ -95,8 +95,21 @@ public DataArtista retornarArtista(String nickname) {
               lista.add(new DataArtista(arti.getNickname(),arti.getNombre(),arti.getApellido(), arti.getEmail(), art.getFoto(), arti.getNacimiento(),arti.getBiografia(), arti.getBiografia()));
             }
         }
-        
-        
+        return lista;
+    }
+    
+    @Override
+    public Collection<String> mostrarNicksArtistas(){
+        Collection<String> lista = new ArrayList<>();
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> artist = persistence.findAll();
+        Iterator<Usuario> iterator = artist.iterator();
+        while (iterator.hasNext()) {
+            Usuario art = iterator.next();
+            if(art instanceof Artista arti){
+              lista.add(arti.getNickname());
+            }
+        }
         return lista;
     }
     

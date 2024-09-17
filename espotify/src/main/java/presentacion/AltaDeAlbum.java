@@ -492,10 +492,8 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
                     tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
                     temas.add(tema_actual);
                 }
-            }
-        //// 
-        
-        if(txtLinkImg.getText().isEmpty()){
+                
+                if(txtLinkImg.getText().isEmpty()){
             controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, generos, temas);
             JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
             reiniciarCampos();
@@ -504,6 +502,9 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
             reiniciarCampos();
         }
+            }
+        //// 
+
          }else{
            JOptionPane.showMessageDialog(lblMsjArch, "El nickname seleccionado no existe o pertenece a un usuario común");
        }

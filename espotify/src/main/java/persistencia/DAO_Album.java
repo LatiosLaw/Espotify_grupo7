@@ -47,12 +47,26 @@ public class DAO_Album {
         return entityManager.createQuery("SELECT e FROM MyEntity e", Album.class).getResultList();
     }
     
-    public List<Album> findAllPorGenero(String nombre_genero) {
-        return entityManager.createQuery("SELECT * FROM USUARIO", Album.class).getResultList();
+    public List<String> findAllPorGenero(String nombre_genero) {
+        try {
+            return entityManager.createQuery(
+                "SELECT a.nombre FROM Album a NATURAL JOIN Genero g WHERE g.nombre = :nombre_genero", String.class)
+                .setParameter("nombre_genero", nombre_genero)
+                .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese nombre
+        }
     }
     
     public List<Album> findAllPorArtista(String nick_artista) {
-        return entityManager.createQuery("SELECT * FROM USUARIO", Album.class).getResultList();
+        try {
+            return entityManager.createQuery(
+                "SELECT a FROM Album a JOIN a.creador c WHERE c.nickname = :nick_artista", Album.class)
+                .setParameter("nick_artista", nick_artista)
+                .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese nombre
+        }
     }
 
     public void update(Album entity) {

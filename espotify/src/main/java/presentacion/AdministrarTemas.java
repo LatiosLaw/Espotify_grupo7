@@ -4,6 +4,10 @@
  */
 package presentacion;
 
+import logica.controladores.IControladorAlbum;
+import logica.controladores.IControladorArtista;
+import logica.controladores.IControladorGenero;
+
 /**
  *
  * @author Urbina
@@ -13,7 +17,14 @@ public class AdministrarTemas extends javax.swing.JPanel {
     /**
      * Creates new form AdministrarUsuario
      */
-    public AdministrarTemas() {
+    private IControladorAlbum controlAlb;
+    private IControladorArtista controlArt;
+    private IControladorGenero controlGen;
+    public AdministrarTemas(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg) {
+        
+        controlAlb = icalb;
+        controlArt = ica;
+        controlGen = icg;
         initComponents();
     }
 
@@ -91,7 +102,7 @@ public class AdministrarTemas extends javax.swing.JPanel {
                   pnlAT.repaint();
                   
              }else if("Eliminar Tema de Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum();
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
@@ -101,7 +112,7 @@ public class AdministrarTemas extends javax.swing.JPanel {
                pnlAT.repaint();
                
              }else if ("Agregar Tema a Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum();
+                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen);
                cda.setLocation(0,0);
                cda.setSize(860, 471);
                
