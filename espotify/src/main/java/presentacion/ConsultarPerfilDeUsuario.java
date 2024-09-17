@@ -88,6 +88,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         jScrollPane10 = new javax.swing.JScrollPane();
         lstFavs = new javax.swing.JList<>();
         cbxFavss = new javax.swing.JComboBox<>();
+        lblSeguidores1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -168,7 +169,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtBuscar.setColumns(10);
 
-        btnOK.setText("OK");
+        btnOK.setText("Buscar");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
@@ -200,6 +201,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
         });
 
+        lblSeguidores1.setText("Usuario Seleccionado : ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,14 +211,16 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSeguidores1)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -293,7 +298,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(30, 30, 30)
+                        .addComponent(lblSeguidores1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -627,6 +634,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel lblListas;
     private javax.swing.JLabel lblNroSeguidores;
     private javax.swing.JLabel lblSeguidores;
+    private javax.swing.JLabel lblSeguidores1;
     private javax.swing.JList<String> lstAlbumSiguiendo1;
     private javax.swing.JList<String> lstFavs;
     private javax.swing.JList<String> lstListas;
