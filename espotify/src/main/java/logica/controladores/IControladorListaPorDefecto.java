@@ -1,5 +1,6 @@
 package logica.controladores;
 
+import java.util.Collection;
 import logica.dt.DataGenero;
 import logica.dt.DataListaPorDefecto;
 
@@ -12,4 +13,6 @@ public interface IControladorListaPorDefecto {
     void quitarTema(String nombre_lista, String nombre_tema);
 
     DataListaPorDefecto devolverInformacion(String ls, String nombre_genero);
+    
+    public Collection<String> retornarListasDelGenero(String genero);
 }

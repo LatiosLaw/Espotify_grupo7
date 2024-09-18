@@ -27,46 +27,83 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbxOpt" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane8" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="txtBuscar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" pref="214" max="-2" attributes="0"/>
                   </Group>
-              </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panel1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNombreLista" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtDefinidoPor" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtApellido" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="365" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblGeneroOCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="txtFiltrarPorEsteGeneroOCliente" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtDesLink" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnOK" min="-2" pref="198" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblLista" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txtListaElegida" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane9" min="-2" pref="152" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonBuscarInfoDeLista" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnOK" min="-2" pref="198" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnLink" min="-2" pref="99" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="txtGeneroLista" min="-2" pref="124" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="jScrollPane10" min="-2" pref="139" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="panel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="txtNomTemLista" min="-2" pref="190" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtDefinidoPor" min="-2" pref="124" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblDurTem" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtDurTem" min="-2" pref="89" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="btnDescargarTema1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtDireccionTema" min="-2" pref="108" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="126" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="546" max="32767" attributes="0"/>
-                  <Component id="btnDescargar" min="-2" pref="99" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
+                  <Component id="txtNombreLista" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -74,46 +111,67 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="cbxOpt" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="jScrollPane8" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="txtBuscar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="btnOK" min="-2" pref="47" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="723" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtNombreLista" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="txtDefinidoPor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="214" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                      <Component id="txtNomTemLista" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDesLink" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnDescargarTema1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDireccionTema" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane10" min="-2" pref="81" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cbxOpt" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblGeneroOCliente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="txtFiltrarPorEsteGeneroOCliente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnOK" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="panel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                                      <Component id="txtDefinidoPor" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="txtGeneroLista" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane9" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="btnLink" min="-2" pref="47" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblLista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtListaElegida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBuscarInfoDeLista" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
-                  <Component id="btnDescargar" min="-2" pref="47" max="-2" attributes="0"/>
-                  <EmptySpace pref="708" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                  <Component id="txtNombreLista" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="280" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -140,12 +198,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtNombreLista">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtApellido">
+    <Component class="javax.swing.JTextField" name="txtGeneroLista">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
@@ -180,7 +233,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lstFiltro">
+        <Component class="javax.swing.JList" name="ListaGenerosOClientes">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -198,7 +251,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtBuscar">
+    <Component class="javax.swing.JTextField" name="txtFiltrarPorEsteGeneroOCliente">
       <Properties>
         <Property name="columns" type="int" value="10"/>
       </Properties>
@@ -211,46 +264,110 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Component class="javax.swing.JLabel" name="lblGeneroOCliente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Genero o cliente elegido : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomTemLista">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDurTem">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDurTem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Duracion :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDescargarTema1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Descargar Tema"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDireccionTema">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Haz clic para copiar el enlace!"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtDireccionTemaMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDireccionTemaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Link del tema : "/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane9">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblTemas">
+        <Component class="javax.swing.JList" name="JListasFiltradas">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+                <StringItem index="4" value="Item 5"/>
+              </StringArray>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtDesLink">
+    <Component class="javax.swing.JTextField" name="txtListaElegida">
       <Properties>
         <Property name="columns" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLink">
+    <Component class="javax.swing.JLabel" name="lblLista">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Copiar Link"/>
+        <Property name="text" type="java.lang.String" value="Lista elegida"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLinkActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDescargar">
+    <Component class="javax.swing.JTextField" name="txtNombreLista">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Descargar"/>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane10">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="ListaTemasLista">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+                <StringItem index="4" value="Item 5"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jButtonBuscarInfoDeLista">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="buscarinfo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDescargarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarInfoDeListaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
