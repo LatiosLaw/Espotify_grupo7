@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
@@ -181,6 +182,93 @@ public class FormPrin extends javax.swing.JFrame {
             controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
             //-------//
 
+            //ARTISTAS//
+            controlArt.agregarArtista("vpeople", "Village", "People", "vpeople@tuta.io", "bit.ly/vpeople", LocalDate.of(1977, 1, 1), """
+                                                                                                                                     Village People es una
+                                                                                                                                     innovadora formaci\u00f3n musical
+                                                                                                                                     de estilo disco de finales de los
+                                                                                                                                     a\u00f1os 70. Fue famosa tanto por
+                                                                                                                                     sus peculiares disfraces, como
+                                                                                                                                     por sus canciones pegadizas,
+                                                                                                                                     con letras sugerentes y llenas de
+                                                                                                                                     dobles sentidos.""", "www.officialvillagepeople.com"); //VP
+
+            controlArt.agregarArtista("dmode", "Depeche", "Mode", "dmode@tuta.io", "bit.ly/depecheMode", LocalDate.of(1980, 6, 14), "", "www.depechemode.com"); //DM
+
+            controlArt.agregarArtista("clauper", "Cyndi", "Lauper", "clauper@hotmail.com", "bit.ly/cLauper", LocalDate.of(1953, 6, 22), """
+                                                                                                                                        Cynthia Ann Stephanie Lauper,
+                                                                                                                                        conocida simplemente como
+                                                                                                                                        Cyndi Lauper, es una
+                                                                                                                                        cantautora, actriz y empresaria
+                                                                                                                                        estadounidense. Despu\u00e9s de
+                                                                                                                                        participar en el grupo musical,
+                                                                                                                                        Blue Angel, en 1983 firm\u00f3 con
+                                                                                                                                        Portrait Records (filial de Epic
+                                                                                                                                        Records) y lanz\u00f3 su exitoso
+                                                                                                                                        \u00e1lbum debut She's So Unusual a
+                                                                                                                                        finales de ese mismo a\u00f1o.
+                                                                                                                                        Sigui\u00f3 lanzando una serie de
+                                                                                                                                        \u00e1lbumes en los que encontr\u00f3
+                                                                                                                                        una inmensa popularidad,
+                                                                                                                                        superando los l\u00edmites de
+                                                                                                                                        contenido de las letras de sus
+                                                                                                                                        canciones.""", "cyndilauper.com"); //CL
+
+            controlArt.agregarArtista("bruceTheBoss", "Bruce", "Springsteen", "bruceTheBoss@gmail.com", "bit.ly/bruceTheBoss", LocalDate.of(1949, 9, 23), "", "brucespringsteen.net"); //BS
+
+            controlArt.agregarArtista("tripleNelson", "La", "Triple Nelson", "tripleNelson@tuta.io", "bit.ly/tripleNelson", LocalDate.of(1998, 1, 1), """
+                                                                                                                                                      La Triple Nelson es un grupo
+                                                                                                                                                      de rock uruguayo formado en
+                                                                                                                                                      enero de 1998 e integrado
+                                                                                                                                                      inicialmente por Christian Cary
+                                                                                                                                                      (guitarra y voz), Fernando
+                                                                                                                                                      "Paco" Pintos (bajo y coros) y
+                                                                                                                                                      Rub\u00e9n Otonello (actualmente su
+                                                                                                                                                      nuevo baterista es Rafael Ugo).""", ""); //TN
+
+            controlArt.agregarArtista("la_ley", "La", "Ley", "la_ley@tuta.io", "", LocalDate.of(1987, 2, 14), "", ""); //LL
+
+            controlArt.agregarArtista("tigerOfWales", "Tom", "Jones", "tigerOfWales@tuta.io", "", LocalDate.of(1940, 6, 7), """
+                                                                                                                            Sir Thomas John, conocido por
+                                                                                                                            su nombre art\u00edstico de Tom
+                                                                                                                            Jones, es un cantante brit\u00e1nico.
+                                                                                                                            Ha vendido m\u00e1s de 100
+                                                                                                                            millones de discos en todo el
+                                                                                                                            mundo.1""", "www.tomjones.com"); //TJ
+
+            controlArt.agregarArtista("chaiko", "Piotr", "Tchaikovsky", "chaiko@tuta.io", "", LocalDate.of(1840, 4, 25), """
+                                                                                                                         Piotr Ilich Chaikovski fue un
+                                                                                                                         compositor ruso del per\u00edodo del
+                                                                                                                         Romanticismo""", ""); //PT
+
+            controlArt.agregarArtista("nicoleneu", "Nicole", "Neumann", "nicoleneu@hotmail.com", "bit.ly/nicoleneu", LocalDate.of(1980, 10, 31), "", ""); //NN
+
+            controlArt.agregarArtista("lospimpi", "Pimpinela", "", "lospimpi@gmail.com", "bit.ly/losPimpinela", LocalDate.of(1981, 8, 13), "", "www.pimpinela.net"); //PI
+
+            controlArt.agregarArtista("dyangounchained", "Dyango", "", "dyangounchained@gmail.com", "", LocalDate.of(1940, 3, 5), """
+                                                                                                                                  Jos\u00e9 G\u00f3mez Romero, conocido
+                                                                                                                                  art\u00edsticamente como Dyango es
+                                                                                                                                  un cantante espa\u00f1ol de m\u00fasica
+                                                                                                                                  rom\u00e1ntica.""", ""); //DY
+
+            controlArt.agregarArtista("alcides", "", "Alcides", "alcides@tuta.io", "", LocalDate.of(1952, 7, 17), """
+                                                                                                                  Su carrera comienza en 1976
+                                                                                                                  cuando forma la banda Los
+                                                                                                                  Playeros junto a su hermano V\u00edctor.
+                                                                                                                  Al poco tiempo se
+                                                                                                                  mudan a San Luis donde
+                                                                                                                  comienzan a hacerse conocidos
+                                                                                                                  en la escena musical. Su \u00e9xito a
+                                                                                                                  nivel nacional llega a comienzos
+                                                                                                                  de los a\u00f1os 1990 cuando
+                                                                                                                  desembarca en Buenos Aires y
+                                                                                                                  graba el \u00e9xito "Violeta",
+                                                                                                                  originalmente compuesta e
+                                                                                                                  interpretada en 1985 por el
+                                                                                                                  m\u00fasico brasile\u00f1o Luiz Caldas
+                                                                                                                  bajo el t\u00edtulo \u00abFricote\u00bb.""", ""); //AL
+            //---------//
+
             //GENEROS//
             Collection<String> generos1 = new ArrayList<>();
 
@@ -212,11 +300,10 @@ public class FormPrin extends javax.swing.JFrame {
             controlTem.crearTemaDefault("YMCA", 428, "mp3");
             controlTem.crearTemaDefault("Macho Man", 328, "web");
             controlTem.crearTemaDefault("In the Navy", 313, "mp3");
-            
-            DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop");
-            
-         //->>>>   lista.agregarTema?////
 
+            DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop");
+
+            //->>>>   lista.agregarTema?////
             //----------------------//
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
 
