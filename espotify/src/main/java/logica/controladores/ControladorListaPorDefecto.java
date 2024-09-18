@@ -1,5 +1,8 @@
 package logica.controladores;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import logica.Genero;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
@@ -55,6 +58,19 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     @Override
     public void quitarTema(String nombre_lista, String nombre_tema) {
 
+    }
+    
+    @Override
+    public Collection<String> retornarListasDelGenero(String genero){
+        Collection<String> lista_final = new ArrayList<>();
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        Collection<ListaPorDefecto> albu = persistence.findListasPorGeneros(genero);
+        Iterator<ListaPorDefecto> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            ListaPorDefecto lista = iterator.next();
+            lista_final.add(lista.getNombre());
+        }
+        return lista_final;
     }
 
     @Override
