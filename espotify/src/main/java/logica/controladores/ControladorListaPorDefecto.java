@@ -56,14 +56,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     @Override
     public void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo) {
 DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
-        ListaPorDefecto lista = null;
-        ListaPorDefecto listas = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
-        if(lista == null){
-          System.out.println("No existen listas en el sistema."); 
-        }else{
+        ListaPorDefecto lista = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
         lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
         daoLista.update(lista);
-        }
     }
 
     @Override
