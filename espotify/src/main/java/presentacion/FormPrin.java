@@ -3,9 +3,11 @@ package presentacion;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 import logica.controladores.*;
+import logica.dt.DataGenero;
+import logica.dt.DataListaPorDefecto;
 import logica.factory.Fabrica;
-import logica.dt.DataTema;
 
 public class FormPrin extends javax.swing.JFrame {
 
@@ -166,20 +168,73 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
-        controlCli.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
-        controlCli.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
-        controlArt.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
-        controlCli.agregarCliente("Nick Furry", "Nikolas", "Furia", "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
+        try {
 
-        controlCli.seguirUsuario("El Listo", "Jose");
+            //CLIENTES//
+            controlCli.agregarCliente("Eleven11", "Eleven", "", "Eleven11@gmail.com", "bit.ly/11Eleven11", LocalDate.of(1971, 12, 31)); //EL
+            controlCli.agregarCliente("cbochinche", "Cacho", "Bochinche", "cbochinche@vera.com.uy", "bit.ly/cbochinche", LocalDate.of(1937, 5, 8)); //CB
+            controlCli.agregarCliente("lachiqui", "Mirtha", "Legrand", "lachiqui@hotmail.com.ar", "bit.ly/laChiqui", LocalDate.of(1927, 2, 3)); //ML
+            controlCli.agregarCliente("benKenobi", "Obi-Wan", "Kenobi", "benKenobi@gmail.com", "bit.ly/benKenobi", LocalDate.of(1914, 4, 2)); //OK
+            controlCli.agregarCliente("Heisenberg", "Walter", "White", "Heisenberg@tuta.io", "bit.ly/heisenbergWW", LocalDate.of(1956, 3, 7)); //WW
+            controlCli.agregarCliente("ppArgento", "Pepe", "Argento", "ppArgento@hotmail.com", "bit.ly/ppArgento", LocalDate.of(1955, 2, 14)); //PA
+            controlCli.agregarCliente("scarlettO", "Scarlett", "O’Hara", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
+            controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
+            //-------//
+
+            //GENEROS//
+            Collection<String> generos1 = new ArrayList<>();
+
+            generos1.add("Electropop"); //EPO
+            generos1.add("Dance-pop"); //DPO
+            generos1.add("Pop Clásico"); //PCL
+
+            Collection<String> generos2 = new ArrayList<>();
+
+            generos2.add("Rock Clásico"); //RCL
+            generos2.add("Rock Latino"); //RKL
+            generos2.add("Rock & Roll"); //RAR
+
+            controlGen.crearGeneroUnico("Clásica"); //CLA
+            controlGen.crearGeneroUnico("Disco"); //DIS
+            controlGen.crearGeneroUnico("Balada"); //BAL
+            controlGen.crearGeneroUnico("Cumbia"); //CUM
+
+            controlGen.crearGeneroConSubgeneros("Rock", generos2); //ROK
+            controlGen.crearGeneroConSubgeneros("Pop", generos1); //POP
+            //--------//
+
+            //LISTAS DE REPRODUCCION//
+            controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico")); //LD1
+            controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino")); //LD2
+            controlListPD.crearLista("Música Clásica", new DataGenero("Clásica")); //LD3
+
+            // controlListPar.crearLista("Música Inspiradora", new DataCliente().setNickname("el_padrino")); //en progreso
+            controlTem.crearTemaDefault("YMCA", 428, "mp3");
+            controlTem.crearTemaDefault("Macho Man", 328, "web");
+            controlTem.crearTemaDefault("In the Navy", 313, "mp3");
+            
+            DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop");
+            
+         //->>>>   lista.agregarTema?////
+
+            //----------------------//
+            JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Error al agregar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        //controlArt.agregarArtista("lachiqui", "Mirtha", "Legrand", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(1927, 2, 3), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
+        /*controlCli.seguirUsuario("El Listo", "Jose");
         controlCli.seguirUsuario("El Listo", "Jhon Black Soul");
-        controlCli.seguirUsuario("Jose", "El Listo");
+        controlCli.seguirUsuario("Jose", "El Listo");*/
 
-        Collection<DataTema> tem = new ArrayList<>();
+ /*Collection<DataTema> tem = new ArrayList<>();
         controlAlb.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);
         controlGen.crearGeneroUnico("Genero 1");
         controlGen.crearGeneroUnico("Genero 2");
-        controlGen.crearGeneroUnico("Genero 3");
+        controlGen.crearGeneroUnico("Genero 3");*/
     }//GEN-LAST:event_btnCarDatActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
