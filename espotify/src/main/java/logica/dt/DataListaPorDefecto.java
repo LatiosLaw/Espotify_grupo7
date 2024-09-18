@@ -1,7 +1,8 @@
 package logica.dt;
 
 public class DataListaPorDefecto extends DataListaReproduccion {
-    private DataGenero genero; 
+
+    private DataGenero genero;
 
     public DataListaPorDefecto(String nombre, DataCliente creador, DataGenero genero) {
         super(nombre, creador);
@@ -16,7 +17,6 @@ public class DataListaPorDefecto extends DataListaReproduccion {
         super(nombre);
         this.genero = dataGenero;
     }
-    
 
     public DataGenero getGenero() {
         return genero;

@@ -5,12 +5,13 @@ import java.util.Collection;
 import java.time.LocalDate;
 
 public class DataCliente extends DataUsuario {
-    private Collection<DataUsuario> seguidos; // Almacena los usuarios seguidos
-    private Collection<DataTema> temasFavoritos; // Almacena los temas favoritos
-    private Collection<DataAlbum> albumesFavoritos; // Almacena los albumes favoritos
-    private Collection<DataListaReproduccion> listasFavoritas; // Almacena las listas de reproduccion favoritas
 
-    public DataCliente(){
+    private Collection<DataUsuario> seguidos;
+    private Collection<DataTema> temasFavoritos;
+    private Collection<DataAlbum> albumesFavoritos;
+    private Collection<DataListaReproduccion> listasFavoritas;
+
+    public DataCliente() {
 
     }
 
@@ -72,11 +73,11 @@ public class DataCliente extends DataUsuario {
 
     @Override
     public String toString() {
-        return "DataCliente{" +
-                "seguido=" + seguidos +
-                ", temasFavoritos=" + temasFavoritos +
-                ", albumesFavoritos=" + albumesFavoritos +
-                ", listasFavoritas=" + listasFavoritas +
-                "} " + super.toString();
+        return "DataCliente{"
+                + "seguido=" + seguidos
+                + ", temasFavoritos=" + temasFavoritos
+                + ", albumesFavoritos=" + albumesFavoritos
+                + ", listasFavoritas=" + listasFavoritas
+                + "} " + super.toString();
     }
 }

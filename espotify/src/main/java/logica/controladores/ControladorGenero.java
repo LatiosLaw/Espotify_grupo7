@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica.controladores;
 
 import java.util.ArrayList;
@@ -12,26 +8,23 @@ import logica.dt.DataAlbum;
 import logica.dt.DataGenero;
 import persistencia.DAO_Album;
 import persistencia.DAO_Genero;
-/**
- *
- * @author Nico
- */
-public class ControladorGenero implements IControladorGenero{
-    
+
+public class ControladorGenero implements IControladorGenero {
+
     @Override
-    public void crearGeneroUnico(String nombre){
+    public void crearGeneroUnico(String nombre) {
         DAO_Genero persistence = new DAO_Genero();
         Genero nuevo_genero = new Genero(nombre);
         persistence.save(nuevo_genero);
     }
-    
+
     @Override
-    public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre){
-        
+    public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre) {
+
     }
-    
+
     @Override
-    public Collection<String> mostrarGeneros(){
+    public Collection<String> mostrarGeneros() {
         Collection<String> lista = new ArrayList<>();
         DAO_Genero persistence = new DAO_Genero();
         Collection<Genero> gene = persistence.findAll();
@@ -44,25 +37,24 @@ public class ControladorGenero implements IControladorGenero{
     }
 
     @Override
-    public Collection<DataGenero> darGenerosDelAlbum(String nombre_album){
-    Collection<DataGenero> lista = new ArrayList<>();
-    DAO_Genero persistence = new DAO_Genero();
-    Collection<String> gene = persistence.findfromAlbum(nombre_album);
-    Iterator<String> iterator = gene.iterator();
+    public Collection<DataGenero> darGenerosDelAlbum(String nombre_album) {
+        Collection<DataGenero> lista = new ArrayList<>();
+        DAO_Genero persistence = new DAO_Genero();
+        Collection<String> gene = persistence.findfromAlbum(nombre_album);
+        Iterator<String> iterator = gene.iterator();
         while (iterator.hasNext()) {
             String genero = iterator.next();
             lista.add(new DataGenero(genero));
         }
         return lista;
     }
-    
+
     @Override
-    public void actualizarGenero(DataGenero genero, Collection<String> albumes_previos_del_genero, DataAlbum album){
+    public void actualizarGenero(DataGenero genero, Collection<String> albumes_previos_del_genero, DataAlbum album) {
         DAO_Genero persistence = new DAO_Genero();
         DAO_Album persistence_a = new DAO_Album();
-            Genero genero_actualizable = persistence.find(genero.getNombre());
-            genero_actualizable.agregarAlbumDelGenero(persistence_a.find(album.getNombre()));
-            persistence.update(genero_actualizable);
-        }
-    
+        Genero genero_actualizable = persistence.find(genero.getNombre());
+        genero_actualizable.agregarAlbumDelGenero(persistence_a.find(album.getNombre()));
+        persistence.update(genero_actualizable);
+    }
 }

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class DataArtista extends DataUsuario {
+
     private String biografia;
     private String dirWeb;
-    private Collection<DataAlbum> albumes; 
+    private Collection<DataAlbum> albumes;
 
-    public DataArtista(){
+    public DataArtista() {
 
     }
 

@@ -11,10 +11,6 @@ import logica.dt.DataListaParticular;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Usuario;
 
-/**
- *
- * @author Nico
- */
 public class ControladorListaParticular implements IControladorListaParticular {
 
     @Override

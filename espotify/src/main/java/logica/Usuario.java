@@ -1,9 +1,5 @@
 package logica;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.ManyToMany;
 
-/**
- *
- * @author Law
- */
 @Entity
 public abstract class Usuario implements Serializable {
 
@@ -46,10 +38,10 @@ public abstract class Usuario implements Serializable {
         this.fecha_nac = fechaNacimiento;
     }
 
-    // Métodos comunes a todos los usuarios
     public String getNickname() {
         return nickname;
     }
+    
     public String getNombre() {
         return nombre;
     }

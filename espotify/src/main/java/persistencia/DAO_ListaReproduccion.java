@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
-/**
- *
- * @author Nico
- */
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
-import java.util.NoSuchElementException;
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
@@ -60,21 +50,21 @@ public class DAO_ListaReproduccion {
             return null;
         }
     }
-    
+
     public Collection<ListaParticular> findListaPorCliente(String nick_creador) {
-    try {
-        return entityManager.createQuery(
-                "SELECT u FROM ListaParticular u WHERE u.creador.nickname = :nick_creador",
-                ListaParticular.class)
-                .setParameter("nick_creador", nick_creador)
-                .getResultList(); // Change here to getResultList()
-    } catch (NoResultException e) {
-        return new ArrayList<>(); // Return an empty list instead of null
-    } catch (Exception e) {
-        e.printStackTrace(); // For debugging
-        return new ArrayList<>(); // Return an empty list in case of an error
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaParticular u WHERE u.creador.nickname = :nick_creador",
+                    ListaParticular.class)
+                    .setParameter("nick_creador", nick_creador)
+                    .getResultList(); // Change here to getResultList()
+        } catch (NoResultException e) {
+            return new ArrayList<>(); // Return an empty list instead of null
+        } catch (Exception e) {
+            e.printStackTrace(); // For debugging
+            return new ArrayList<>(); // Return an empty list in case of an error
+        }
     }
-}
 
     public ListaPorDefecto findListaPorGeneroYNombre(String generoNombre, String nombreLista) {
         try {
@@ -115,5 +105,4 @@ public class DAO_ListaReproduccion {
             entityManagerFactory.close();
         }
     }
-
 }

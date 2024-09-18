@@ -3,6 +3,7 @@ package logica.dt;
 import java.time.LocalDate;
 
 public class DataUsuario {
+
     private String nickname;
     private String nombre;
     private String apellido;
@@ -19,7 +20,7 @@ public class DataUsuario {
         this.fechaNac = fechaNac;
     }
 
-    public DataUsuario(){
+    public DataUsuario() {
         this.setNickname(new String());
         this.setNombre(new String());
         this.setApellido(new String());
@@ -47,7 +48,7 @@ public class DataUsuario {
     public LocalDate getFechaNac() {
         return fechaNac;
     }
-    
+
     public String getFoto() {
         return foto_perfil;
     }
@@ -78,12 +79,12 @@ public class DataUsuario {
 
     @Override
     public String toString() {
-        return "DataUsuario{" +
-                "nickname='" + nickname + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", correo='" + correo + '\'' +
-                ", fechaNac=" + fechaNac +
-                '}';
+        return "DataUsuario{"
+                + "nickname='" + nickname + '\''
+                + ", nombre='" + nombre + '\''
+                + ", apellido='" + apellido + '\''
+                + ", correo='" + correo + '\''
+                + ", fechaNac=" + fechaNac
+                + '}';
     }
 }

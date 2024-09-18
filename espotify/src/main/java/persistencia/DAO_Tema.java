@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
 import javax.persistence.EntityManager;
@@ -10,9 +6,9 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.tema;
-import logica.Usuario;
 
 public class DAO_Tema {
+
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
@@ -34,12 +30,12 @@ public class DAO_Tema {
     public List<tema> findAll() {
         return entityManager.createQuery("SELECT e FROM TEMA e", tema.class).getResultList();
     }
-    
+
     public List<tema> findFromAlbum(String nombre_album) {
         try {
             return entityManager.createQuery("SELECT t FROM tema t JOIN Album a WHERE a.nombre = :nombre_album ORDER BY t.posicion_album ASC", tema.class)
-                .setParameter("nombre_album", nombre_album)
-                .getResultList();
+                    .setParameter("nombre_album", nombre_album)
+                    .getResultList();
         } catch (NoResultException e) {
             return null; // No se encontro ningún tema de este album
         }
@@ -61,7 +57,11 @@ public class DAO_Tema {
     }
 
     public void close() {
-        if (entityManager != null) entityManager.close();
-        if (entityManagerFactory != null) entityManagerFactory.close();
+        if (entityManager != null) {
+            entityManager.close();
+        }
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
+        }
     }
 }

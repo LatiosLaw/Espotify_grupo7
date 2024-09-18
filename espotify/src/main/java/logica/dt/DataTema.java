@@ -1,19 +1,20 @@
 package logica.dt;
 
 public class DataTema {
+
     private String nickname;
     private Integer posicion_album;
     private Integer duracion;
-    private DataAlbum album; 
+    private DataAlbum album;
     private String metodo_de_acceso;
-    
+
     public DataTema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso) {
         this.nickname = nickname;
         this.duracion = duracion;
         this.posicion_album = posicion_album;
         this.metodo_de_acceso = metodo_de_acceso;
     }
-    
+
     public DataTema(String nickname, Integer duracion) {
         this.nickname = nickname;
         this.duracion = duracion;
@@ -24,7 +25,7 @@ public class DataTema {
         this.duracion = duracion;
         this.album = album;
     }
-    
+
     public DataTema(String nickname, Integer duracion, DataAlbum album, Integer posicion_album) {
         this.nickname = nickname;
         this.duracion = duracion;
@@ -32,7 +33,7 @@ public class DataTema {
         this.posicion_album = posicion_album;
     }
 
-    public DataTema(){
+    public DataTema() {
         this.setNickname(new String());
         this.setDuracion(null);
         this.album = new DataAlbum();
@@ -56,7 +57,7 @@ public class DataTema {
     public DataAlbum getAlbum() {
         return album;
     }
-    
+
     public Integer getPos() {
         return posicion_album;
     }
@@ -64,7 +65,7 @@ public class DataTema {
     public void setPos(Integer posicion) {
         this.posicion_album = posicion;
     }
-    
+
     public String getAccess() {
         return metodo_de_acceso;
     }

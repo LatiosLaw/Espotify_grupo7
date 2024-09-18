@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class DataGenero {
+
     private String nombre;
     private Collection<DataGenero> subgeneros;
-    private Collection<DataAlbum> albumesDelGenero; 
-
+    private Collection<DataAlbum> albumesDelGenero;
 
     public DataGenero(String nombre) {
         this.nombre = nombre;
@@ -47,10 +47,10 @@ public class DataGenero {
 
     @Override
     public String toString() {
-        return "DataGenero{" +
-                "nombre='" + nombre + '\'' +
-                ", subgeneros=" + subgeneros +
-                ", albumesDelGenero=" + albumesDelGenero +
-                '}';
+        return "DataGenero{"
+                + "nombre='" + nombre + '\''
+                + ", subgeneros=" + subgeneros
+                + ", albumesDelGenero=" + albumesDelGenero
+                + '}';
     }
 }

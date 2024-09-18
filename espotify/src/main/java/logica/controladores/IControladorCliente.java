@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package logica.controladores;
 
 import java.time.LocalDate;
@@ -12,58 +8,47 @@ import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.errorBundle;
 
-/**
- *
- * @author Nico
- */
 public interface IControladorCliente {
-    
+
     public errorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
-    
-    
-    /**
-     * 
-     * @param nick1 nickname de la persona que sigue
-     * @param nick2 nickname de la persona que es seguida
-     */
+
     public void seguirUsuario(String nick1, String nick2);
-    
+
     public void dejarDeSeguirUsuario(String nick1, String nick2);
-    
+
     public DataCliente consultarPerfilCliente(String nick_cli);
-    
+
     public void agregarTema(DataCliente nickcli, DataTema nicktem);
-    
+
     public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista);
-    
+
     public void agregarAlbum(DataCliente nickcli, DataAlbum nomalbum);
-    
+
     public void eliminarTema(DataCliente nickcli, DataTema nicktem);
-    
+
     public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista);
-    
+
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum);
-    
+
     public void consultarListaReproduccion(String nickname);
-    
+
     public int obtenerNumeroSeguidores(String nick);
-    
+
     public Collection<DataCliente> mostrarClientes();
-    
+
     public Collection<String> obtenerSeguidosUsuario(String nick);
-    
+
     public Collection<String> obtenerSeguidoresUsuario(String nick);
-    
+
     public Collection<String> obtenerListasDeUsuario(String nick);
-    
-     public Collection<String> obtenerListasFavCliente(String nick);
-     
-      public Collection<String> obtenerTemaFavCliente(String nick);
-     
-     public Collection<String> obtenerAlbumFavCliente(String nick) ;
-    
-     public Collection<String> mostrarUsuarios();
+
+    public Collection<String> obtenerListasFavCliente(String nick);
+
+    public Collection<String> obtenerTemaFavCliente(String nick);
+
+    public Collection<String> obtenerAlbumFavCliente(String nick);
+
+    public Collection<String> mostrarUsuarios();
 
     public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido);
-    
 }

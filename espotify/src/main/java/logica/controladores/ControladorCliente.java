@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -27,10 +23,6 @@ import logica.dt.DataTema;
 import logica.dt.errorBundle;
 import persistencia.DAO_Usuario;
 
-/**
- *
- * @author Nico
- */
 public class ControladorCliente implements IControladorCliente {
 
     @Override
@@ -40,12 +32,12 @@ public class ControladorCliente implements IControladorCliente {
 
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false,1);
+            return new errorBundle(false, 1);
         }
 
         if (persistence.findUsuarioByMail(mail) != null) {
             System.out.println("El correo electronico: " + mail + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false,2);
+            return new errorBundle(false, 2);
         }
 
         // Crear el nuevo cliente
@@ -55,13 +47,13 @@ public class ControladorCliente implements IControladorCliente {
         try {
             persistence.save(nuevoCliente);
             System.out.println("Cliente agregado exitosamente.");
-            return new errorBundle(true,null);
+            return new errorBundle(true, null);
         } catch (PersistenceException e) {
             System.out.println("Error al guardar el cliente: " + e.getMessage());
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
             }
-            return new errorBundle(true,null);
+            return new errorBundle(true, null);
         }
     }
 
@@ -116,38 +108,38 @@ public class ControladorCliente implements IControladorCliente {
         if (usuario == null) {
             throw new IllegalArgumentException("Usuario a dejar de seguir no encontrado.");
         }
-        
+
         cliente.dejarDeSeguir(usuario);
- 
+
         // Actualizar la tabla
         persistence.update(cliente);
     }
 
-@Override
-public DataCliente consultarPerfilCliente(String nick_cli) {
-    Usuario retorno;
-    DAO_Usuario persistence = new DAO_Usuario();
-    
-    try {
-        retorno = persistence.findUsuarioByNick(nick_cli);
-        if (retorno != null && retorno instanceof Cliente cliente) {
-            return new DataCliente(
-                retorno.getNickname(),
-                retorno.getNombre(),
-                retorno.getApellido(),
-                retorno.getFoto(),
-                retorno.getEmail(),
-                retorno.getNacimiento()
-            );
-        } else {
-            System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");
+    @Override
+    public DataCliente consultarPerfilCliente(String nick_cli) {
+        Usuario retorno;
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        try {
+            retorno = persistence.findUsuarioByNick(nick_cli);
+            if (retorno != null && retorno instanceof Cliente cliente) {
+                return new DataCliente(
+                        retorno.getNickname(),
+                        retorno.getNombre(),
+                        retorno.getApellido(),
+                        retorno.getFoto(),
+                        retorno.getEmail(),
+                        retorno.getNacimiento()
+                );
+            } else {
+                System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("Error al buscar el cliente: " + e.getMessage());
             return null;
         }
-    } catch (Exception e) {
-        System.err.println("Error al buscar el cliente: " + e.getMessage());
-        return null;
     }
-}
 
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
@@ -217,105 +209,105 @@ public DataCliente consultarPerfilCliente(String nick_cli) {
     public void consultarListaReproduccion(String nickname) {
 
     }
-    
+
     @Override
-    public int obtenerNumeroSeguidores(String nick){
+    public int obtenerNumeroSeguidores(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerCantidadSeguidores(nick);
     }
+
     @Override
-    public Collection<String> obtenerSeguidoresUsuario(String nick){
+    public Collection<String> obtenerSeguidoresUsuario(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerSeguidoresDeUsuario(nick);
     }
-     @Override
-    public Collection<String> obtenerSeguidosUsuario(String nick){
+
+    @Override
+    public Collection<String> obtenerSeguidosUsuario(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         Usuario usr;
         Collection<String> cole = dao.obtenerSeguidosDeUsuario(nick);
         Collection<String> cole2 = new ArrayList<>();
         for (String elemento : cole) {
-          usr =  dao.findUsuarioByNick(elemento);
-            if(usr instanceof Cliente cli){
+            usr = dao.findUsuarioByNick(elemento);
+            if (usr instanceof Cliente cli) {
                 cole2.add(cli.getNickname() + "/Cliente");
-            }else{
+            } else {
                 cole2.add(usr.getNickname() + "/Artista");
             }
         }
-        
-        
+
         return cole2;
     }
-     @Override
-    public Collection<String> obtenerListasDeUsuario(String nick){
+
+    @Override
+    public Collection<String> obtenerListasDeUsuario(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerListasDeUsuario(nick);
     }
+
     @Override
-    public Collection<DataCliente> mostrarClientes(){
+    public Collection<DataCliente> mostrarClientes() {
         Collection<DataCliente> lista = new ArrayList<>();
         DAO_Usuario persistence = new DAO_Usuario();
         Collection<Usuario> cliente = persistence.findAll();
         Iterator<Usuario> iterator = cliente.iterator();
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
-            if(usr instanceof Cliente cli){
-              lista.add(new DataCliente(cli.getNickname(),cli.getNombre(),cli.getApellido(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
+            if (usr instanceof Cliente cli) {
+                lista.add(new DataCliente(cli.getNickname(), cli.getNombre(), cli.getApellido(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
             }
-        }       
+        }
         return lista;
     }
-     @Override
-    public Collection<String> obtenerListasFavCliente(String nick){
+
+    @Override
+    public Collection<String> obtenerListasFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerListasFavCliente(nick);
     }
-     @Override
-    public Collection<String> obtenerTemaFavCliente(String nick){
+
+    @Override
+    public Collection<String> obtenerTemaFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerTemaFavCliente(nick);
     }
-     @Override
-    public Collection<String> obtenerAlbumFavCliente(String nick){
+
+    @Override
+    public Collection<String> obtenerAlbumFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerAlbumFavCliente(nick);
     }
-     @Override
-    public Collection<String> mostrarUsuarios(){
+
+    @Override
+    public Collection<String> mostrarUsuarios() {
         Collection<String> lista = new ArrayList<>();
         DAO_Usuario persistence = new DAO_Usuario();
         Collection<Usuario> usuario = persistence.findAll();
         Iterator<Usuario> iterator = usuario.iterator();
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
-              lista.add(usr.getNickname());
-        }       
+            lista.add(usr.getNickname());
+        }
         return lista;
-        
+
     }
-    
+
     @Override
-    public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido){
-         DAO_Usuario persistence = new DAO_Usuario();
+    public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido) {
+        DAO_Usuario persistence = new DAO_Usuario();
         Collection<String> cole = persistence.obtenerSeguidosDeUsuario(nickCliente);
         boolean token = false;
-         for (String elemento : cole) {
+        for (String elemento : cole) {
             String nick = elemento;
-            System.out.println("Nick dentro de la lista: " +nick);
-            if(nick.equals(nickSeguido)){
+            System.out.println("Nick dentro de la lista: " + nick);
+            if (nick.equals(nickSeguido)) {
                 System.out.println("Ah jah!");
                 token = true;
                 break;
             }
         }
-        
+
         return token;
     }
-    
-    
-    
-    
-    
-    
 }
-

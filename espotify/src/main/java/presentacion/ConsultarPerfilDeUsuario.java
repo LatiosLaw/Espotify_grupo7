@@ -162,11 +162,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         });
         jScrollPane7.setViewportView(lstListas);
 
-        lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Larry", "Capaja", "El", "Hombre", "Que ", "No ", "Te", "Engaña" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane8.setViewportView(lstUsuarios);
 
         txtBuscar.setColumns(10);

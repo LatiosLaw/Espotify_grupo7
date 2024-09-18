@@ -1,10 +1,10 @@
 package logica.dt;
 
 public class DataListaParticular extends DataListaReproduccion {
-    private boolean visibilidad; 
-    private DataCliente creador; 
 
-    // Constructor
+    private boolean visibilidad;
+    private DataCliente creador;
+
     public DataListaParticular(String nombre, DataCliente creador, boolean visibilidad) {
         super(nombre, creador);
         this.visibilidad = visibilidad;
@@ -20,8 +20,8 @@ public class DataListaParticular extends DataListaReproduccion {
     public boolean getVisibilidad() {
         return visibilidad;
     }
-    
-    public DataCliente getDataCliente(){
+
+    public DataCliente getDataCliente() {
         return this.creador;
     }
 

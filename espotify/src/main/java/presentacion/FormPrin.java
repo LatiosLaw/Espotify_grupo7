@@ -49,6 +49,7 @@ public class FormPrin extends javax.swing.JFrame {
         btnCarDat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Espotify");
         setResizable(false);
 
         pnlPrin.setBackground(new java.awt.Color(153, 255, 204));
