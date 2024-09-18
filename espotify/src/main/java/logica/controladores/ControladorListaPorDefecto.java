@@ -58,14 +58,6 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
 DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         ListaPorDefecto lista = null;
         ListaPorDefecto listas = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
-        Iterator<ListaPorDefecto> iterator = listas.iterator();
-        while (iterator.hasNext()) {
-            lista = iterator.next();
-            String nombrel = lista.getNombre();
-            if(nombrel == nombre_lista){
-                break;
-            }
-        }
         if(lista == null){
           System.out.println("No existen listas en el sistema."); 
         }else{
