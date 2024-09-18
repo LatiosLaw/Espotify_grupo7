@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
@@ -11,6 +14,7 @@ import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
+import logica.dt.DataTema;
 
 /**
  *
@@ -149,10 +153,7 @@ public class FormPrin extends javax.swing.JFrame {
                pnlPrin.removeAll();
                pnlPrin.add(au);
                pnlPrin.revalidate();
-               pnlPrin.repaint();
-    
- 
-                
+               pnlPrin.repaint();      
     }//GEN-LAST:event_btnAdUsActionPerformed
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
@@ -179,7 +180,21 @@ public class FormPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdLiActionPerformed
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
-        // TODO add your handling code here:
+        
+        controlCli.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
+        controlCli.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
+        controlArt.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
+        controlCli.agregarCliente("Nick Furry", "Nikolas", "Furia" , "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
+            
+        controlCli.seguirUsuario("El Listo", "Jose");
+        controlCli.seguirUsuario("El Listo", "Jhon Black Soul");
+        controlCli.seguirUsuario("Jose", "El Listo");
+        
+        Collection<DataTema> tem = new ArrayList<>();
+        controlAlb.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);
+        controlGen.crearGeneroUnico("Genero 1");
+        controlGen.crearGeneroUnico("Genero 2");
+        controlGen.crearGeneroUnico("Genero 3");
     }//GEN-LAST:event_btnCarDatActionPerformed
 
     /**

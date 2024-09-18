@@ -10,39 +10,26 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
-/**
- *
- * @author Urbina
- */
 public class AgregarUsuario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AgregarUsuario
-     */
     private IControladorCliente controlCli;
     private IControladorArtista controlArt;
     private Component lblMsjArch;
+
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
         controlArt = ica;
-        
-        ica.agregarArtista("Pepe122", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        ica.agregarArtista("joselito", "Pepe", "Cuenca", "pepe@gmail.com", "dirFoto", LocalDate.of(2024,5,2), "Me gusta tocar la viola", "pepito.com");
-        icc.agregarCliente("mario34", "Mario", "Fuentes", "mariofuentes@gmail.com", "dirFoto" , LocalDate.of(2002, 3, 1));
-        icc.agregarCliente("El listo", "Larry", "Capaja", "larricapaja@gaymail.com", "defoult" , LocalDate.of(1969, 6, 9));
-        
-        
+
         initComponents();
         txtNull.setVisible(false);
-         lblDirWeb.setVisible(false);
-               txtDirWeb.setVisible(false);
-               txtaBio.setVisible(false);
-               lblBiografia.setVisible(false);
+        lblDirWeb.setVisible(false);
+        txtDirWeb.setVisible(false);
+        txtaBio.setVisible(false);
+        lblBiografia.setVisible(false);
     }
 
     /**
@@ -240,150 +227,143 @@ public class AgregarUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-        
-        
-        if(cbxTipoUsr.getSelectedIndex() == 0){
+
+        if (cbxTipoUsr.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione el tipo de usuario.");
-        }else{
-             String pattern = "MM/dd/yyyy";
+        } else {
+            String pattern = "MM/dd/yyyy";
 
             DateFormat df = new SimpleDateFormat(pattern);
 
-        
-            Date today =(Date) sprFecha.getValue();        
+            Date today = (Date) sprFecha.getValue();
 
             String fechaString = df.format(today);
 
             System.out.println("Today is: " + fechaString);
 
             DateTimeFormatter formatter
-                = DateTimeFormatter.ofPattern("MM/dd/yyyy");
- 
+                    = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
             LocalDate fechaFinal
-                = LocalDate.parse(fechaString, formatter);
- 
+                    = LocalDate.parse(fechaString, formatter);
+
             String nick = txtNickName.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String correo = txtCorreo.getText();
             String foto = "foto"; //DE MOMENTO
-              System.out.println("Converted LocalDate: "  + fechaFinal);
-            if(txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true){
-            if(cbxTipoUsr.getSelectedIndex() == 2){
-                String biografia = txtaBio.getText();
-                String webPag = txtDirWeb.getText();
-                //deborlber cosas CON bio y web
-                if(txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true){
-                if(txtIMG.getText().isEmpty()){
-                     if(controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag).getValor()){
-              JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
-              vaciarCampos();
-                     }else{
-                         if(controlArt.agregarArtista(nick, nombre, apellido, correo,"default", fechaFinal, biografia, webPag).getNumero() == 1){
-                             JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
-                         }else{
-                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
-                         }
-                     }
-                }else{
-                    if(controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag).getValor()){
-                JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
-                vaciarCampos();
-                     }else{
-                         if(controlArt.agregarArtista(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal, biografia, webPag).getNumero() == 1){
-                         JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
-                         }else{
-                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
-                         }
-                     }
+            System.out.println("Converted LocalDate: " + fechaFinal);
+            if (txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true) {
+                if (cbxTipoUsr.getSelectedIndex() == 2) {
+                    String biografia = txtaBio.getText();
+                    String webPag = txtDirWeb.getText();
+                    //deborlber cosas CON bio y web
+                    if (txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true) {
+                        if (txtIMG.getText().isEmpty()) {
+                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getValor()) {
+                                JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
+                                vaciarCampos();
+                            } else {
+                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getNumero() == 1) {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                                } else {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                                }
+                            }
+                        } else {
+                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal, biografia, webPag).getValor()) {
+                                JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
+                                vaciarCampos();
+                            } else {
+                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal, biografia, webPag).getNumero() == 1) {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                                } else {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                                }
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
+                    }
+                } else {
+
+                    if (txtIMG.getText().isEmpty()) {
+
+                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal).getValor() == true) {
+                            JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
+                            vaciarCampos();
+                        } else {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal).getNumero() == 1) {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                            } else {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                            }
+                        }
+                    } else {
+                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, "default", fechaFinal).getValor() == true) {
+                            JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
+                            vaciarCampos();
+                        } else {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, "default", fechaFinal).getNumero() == 1) {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                            } else {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                            }
+                        }
+                    }
                 }
-                }else{
-                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
-                }
-            }else{
-                
-                if(txtIMG.getText().isEmpty()){
-                    
-                     if(controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal).getValor() == true){
-                         JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
-                         vaciarCampos();
-                     }else{
-                         if(controlCli.agregarCliente(nick, nombre, apellido, correo,txtIMG.getText(), fechaFinal).getNumero()==1){
-                             JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
-                         }else{
-                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
-                         }
-                     }
-                }else{
-                     if(controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal).getValor() == true){
-                     JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
-                     vaciarCampos();
-                     }else{
-                        if(controlCli.agregarCliente(nick, nombre, apellido, correo,"default", fechaFinal).getNumero()==1){
-                         JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
-                         }else{
-                             JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
-                         }
-                     }
-                }
-            }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos del formulario.");
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void vaciarCampos(){
-       txtNickName.setText(null);
-       txtNombre.setText(null);
-       txtCorreo.setText(null);
-       txtIMG.setText(null);
-       txtApellido.setText(null);
-       txtDirWeb.setText(null);
-       txtaBio.setText(null);
-       cbxTipoUsr.setSelectedIndex(0);
+    private void vaciarCampos() {
+        txtNickName.setText(null);
+        txtNombre.setText(null);
+        txtCorreo.setText(null);
+        txtIMG.setText(null);
+        txtApellido.setText(null);
+        txtDirWeb.setText(null);
+        txtaBio.setText(null);
+        cbxTipoUsr.setSelectedIndex(0);
     }
-    
+
     private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNickNameActionPerformed
 
     private void cbxTipoUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUsrActionPerformed
         int token = cbxTipoUsr.getSelectedIndex();
-       
+
         switch (token) {
-         case 0:
-                 
-               lblDirWeb.setVisible(false);
-               txtDirWeb.setVisible(false);
-               txtaBio.setVisible(false);
-               lblBiografia.setVisible(false);
-             
-               
+            case 0:
+
+                lblDirWeb.setVisible(false);
+                txtDirWeb.setVisible(false);
+                txtaBio.setVisible(false);
+                lblBiografia.setVisible(false);
+
             case 1:
-               lblDirWeb.setVisible(false);
-               txtDirWeb.setVisible(false);
-               txtaBio.setVisible(false);
-               lblBiografia.setVisible(false);
-             
-             
+                lblDirWeb.setVisible(false);
+                txtDirWeb.setVisible(false);
+                txtaBio.setVisible(false);
+                lblBiografia.setVisible(false);
+
                 break;
             case 2:
-               lblDirWeb.setVisible(true);
-               txtDirWeb.setVisible(true);
-               txtaBio.setVisible(true);
-               lblBiografia.setVisible(true);
-               
-               
-                break;    
+                lblDirWeb.setVisible(true);
+                txtDirWeb.setVisible(true);
+                txtaBio.setVisible(true);
+                lblBiografia.setVisible(true);
+
+                break;
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
     private void txtNullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNullActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNullActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
