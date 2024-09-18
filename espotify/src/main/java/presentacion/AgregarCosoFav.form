@@ -46,8 +46,8 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblFav" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtFav" min="-2" pref="201" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtFav" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblFavList" min="-2" max="-2" attributes="0"/>
@@ -181,7 +181,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblFav">
       <Properties>
-        <Property name="text" type="java.lang.String" value="A agregar a Fav:"/>
+        <Property name="text" type="java.lang.String" value="A agregar a Fav :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCreadorGenero">
