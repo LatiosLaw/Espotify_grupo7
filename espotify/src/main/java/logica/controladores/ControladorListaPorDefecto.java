@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import logica.Genero;
+import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.dt.DataGenero;
 import logica.dt.DataListaPorDefecto;
+import logica.dt.DataTema;
+import logica.tema;
 import persistencia.DAO_Genero;
 import persistencia.DAO_ListaReproduccion;
 
@@ -51,8 +54,24 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     }
 
     @Override
-    public void agregarTema(String nombre_lista, String nombre_tema) {
-
+    public void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo) {
+DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+        ListaPorDefecto lista = null;
+        ListaPorDefecto listas = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
+        Iterator<ListaPorDefecto> iterator = listas.iterator();
+        while (iterator.hasNext()) {
+            lista = iterator.next();
+            String nombrel = lista.getNombre();
+            if(nombrel == nombre_lista){
+                break;
+            }
+        }
+        if(lista == null){
+          System.out.println("No existen listas en el sistema."); 
+        }else{
+        lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
+        daoLista.update(lista);
+        }
     }
 
     @Override
