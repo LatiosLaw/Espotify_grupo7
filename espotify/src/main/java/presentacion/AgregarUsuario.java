@@ -61,18 +61,18 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        jLabel1.setText("Nickname");
+        jLabel1.setText("Nickname :");
 
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre :");
 
-        jLabel3.setText("Apellido");
+        jLabel3.setText("Apellido :");
 
-        jLabel4.setText("Correo");
+        jLabel4.setText("Correo :");
 
         sprFecha.setModel(new javax.swing.SpinnerDateModel());
         sprFecha.setEditor(new javax.swing.JSpinner.DateEditor(sprFecha, "dd.MM.yyyy"));
 
-        lblFechaNaci.setText("Fecha Nacimiento");
+        lblFechaNaci.setText("Fecha Nacimiento :");
 
         txtNickName.setColumns(10);
         txtNickName.addActionListener(new java.awt.event.ActionListener() {
@@ -94,13 +94,13 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblBiografia.setText("Biografia");
+        lblBiografia.setText("Biografia :");
 
         txtaBio.setColumns(20);
         txtaBio.setRows(5);
         jScrollPane1.setViewportView(txtaBio);
 
-        lblDirWeb.setText("Direccion Web");
+        lblDirWeb.setText("Direccion Web :");
 
         txtDirWeb.setColumns(10);
 
@@ -111,7 +111,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblIMGG.setText("URL Perfil");
+        lblIMGG.setText("URL Perfil :");
 
         txtIMG.setColumns(10);
 
@@ -122,7 +122,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblIMGG1.setText("Tipo de Usuario");
+        lblIMGG1.setText("Tipo de Usuario :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,7 +153,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()

@@ -52,7 +52,7 @@
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnConfirmar" min="-2" pref="234" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -147,22 +147,22 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nickname"/>
+        <Property name="text" type="java.lang.String" value="Nickname :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre"/>
+        <Property name="text" type="java.lang.String" value="Nombre :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Apellido"/>
+        <Property name="text" type="java.lang.String" value="Apellido :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Correo"/>
+        <Property name="text" type="java.lang.String" value="Correo :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="sprFecha">
@@ -177,7 +177,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblFechaNaci">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha Nacimiento"/>
+        <Property name="text" type="java.lang.String" value="Fecha Nacimiento :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNickName">
@@ -222,7 +222,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblBiografia">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Biografia"/>
+        <Property name="text" type="java.lang.String" value="Biografia :"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -242,7 +242,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblDirWeb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Direccion Web"/>
+        <Property name="text" type="java.lang.String" value="Direccion Web :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDirWeb">
@@ -260,7 +260,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblIMGG">
       <Properties>
-        <Property name="text" type="java.lang.String" value="URL Perfil"/>
+        <Property name="text" type="java.lang.String" value="URL Perfil :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIMG">
@@ -278,7 +278,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblIMGG1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo de Usuario"/>
+        <Property name="text" type="java.lang.String" value="Tipo de Usuario :"/>
       </Properties>
     </Component>
   </SubComponents>

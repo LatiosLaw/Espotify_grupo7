@@ -115,9 +115,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtPaginaWeb.setEditable(false);
 
-        lblSeguidores.setText("Seguidores ");
+        lblSeguidores.setText("Seguidores :");
 
-        lblAlbumSiguiendo.setText("Albumes");
+        lblAlbumSiguiendo.setText("Albumes :");
 
         lblNroSeguidores.setText("Numero de Seguidores :");
 
@@ -167,9 +167,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         });
         jScrollPane9.setViewportView(lstAlbumSiguiendo1);
 
-        lblListas.setText("Listas");
+        lblListas.setText("Listas :");
 
-        lblFavs.setText("Favs");
+        lblFavs.setText("Favs :");
 
         lstFavs.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -187,7 +187,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         lblSeguidores1.setText("Usuario Seleccionado : ");
 
-        jLabel1.setText("Tipo de Usuario");
+        jLabel1.setText("Tipo de Usuario :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
