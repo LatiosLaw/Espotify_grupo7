@@ -41,17 +41,17 @@ public class EspotifyMain {
         IControladorListaParticular listPHandler = new ControladorListaParticular();
         IControladorTema temHandler = new ControladorTema();
         
-         cliHandler.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
-         cliHandler.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
-         artHandler.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
-         cliHandler.agregarCliente("Nick Furry", "Nikolas", "Furia" , "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
+        cliHandler.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
+        cliHandler.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
+        artHandler.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
+        cliHandler.agregarCliente("Nick Furry", "Nikolas", "Furia" , "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
          
          
          
-        cliHandler.seguirUsuario("El listo", "Jose");
-        cliHandler.seguirUsuario("El listo", "Jhon Black Soul");
-        cliHandler.seguirUsuario("Jose", "El listo");
-       // cliHandler.seguirUsuario("Nick Furry", "El listo");
+        cliHandler.seguirUsuario("El Listo", "Jose");
+        cliHandler.seguirUsuario("El Listo", "Jhon Black Soul");
+        cliHandler.seguirUsuario("Jose", "El Listo");
+       // cliHandler.seguirUsuario("Nick Furry", "El Listo");
         
         Collection<DataTema> tem = new ArrayList<>();
         albHandler.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);

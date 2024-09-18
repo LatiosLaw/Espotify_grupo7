@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import java.util.Collection;
@@ -13,27 +9,18 @@ import logica.controladores.IControladorListaPorDefecto;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
 
-/**
- *
- * @author Urbina
- */
 public class PublicarLista extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AgregarUsuario
-     */
-    private IControladorListaParticular controlListPart;
-    private IControladorListaPorDefecto controlListPD;
-    private IControladorCliente controlCli;
+    private final IControladorListaParticular controlListPart;
+    private final IControladorCliente controlCli;
 
     public PublicarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
         initComponents();
 
         controlListPart = iclp;
-        controlListPD = iclpd;
         controlCli = iclc;
-        
-        this.cargarClientesLst(controlCli.mostrarClientes()); 
+
+        this.cargarClientesLst(controlCli.mostrarClientes());
     }
 
     /**
@@ -53,6 +40,8 @@ public class PublicarLista extends javax.swing.JPanel {
         txtNombreLista = new javax.swing.JTextField();
         lblLista = new javax.swing.JLabel();
         btnBuscarN = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstListaParticular = new javax.swing.JList<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -85,106 +74,137 @@ public class PublicarLista extends javax.swing.JPanel {
             }
         });
 
+        lstListaParticular.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(lstListaParticular);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(btnBuscarN)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(154, 154, 154)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblLista)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(btnBuscarN)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(100, 100, 100))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(277, 277, 277))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLista))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(29, 29, 29)
+                .addComponent(btnBuscarN)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscarN)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-        if(txtNombre.getText().equals("") || txtNombreLista.getText().equals("")){
+
+        if (txtNombre.getText().equals("") || txtNombreLista.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "No debes dejar campos vacios.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            if(controlListPart.publicarLista(txtNombre.getText(), txtNombreLista.getText())){
+            if (controlListPart.publicarLista(txtNombre.getText(), txtNombreLista.getText())) {
                 JOptionPane.showMessageDialog(null, "La lista: '" + txtNombreLista.getText() + "' ahora es publica.",
-                "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro el cliente/lista.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        }   
-      }
+                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro el cliente/lista.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
 
-        if(txtNombre.getText().equals("")){
+        if (txtNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "El campo 'Nombre' no puede estar vacio.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            
+
             Collection<DataListaParticular> listas = controlListPart.devolverListadeCliente(txtNombre.getText());
-            
-        if (listas != null && !listas.isEmpty()) {
-            System.out.println("Listas encontradas: " + listas.size());
-            
-            for (DataListaParticular lista : listas){
-            System.out.println(lista.getNombre());
+
+            if (listas != null && !listas.isEmpty()) {
+                System.out.println("Listas encontradas: " + listas.size());
+
+                for (DataListaParticular lista : listas) {
+                    System.out.println(lista.getNombre());
+                    cargarListasLst(controlListPart.devolverListadeCliente(txtNombre.getText()));
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron listas para el cliente con el nickname: " + txtNombre.getText(),
+                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontraron listas para el cliente con el nickname: " + txtNombre.getText(),
-                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
-      }
     }//GEN-LAST:event_btnBuscarNActionPerformed
-    
-   public void cargarClientesLst(Collection<DataCliente> cole) {
+
+    public void cargarClientesLst(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
 
-        model = new DefaultListModel<String>();
+        model = new DefaultListModel<>();
 
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
         }
         lstLista.setModel(model);
-}
+    }
+
+    public void cargarListasLst(Collection<DataListaParticular> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<>();
+
+        for (DataListaParticular elemento : cole) {
+            String nombreLista = elemento.getNombre();
+            model.addElement(nombreLista);
+        }
+        lstListaParticular.setModel(model);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarN;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblLista;
     private javax.swing.JList<String> lstLista;
+    private javax.swing.JList<String> lstListaParticular;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreLista;
     // End of variables declaration//GEN-END:variables
