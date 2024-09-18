@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import java.io.File;
@@ -26,22 +22,15 @@ import java.awt.event.KeyEvent;
 import logica.controladores.IControladorArtista;
 import logica.dt.DataAlbum;
 
-/**
- *
- * @author Tabaré 8031
- */
 public class AltaDeAlbum extends javax.swing.JPanel {
-    
-    /**
-     * Creates new form AltaDeAlbum
-     */
-        private IControladorAlbum controlAlb;
-        private IControladorGenero controlGen;
-        private IControladorArtista controlArt;
-        private IControladorTema controlTem;
-        private JFileChooser fileChooser;
-        private Collection<String> generos_seleccionados;
-        private ArrayList<String> temas_del_album;
+
+    private final IControladorAlbum controlAlb;
+    private final IControladorGenero controlGen;
+    private final IControladorArtista controlArt;
+    private final IControladorTema controlTem;
+    private final JFileChooser fileChooser;
+    private final Collection<String> generos_seleccionados;
+    private final ArrayList<String> temas_del_album;
 
     public AltaDeAlbum(IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict, IControladorArtista ica) {
         controlAlb = icalb;
@@ -52,15 +41,15 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setDialogTitle("Selecciona un archivo MP3");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
-        
+
         generos_seleccionados = new ArrayList<>();
         temas_del_album = new ArrayList<>();
-        
+
         initComponents();
         cargarGeneros();
-        
+
         txtTipMus.setVisible(false);
-        
+
         txtAnio.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -347,24 +336,23 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private boolean insertarEnPosicion(ArrayList<String> temas, String temazo, int posicion) {
-        posicion = posicion -1;
+        posicion = posicion - 1;
         // Verificar que la posición sea válida
         if (posicion < 0) {
             return false;
         }
-        
-        if(posicion > temas.size()){
+
+        if (posicion > temas.size()) {
             temas.add(temazo);
             return true;
-        }else{
+        } else {
             temas.add(posicion, temazo); // El método add en ArrayList automáticamente mueve los elementos hacia abajo
             return true;
         }
-        
+
         // Insertar el nuevo elemento en la posición deseada
-        
     }
-    
+
     private void txtNomTemaAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomTemaAlbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomTemaAlbActionPerformed
@@ -374,194 +362,194 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_jList1HierarchyChanged
 
     private void btnConfTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfTemActionPerformed
-if(!txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty()){
-    String nombre_tema = txtNomTemaAlb.getText();
-Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
-       if(cbxTipMus.getSelectedItem() == "Archivo mp3"){
-           File selectedFile;
-           if(fileChooser.getSelectedFile() != null){
-            selectedFile = fileChooser.getSelectedFile();
-            File destinationDir = new File("espotify\\src\\main\\java\\temas");
-    
-            if (!destinationDir.exists()) {
-                destinationDir.mkdirs(); // Crear la carpeta si no existe
-            }
-    
-            // Crear el archivo de destino con el mismo nombre que el seleccionado
-            File destinationFile = new File(destinationDir, selectedFile.getName());
-    
-            // Copiar el archivo al destino
-            if (selectedFile.getName().endsWith(".mp3")) {
-                try {
-                // Extract duration from the MP3 file
-                Mp3File mp3File = new Mp3File(selectedFile.getAbsolutePath());
-                if (mp3File.hasId3v2Tag()) {
-                    ID3v2 id3v2Tag = mp3File.getId3v2Tag();
-                    long durationInSeconds = mp3File.getLengthInSeconds();
-                    if(insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, selectedFile.getName())){
-                        JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
-                        DefaultListModel<String> model = new DefaultListModel();
-                        Iterator<String> iterator = temas_del_album.iterator();
-                        while (iterator.hasNext()) {
-                            model.addElement(iterator.next());
-                        }
-                        jList1.setModel(model);
-                        txtNomTemaAlb.setText(null);
-                        txtPosTemaAlb.setText(null);
-                        fileChooser.setSelectedFile(null);
-                        lblMsjArch.setText("El archivo no se reconoce como un mp3");
-                        try {
-                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
-                    } catch (IOException i) {
-                        System.out.println("Error al guardar el archivo.");
+        if (!txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty()) {
+            String nombre_tema = txtNomTemaAlb.getText();
+            Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
+            if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
+                File selectedFile;
+                if (fileChooser.getSelectedFile() != null) {
+                    selectedFile = fileChooser.getSelectedFile();
+                    File destinationDir = new File("espotify\\src\\main\\java\\temas");
+
+                    if (!destinationDir.exists()) {
+                        destinationDir.mkdirs(); // Crear la carpeta si no existe
                     }
-                    }else{
-                        JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+
+                    // Crear el archivo de destino con el mismo nombre que el seleccionado
+                    File destinationFile = new File(destinationDir, selectedFile.getName());
+
+                    // Copiar el archivo al destino
+                    if (selectedFile.getName().endsWith(".mp3")) {
+                        try {
+                            // Extract duration from the MP3 file
+                            Mp3File mp3File = new Mp3File(selectedFile.getAbsolutePath());
+                            if (mp3File.hasId3v2Tag()) {
+                                ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                                long durationInSeconds = mp3File.getLengthInSeconds();
+                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, selectedFile.getName())) {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
+                                    DefaultListModel<String> model = new DefaultListModel();
+                                    Iterator<String> iterator = temas_del_album.iterator();
+                                    while (iterator.hasNext()) {
+                                        model.addElement(iterator.next());
+                                    }
+                                    jList1.setModel(model);
+                                    txtNomTemaAlb.setText(null);
+                                    txtPosTemaAlb.setText(null);
+                                    fileChooser.setSelectedFile(null);
+                                    lblMsjArch.setText("El archivo no se reconoce como un mp3");
+                                    try {
+                                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+                                    } catch (IOException i) {
+                                        System.out.println("Error al guardar el archivo.");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido.");
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(lblMsjArch, "Error al leer el archivo MP3");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido.");
-                }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Error al leer el archivo MP3");
+                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
                 }
 
             } else {
-                JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
+                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText())) {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
+                    DefaultListModel<String> model = new DefaultListModel();
+                    Iterator<String> iterator = temas_del_album.iterator();
+                    while (iterator.hasNext()) {
+                        model.addElement(iterator.next());
+                    }
+                    jList1.setModel(model);
+                    txtNomTemaAlb.setText(null);
+                    txtTipMus.setText(null);
+                    txtPosTemaAlb.setText(null);
+                    fileChooser.setSelectedFile(null);
+                } else {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                }
             }
-       }else{
-          JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3"); 
-       }
-           
-       }else{
-           if(insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText())){
-               JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
-               DefaultListModel<String> model = new DefaultListModel();
-               Iterator<String> iterator = temas_del_album.iterator();
-               while (iterator.hasNext()) {
-                            model.addElement(iterator.next());
-               }
-               jList1.setModel(model);
-               txtNomTemaAlb.setText(null);
-               txtTipMus.setText(null);
-               txtPosTemaAlb.setText(null);
-               fileChooser.setSelectedFile(null);
-           }else{
-           JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
-           }
-       }
-}else{
-    JOptionPane.showMessageDialog(lblMsjArch, "Nombre y posicion del tema son obligatorios.");
-}
+        } else {
+            JOptionPane.showMessageDialog(lblMsjArch, "Nombre y posicion del tema son obligatorios.");
+        }
 
     }//GEN-LAST:event_btnConfTemActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if(txtArt.getText().isEmpty() || txtNomAlb.getText().isEmpty() || txtAnio.getText().isEmpty()){
-           JOptionPane.showMessageDialog(lblMsjArch, "Por favor, complete el formulario con la informacion necesaria");
-       }else{
-        if(controlArt.retornarArtista(txtArt.getText()) != null){
-        String nick_artista = txtArt.getText();
-        String nombre_album = txtNomAlb.getText();
-        String imagen = txtLinkImg.getText();
-        Integer año_album = Integer.parseInt(txtAnio.getText());
-        
-        //// CALCULAR GENEROS SELECCIONADOS
-        Collection<DataGenero> generos = new ArrayList<>();
-                if(generos_seleccionados.isEmpty()){
-                JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione generos para el album");
-            }else{
-                Iterator<String> iterator = generos_seleccionados.iterator();
-                while (iterator.hasNext()) {
-    String elemento = iterator.next();
-                    generos.add(new DataGenero(elemento));
-}
-                while (iterator.hasNext()) {
-                    
-                }
-            }
-        ////
-        
-        //// CALCULAR TEMAS SELECCIONADOS
-        Collection<DataTema> temas = new ArrayList<>();
-        if(temas_del_album.isEmpty()){
-                JOptionPane.showMessageDialog(lblMsjArch, "Por favor, genere temas para el album");
-            }else{
-                Iterator<String> iterator = temas_del_album.iterator();
-                Integer posicion = 1;
-                while (iterator.hasNext()) {
-                    DataTema tema_actual = controlTem.retornarTema(iterator.next());
-                    tema_actual.setPos(posicion);
-                    posicion = posicion +1;
-                    tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
-                    temas.add(tema_actual);
-                }
-                
-                if(txtLinkImg.getText().isEmpty()){
-            DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);        
-            Iterator<String> iterator_gen = generos_seleccionados.iterator();
-        while (iterator_gen.hasNext()) {
-            String genero = iterator_gen.next();
-            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
-            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
-        }
-            JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
-            reiniciarCampos();
-        }else{
-            DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, temas); 
-            Iterator<String> iterator_gen = generos_seleccionados.iterator();
-        while (iterator_gen.hasNext()) {
-            String genero = iterator_gen.next();
-            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
-            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
-        }
-            JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
-            reiniciarCampos();
-        }
-            }
-        //// 
+        if (txtArt.getText().isEmpty() || txtNomAlb.getText().isEmpty() || txtAnio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(lblMsjArch, "Por favor, complete el formulario con la informacion necesaria");
+        } else {
+            if (controlArt.retornarArtista(txtArt.getText()) != null) {
+                String nick_artista = txtArt.getText();
+                String nombre_album = txtNomAlb.getText();
+                String imagen = txtLinkImg.getText();
+                Integer año_album = Integer.parseInt(txtAnio.getText());
 
-         }else{
-           JOptionPane.showMessageDialog(lblMsjArch, "El nickname seleccionado no existe o pertenece a un usuario común");
-       }
+                //// CALCULAR GENEROS SELECCIONADOS
+                Collection<DataGenero> generos = new ArrayList<>();
+                if (generos_seleccionados.isEmpty()) {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione generos para el album");
+                } else {
+                    Iterator<String> iterator = generos_seleccionados.iterator();
+                    while (iterator.hasNext()) {
+                        String elemento = iterator.next();
+                        generos.add(new DataGenero(elemento));
+                    }
+                    while (iterator.hasNext()) {
+
+                    }
+                }
+                ////
+
+                //// CALCULAR TEMAS SELECCIONADOS
+                Collection<DataTema> temas = new ArrayList<>();
+                if (temas_del_album.isEmpty()) {
+                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, genere temas para el album");
+                } else {
+                    Iterator<String> iterator = temas_del_album.iterator();
+                    Integer posicion = 1;
+                    while (iterator.hasNext()) {
+                        DataTema tema_actual = controlTem.retornarTema(iterator.next());
+                        tema_actual.setPos(posicion);
+                        posicion = posicion + 1;
+                        tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
+                        temas.add(tema_actual);
+                    }
+
+                    if (txtLinkImg.getText().isEmpty()) {
+                        DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);
+                        Iterator<String> iterator_gen = generos_seleccionados.iterator();
+                        while (iterator_gen.hasNext()) {
+                            String genero = iterator_gen.next();
+                            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
+                            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
+                        }
+                        JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
+                        reiniciarCampos();
+                    } else {
+                        DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, temas);
+                        Iterator<String> iterator_gen = generos_seleccionados.iterator();
+                        while (iterator_gen.hasNext()) {
+                            String genero = iterator_gen.next();
+                            Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
+                            controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
+                        }
+                        JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
+                        reiniciarCampos();
+                    }
+                }
+                //// 
+
+            } else {
+                JOptionPane.showMessageDialog(lblMsjArch, "El nickname seleccionado no existe o pertenece a un usuario común");
+            }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void reiniciarCampos() {   
-       txtArt.setText(null);
-       txtNomAlb.setText(null);
-       txtLinkImg.setText(null);
-       txtAnio.setText(null);
-       txtNomTemaAlb.setText(null);
-       txtTipMus.setText(null);
-       txtPosTemaAlb.setText(null);
-       fileChooser.setSelectedFile(null);
-       lblMsjArch.setText("El archivo no se reconoce como un mp3");
-       DefaultListModel<String> model = new DefaultListModel();
-       listGenSelect.setModel(model);
-       jList1.setModel(model);
-       generos_seleccionados.removeAll(generos_seleccionados);
-       temas_del_album.removeAll(temas_del_album);
-    }  
-    
+    private void reiniciarCampos() {
+        txtArt.setText(null);
+        txtNomAlb.setText(null);
+        txtLinkImg.setText(null);
+        txtAnio.setText(null);
+        txtNomTemaAlb.setText(null);
+        txtTipMus.setText(null);
+        txtPosTemaAlb.setText(null);
+        fileChooser.setSelectedFile(null);
+        lblMsjArch.setText("El archivo no se reconoce como un mp3");
+        DefaultListModel<String> model = new DefaultListModel();
+        listGenSelect.setModel(model);
+        jList1.setModel(model);
+        generos_seleccionados.removeAll(generos_seleccionados);
+        temas_del_album.removeAll(temas_del_album);
+    }
+
     private void btnArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchActionPerformed
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             if (selectedFile.getName().endsWith(".mp3")) {
-                lblMsjArch.setText("Archivo seleccionado: " + selectedFile.getName());  
-            }else{
-            lblMsjArch.setText("Archivo seleccionado no valido");
+                lblMsjArch.setText("Archivo seleccionado: " + selectedFile.getName());
+            } else {
+                lblMsjArch.setText("Archivo seleccionado no valido");
             }
         }
     }//GEN-LAST:event_btnArchActionPerformed
 
     private void cbxTipMusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipMusActionPerformed
-        if(cbxTipMus.getSelectedItem() == "Archivo mp3"){
+        if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
             txtTipMus.setVisible(false);
             btnArch.setVisible(true);
             lblMsjArch.setVisible(true);
-        }else{
+        } else {
             txtTipMus.setVisible(true);
             btnArch.setVisible(false);
             lblMsjArch.setVisible(false);
@@ -569,28 +557,28 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
     }//GEN-LAST:event_cbxTipMusActionPerformed
 
     private void btnSelGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelGenActionPerformed
-        if(generos_seleccionados.contains(listGen.getSelectedValue())){
+        if (generos_seleccionados.contains(listGen.getSelectedValue())) {
             JOptionPane.showMessageDialog(lblMsjArch, "Este album ya cuenta con este genero");
-        }else{
-        generos_seleccionados.add(listGen.getSelectedValue());
-        DefaultListModel<String> model = new DefaultListModel();
-            if(generos_seleccionados.isEmpty()){
-             
-            }else{
+        } else {
+            generos_seleccionados.add(listGen.getSelectedValue());
+            DefaultListModel<String> model = new DefaultListModel();
+            if (generos_seleccionados.isEmpty()) {
+
+            } else {
                 Iterator<String> iterator = generos_seleccionados.iterator();
                 while (iterator.hasNext()) {
                     model.addElement(iterator.next());
                 }
             }
-        listGenSelect.setModel(model);
+            listGenSelect.setModel(model);
         }
     }//GEN-LAST:event_btnSelGenActionPerformed
 
 
     private void btnReiGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiGenActionPerformed
-       DefaultListModel<String> model = new DefaultListModel();
-       listGenSelect.setModel(model);
-       generos_seleccionados.clear();
+        DefaultListModel<String> model = new DefaultListModel();
+        listGenSelect.setModel(model);
+        generos_seleccionados.clear();
     }//GEN-LAST:event_btnReiGenActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -604,27 +592,27 @@ Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
     private void btnNukear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNukear1ActionPerformed
         Iterator<String> iterator = temas_del_album.iterator();
         while (iterator.hasNext()) {
-        controlTem.BorrarTema(iterator.next());
+            controlTem.BorrarTema(iterator.next());
         }
         reiniciarCampos();
         JOptionPane.showMessageDialog(lblMsjArch, "Alta de Album cancelada con exito");
     }//GEN-LAST:event_btnNukear1ActionPerformed
 
-    public void cargarGeneros(){
+    public void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
-            if(retorno.isEmpty()){
-                
-            }else{
-                Iterator<String> iterator = retorno.iterator();
-                while (iterator.hasNext()) {
-                    
-                    model.addElement(iterator.next());
-                }
+        if (retorno.isEmpty()) {
+
+        } else {
+            Iterator<String> iterator = retorno.iterator();
+            while (iterator.hasNext()) {
+
+                model.addElement(iterator.next());
             }
+        }
         listGen.setModel(model);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArch;
     private javax.swing.JButton btnConfTem;

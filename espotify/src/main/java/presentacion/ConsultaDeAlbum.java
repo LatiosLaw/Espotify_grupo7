@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import java.awt.Toolkit;
@@ -23,27 +19,20 @@ import logica.dt.DataAlbum;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
 
-/**
- *
- * @author Tabaré 8031
- */
 public class ConsultaDeAlbum extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ConsultaDeAlbum
-     */
-    private IControladorAlbum controlAlb;
-    private IControladorArtista controlArt;
-    private IControladorGenero controlGen;
-    private IControladorTema controlTem;
+    private final IControladorAlbum controlAlb;
+    private final IControladorArtista controlArt;
+    private final IControladorGenero controlGen;
+    private final IControladorTema controlTem;
     private DataTema tema_seleccionado;
-    
+
     public ConsultaDeAlbum(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg, IControladorTema ict) {
         controlAlb = icalb;
         controlArt = ica;
         controlGen = icg;
         controlTem = ict;
-        
+
         initComponents();
         txtDireccionTema.setVisible(false);
         btnDescargarTema.setVisible(false);
@@ -332,98 +321,100 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDescargarTemaActionPerformed
 
-    private void cargarGenerosDelAlbum(String nombre_album){
+    private void cargarGenerosDelAlbum(String nombre_album) {
         Collection<DataGenero> generos_del_album = controlGen.darGenerosDelAlbum(nombre_album);
         DefaultListModel<String> model = new DefaultListModel();
-                Iterator<DataGenero> iterator = generos_del_album.iterator();
-                while (iterator.hasNext()) {
-                    DataGenero genero_actual = iterator.next();
-                    model.addElement(genero_actual.getNombre());
-                }
+        Iterator<DataGenero> iterator = generos_del_album.iterator();
+        while (iterator.hasNext()) {
+            DataGenero genero_actual = iterator.next();
+            model.addElement(genero_actual.getNombre());
+        }
         listGenAlb.setModel(model);
     }
-    
-    private void cargarTemasDelAlbum(String nombre_album){
+
+    private void cargarTemasDelAlbum(String nombre_album) {
         Collection<DataTema> temas_del_album = controlTem.retornarTemasDeAlbum(nombre_album);
         DefaultListModel<String> model = new DefaultListModel();
-                Iterator<DataTema> iterator = temas_del_album.iterator();
-                while (iterator.hasNext()) {
-                    DataTema tema_actual = iterator.next();
-                    model.addElement(tema_actual.getNickname());
-                }
+        Iterator<DataTema> iterator = temas_del_album.iterator();
+        while (iterator.hasNext()) {
+            DataTema tema_actual = iterator.next();
+            model.addElement(tema_actual.getNickname());
+        }
         listTemAlb.setModel(model);
     }
-    
+
     private void cbxConAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxConAlbActionPerformed
         int token = cbxConAlb.getSelectedIndex();
-       
-        switch (token) {
-         case 0:
 
-            case 1:
-               reinicarAlbumInfo();
+        switch (token) {
+            case 0, 1 -> {
+                reinicarAlbumInfo();
                 cargarGeneros();
-                break;
-            case 2:
-               reinicarAlbumInfo();
+            }
+
+            case 2 -> {
+                reinicarAlbumInfo();
                 cargarArtistas();
-                break;    
-    }                 
+            }
+        }
     }//GEN-LAST:event_cbxConAlbActionPerformed
 
-    private void cargarGeneros(){
+    private void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
-                Iterator<String> iterator = retorno.iterator();
-                while (iterator.hasNext()) {
-                    model.addElement(iterator.next());
-                }
+        Iterator<String> iterator = retorno.iterator();
+        while (iterator.hasNext()) {
+            model.addElement(iterator.next());
+        }
         listGenOrArt.setModel(model);
     }
-    
-    private void cargarArtistas(){
+
+    private void cargarArtistas() {
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlArt.mostrarNicksArtistas();
-                Iterator<String> iterator = retorno.iterator();
-                while (iterator.hasNext()) {
-                    model.addElement(iterator.next());
-                }
+        Iterator<String> iterator = retorno.iterator();
+        while (iterator.hasNext()) {
+            model.addElement(iterator.next());
+        }
         listGenOrArt.setModel(model);
     }
-    
-    private void reinicarAlbumInfo(){
+
+    private void reinicarAlbumInfo() {
         DefaultListModel<String> model = new DefaultListModel();
         listAlb.setModel(model);
     }
-    
+
     private void btnMostrarAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarAlbActionPerformed
-       if(cbxConAlb.getSelectedIndex()==0){
-           JOptionPane.showMessageDialog(null, "Seleccione si quiere buscar albumes por Generos o Artistas.");
-       }else if(cbxConAlb.getSelectedIndex()==1){
-           if(!nomGenOrArt.getText().isEmpty()){
-           DefaultListModel<String> model = new DefaultListModel();
-        Collection<String> retorno = controlAlb.retornarAlbumsDelGenero(nomGenOrArt.getText());
-                Iterator<String> iterator = retorno.iterator();
-                while (iterator.hasNext()) {
-                    model.addElement(iterator.next());
+        switch (cbxConAlb.getSelectedIndex()) {
+            case 0 ->
+                JOptionPane.showMessageDialog(null, "Seleccione si quiere buscar albumes por Generos o Artistas.");
+            case 1 -> {
+                if (!nomGenOrArt.getText().isEmpty()) {
+                    DefaultListModel<String> model = new DefaultListModel();
+                    Collection<String> retorno = controlAlb.retornarAlbumsDelGenero(nomGenOrArt.getText());
+                    Iterator<String> iterator = retorno.iterator();
+                    while (iterator.hasNext()) {
+                        model.addElement(iterator.next());
+                    }
+                    listAlb.setModel(model);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Especifique el genero en el formulario.");
                 }
-        listAlb.setModel(model);
-           }else{
-                JOptionPane.showMessageDialog(null, "Especifique el genero en el formulario.");
-           }
-       }else{
-if(!nomGenOrArt.getText().isEmpty()){
-           DefaultListModel<String> model = new DefaultListModel();
-        Collection<String> retorno = controlAlb.retornarAlbumsDelArtista(nomGenOrArt.getText());
-                Iterator<String> iterator = retorno.iterator();
-                while (iterator.hasNext()) {
-                    model.addElement(iterator.next());
+            }
+            default -> {
+                if (!nomGenOrArt.getText().isEmpty()) {
+                    DefaultListModel<String> model = new DefaultListModel();
+                    Collection<String> retorno = controlAlb.retornarAlbumsDelArtista(nomGenOrArt.getText());
+                    Iterator<String> iterator = retorno.iterator();
+                    while (iterator.hasNext()) {
+                        model.addElement(iterator.next());
+                    }
+                    listAlb.setModel(model);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Especifique el artista en el formulario.");
                 }
-        listAlb.setModel(model);
-        }else{
-                JOptionPane.showMessageDialog(null, "Especifique el artista en el formulario.");
-           }
-       }
+            }
+        }
     }//GEN-LAST:event_btnMostrarAlbActionPerformed
 
     private void nomAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomAlbumActionPerformed
@@ -438,21 +429,21 @@ if(!nomGenOrArt.getText().isEmpty()){
         String nomtem = listTemAlb.getSelectedValue();
         tema_seleccionado = controlTem.retornarTema(nomtem);
         txtNomTemAlb.setText(tema_seleccionado.getNickname());
-        
-        if(!tema_seleccionado.getAccess().endsWith(".mp3")){
+
+        if (!tema_seleccionado.getAccess().endsWith(".mp3")) {
             txtDireccionTema.setVisible(true);
             btnDescargarTema.setVisible(false);
             jLabel1.setVisible(true);
             txtDireccionTema.setText(tema_seleccionado.getAccess());
-            
-        }else{
+
+        } else {
             txtDireccionTema.setVisible(false);
             btnDescargarTema.setVisible(true);
             jLabel1.setVisible(false);
-    }
-        if(tema_seleccionado.getDuracion()!= 0){
+        }
+        if (tema_seleccionado.getDuracion() != 0) {
             txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
-        }else{
+        } else {
             txtDurTem.setText(" - ");
         }
     }//GEN-LAST:event_listTemAlbMouseClicked
@@ -462,13 +453,13 @@ if(!nomGenOrArt.getText().isEmpty()){
     }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
     private void btnGenConsult1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenConsult1ActionPerformed
-        if(!nomAlbum.getText().isEmpty()){
-        DataAlbum album = controlAlb.retornarInfoAlbum(nomAlbum.getText());
-        txtNomAlb.setText(album.getNombre());
-        txtAnioCre.setText(Integer.toString(album.getAnioCreacion()));
-        cargarGenerosDelAlbum(album.getNombre());
-        cargarTemasDelAlbum(album.getNombre());
-        }else{
+        if (!nomAlbum.getText().isEmpty()) {
+            DataAlbum album = controlAlb.retornarInfoAlbum(nomAlbum.getText());
+            txtNomAlb.setText(album.getNombre());
+            txtAnioCre.setText(Integer.toString(album.getAnioCreacion()));
+            cargarGenerosDelAlbum(album.getNombre());
+            cargarTemasDelAlbum(album.getNombre());
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor, introduzca el album del que quiere saber la informacion en el formulario.");
         }
     }//GEN-LAST:event_btnGenConsult1ActionPerformed
@@ -481,10 +472,10 @@ if(!nomGenOrArt.getText().isEmpty()){
 
         // Copiar el texto al portapapeles
         clipboard.setContents(stringSelection, null);
-        
+
         JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
     }//GEN-LAST:event_txtDireccionTemaMouseClicked
-     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescargarTema;

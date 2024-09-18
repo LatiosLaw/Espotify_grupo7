@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import logica.controladores.IControladorAlbum;
@@ -11,30 +7,23 @@ import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
 
-/**
- *
- * @author Urbina
- */
 public class AdministrarUsuario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdministrarUsuario
-     */
-    private IControladorCliente controlCli;
-    private IControladorArtista controlArt;
-    private IControladorTema controlTem;
-    private IControladorAlbum controlAlb;
-    private IControladorListaParticular controlListPar;
-    private IControladorListaPorDefecto controlListPD;
+    private final IControladorCliente controlCli;
+    private final IControladorArtista controlArt;
+    private final IControladorTema controlTem;
+    private final IControladorAlbum controlAlb;
+    private final IControladorListaParticular controlListPar;
+    private final IControladorListaPorDefecto controlListPD;
 
     public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorAlbum icalb) {
         controlCli = icc;
         controlArt = ica;
         controlTem = ict;
         controlAlb = icalb;
-        controlListPar = iclp;        
+        controlListPar = iclp;
         controlListPD = icld;
-                
+
         initComponents();
     }
 
@@ -122,25 +111,15 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        /*
-                OPT
-                Agregar Usuario
-                Seguir Usuario
-                Dejar de seguir Usuario
-                Consultar Perfil de Usuario
-                Eliminar Lista/Album/Tema de Fav
-                Agregar Tema/Album/Lista a Fav
-         */
+
         String token = String.valueOf(jComboBox1.getSelectedItem());
 
         switch (token) {
-            case "OPT":
-                //No
+            case "OPT" -> {
                 pnlAU.removeAll();
                 pnlAU.repaint();
-                break;
-            case "Agregar Usuario":
-
+            }
+            case "Agregar Usuario" -> {
                 AgregarUsuario au = new AgregarUsuario(controlCli, controlArt);
                 au.setLocation(0, 0);
                 au.setSize(860, 471);
@@ -149,9 +128,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(au);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
-            case "Seguir Usuario":
-
+            }
+            case "Seguir Usuario" -> {
                 SeguirUsuario su = new SeguirUsuario(controlCli);
                 su.setLocation(0, 0);
                 su.setSize(860, 471);
@@ -160,9 +138,9 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(su);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
+            }
 
-            case "Dejar de seguir Usuario":
+            case "Dejar de seguir Usuario" -> {
                 DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario(controlCli);
                 ddsu.setLocation(0, 0);
                 ddsu.setSize(860, 471);
@@ -171,8 +149,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(ddsu);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
-            case "Consultar Perfil de Usuario":
+            }
+            case "Consultar Perfil de Usuario" -> {
                 ConsultarPerfilDeUsuario cpdu = new ConsultarPerfilDeUsuario(controlCli, controlArt);
                 cpdu.setLocation(0, 0);
                 cpdu.setSize(860, 471);
@@ -181,8 +159,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(cpdu);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
-            case "Eliminar Lista/Album/Tema de Fav":
+            }
+            case "Eliminar Lista/Album/Tema de Fav" -> {
                 EliminarCosoFav ecf = new EliminarCosoFav();
                 ecf.setLocation(0, 0);
                 ecf.setSize(860, 471);
@@ -191,8 +169,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(ecf);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
-            case "Agregar Tema/Album/Lista a Fav":
+            }
+            case "Agregar Tema/Album/Lista a Fav" -> {
                 AgregarCosoFav acf = new AgregarCosoFav(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
                 acf.setLocation(0, 0);
                 acf.setSize(860, 471);
@@ -201,15 +179,12 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.add(acf);
                 pnlAU.revalidate();
                 pnlAU.repaint();
-                break;
+            }
 
-            default:
-            jComboBox1.setSelectedIndex(0);
-                break;
+            default ->
+                jComboBox1.setSelectedIndex(0);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;

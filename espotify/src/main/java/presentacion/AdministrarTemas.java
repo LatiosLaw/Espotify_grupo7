@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import logica.controladores.IControladorAlbum;
@@ -9,21 +5,15 @@ import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorTema;
 
-/**
- *
- * @author Urbina
- */
 public class AdministrarTemas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdministrarUsuario
-     */
-    private IControladorAlbum controlAlb;
-    private IControladorArtista controlArt;
-    private IControladorGenero controlGen;
-    private IControladorTema controlTem;
+    private final IControladorAlbum controlAlb;
+    private final IControladorArtista controlArt;
+    private final IControladorGenero controlGen;
+    private final IControladorTema controlTem;
+
     public AdministrarTemas(IControladorAlbum icalb, IControladorArtista ica, IControladorGenero icg, IControladorTema ict) {
-        
+
         controlAlb = icalb;
         controlArt = ica;
         controlGen = icg;
@@ -91,47 +81,35 @@ public class AdministrarTemas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
-        int token = cbxOPT.getSelectedIndex();
-         String x = String.valueOf(cbxOPT.getSelectedItem());
-         /*
-               OPT
-               Eliminar Tema de Fav
-               Agregar Tema a Fav
+        String x = String.valueOf(cbxOPT.getSelectedItem());
 
-         */
-     
-             if("OPT".equals(x)){
-                  pnlAT.removeAll();
-                  pnlAT.repaint();
-                  
-             }else if("Eliminar Tema de Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
-               cda.setLocation(0,0);
-               cda.setSize(860, 471);
-               
-               pnlAT.removeAll();
-               pnlAT.add(cda);
-               pnlAT.revalidate();
-               pnlAT.repaint();
-               
-             }else if ("Agregar Tema a Fav".equals(x)){
-                  ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
-               cda.setLocation(0,0);
-               cda.setSize(860, 471);
-               
-               pnlAT.removeAll();
-               pnlAT.add(cda);
-               pnlAT.revalidate();
-               pnlAT.repaint();
-             }else{
-                 cbxOPT.setSelectedIndex(0);
-             }
-              
-            
-        
-        
+        switch (x) {
+            case "OPT" -> {
+                pnlAT.removeAll();
+                pnlAT.repaint();
+            }
+            case "Eliminar Tema de Fav" -> {
+                ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
+                cda.setLocation(0, 0);
+                cda.setSize(860, 471);
+                pnlAT.removeAll();
+                pnlAT.add(cda);
+                pnlAT.revalidate();
+                pnlAT.repaint();
+            }
+            case "Agregar Tema a Fav" -> {
+                ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
+                cda.setLocation(0, 0);
+                cda.setSize(860, 471);
+                pnlAT.removeAll();
+                pnlAT.add(cda);
+                pnlAT.revalidate();
+                pnlAT.repaint();
+            }
+            default ->
+                cbxOPT.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_cbxOPTActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxOPT;

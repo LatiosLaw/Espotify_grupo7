@@ -1,4 +1,3 @@
-
 package presentacion;
 
 import java.util.Collection;
@@ -7,22 +6,15 @@ import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
 import logica.dt.DataCliente;
 
-/**
- *
- * @author Urbina
- */
 public class DejarDeSeguirUsuario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SeguirUsuario
-     */
     private IControladorCliente controlCli;
-    
+
     public DejarDeSeguirUsuario(IControladorCliente controlador) {
-        this.controlCli = controlador; 
+        this.controlCli = controlador;
         initComponents();
         this.cargarClientesLst(controlCli.mostrarClientes());
-        
+
         this.cargarUsuariosLst(controlCli.mostrarUsuarios());
     }
 
@@ -142,39 +134,38 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAdejarDeSeguir.getText();
-        
+
         if (nickCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
-        } else{
-            
+        } else {
+
             DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
-                    if (usr != null) {
-                         DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
-                        if (usr2 != null) {
-                            
-                            if(controlCli.corroborarSiEstaenSeguidos(nickCliente,nickAseguir) == true){
-                            controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir); 
-                            JOptionPane.showMessageDialog(null, "Seguimiento terminado con exito.");
-                        }else{
-                                JOptionPane.showMessageDialog(null, "El cliente " + txtCliente.getText() + " no esta siguiendo a " + txtUsuarioAdejarDeSeguir.getText());
-                            }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
+            if (usr != null) {
+                DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
+                if (usr2 != null) {
+
+                    if (controlCli.corroborarSiEstaenSeguidos(nickCliente, nickAseguir) == true) {
+                        controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir);
+                        JOptionPane.showMessageDialog(null, "Seguimiento terminado con exito.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El cliente " + txtCliente.getText() + " no esta siguiendo a " + txtUsuarioAdejarDeSeguir.getText());
                     }
-                        
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Cliente no encontrado");
-                    }
-            
-            
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+            }
+
         }
-   
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-public void cargarClientesLst(Collection<DataCliente> cole) {
+    public void cargarClientesLst(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
 
-        model = new DefaultListModel<String>();
+        model = new DefaultListModel<>();
 
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
@@ -182,20 +173,19 @@ public void cargarClientesLst(Collection<DataCliente> cole) {
         }
         lstClientes.setModel(model);
 
-}
+    }
 
-public void cargarUsuariosLst(Collection<String> cole) {
+    public void cargarUsuariosLst(Collection<String> cole) {
         DefaultListModel<String> model;
 
-        model = new DefaultListModel<String>();
+        model = new DefaultListModel<>();
 
         for (String elemento : cole) {
             String nick = elemento;
             model.addElement(nick);
         }
         lstUsuarios.setModel(model);
-
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;

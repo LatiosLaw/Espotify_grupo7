@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import static java.lang.String.valueOf;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
@@ -21,17 +15,10 @@ import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 import logica.dt.DataUsuario;
 
-/**
- *
- * @author Urbina
- */
 public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ConsultarPerfilDeUsuario
-     */
-    private IControladorCliente controlCli;
-    private IControladorArtista controlArt;
+    private final IControladorCliente controlCli;
+    private final IControladorArtista controlArt;
     private JComboBox<DataUsuario> comboBoxUsuarios;
     private JList<DataUsuario> listUsuarios;
 
@@ -367,11 +354,11 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
             case 2 -> {
                 // Artista
-                
+
                 Collection<DataArtista> cole = controlArt.mostrarArtistas();
                 cargarArtistasLstBuscar(cole);
-                
-                 lblAlbumSiguiendo.setText("Album");
+
+                lblAlbumSiguiendo.setText("Album");
                 limpiarCampos();
                 txtPaginaWeb.setVisible(true);
                 txtaBiografia.setVisible(true);
@@ -401,11 +388,10 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         txtaBiografia.setText("");
         lstListas.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de albumes
         lstSeguidores.setModel(new javax.swing.DefaultListModel<>()); // Limpiar lista de seguidores
-        lstAlbumSiguiendo1.setModel(new javax.swing.DefaultListModel<>()); 
-        lstFavs.setModel(new javax.swing.DefaultListModel<>()); 
+        lstAlbumSiguiendo1.setModel(new javax.swing.DefaultListModel<>());
+        lstFavs.setModel(new javax.swing.DefaultListModel<>());
         txtNumeroDeSeguidoresPosta.setText("0");
-        
-        
+
         /*
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
@@ -415,7 +401,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lblSeguidores.setVisible(false);
         txtNumeroDeSeguidoresPosta.setVisible(false);
         lblAlbumSiguiendo.setVisible(false);
-        */
+         */
     }
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -430,8 +416,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 if ("Cliente".equals(token)) {
                     DataCliente usr = controlCli.consultarPerfilCliente(nickBuscar);
                     if (usr != null) {
-                        
-                      
+
                         txtNickName.setText(usr.getNickname());
                         txtNombre.setText(usr.getNombre());
                         txtApellido.setText(usr.getApellido());
@@ -440,48 +425,42 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtPaginaWeb.setText("");
                         txtaBiografia.setText("");
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlCli.obtenerNumeroSeguidores(usr.getNickname())));
-                        
-                        Collection<String> coleSeguidores =controlCli.obtenerSeguidoresUsuario(usr.getNickname());
+
+                        Collection<String> coleSeguidores = controlCli.obtenerSeguidoresUsuario(usr.getNickname());
                         Collection<String> coleSeguidos = controlCli.obtenerSeguidosUsuario(usr.getNickname());
                         Collection<String> coleListas = controlCli.obtenerListasDeUsuario(usr.getNickname());
                         cargarUsuariosLstSegudidores(coleSeguidores);
                         cargarUsuariosLstSeguidos(coleSeguidos);
                         cargarListasLst(coleListas);
-                        
-                         String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
+
+                        String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
                         switch (tokenFav) {
                             case "Temas":
-                           //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
+                                //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
                                 Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr.getNickname());
                                 cargarLstFav(favTema);
-                                
+
                                 break;
                             case "Albums":
-                                Collection<String> favAlbum =controlCli.obtenerAlbumFavCliente(usr.getNickname());
+                                Collection<String> favAlbum = controlCli.obtenerAlbumFavCliente(usr.getNickname());
                                 cargarLstFav(favAlbum);
                                 break;
                             case "Listas":
-                                Collection<String> favLista =controlCli.obtenerListasFavCliente(usr.getNickname());
+                                Collection<String> favLista = controlCli.obtenerListasFavCliente(usr.getNickname());
                                 cargarLstFav(favLista);
                                 break;
                             default:
                                 break;
                         }
-                        
-                        
-                        
-                       
-                       
-                       
-                        
+
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
                     }
                 } else if ("Artista".equals(token)) {
- 
+
                     DataArtista art = controlArt.retornarArtista(nickBuscar);
                     if (art != null) {
-                      
+
                         txtNickName.setText(art.getNickname());
                         txtNombre.setText(art.getNombre());
                         txtApellido.setText(art.getApellido());
@@ -490,13 +469,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtPaginaWeb.setText(art.getDirWeb());
                         txtaBiografia.setText(art.getBiografia());
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlArt.obtenerNumeroSeguidores(art.getNickname())));
-                        Collection<String> coleSeguidores =controlArt.obtenerSeguidoresArt(art.getNickname());
+                        Collection<String> coleSeguidores = controlArt.obtenerSeguidoresArt(art.getNickname());
                         cargarUsuariosLstSegudidores(coleSeguidores);
-                        
-                         Collection<String> artAlbum =controlArt.obtenerAlbumsArt(art.getNickname());
-                                cargarUsuariosLstSeguidos(artAlbum);
-                        
-                        
+
+                        Collection<String> artAlbum = controlArt.obtenerAlbumsArt(art.getNickname());
+                        cargarUsuariosLstSeguidos(artAlbum);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el artista.");
                     }
@@ -510,27 +488,27 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
 
     private void cbxFavssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFavssActionPerformed
-      String usr =  txtNickName.getText();
-      
+        String usr = txtNickName.getText();
+
         String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
-      //  System.out.println(tokenFav);
-            switch (tokenFav) {
-           case "Temas":
-                           //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
-                                Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr);
-                                cargarLstFav(favTema);
-                                
-                                break;
-                            case "Albums":
-                                Collection<String> favAlbum =controlCli.obtenerAlbumFavCliente(usr);
-                                cargarLstFav(favAlbum);
-                                break;
-                            case "Listas":
-                                Collection<String> favLista =controlCli.obtenerListasFavCliente(usr);
-                                cargarLstFav(favLista);
-                                break;
-                            default:
-                                break;
+        //  System.out.println(tokenFav);
+        switch (tokenFav) {
+            case "Temas":
+                //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
+                Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr);
+                cargarLstFav(favTema);
+
+                break;
+            case "Albums":
+                Collection<String> favAlbum = controlCli.obtenerAlbumFavCliente(usr);
+                cargarLstFav(favAlbum);
+                break;
+            case "Listas":
+                Collection<String> favLista = controlCli.obtenerListasFavCliente(usr);
+                cargarLstFav(favLista);
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_cbxFavssActionPerformed
 
@@ -546,6 +524,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstUsuarios.setModel(model);
 
     }
+
     public void cargarArtistasLstBuscar(Collection<DataArtista> cole) {
         DefaultListModel<String> model;
 
@@ -558,22 +537,21 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstUsuarios.setModel(model);
 
     }
-    
-    
-    
-     public void cargarUsuariosLstSegudidores(Collection<String> cole) {
+
+    public void cargarUsuariosLstSegudidores(Collection<String> cole) {
         DefaultListModel<String> model;
 
         model = new DefaultListModel<String>();
 
         for (String elemento : cole) {
-           // System.out.print("Elemento de lstSeguidores"+elemento);
+            // System.out.print("Elemento de lstSeguidores"+elemento);
             String nick = elemento;
             model.addElement(nick);
         }
         lstSeguidores.setModel(model);
 
     }
+
     public void cargarListasLst(Collection<String> cole) {
         DefaultListModel<String> model;
 
@@ -587,26 +565,28 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstListas.setModel(model);
 
     }
+
     public void cargarUsuariosLstSeguidos(Collection<String> cole) {
         DefaultListModel<String> model;
 
         model = new DefaultListModel<String>();
 
         for (String elemento : cole) {
-           // System.out.print("Elemento de lstSeguidos"+elemento);
+            // System.out.print("Elemento de lstSeguidos"+elemento);
             String nick = elemento;
             model.addElement(nick);
         }
         lstAlbumSiguiendo1.setModel(model);
 
     }
+
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
 
         model = new DefaultListModel<String>();
 
         for (String elemento : cole) {
-          //  System.out.print("Elemento de lstSeguidos"+elemento);
+            //  System.out.print("Elemento de lstSeguidos"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import java.awt.Component;
@@ -16,8 +12,8 @@ import logica.controladores.IControladorArtista;
 
 public class AgregarUsuario extends javax.swing.JPanel {
 
-    private IControladorCliente controlCli;
-    private IControladorArtista controlArt;
+    private final IControladorCliente controlCli;
+    private final IControladorArtista controlArt;
     private Component lblMsjArch;
 
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
@@ -360,10 +356,10 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 break;
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
+
     private void txtNullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNullActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNullActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;

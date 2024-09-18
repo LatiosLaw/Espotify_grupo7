@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
-/**
- *
- * @author Urbina
- */
 public class ConsultarLista extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ConsultarPerfilDeUsuario
-     */
     public ConsultarLista() {
         initComponents();
-               this.revalidate();
-               this.repaint();
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -201,40 +190,29 @@ public class ConsultarLista extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxOptItemStateChanged
-       
+
     }//GEN-LAST:event_cbxOptItemStateChanged
 
     private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
         int token = cbxOpt.getSelectedIndex();
-       
-        switch (token) {
-            case 0:
-                 
- 
-               
-            case 1:
 
-                break;
-            case 2:
-        
-               
-                break;
-                
+        switch (token) {
+            case 0 -> {
+            }
+
+            case 1 -> {
+            }
+            case 2 -> {
+            }
+        }
     }//GEN-LAST:event_cbxOptActionPerformed
-}
+
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-       String nickBuscar = txtBuscar.getText();
-       
-       
-       
-       //mandar mierda
-       
-       
-       //recibir mierda()
-       
-       
-       
-       
+        String nickBuscar = txtBuscar.getText();
+
+        //mandar mierda
+        //recibir mierda()
+
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkActionPerformed
@@ -245,9 +223,7 @@ public class ConsultarLista extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDescargarActionPerformed
 
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnLink;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import logica.controladores.IControladorAlbum;
@@ -9,27 +5,19 @@ import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorTema;
 
-/**
- *
- * @author Urbina
- */
 public class AdministrarAlbum extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdministrarUsuario
-     */
-    
-    private IControladorAlbum controlAlb;
-    private IControladorGenero controlGen;
-    private IControladorTema controlTem;
-    private IControladorArtista controlArt;
-        
+    private final IControladorAlbum controlAlb;
+    private final IControladorGenero controlGen;
+    private final IControladorTema controlTem;
+    private final IControladorArtista controlArt;
+
     public AdministrarAlbum(IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict, IControladorArtista ica) {
         controlAlb = icalb;
         controlGen = icg;
         controlTem = ict;
         controlArt = ica;
-        
+
         initComponents();
     }
 
@@ -94,44 +82,37 @@ public class AdministrarAlbum extends javax.swing.JPanel {
 
     private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
         String token = String.valueOf(cbxOPT.getSelectedItem());
-        
+
         switch (token) {
-            case "OPT":
-                //No
+            case "OPT" -> {
                 pnlAdAl.removeAll();
                 pnlAdAl.revalidate();
                 pnlAdAl.repaint();
-                break;
-            case "Agregar Album":
-
+            }
+            case "Agregar Album" -> {
                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
-               ada.setLocation(0,0);
-               ada.setSize(860, 471);
-               
-               pnlAdAl.removeAll();
-               pnlAdAl.add(ada);
-               pnlAdAl.revalidate();
-               pnlAdAl.repaint();
-                break;
-            case "Consultar Album":
+                ada.setLocation(0, 0);
+                ada.setSize(860, 471);
 
+                pnlAdAl.removeAll();
+                pnlAdAl.add(ada);
+                pnlAdAl.revalidate();
+                pnlAdAl.repaint();
+            }
+            case "Consultar Album" -> {
                 ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
-               cda.setLocation(0,0);
-               cda.setSize(860, 471);
-               
-               pnlAdAl.removeAll();
-               pnlAdAl.add(cda);
-               pnlAdAl.revalidate();
-               pnlAdAl.repaint();
-                break;
-            default:
-            cbxOPT.setSelectedIndex(0);
-                break;
-        }
-        
-        
-    }//GEN-LAST:event_cbxOPTActionPerformed
+                cda.setLocation(0, 0);
+                cda.setSize(860, 471);
 
+                pnlAdAl.removeAll();
+                pnlAdAl.add(cda);
+                pnlAdAl.revalidate();
+                pnlAdAl.repaint();
+            }
+            default ->
+                cbxOPT.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_cbxOPTActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxOPT;

@@ -1,27 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 
-/**
- *
- * @author Urbina
- */
-
 public class AdministrarLista extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdministrarUsuario
-     */
-    private IControladorListaParticular controlListPart;
-    private IControladorListaPorDefecto controlListPD;
-    private IControladorCliente controlCli;
-    
+    private final IControladorListaParticular controlListPart;
+    private final IControladorListaPorDefecto controlListPD;
+    private final IControladorCliente controlCli;
+
     public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
         initComponents();
 
@@ -135,28 +123,26 @@ public class AdministrarLista extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOPTActionPerformed
-        int token = cbxOPT.getSelectedIndex();
         String tokenx = String.valueOf(cbxOPT.getSelectedItem());
 
-        if (tokenx == "OPT"){
-            pnlAL.removeAll();
-            pnlAL.repaint();
-        }else if (tokenx == "Publicar Lista"){
-            PublicarLista pl = new PublicarLista(controlListPD,controlListPart, controlCli);
-            pl.setLocation(0,0);
-            pl.setSize(860, 471);
-
-            pnlAL.removeAll();
-            pnlAL.add(pl);
-            pnlAL.revalidate();
-            pnlAL.repaint();
-        }else{
-            cbxOPT.setSelectedIndex(0);
+        switch (tokenx) {
+            case "OPT" -> {
+                pnlAL.removeAll();
+                pnlAL.repaint();
+            }
+            case "Publicar Lista" -> {
+                PublicarLista pl = new PublicarLista(controlListPD, controlListPart, controlCli);
+                pl.setLocation(0, 0);
+                pl.setSize(860, 471);
+                pnlAL.removeAll();
+                pnlAL.add(pl);
+                pnlAL.revalidate();
+                pnlAL.repaint();
+            }
+            default ->
+                cbxOPT.setSelectedIndex(0);
         }
     }//GEN-LAST:event_cbxOPTActionPerformed
-    
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxOPT;

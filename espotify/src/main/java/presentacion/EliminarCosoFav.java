@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import java.text.DateFormat;
@@ -12,18 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-/**
- *
- * @author Urbina
- */
 public class EliminarCosoFav extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AgregarUsuario
-     */
     public EliminarCosoFav() {
         initComponents();
-    
     }
 
     /**
@@ -134,23 +122,24 @@ public class EliminarCosoFav extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-        String token= String.valueOf( cbxTipoCoso.getSelectedItem());
-        if(token == "Lista"){
-            
-        }else if(token == "Album"){
-            
-        }else if (token == "Tema"){
-            
+
+        String token = String.valueOf(cbxTipoCoso.getSelectedItem());
+
+        switch (token) {
+            case "Lista" -> {
+            }
+            case "Album" -> {
+            }
+            case "Tema" -> {
+            }
+            default -> {
+            }
         }
-        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void cbxTipoCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCosoActionPerformed
-       
- 
-    }//GEN-LAST:event_cbxTipoCosoActionPerformed
 
+    }//GEN-LAST:event_cbxTipoCosoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

@@ -1,18 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
-/**
- *
- * @author Tabaré 8031
- */
 public class AltaDeGenero extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AltaDeGenero
-     */
     public AltaDeGenero() {
         initComponents();
     }
@@ -79,7 +68,6 @@ public class AltaDeGenero extends javax.swing.JPanel {
                 .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCarGen;

@@ -1,16 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
@@ -23,42 +13,27 @@ import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-
-/**
- *
- * @author Urbina
- */
 public class AgregarCosoFav extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AgregarUsuario
-     */
-    
-    private IControladorCliente controlCli;
-    private IControladorTema controlTema;
-    private IControladorListaParticular controlLipa;
-    private IControladorListaPorDefecto controlLiporde;
-    private IControladorAlbum controlAlb;
-    
-    
-    
-    
+    private final IControladorCliente controlCli;
+    private final IControladorTema controlTema;
+    private final IControladorListaParticular controlLipa;
+    private final IControladorListaPorDefecto controlLiporde;
+    private final IControladorAlbum controlAlb;
+
     public AgregarCosoFav(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
         lblFav.setVisible(false);
         lstCoso.setVisible(false);
         txtFav.setVisible(false);
         btnConfirmar.setVisible(false);
-        
-        
-        
-       controlCli = icc;
-       controlAlb = ica;
-       controlLipa = iclp;
-       controlLiporde = iclpd;
-       controlTema = ict;
+
+        controlCli = icc;
+        controlAlb = ica;
+        controlLipa = iclp;
+        controlLiporde = iclpd;
+        controlTema = ict;
     }
 
     /**
@@ -206,135 +181,122 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-         String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
-        
-       if(nick.isBlank()){
-           JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
-       }else{
-           DataCliente cli = controlCli.consultarPerfilCliente(nick);
-           if(cli != null){
-               switch (nick) {
-            case "OPT":
-                 //No
-               // pnlAU.removeAll();
-              //  pnlAU.repaint();
-                JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
-            break;
-            case "Tema":
-            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
-                DataTema tema = new DataTema(txtFav.getText(),0);
-                 controlCli.agregarTema(cli, tema);
-                break;
-            case "Lista":
-                this.cargarLstFav( controlCli.obtenerListasFavCliente(nick));
-                break;
-            case "Album":
-                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
-                break;
+
+        String nick = String.valueOf(cbxTipoCoso.getSelectedItem());
+
+        if (nick.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+        } else {
+            DataCliente cli = controlCli.consultarPerfilCliente(nick);
+            if (cli != null) {
+                switch (nick) {
+                    case "OPT" -> {
+                        // pnlAU.removeAll();
+                        //  pnlAU.repaint();
+                        JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
+                    }
+                    case "Tema" -> {
+                        this.cargarLstFav(controlCli.obtenerTemaFavCliente(nick));
+                        DataTema tema = new DataTema(txtFav.getText(), 0);
+                        controlCli.agregarTema(cli, tema);
+                    }
+                    case "Lista" ->
+                        this.cargarLstFav(controlCli.obtenerListasFavCliente(nick));
+                    case "Album" ->
+                        this.cargarLstFav(controlCli.obtenerAlbumFavCliente(nick));
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");
             }
-            }else{JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");}
-       }
-        
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void cbxTipoCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCosoActionPerformed
-       String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
-        
+        String nick = String.valueOf(cbxTipoCoso.getSelectedItem());
+
         switch (nick) {
-            case "OPT":
-                 //No
-               // pnlAU.removeAll();
-              //  pnlAU.repaint();
+            case "OPT" -> //No
+                // pnlAU.removeAll();
+                //  pnlAU.repaint();
                 JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
-            break;
-            case "Tema":
-                  txtCreadorGenero.setVisible(false);
-                lblCreadorGenero.setVisible(false);
-                
-                
-            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
-                 
-                break;
-            case "Lista":
-                txtCreadorGenero.setVisible(true);
-                lblCreadorGenero.setVisible(true);
-                this.cargarLstFav( controlCli.obtenerListasFavCliente(nick));
-                String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
-                if("Lista por defecto".equals(tokenLista)){
-                    txtCreadorGenero.setText("Genero:");
-                }else{
-                    txtCreadorGenero.setText("Creador:");
-                }
-                
-                
-                break;
-            case "Album":
+            case "Tema" -> {
                 txtCreadorGenero.setVisible(false);
                 lblCreadorGenero.setVisible(false);
-                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
-                break;
+
+                this.cargarLstFav(controlCli.obtenerTemaFavCliente(nick));
+            }
+            case "Lista" -> {
+                txtCreadorGenero.setVisible(true);
+                lblCreadorGenero.setVisible(true);
+                this.cargarLstFav(controlCli.obtenerListasFavCliente(nick));
+                String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
+                if ("Lista por defecto".equals(tokenLista)) {
+                    txtCreadorGenero.setText("Genero:");
+                } else {
+                    txtCreadorGenero.setText("Creador:");
+                }
+            }
+            case "Album" -> {
+                txtCreadorGenero.setVisible(false);
+                lblCreadorGenero.setVisible(false);
+                this.cargarLstFav(controlCli.obtenerAlbumFavCliente(nick));
+            }
         }
- 
     }//GEN-LAST:event_cbxTipoCosoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
         lblFav.setVisible(true);
         lstCoso.setVisible(true);
         txtFav.setVisible(true);
         btnConfirmar.setVisible(true);
-        
-         String nick= String.valueOf( cbxTipoCoso.getSelectedItem());
-        
-       if(nick.isBlank()){
-           JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
-       }else{
-           DataCliente cli = controlCli.consultarPerfilCliente(nick);
-           if(cli != null){
-               switch (nick) {
-            case "OPT":
-                 //No
-               // pnlAU.removeAll();
-              //  pnlAU.repaint();
-                JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
-            break;
-            case "Tema":
-            this.cargarLstFav( controlCli.obtenerTemaFavCliente(nick));
-                 DataTema tema = controlTema.retornarTema(txtFav.getText());
-                 
-                 //algo.corroborarVlidezDeTema(tema)
-                 
-                 controlCli.agregarTema(cli, tema);
-                break;
-            case "Lista":
-                String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
-                 if("Lista por defecto".equals(tokenLista)){
-                    DataListaPorDefecto lista = controlLiporde.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
-                    controlCli.agregarLista(cli, lista);
-                 }else{
-                    txtCreadorGenero.setText("Creador:");
-                    DataListaParticular lista = controlLipa.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
-                    if(lista.getVisibilidad() == false){
-                        JOptionPane.showMessageDialog(null, "Lista que se ingresó es provada, no se puede agregar a fav.");
-                    }else{
-                       controlCli.agregarLista(cli, lista);
+
+        String nick = String.valueOf(cbxTipoCoso.getSelectedItem());
+
+        if (nick.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+        } else {
+            DataCliente cli = controlCli.consultarPerfilCliente(nick);
+            if (cli != null) {
+                switch (nick) {
+                    case "OPT" -> //No
+                        // pnlAU.removeAll();
+                        //  pnlAU.repaint();
+                        JOptionPane.showMessageDialog(null, "Elija una opcion del combo box, que no sea OPT claro.");
+                    case "Tema" -> {
+                        this.cargarLstFav(controlCli.obtenerTemaFavCliente(nick));
+                        DataTema tema = controlTema.retornarTema(txtFav.getText());
+
+                        //algo.corroborarVlidezDeTema(tema)
+                        controlCli.agregarTema(cli, tema);
                     }
-                 }
-                 JOptionPane.showMessageDialog(null, "Las listas me estan dando problemas ayuda");
-                
-                break;
-            case "Album":
-                this.cargarLstFav( controlCli.obtenerAlbumFavCliente(nick));
-                
-                DataAlbum album = controlAlb.retornarInfoAlbum(txtFav.getText());
-                controlCli.agregarAlbum(cli, album);
-                
-                break;
+                    case "Lista" -> {
+                        String tokenLista = String.valueOf(cbxListasLPM.getSelectedItem());
+                        if ("Lista por defecto".equals(tokenLista)) {
+                            DataListaPorDefecto lista = controlLiporde.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
+                            controlCli.agregarLista(cli, lista);
+                        } else {
+                            txtCreadorGenero.setText("Creador:");
+                            DataListaParticular lista = controlLipa.devolverInformacion(txtFav.getText(), txtCreadorGenero.getText());
+                            if (lista.getVisibilidad() == false) {
+                                JOptionPane.showMessageDialog(null, "Lista que se ingresó es provada, no se puede agregar a fav.");
+                            } else {
+                                controlCli.agregarLista(cli, lista);
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, "Las listas me estan dando problemas ayuda");
+                    }
+                    case "Album" -> {
+                        this.cargarLstFav(controlCli.obtenerAlbumFavCliente(nick));
+
+                        DataAlbum album = controlAlb.retornarInfoAlbum(txtFav.getText());
+                        controlCli.agregarAlbum(cli, album);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");
             }
-            }else{JOptionPane.showMessageDialog(null, "No existe usuario a ese nick.");}
-       }
-        
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbxListasLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxListasLPMActionPerformed
@@ -344,24 +306,15 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
 
-        model = new DefaultListModel<String>();
+        model = new DefaultListModel<>();
 
         for (String elemento : cole) {
-          //  System.out.print("Elemento de lstSeguidos"+elemento);
+            //  System.out.print("Elemento de lstSeguidos"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }
         lstCoso.setModel(model);
-
-    } 
-    
-    
-    
-    
-    
-    
-    
-    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
