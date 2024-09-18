@@ -1,50 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package presentacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import logica.controladores.IControladorAlbum;
-import logica.controladores.IControladorArtista;
-import logica.controladores.IControladorCliente;
-import logica.controladores.IControladorGenero;
-import logica.controladores.IControladorListaParticular;
-import logica.controladores.IControladorListaPorDefecto;
-import logica.controladores.IControladorTema;
+import logica.controladores.*;
+import logica.factory.Fabrica;
 import logica.dt.DataTema;
 
-/**
- *
- * @author Urbina
- */
 public class FormPrin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormPrin
-     */
-    private IControladorAlbum controlAlb;
-    private IControladorGenero controlGen;
-    private IControladorCliente controlCli;
-    private IControladorArtista controlArt;
-    private IControladorTema controlTem;
-    
-    private IControladorListaParticular controlListPar;
-    private IControladorListaPorDefecto controlListPD;
-    
-    public FormPrin(IControladorListaParticular iclp,IControladorListaPorDefecto iclpd,IControladorCliente icc, IControladorArtista ica, IControladorAlbum icalb, IControladorGenero icg, IControladorTema ict) {
-        controlCli = icc;
-        controlArt = ica;
-        controlAlb = icalb;
-        controlGen = icg;
-        controlTem = ict;
-        controlListPD =iclpd;
-        controlListPar =iclp;
-                
-                
-                
+    private final IControladorAlbum controlAlb;
+    private final IControladorGenero controlGen;
+    private final IControladorCliente controlCli;
+    private final IControladorArtista controlArt;
+    private final IControladorTema controlTem;
+    private final IControladorListaParticular controlListPar;
+    private final IControladorListaPorDefecto controlListPD;
+
+    public FormPrin() {
+
+        Fabrica factory = Fabrica.getInstance();
+
+        controlCli = factory.getIControladorCliente();
+        controlArt = factory.getIControladorArtista();
+        controlAlb = factory.getIControladorAlbum();
+        controlGen = factory.getIControladorGenero();
+        controlTem = factory.getIControladorTema();
+        controlListPD = factory.getIControladorListaPorDefecto();
+        controlListPar = factory.getIControladorListaParticular();
+
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -145,62 +129,57 @@ public class FormPrin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdUsActionPerformed
-        
-               AdministrarUsuario au = new  AdministrarUsuario(controlCli,controlArt,controlTem,controlListPar,controlListPD,controlAlb);
-               au.setLocation(0,0);
-               au.setSize(872, 579);
-               
-               pnlPrin.removeAll();
-               pnlPrin.add(au);
-               pnlPrin.revalidate();
-               pnlPrin.repaint();      
+
+        AdministrarUsuario au = new AdministrarUsuario(controlCli, controlArt, controlTem, controlListPar, controlListPD, controlAlb);
+        au.setLocation(0, 0);
+        au.setSize(872, 579);
+
+        pnlPrin.removeAll();
+        pnlPrin.add(au);
+        pnlPrin.revalidate();
+        pnlPrin.repaint();
     }//GEN-LAST:event_btnAdUsActionPerformed
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
-      
+
         AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen, controlTem, controlArt);
-               aa.setLocation(0,0);
-               aa.setSize(872, 579);
-               
-               pnlPrin.removeAll();
-               pnlPrin.add(aa);
-               pnlPrin.revalidate();
-               pnlPrin.repaint();
+        aa.setLocation(0, 0);
+        aa.setSize(872, 579);
+
+        pnlPrin.removeAll();
+        pnlPrin.add(aa);
+        pnlPrin.revalidate();
+        pnlPrin.repaint();
     }//GEN-LAST:event_btnAdAlActionPerformed
 
     private void btnAdLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdLiActionPerformed
-         AdministrarLista aL = new AdministrarLista(controlListPD,controlListPar, controlCli);
-        aL.setLocation(0,0);
-               aL.setSize(872, 579);
-               
-               pnlPrin.removeAll();
-               pnlPrin.add(aL);
-               pnlPrin.revalidate();
-               pnlPrin.repaint();
+        AdministrarLista aL = new AdministrarLista(controlListPD, controlListPar, controlCli);
+        aL.setLocation(0, 0);
+        aL.setSize(872, 579);
+
+        pnlPrin.removeAll();
+        pnlPrin.add(aL);
+        pnlPrin.revalidate();
+        pnlPrin.repaint();
     }//GEN-LAST:event_btnAdLiActionPerformed
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
-        
+
         controlCli.agregarCliente("El Listo", "Larry", "Capaja", "larricapasta@gmai.com", "Defoult", LocalDate.of(1969, 6, 9));
         controlCli.agregarCliente("Jose", "Pedro", "Barela", "agachateyconocela@gmai.com", "Defoult", LocalDate.of(1000, 3, 1));
         controlArt.agregarArtista("Jhon Black Soul", "Grimm", "", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(2020, 6, 7), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
-        controlCli.agregarCliente("Nick Furry", "Nikolas", "Furia" , "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
-            
+        controlCli.agregarCliente("Nick Furry", "Nikolas", "Furia", "imnotafurry@gmai.com", "fursona.png", LocalDate.of(1969, 6, 9));
+
         controlCli.seguirUsuario("El Listo", "Jose");
         controlCli.seguirUsuario("El Listo", "Jhon Black Soul");
         controlCli.seguirUsuario("Jose", "El Listo");
-        
+
         Collection<DataTema> tem = new ArrayList<>();
         controlAlb.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);
         controlGen.crearGeneroUnico("Genero 1");
         controlGen.crearGeneroUnico("Genero 2");
         controlGen.crearGeneroUnico("Genero 3");
     }//GEN-LAST:event_btnCarDatActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdAl;
