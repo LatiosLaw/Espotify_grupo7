@@ -5,9 +5,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import logica.dt.DataTema;
+import javax.persistence.ManyToMany;
 
 @Entity
 public abstract class ListaReproduccion implements Serializable {
@@ -15,8 +13,7 @@ public abstract class ListaReproduccion implements Serializable {
     @Id
     protected String nombre;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "nickname")
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<tema> temas;
 
     public ListaReproduccion() {

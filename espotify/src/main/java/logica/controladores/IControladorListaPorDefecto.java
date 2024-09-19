@@ -8,6 +8,8 @@ import logica.dt.DataTema;
 public interface IControladorListaPorDefecto {
 
     void crearLista(String nombre, DataGenero genero);
+    
+    void actualizarLista(DataListaPorDefecto lista);
 
     void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo);
 

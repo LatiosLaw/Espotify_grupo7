@@ -28,6 +28,7 @@ public class ConsultarLista extends javax.swing.JPanel {
     private final IControladorTema controlTem;
     private String nombre_cliente;
     private String nombre_genero;
+    private DataTema tema_seleccionado;
     
     public ConsultarLista(IControladorGenero icg, IControladorCliente icc, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorTema ict) {
         controlGen = icg;
@@ -160,6 +161,11 @@ public class ConsultarLista extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        ListaTemasLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListaTemasListaMouseClicked(evt);
+            }
         });
         jScrollPane10.setViewportView(ListaTemasLista);
 
@@ -363,19 +369,19 @@ public class ConsultarLista extends javax.swing.JPanel {
     private void jButtonBuscarInfoDeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInfoDeListaActionPerformed
        if (!txtListaElegida.getText().isEmpty()) {
            if(cbxOpt.getSelectedIndex() == 1){
-               DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
-               txtNombreLista.setText(lista.getNombre());
-               DataCliente cli = lista.getCreadorNickname();
-               txtDefinidoPor.setText(cli.getNickname());
-               txtGeneroLista.setText(" - ");
-               cargarTemasDeLaLista(lista.getNombre(), 1);
-        }else if(cbxOpt.getSelectedIndex() == 2){
-            DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), TOOL_TIP_TEXT_KEY);
+               DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), nombre_genero);
             txtNombreLista.setText(lista.getNombre());
                txtDefinidoPor.setText(" - ");
                DataGenero gen = lista.getGenero();
                txtGeneroLista.setText(gen.getNombre());
-            cargarTemasDeLaLista(lista.getNombre(), 2);
+            cargarTemasDeLaLista(lista.getNombre(), 1);
+        }else if(cbxOpt.getSelectedIndex() == 2){
+            DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
+               txtNombreLista.setText(lista.getNombre());
+               DataCliente cli = lista.getCreadorNickname();
+               txtDefinidoPor.setText(cli.getNickname());
+               txtGeneroLista.setText(" - ");
+               cargarTemasDeLaLista(lista.getNombre(), 2);
         }else{
             JOptionPane.showMessageDialog(null, "Disculpe, un error ha ocurrido.");
         }
@@ -384,13 +390,32 @@ public class ConsultarLista extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonBuscarInfoDeListaActionPerformed
 
+    private void ListaTemasListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaTemasListaMouseClicked
+        String nomtem = ListaTemasLista.getSelectedValue();
+        tema_seleccionado = controlTem.retornarTema(nomtem);
+        txtNomTemLista.setText(tema_seleccionado.getNickname());
+
+        if (!tema_seleccionado.getAccess().endsWith(".mp3")) {
+            txtDireccionTema.setVisible(true);
+            btnDescargarTema1.setVisible(false);
+            jLabel2.setVisible(true);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+
+        } else {
+            txtDireccionTema.setVisible(false);
+            btnDescargarTema1.setVisible(true);
+            jLabel2.setVisible(false);
+        }
+        if (tema_seleccionado.getDuracion() != 0) {
+            txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
+        } else {
+            txtDurTem.setText(" - ");
+        }
+    }//GEN-LAST:event_ListaTemasListaMouseClicked
+
     private void cargarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
         Collection<DataTema> temas_de_la_lista = new ArrayList<>();
-        if(tipo_lista == 1){
-               // Si es una lista particular, retornar temas de esa lista particular, guardarla en temas_de_la_lista
-        }else if(tipo_lista == 2){
-            // Si es una lista por defecto, retornar temas de esa lista particular, guardarla en temas_de_la_lista
-        }
+        temas_de_la_lista = controlTem.retornarTemasDeLaLista(nombre_lista, tipo_lista);
         DefaultListModel<String> model = new DefaultListModel();
         Iterator<DataTema> iterator = temas_de_la_lista.iterator();
         while (iterator.hasNext()) {

@@ -9,6 +9,8 @@ public interface IControladorTema {
     public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso);
 
     public DataTema retornarTema(String nickname);
+    
+    Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista);
 
     public Collection<DataTema> retornarTemasDeAlbum(String nombre_album);
 

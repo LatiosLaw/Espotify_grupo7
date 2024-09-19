@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import logica.Genero;
-import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.dt.DataGenero;
@@ -13,6 +12,7 @@ import logica.dt.DataTema;
 import logica.tema;
 import persistencia.DAO_Genero;
 import persistencia.DAO_ListaReproduccion;
+import persistencia.DAO_Tema;
 
 public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
 
@@ -51,6 +51,19 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         } catch (Exception e) {
             System.err.println("Error al guardar la lista: " + e.getMessage());
         }
+    }
+    
+    @Override
+    public void actualizarLista(DataListaPorDefecto lista){
+        DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
+        DAO_Tema dao_t = new DAO_Tema();
+        ListaPorDefecto lista_actualizable = dao_l.findListaPorGeneroYNombre(lista.getGenero().getNombre(), lista.getNombre());
+        Iterator<DataTema> iterator = lista.getTemas().iterator();
+        while (iterator.hasNext()) {
+            DataTema tema = iterator.next();
+            lista_actualizable.agregarTema(dao_t.find(tema.getNickname()));
+        }
+        dao_l.update(lista_actualizable);
     }
 
     @Override

@@ -1,9 +1,12 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -18,6 +21,9 @@ public class tema implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ALBUM_NOMBRE")
     private Album album;
+    
+    @ManyToMany(mappedBy = "temas")
+    private Collection<ListaReproduccion> listas;
     
      public tema(){
         
