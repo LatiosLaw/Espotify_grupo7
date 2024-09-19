@@ -33,7 +33,7 @@ public class DAO_Tema {
 
     public List<tema> findFromAlbum(String nombre_album) {
         try {
-            return entityManager.createQuery("SELECT t FROM tema t JOIN Album a WHERE a.nombre = :nombre_album ORDER BY t.posicion_album ASC", tema.class)
+            return entityManager.createQuery("SELECT t FROM tema t JOIN t.album a WHERE a.nombre = :nombre_album ORDER BY t.posicion_album ASC", tema.class)
                     .setParameter("nombre_album", nombre_album)
                     .getResultList();
         } catch (NoResultException e) {
@@ -43,7 +43,7 @@ public class DAO_Tema {
     
     public List<tema> findFromListaDefecto(String nombre_lista) { // No existen diferencias actualmente, seran implementadas proxima iteracion.
         try {
-            return entityManager.createQuery("SELECT t FROM tema t JOIN ListaPorDefecto l WHERE l.nombre = :nombre_lista", tema.class)
+            return entityManager.createQuery("SELECT t FROM tema t JOIN t.listas l WHERE l.nombre = :nombre_lista", tema.class)
                     .setParameter("nombre_lista", nombre_lista)
                     .getResultList();
         } catch (NoResultException e) {
@@ -54,7 +54,7 @@ public class DAO_Tema {
     
     public List<tema> findFromListaParticular(String nombre_lista) { // No existen diferencias actualmente, seran implementadas proxima iteracion.
         try {
-            return entityManager.createQuery("SELECT t FROM tema t JOIN ListaParticular l WHERE l.nombre = :nombre_lista", tema.class)
+            return entityManager.createQuery("SELECT t FROM tema t JOIN t.listas WHERE l.nombre = :nombre_lista", tema.class)
                     .setParameter("nombre_lista", nombre_lista)
                     .getResultList();
         } catch (NoResultException e) {
