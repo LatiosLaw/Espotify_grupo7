@@ -115,11 +115,6 @@ public class ConsultarLista extends javax.swing.JPanel {
             }
         });
 
-        ListaGenerosOClientes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane8.setViewportView(ListaGenerosOClientes);
 
         txtFiltrarPorEsteGeneroOCliente.setColumns(10);
@@ -156,11 +151,6 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         jLabel2.setText("Link del tema : ");
 
-        JListasFiltradas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane9.setViewportView(JListasFiltradas);
 
         txtListaElegida.setColumns(10);
@@ -169,11 +159,6 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         txtNombreLista.setEditable(false);
 
-        ListaTemasLista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListaTemasLista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ListaTemasListaMouseClicked(evt);
@@ -212,8 +197,8 @@ public class ConsultarLista extends javax.swing.JPanel {
                                     .addComponent(lblConAlb)
                                     .addGap(18, 18, 18)
                                     .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnOK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnOK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(140, 140, 140)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()

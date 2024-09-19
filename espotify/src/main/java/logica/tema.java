@@ -50,10 +50,13 @@ public class tema implements Serializable {
         this.identificador_archivo = archivo;
     }
     
-    public tema(String nickname, Integer duracion, Integer posicion_album) {
+    public tema(String nickname, Integer duracion, String metodo_de_acceso, String archivo, Integer posicion, Album album) {
         this.nickname = nickname;
         this.duracion = duracion;
-        this.posicion_album = posicion_album;
+        this.posicion_album = posicion;
+        this.metodo_de_acceso = metodo_de_acceso;
+        this.identificador_archivo = archivo;
+        this.album = album;
     }
 
     public String getNickname() {

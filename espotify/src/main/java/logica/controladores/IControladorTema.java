@@ -8,6 +8,8 @@ public interface IControladorTema {
 
     public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo);
 
+    boolean crearTemaCompleto(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album);
+            
     public DataTema retornarTema(String nickname);
     
     Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista);

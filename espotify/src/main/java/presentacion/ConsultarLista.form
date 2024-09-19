@@ -38,8 +38,8 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="cbxOpt" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtFiltrarPorEsteGeneroOCliente" alignment="0" max="32767" attributes="0"/>
                               <Component id="btnOK" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="txtFiltrarPorEsteGeneroOCliente" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
@@ -205,13 +205,7 @@
         <Component class="javax.swing.JList" name="ListaGenerosOClientes">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -279,13 +273,7 @@
         <Component class="javax.swing.JList" name="JListasFiltradas">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -319,13 +307,7 @@
         <Component class="javax.swing.JList" name="ListaTemasLista">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>

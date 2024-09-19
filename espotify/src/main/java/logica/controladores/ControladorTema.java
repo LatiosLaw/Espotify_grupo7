@@ -8,6 +8,7 @@ import logica.Album;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataTema;
+import persistencia.DAO_Album;
 import persistencia.DAO_Tema;
 
 public class ControladorTema implements IControladorTema {
@@ -15,6 +16,26 @@ public class ControladorTema implements IControladorTema {
     @Override
     public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo) {
         tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo);
+        DAO_Tema persistence = new DAO_Tema();
+        if (persistence.find(nuevo_tema.getNickname()) != null) {
+            System.out.println("El tema ya existe.");
+            return false;
+        } else {
+            persistence.save(nuevo_tema);
+            if (persistence.find(nuevo_tema.getNickname()) != null) {
+                System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                return true;
+            } else {
+                System.out.println("Un error ha ocurrido.");
+                return false;
+            }
+        }
+    }
+    
+    @Override
+    public boolean crearTemaCompleto(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album) {
+        DAO_Album persistence_alb = new DAO_Album();
+        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo, posicion, persistence_alb.findAlbumByName(album.getNombre()));
         DAO_Tema persistence = new DAO_Tema();
         if (persistence.find(nuevo_tema.getNickname()) != null) {
             System.out.println("El tema ya existe.");

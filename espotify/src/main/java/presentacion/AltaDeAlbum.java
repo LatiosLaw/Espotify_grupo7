@@ -370,7 +370,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_jList1HierarchyChanged
 
     private void btnConfTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfTemActionPerformed
-        if (!txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty()) {
+        if (!txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty() && !txtTipMus.getText().isEmpty()) {
             String nombre_tema = txtNomTemaAlb.getText();
             Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
@@ -449,7 +449,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(lblMsjArch, "Nombre y posicion del tema son obligatorios.");
+            JOptionPane.showMessageDialog(lblMsjArch, "Nombre, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
         }
 
     }//GEN-LAST:event_btnConfTemActionPerformed
