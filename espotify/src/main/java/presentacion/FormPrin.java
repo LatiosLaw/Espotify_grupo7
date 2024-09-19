@@ -3,10 +3,10 @@ package presentacion;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 import logica.controladores.*;
 import logica.dt.DataGenero;
 import logica.factory.Fabrica;
-import logica.dt.DataTema;
 
 public class FormPrin extends javax.swing.JFrame {
 
@@ -171,9 +171,9 @@ public class FormPrin extends javax.swing.JFrame {
             cargarClientes();
             cargarArtistas();
             cargarGeneros();
+            cargarSeguimientos();
             cargarListas();
             cargarTemas();
-            
             
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
 
@@ -223,10 +223,82 @@ public class FormPrin extends javax.swing.JFrame {
     }
     
     private void cargarTemas(){
-        controlTem.crearTemaDefault("YMCA", 428, "mp3");
-        controlTem.crearTemaDefault("Macho Man", 328, "web");
-        controlTem.crearTemaDefault("In the Navy", 313, "mp3");
+        controlTem.crearTemaDefault("YMCA", 428, "mp3", "identificador archivo mp3");
+        controlTem.crearTemaDefault("Macho Man", 328, "web", null);
+        controlTem.crearTemaDefault("In the Navy", 313, "mp3", null);
         System.out.println("LISTAS CARGADAS");
+    }
+    
+    private void cargarSeguimientos(){
+        
+        controlCli.seguirUsuario("el_padrino", "vpeople");
+        controlCli.seguirUsuario("el_padrino", "dmode");
+        controlCli.seguirUsuario("el_padrino", "bruceTheBoss");
+        controlCli.seguirUsuario("el_padrino", "benKenobi");
+        controlCli.seguirUsuario("el_padrino", "lachiqui");
+        controlCli.seguirUsuario("el_padrino", "cbochinche");
+        controlCli.seguirUsuario("el_padrino", "Eleven11");
+        
+        controlCli.seguirUsuario("scarlettO", "dmode");
+        controlCli.seguirUsuario("scarlettO", "bruceTheBoss");
+        controlCli.seguirUsuario("scarlettO", "tigerOfWales");
+        controlCli.seguirUsuario("scarlettO", "tripleNelson");
+        controlCli.seguirUsuario("scarlettO", "Heisenberg");
+        controlCli.seguirUsuario("scarlettO", "benKenobi");
+        controlCli.seguirUsuario("scarlettO", "lachiqui");
+        
+        controlCli.seguirUsuario("ppArgento", "dmode");
+        controlCli.seguirUsuario("ppArgento", "bruceTheBoss");
+        controlCli.seguirUsuario("ppArgento", "tripleNelson");
+        controlCli.seguirUsuario("ppArgento", "benKenobi");
+        controlCli.seguirUsuario("ppArgento", "lachiqui");
+        controlCli.seguirUsuario("ppArgento", "cbochinche");
+        controlCli.seguirUsuario("ppArgento", "Eleven11");
+        
+        controlCli.seguirUsuario("Heisenberg", "dmode");
+        controlCli.seguirUsuario("Heisenberg", "bruceTheBoss");
+        controlCli.seguirUsuario("Heisenberg", "tigerOfWales");
+        controlCli.seguirUsuario("Heisenberg", "tripleNelson");
+        controlCli.seguirUsuario("Heisenberg", "lospimpi");
+        controlCli.seguirUsuario("Heisenberg", "dyangounchained");
+        controlCli.seguirUsuario("Heisenberg", "alcides");
+        controlCli.seguirUsuario("Heisenberg", "el_padrino");
+        controlCli.seguirUsuario("Heisenberg", "ppArgento");
+        controlCli.seguirUsuario("Heisenberg", "benKenobi");
+        controlCli.seguirUsuario("Heisenberg", "lachiqui");
+        controlCli.seguirUsuario("Heisenberg", "Eleven11");
+        
+        controlCli.seguirUsuario("benKenobi", "dmode");
+        controlCli.seguirUsuario("benKenobi", "bruceTheBoss");
+        controlCli.seguirUsuario("benKenobi", "la_ley");
+        controlCli.seguirUsuario("benKenobi", "chaiko");
+        controlCli.seguirUsuario("benKenobi", "nicoleneu");
+        controlCli.seguirUsuario("benKenobi", "lospimpi");
+        controlCli.seguirUsuario("benKenobi", "alcides");
+        controlCli.seguirUsuario("benKenobi", "el_padrino");
+        controlCli.seguirUsuario("benKenobi", "ppArgento");
+        controlCli.seguirUsuario("benKenobi", "lachiqui");
+        controlCli.seguirUsuario("benKenobi", "cbochinche");
+        controlCli.seguirUsuario("benKenobi", "Eleven11");
+        
+        controlCli.seguirUsuario("lachiqui", "bruceTheBoss");
+        controlCli.seguirUsuario("lachiqui", "la_ley");
+        controlCli.seguirUsuario("lachiqui", "lospimpi");
+        controlCli.seguirUsuario("lachiqui", "alcides");
+        controlCli.seguirUsuario("lachiqui", "el_padrino");
+        controlCli.seguirUsuario("lachiqui", "scarlettO");
+        controlCli.seguirUsuario("lachiqui", "ppArgento");
+        
+        controlCli.seguirUsuario("cbochinche", "la_ley");
+        controlCli.seguirUsuario("cbochinche", "lospimpi");
+        controlCli.seguirUsuario("cbochinche", "dyangounchained");
+        controlCli.seguirUsuario("cbochinche", "alcides");
+        controlCli.seguirUsuario("cbochinche", "ppArgento");
+        
+        controlCli.seguirUsuario("Eleven11", "la_ley");
+        controlCli.seguirUsuario("Eleven11", "el_padrino");
+        controlCli.seguirUsuario("Eleven11", "scarlettO");
+        controlCli.seguirUsuario("Eleven11", "ppArgento");
     }
 
     private void cargarClientes() {

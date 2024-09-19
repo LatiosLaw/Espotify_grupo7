@@ -3,24 +3,25 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Artista extends Usuario {
-    
+
+    @Column(length = 1024)  // Cambiar la longitud del campo
     private String biografia;
     private String dirWeb;
-    @OneToMany(mappedBy="creador")
+    @OneToMany(mappedBy = "creador")
     private Collection<Album> albumes = new ArrayList<Album>();
 
-    // Constructor por defecto
     public Artista() {
-        // Constructor vacío necesario para JPA
+
     }
-    
+
     public Artista(String nickname) {
-    super(nickname);
+        super(nickname);
     }
 
     public Artista(String nickname, String nombre, String apellido, String email, String foto_perfil, LocalDate fecha_naci, String biografia, String dirWeb) {
