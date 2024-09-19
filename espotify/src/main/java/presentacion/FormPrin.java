@@ -3,8 +3,10 @@ package presentacion;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 import logica.controladores.*;
 import logica.dt.DataGenero;
+import logica.dt.DataListaPorDefecto;
 import logica.factory.Fabrica;
 import logica.dt.DataTema;
 
@@ -171,9 +173,9 @@ public class FormPrin extends javax.swing.JFrame {
             cargarClientes();
             cargarArtistas();
             cargarGeneros();
-            cargarListas();
-            cargarTemas();
             
+            cargarTemas();
+            cargarListas();
             
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
 
@@ -213,8 +215,10 @@ public class FormPrin extends javax.swing.JFrame {
         controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino")); // LD2
         controlListPD.crearLista("Música Clásica", new DataGenero("Clásica")); // LD3
             
-           // DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
-            
+           DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
+            lista.agregarTema(controlTem.retornarTema("YMCA"));
+            lista.agregarTema(controlTem.retornarTema("Macho Man"));
+            controlListPD.actualizarLista(lista);
            // System.out.println(lista.getNombre());
             
            // controlListPD.agregarTema(lista.getNombre(), "Pop Clásico", controlTem.retornarTema("YMCA"));
