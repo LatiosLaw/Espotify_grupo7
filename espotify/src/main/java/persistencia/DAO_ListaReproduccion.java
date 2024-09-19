@@ -95,6 +95,22 @@ public class DAO_ListaReproduccion {
             return null;
         }
     }
+       public Collection<ListaPorDefecto> findListasPorGeneros(String generoNombre) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaPorDefecto u WHERE u.genero.nombre = :generoNombre",
+                    ListaPorDefecto.class)
+                    .setParameter("generoNombre", generoNombre)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontró ninguna lista con esos parámetros
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depuración
+            return null;
+        }
+    }
+
+
     public void update(ListaReproduccion entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);

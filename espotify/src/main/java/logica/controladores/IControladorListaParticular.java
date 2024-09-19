@@ -3,12 +3,13 @@ package logica.controladores;
 import java.util.Collection;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
+import logica.dt.DataTema;
 
 public interface IControladorListaParticular {
 
     void crearLista(String nombre, DataCliente cli);
 
-    void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema);
+    void agregarTema(String nick_cliente, String nombre_lista, DataTema nombre_tema);
 
     void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema);
 

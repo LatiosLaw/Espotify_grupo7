@@ -1,14 +1,23 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import logica.dt.DataTema;
 
 @Entity
 public abstract class ListaReproduccion implements Serializable {
 
     @Id
     protected String nombre;
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "nickname")
+    private Collection<tema> temas;
 
     public ListaReproduccion() {
 
@@ -24,6 +33,14 @@ public abstract class ListaReproduccion implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public Collection<tema> getTemas() {
+        return temas;
+    }
+
+    public void agregarTema(tema tema) {
+        this.temas.add(tema);
     }
 
     @Override

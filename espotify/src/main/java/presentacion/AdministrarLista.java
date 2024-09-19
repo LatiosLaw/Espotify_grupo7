@@ -1,21 +1,27 @@
 package presentacion;
 
 import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
 
 public class AdministrarLista extends javax.swing.JPanel {
 
     private final IControladorListaParticular controlListPart;
     private final IControladorListaPorDefecto controlListPD;
+    private final IControladorGenero controlGen;
     private final IControladorCliente controlCli;
+    private final IControladorTema controlTem;
 
-    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
-        initComponents();
-
+    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc, IControladorGenero icg, IControladorTema ict) {
+        controlGen = icg;
         controlListPart = iclp;
         controlListPD = iclpd;
         controlCli = iclc;
+        controlTem = ict;
+        
+        initComponents();
     }
 
     /**
@@ -50,7 +56,7 @@ public class AdministrarLista extends javax.swing.JPanel {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(872, 579));
 
-        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", " " }));
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", "Consultar Lista" }));
         cbxOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxOPTActionPerformed(evt);
@@ -68,7 +74,7 @@ public class AdministrarLista extends javax.swing.JPanel {
         );
         pnlAU1Layout.setVerticalGroup(
             pnlAU1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -90,7 +96,7 @@ public class AdministrarLista extends javax.swing.JPanel {
                 .addGap(54, 54, 54)
                 .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(pnlAU1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAU1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -136,6 +142,15 @@ public class AdministrarLista extends javax.swing.JPanel {
                 pl.setSize(860, 471);
                 pnlAL.removeAll();
                 pnlAL.add(pl);
+                pnlAL.revalidate();
+                pnlAL.repaint();
+            }
+            case "Consultar Lista" -> {
+                ConsultarLista cl = new ConsultarLista(controlGen, controlCli, controlListPart, controlListPD, controlTem);
+                cl.setLocation(0, 0);
+                cl.setSize(860, 471);
+                pnlAL.removeAll();
+                pnlAL.add(cl);
                 pnlAL.revalidate();
                 pnlAL.repaint();
             }

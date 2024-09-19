@@ -2,12 +2,15 @@ package logica.controladores;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaReproduccion;
 import logica.Usuario;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
+import logica.dt.DataTema;
+import logica.tema;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Usuario;
 
@@ -43,8 +46,24 @@ public class ControladorListaParticular implements IControladorListaParticular {
     }
 
     @Override
-    public void agregarTema(String nick_cliente, String nombre_lista, String nombre_tema) {
-
+    public void agregarTema(String nick_cliente, String nombre_lista, DataTema temazo){
+        DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+        ListaParticular lista = null;
+        Collection<ListaParticular> listas = daoLista.findListaPorCliente(nick_cliente);
+        Iterator<ListaParticular> iterator = listas.iterator();
+        while (iterator.hasNext()) {
+            lista = iterator.next();
+            String nombrel = lista.getNombre();
+            if(nombrel == nombre_lista){
+                if(lista == null){
+          System.out.println("No existen listas en el sistema."); 
+        }else{
+        lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
+        daoLista.update(lista);
+        }
+                break;
+            }
+        }
     }
 
     @Override

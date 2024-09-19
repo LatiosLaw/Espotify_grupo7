@@ -1,8 +1,40 @@
 package presentacion;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorGenero;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
+import logica.dt.DataCliente;
+import logica.dt.DataGenero;
+import logica.dt.DataListaParticular;
+import logica.dt.DataListaPorDefecto;
+import logica.dt.DataTema;
+
 public class ConsultarLista extends javax.swing.JPanel {
 
-    public ConsultarLista() {
+    private final IControladorGenero controlGen;
+    private final IControladorCliente controlCli;
+    private final IControladorListaParticular controlListPar;
+    private final IControladorListaPorDefecto controlListPD;
+    private final IControladorTema controlTem;
+    private String nombre_cliente;
+    private String nombre_genero;
+    
+    public ConsultarLista(IControladorGenero icg, IControladorCliente icc, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorTema ict) {
+        controlGen = icg;
+        controlCli = icc;
+        controlListPar = iclp;
+        controlListPD = icld;
+        controlTem = ict;
         initComponents();
         this.revalidate();
         this.repaint();
@@ -18,38 +50,48 @@ public class ConsultarLista extends javax.swing.JPanel {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
-        txtNombreLista = new javax.swing.JTextField();
-        txtApellido = new javax.swing.JTextField();
+        txtGeneroLista = new javax.swing.JTextField();
         txtDefinidoPor = new javax.swing.JTextField();
         cbxOpt = new javax.swing.JComboBox<>();
         jScrollPane8 = new javax.swing.JScrollPane();
-        lstFiltro = new javax.swing.JList<>();
-        txtBuscar = new javax.swing.JTextField();
+        ListaGenerosOClientes = new javax.swing.JList<>();
+        txtFiltrarPorEsteGeneroOCliente = new javax.swing.JTextField();
         btnOK = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTemas = new javax.swing.JTable();
-        txtDesLink = new javax.swing.JTextField();
-        btnLink = new javax.swing.JButton();
-        btnDescargar = new javax.swing.JButton();
+        lblGeneroOCliente = new javax.swing.JLabel();
+        txtNomTemLista = new javax.swing.JTextField();
+        txtDurTem = new javax.swing.JTextField();
+        lblDurTem = new javax.swing.JLabel();
+        btnDescargarTema1 = new javax.swing.JButton();
+        txtDireccionTema = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        JListasFiltradas = new javax.swing.JList<>();
+        txtListaElegida = new javax.swing.JTextField();
+        lblLista = new javax.swing.JLabel();
+        txtNombreLista = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        ListaTemasLista = new javax.swing.JList<>();
+        jButtonBuscarInfoDeLista = new javax.swing.JButton();
+        lblConAlb = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
         panel1.setBackground(new java.awt.Color(255, 102, 102));
+        panel1.setPreferredSize(new java.awt.Dimension(149, 149));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
+            .addGap(0, 149, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 149, Short.MAX_VALUE)
         );
 
-        txtNombreLista.setEditable(false);
-
-        txtApellido.setEditable(false);
+        txtGeneroLista.setEditable(false);
 
         txtDefinidoPor.setEditable(false);
 
@@ -65,127 +107,172 @@ public class ConsultarLista extends javax.swing.JPanel {
             }
         });
 
-        lstFiltro.setModel(new javax.swing.AbstractListModel<String>() {
+        ListaGenerosOClientes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane8.setViewportView(lstFiltro);
+        jScrollPane8.setViewportView(ListaGenerosOClientes);
 
-        txtBuscar.setColumns(10);
+        txtFiltrarPorEsteGeneroOCliente.setColumns(10);
 
-        btnOK.setText("OK");
+        btnOK.setText("Mostrar Listas");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
             }
         });
 
-        tblTemas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        lblGeneroOCliente.setText("Genero o Cliente : ");
+
+        lblDurTem.setText("Duracion :");
+
+        btnDescargarTema1.setText("Descargar Tema");
+
+        txtDireccionTema.setToolTipText("Haz clic para copiar el enlace!");
+        txtDireccionTema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDireccionTemaMouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tblTemas);
-
-        txtDesLink.setColumns(10);
-
-        btnLink.setText("Copiar Link");
-        btnLink.addActionListener(new java.awt.event.ActionListener() {
+        });
+        txtDireccionTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLinkActionPerformed(evt);
+                txtDireccionTemaActionPerformed(evt);
             }
         });
 
-        btnDescargar.setText("Descargar");
-        btnDescargar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Link del tema : ");
+
+        JListasFiltradas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane9.setViewportView(JListasFiltradas);
+
+        txtListaElegida.setColumns(10);
+
+        lblLista.setText("Lista :");
+
+        txtNombreLista.setEditable(false);
+
+        ListaTemasLista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane10.setViewportView(ListaTemasLista);
+
+        jButtonBuscarInfoDeLista.setText("Mostrar Datos");
+        jButtonBuscarInfoDeLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDescargarActionPerformed(evt);
+                jButtonBuscarInfoDeListaActionPerformed(evt);
             }
         });
+
+        lblConAlb.setText("Consultar Lista :");
+
+        jLabel1.setText("Temas de la Lista :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBuscarInfoDeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNombreLista)
-                        .addComponent(txtDefinidoPor)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDesLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(546, Short.MAX_VALUE)
-                    .addComponent(btnDescargar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(215, 215, 215)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLista)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtListaElegida, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblGeneroOCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblConAlb)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnOK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(140, 140, 140)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnDescargarTema1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(49, 49, 49)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombreLista)
+                                    .addComponent(txtDefinidoPor)
+                                    .addComponent(txtGeneroLista)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jScrollPane10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDurTem)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtNomTemLista))))))
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 723, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblConAlb)
+                            .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGeneroOCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLista))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtDefinidoPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtGeneroLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(txtNomTemLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDesLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(41, 41, 41)
-                .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(311, 311, 311)
-                    .addComponent(btnDescargar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(708, Short.MAX_VALUE)))
+                            .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDurTem)
+                            .addComponent(btnDescargarTema1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtListaElegida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBuscarInfoDeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,43 +288,143 @@ public class ConsultarLista extends javax.swing.JPanel {
             }
 
             case 1 -> {
+                cargarGeneros();
             }
             case 2 -> {
+                this.cargarClientes(controlCli.mostrarClientes());
             }
         }
     }//GEN-LAST:event_cbxOptActionPerformed
 
+    private void cargarGeneros() {
+        DefaultListModel<String> model = new DefaultListModel();
+        Collection<String> retorno = controlGen.mostrarGeneros();
+        Iterator<String> iterator = retorno.iterator();
+        while (iterator.hasNext()) {
+            model.addElement(iterator.next());
+        }
+        ListaGenerosOClientes.setModel(model);
+    }
+    
+    private void cargarClientes(Collection<DataCliente> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<>();
+
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        ListaGenerosOClientes.setModel(model);
+    }
+    
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        String nickBuscar = txtBuscar.getText();
-
-        //mandar mierda
-        //recibir mierda()
-
+        String buscar = txtFiltrarPorEsteGeneroOCliente.getText();
+        if(cbxOpt.getSelectedIndex() == 1){
+        Collection<String> ld = controlListPD.retornarListasDelGenero(buscar);
+        DefaultListModel<String> model;
+        model = new DefaultListModel<>();
+        for (String elemento : ld) {
+            model.addElement(elemento);
+        }
+        JListasFiltradas.setModel(model);
+        nombre_genero = buscar;
+        }else if(cbxOpt.getSelectedIndex() == 2){
+            Collection<DataListaParticular> lp = controlListPar.devolverListadeCliente(buscar);
+            DefaultListModel<String> model;
+        model = new DefaultListModel<>();
+        for (DataListaParticular elemento : lp) {
+            String nombre_lista = elemento.getNombre();
+            model.addElement(nombre_lista);
+        }
+        JListasFiltradas.setModel(model);
+        nombre_cliente = buscar;
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una opcion de filtrado coherente (Cliente o Genero).");
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
-    private void btnLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkActionPerformed
+    private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
+        StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
+
+        // Obtener el portapapeles del sistema
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+        // Copiar el texto al portapapeles
+        clipboard.setContents(stringSelection, null);
+
+        JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
+    }//GEN-LAST:event_txtDireccionTemaMouseClicked
+
+    private void txtDireccionTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTemaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLinkActionPerformed
+    }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
-    private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDescargarActionPerformed
+    private void jButtonBuscarInfoDeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInfoDeListaActionPerformed
+       if (!txtListaElegida.getText().isEmpty()) {
+           if(cbxOpt.getSelectedIndex() == 1){
+               DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
+               txtNombreLista.setText(lista.getNombre());
+               DataCliente cli = lista.getCreadorNickname();
+               txtDefinidoPor.setText(cli.getNickname());
+               txtGeneroLista.setText(" - ");
+               cargarTemasDeLaLista(lista.getNombre(), 1);
+        }else if(cbxOpt.getSelectedIndex() == 2){
+            DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), TOOL_TIP_TEXT_KEY);
+            txtNombreLista.setText(lista.getNombre());
+               txtDefinidoPor.setText(" - ");
+               DataGenero gen = lista.getGenero();
+               txtGeneroLista.setText(gen.getNombre());
+            cargarTemasDeLaLista(lista.getNombre(), 2);
+        }else{
+            JOptionPane.showMessageDialog(null, "Disculpe, un error ha ocurrido.");
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, introduzca la lista de la que quiere saber la informacion en el formulario.");
+        }
+    }//GEN-LAST:event_jButtonBuscarInfoDeListaActionPerformed
 
-
+    private void cargarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
+        Collection<DataTema> temas_de_la_lista = new ArrayList<>();
+        if(tipo_lista == 1){
+               // Si es una lista particular, retornar temas de esa lista particular, guardarla en temas_de_la_lista
+        }else if(tipo_lista == 2){
+            // Si es una lista por defecto, retornar temas de esa lista particular, guardarla en temas_de_la_lista
+        }
+        DefaultListModel<String> model = new DefaultListModel();
+        Iterator<DataTema> iterator = temas_de_la_lista.iterator();
+        while (iterator.hasNext()) {
+            DataTema tema_actual = iterator.next();
+            model.addElement(tema_actual.getNickname());
+        }
+        ListaTemasLista.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDescargar;
-    private javax.swing.JButton btnLink;
+    private javax.swing.JList<String> JListasFiltradas;
+    private javax.swing.JList<String> ListaGenerosOClientes;
+    private javax.swing.JList<String> ListaTemasLista;
+    private javax.swing.JButton btnDescargarTema1;
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jButtonBuscarInfoDeLista;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JList<String> lstFiltro;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lblConAlb;
+    private javax.swing.JLabel lblDurTem;
+    private javax.swing.JLabel lblGeneroOCliente;
+    private javax.swing.JLabel lblLista;
     private java.awt.Panel panel1;
-    private javax.swing.JTable tblTemas;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDefinidoPor;
-    private javax.swing.JTextField txtDesLink;
+    private javax.swing.JTextField txtDireccionTema;
+    private javax.swing.JTextField txtDurTem;
+    private javax.swing.JTextField txtFiltrarPorEsteGeneroOCliente;
+    private javax.swing.JTextField txtGeneroLista;
+    private javax.swing.JTextField txtListaElegida;
+    private javax.swing.JTextField txtNomTemLista;
     private javax.swing.JTextField txtNombreLista;
     // End of variables declaration//GEN-END:variables
 }
