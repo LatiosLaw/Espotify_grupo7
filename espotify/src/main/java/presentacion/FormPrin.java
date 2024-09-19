@@ -1,15 +1,15 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 import logica.controladores.*;
+import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataListaPorDefecto;
+import logica.dt.DataTema;
 import logica.factory.Fabrica;
 
 public class FormPrin extends javax.swing.JFrame {
@@ -21,7 +21,6 @@ public class FormPrin extends javax.swing.JFrame {
     private final IControladorTema controlTem;
     private final IControladorListaParticular controlListPar;
     private final IControladorListaPorDefecto controlListPD;
-    
 
     public FormPrin() {
 
@@ -194,25 +193,27 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
-         new Thread(() -> {
+        new Thread(() -> {
             try {
                 lblCargando.setVisible(true);
                 jProgressBar1.setVisible(true);
                 cargarClientes();
                 jProgressBar1.setValue(10); // Actualiza a 10%
-                
+
                 cargarArtistas();
                 jProgressBar1.setValue(20); // Actualiza a 20%
-                
+
                 cargarGeneros();
                 jProgressBar1.setValue(30); // Actualiza a 30%
-                
+
                 cargarTemas();
                 jProgressBar1.setValue(40); // Actualiza a 40%
-                
+
                 cargarSeguimientos();
                 jProgressBar1.setValue(60); // Actualiza a 60%
-                
+
+                cargarAlbumes();
+
                 cargarListas();
                 jProgressBar1.setValue(80); // Actualiza a 80%
 
@@ -468,6 +469,91 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                   bajo el t\u00edtulo \u00abFricote\u00bb.""", ""); //AL
         //---------//
         System.out.println("ARTISTAS CARGADOS");
+    }
+
+    private void cargarAlbumes() {
+        Collection<DataTema> temas = new ArrayList<>();
+        Collection<DataGenero> genVPL = new ArrayList<>();
+        Collection<DataGenero> genDMV = new ArrayList<>();
+        Collection<DataGenero> genCLU = new ArrayList<>();
+        Collection<DataGenero> genUSA = new ArrayList<>();
+        Collection<DataGenero> genINU = new ArrayList<>();
+        Collection<DataGenero> genAYS = new ArrayList<>();
+        Collection<DataGenero> genLLU = new ArrayList<>();
+        Collection<DataGenero> genLDC = new ArrayList<>();
+        Collection<DataGenero> genCPP = new ArrayList<>();
+        Collection<DataGenero> genPAM = new ArrayList<>();
+        Collection<DataGenero> genAMA = new ArrayList<>();
+        Collection<DataGenero> genLOC = new ArrayList<>();
+        Collection<DataGenero> genVIO = new ArrayList<>();
+
+        DataGenero POP = new DataGenero("Pop");
+        DataGenero EPO = new DataGenero("Electropop");
+        DataGenero DPO = new DataGenero("Dance-pop");
+        DataGenero PCL = new DataGenero("Pop Clásico");
+
+        DataGenero ROK = new DataGenero("Rock");
+        DataGenero RCL = new DataGenero("Rock Clásico");
+        DataGenero RKL = new DataGenero("Rock Latino");
+        DataGenero RAR = new DataGenero("Rock & Roll");
+
+        DataGenero CLA = new DataGenero("Clásica");
+        DataGenero DIS = new DataGenero("Disco");
+        DataGenero BAL = new DataGenero("Balada");
+        DataGenero CUM = new DataGenero("Cumbia");
+
+        controlAlb.agregarAlbum("vpeople", "Village People Live and Sleazy", null, 1980, temas); //VPL
+        DataAlbum VPL = controlAlb.retornarInfoAlbum("Village People Live and Sleazy");
+        genVPL.add(DIS);
+        genVPL.add(DPO);
+        genVPL.add(PCL);
+        controlAlb.actualizarAlbum(VPL, genVPL);
+
+        controlAlb.agregarAlbum("dmode", "Violator", null, 1990, temas); //DMV
+        DataAlbum DMV = controlAlb.retornarInfoAlbum("Violator");
+        genDMV.add(EPO);
+        controlAlb.actualizarAlbum(DMV, genDMV);
+
+        controlAlb.agregarAlbum("clauper", "She’s So Unusual", "bit.ly/shesunusual", 1983, temas); //CLU
+        DataAlbum CLU = controlAlb.retornarInfoAlbum("She’s So Unusual");
+        genCLU.add(PCL);
+        genCLU.add(DPO);
+        controlAlb.actualizarAlbum(CLU, genCLU);
+
+        controlAlb.agregarAlbum("bruceTheBoss", "Born In The U.S.A.", null, 1984, temas); //USA
+        DataAlbum USA = controlAlb.retornarInfoAlbum("Born In The U.S.A.");
+        genUSA.add(RCL);
+        genUSA.add(RAR);
+        genUSA.add(PCL);
+        controlAlb.actualizarAlbum(USA, genUSA);
+
+        controlAlb.agregarAlbum("tigerOfWales", "It’s Not Unusual", "bit.ly/itsNotUnusual", 1965, temas); //INU
+        DataAlbum INU = controlAlb.retornarInfoAlbum("It’s Not Unusual");
+        genINU.add(RCL);
+        genINU.add(RAR);
+        genINU.add(PCL);
+        controlAlb.actualizarAlbum(INU, genINU);
+
+        /*Hasta aca parece 
+        que todo bien, sinceramente esto es horrible.*/
+        controlAlb.agregarAlbum("tripleNelson", "Agua Y Sal", null, 2012, temas); //AYS
+
+        controlAlb.agregarAlbum("la_ley", "MTV Unplugged", "bit.ly/MTVunplugged", 2001, temas); //LLU
+
+        controlAlb.agregarAlbum("chaiko", "El Lago De Los Cisnes", null, 1875, temas); //LDC
+
+        controlAlb.agregarAlbum("chaiko", "Concierto Para Piano No. 1 En Si Menor, Opus 23", null, 1875, temas); //CPP
+
+        controlAlb.agregarAlbum("nicoleneu", "Primer Amor", null, 1994, temas); //PAM
+
+        controlAlb.agregarAlbum("lospimpi", "Hay Amores Que Matan", null, 1993, temas); //AMA
+
+        controlAlb.agregarAlbum("dyangounchained", "Un Loco Como Yo", "bit.ly/UnLocoComo", 1993, temas); //LOC
+
+        controlAlb.agregarAlbum("alcides", "20 Grandes Éxitos", "bit.ly/alcides20", 1989, temas); //VIO
+
+        // controlAlb.
+        System.out.println("ALBUMES CARGADOS");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdAl;

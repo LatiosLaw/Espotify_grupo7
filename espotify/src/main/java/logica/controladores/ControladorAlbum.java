@@ -3,14 +3,16 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import logica.Album;
 import logica.Artista;
+import logica.Genero;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
+import logica.dt.DataGenero;
 import logica.dt.DataTema;
 import persistencia.DAO_Album;
+import persistencia.DAO_Genero;
 
 public class ControladorAlbum implements IControladorAlbum {
 
@@ -74,19 +76,56 @@ public class ControladorAlbum implements IControladorAlbum {
             return new DataAlbum("ALBUM NO EXISTE");
         }
     }
-    @Override
-     public Collection<String> retornarAlbumsString() {
-        DAO_Album persistence = new DAO_Album();
-                Collection<String> coleString = new ArrayList<>();
-                Collection<Album> cole = persistence.findAll();
-                if(cole == null){
-                    return null;
-                }else{
-                 for(Album al:cole){
-                     coleString.add(al.getNombre());
-                    }
-                }    
-            return coleString;    
-     }
-}
 
+    @Override
+    public Collection<String> retornarAlbumsString() {
+        DAO_Album persistence = new DAO_Album();
+        Collection<String> coleString = new ArrayList<>();
+        Collection<Album> cole = persistence.findAll();
+        if (cole == null) {
+            return null;
+        } else {
+            for (Album al : cole) {
+                coleString.add(al.getNombre());
+            }
+        }
+        return coleString;
+    }
+
+    //probablemente agregar como parametro coleccion de temas
+    public void actualizarAlbum(DataAlbum dataAlbum, Collection<DataGenero> nuevosGeneros) {
+        DAO_Album persistence = new DAO_Album();
+        DAO_Genero persistence2 = new DAO_Genero();
+
+        Album albumExistente = persistence.find(dataAlbum.getNombre());
+
+        if (albumExistente != null) {
+            albumExistente.setImagen(dataAlbum.getImagen());
+            albumExistente.setanioCreacion(dataAlbum.getAnioCreacion());
+
+            for (DataTema tema : dataAlbum.getTemas()) {
+                albumExistente.agregarTema(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
+            }
+            // ayudaa
+
+            for (DataGenero dataGenero : nuevosGeneros) {
+                Genero generoExistente = new Genero(dataGenero.getNombre());
+
+                if (!albumExistente.getGeneros().contains(generoExistente)) {
+                    Genero genero = persistence2.find(dataGenero.getNombre());
+
+                    if (genero != null) {
+                        albumExistente.agregarGenero(genero);
+                        genero.agregarAlbumDelGenero(albumExistente);
+                    }
+                }
+            }
+
+            persistence.update(albumExistente);
+
+            System.out.println("El álbum " + dataAlbum.getNombre() + " fue actualizado correctamente.");
+        } else {
+            System.out.println("El álbum con nombre: " + dataAlbum.getNombre() + " no existe.");
+        }
+    }
+}
