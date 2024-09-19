@@ -3,6 +3,7 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaReproduccion;
@@ -36,6 +37,37 @@ public class ControladorListaParticular implements IControladorListaParticular {
         // Crear la nueva lista particular y asociar el cliente existente
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
         nuevaLista.setVisibilidad(false);
+
+        ListaParticular ls = new ListaParticular();
+        ls.setNombre(nuevaLista.getNombre());
+        daoLista.save(ls);
+        daoLista.update(nuevaLista);
+
+        System.out.println("Lista Particular creada exitosamente.");
+    }
+    
+    @Override
+    public void crearListaConVisibilidad(String nombre, DataCliente cli, boolean publica, String foto){
+        DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+        DAO_Usuario daoUsuario = new DAO_Usuario();
+
+        // Buscar el usuario existente usando el nickname
+        Usuario clienteExistente = daoUsuario.findUsuarioByNick(cli.getNickname());
+        if (clienteExistente == null) {
+            throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + cli.getNickname());
+        }
+
+        // Verificar si la lista ya existe
+        ListaReproduccion listaExistente = daoLista.find(nombre);
+        if (listaExistente != null) {
+            throw new IllegalArgumentException("La lista de reproduccion ya existe.");
+        }
+
+        // Crear la nueva lista particular y asociar el cliente existente
+        ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
+        nuevaLista.setVisibilidad(publica);
+        nuevaLista.setFoto(foto);
+        
 
         ListaParticular ls = new ListaParticular();
         ls.setNombre(nuevaLista.getNombre());
@@ -170,6 +202,20 @@ public class ControladorListaParticular implements IControladorListaParticular {
     
     
     
-    
-    
+    @Override
+    public DataListaParticular retornarlista(String nickname){
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        ListaReproduccion lista = persistence.find(nickname);
+        
+        if(lista != null){
+            if(lista instanceof ListaParticular listaP){
+                DataListaParticular listaRetorno = new DataListaParticular();
+                listaRetorno.setNombre(listaP.getNombre());
+                System.out.println("Listas retornadas correctamente.");
+                return listaRetorno;
+            }
+        }
+        System.out.println("Error al retornar Lista.");
+        return null;
+    }
 }

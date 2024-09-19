@@ -17,7 +17,7 @@ import persistencia.DAO_Tema;
 public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
 
     @Override
-    public void crearLista(String nombre, DataGenero dGenero) {
+    public void crearLista(String nombre, DataGenero dGenero, String foto) {
         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
         DAO_Genero gdao = new DAO_Genero();
 
@@ -39,6 +39,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         }
 
         ListaPorDefecto nuevaLista = new ListaPorDefecto(nombre, generoExistente);
+        nuevaLista.setFoto(foto);
 
         // Guardar la nueva lista en la base de datos
         try {

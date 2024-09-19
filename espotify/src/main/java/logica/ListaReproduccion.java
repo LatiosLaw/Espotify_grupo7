@@ -13,6 +13,8 @@ public abstract class ListaReproduccion implements Serializable {
     @Id
     protected String nombre;
     
+    protected String foto;
+    
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<tema> temas;
 
@@ -38,6 +40,14 @@ public abstract class ListaReproduccion implements Serializable {
 
     public void agregarTema(tema tema) {
         this.temas.add(tema);
+    }
+    
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override

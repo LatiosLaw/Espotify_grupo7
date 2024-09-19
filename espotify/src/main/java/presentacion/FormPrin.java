@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import logica.controladores.*;
+import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataListaPorDefecto;
 import logica.factory.Fabrica;
@@ -172,10 +173,10 @@ public class FormPrin extends javax.swing.JFrame {
             cargarClientes();
             cargarArtistas();
             cargarGeneros();
+            cargarTemas();
             cargarSeguimientos();
             cargarListas();
-            cargarTemas();
-            
+
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
 
         } catch (Exception e) {
@@ -191,7 +192,6 @@ public class FormPrin extends javax.swing.JFrame {
         subsPop.add("Dance-pop"); // DPO
         subsPop.add("Pop Clásico"); // PCL
 
-
         Collection<String> subsRock = new ArrayList<>();
         subsRock.add("Rock Clásico"); // RCL
         subsRock.add("Rock Latino"); // RKL
@@ -204,36 +204,56 @@ public class FormPrin extends javax.swing.JFrame {
 
         controlGen.crearGeneroConSubgeneros("Rock", subsRock); // ROK
         controlGen.crearGeneroConSubgeneros("Pop", subsPop); // POP
-        
+
         System.out.println("GENEROS CARGADOS");
     }
 
-    private void cargarListas(){       
-        
-        controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico")); // LD1
-        controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino")); // LD2
-        controlListPD.crearLista("Música Clásica", new DataGenero("Clásica")); // LD3
-            
-           DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
-            lista.agregarTema(controlTem.retornarTema("YMCA"));
-            lista.agregarTema(controlTem.retornarTema("Macho Man"));
-            controlListPD.actualizarLista(lista);
-           // System.out.println(lista.getNombre());
-            
-           // controlListPD.agregarTema(lista.getNombre(), "Pop Clásico", controlTem.retornarTema("YMCA"));
- 
-        System.out.println("LISTAS CARGADAS");
+    private void cargarListas() {
+
+        controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico"), "bit.ly/laNocheNostalgia"); // LD1
+        controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino"), null); // LD2
+        controlListPD.crearLista("Música Clásica", new DataGenero("Clásica"), "bit.ly/musicaCla"); // LD3
+
+        DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
+        lista.agregarTema(controlTem.retornarTema("YMCA"));
+        lista.agregarTema(controlTem.retornarTema("Macho Man"));
+        controlListPD.actualizarLista(lista);
+
+        try {
+            DataCliente VC = controlCli.consultarPerfilCliente("el_padrino");
+            controlListPar.crearListaConVisibilidad("Música Inspiradora", VC, true, "bit.ly/musicInspi");
+
+            DataCliente SO = controlCli.consultarPerfilCliente("scarlettO");
+            controlListPar.crearListaConVisibilidad("De Todo Un Poco", SO, true, null);
+
+            DataCliente WW = controlCli.consultarPerfilCliente("Heisenberg");
+            controlListPar.crearListaConVisibilidad("Para Cocinaro", WW, false, "bit.ly/ParaCocinar");
+
+            DataCliente ML = controlCli.consultarPerfilCliente("lachiqui");
+            controlListPar.crearListaConVisibilidad("Para Las Chicas", ML, true, null);
+
+            DataCliente CB = controlCli.consultarPerfilCliente("cbochinche");
+            controlListPar.crearListaConVisibilidad("Fiesteras", CB, true, "bit.ly/fiestaFiesta");
+
+            controlListPar.crearLista("Mis Favoritas", CB);
+
+            System.out.println("LISTAS CARGADAS");
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
-    private void cargarTemas(){
+
+    private void cargarTemas() {
+
         controlTem.crearTemaDefault("YMCA", 428, "mp3", "identificador archivo mp3");
         controlTem.crearTemaDefault("Macho Man", 328, "web", null);
-        controlTem.crearTemaDefault("In the Navy", 313, "mp3", null);
+        controlTem.crearTemaDefault("In the Navy", 313, "mp3", "identificador archivo mp3");
         System.out.println("LISTAS CARGADAS");
     }
-    
-    private void cargarSeguimientos(){
-        
+
+    private void cargarSeguimientos() {
+
         controlCli.seguirUsuario("el_padrino", "vpeople");
         controlCli.seguirUsuario("el_padrino", "dmode");
         controlCli.seguirUsuario("el_padrino", "bruceTheBoss");
@@ -241,7 +261,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("el_padrino", "lachiqui");
         controlCli.seguirUsuario("el_padrino", "cbochinche");
         controlCli.seguirUsuario("el_padrino", "Eleven11");
-        
+
         controlCli.seguirUsuario("scarlettO", "dmode");
         controlCli.seguirUsuario("scarlettO", "bruceTheBoss");
         controlCli.seguirUsuario("scarlettO", "tigerOfWales");
@@ -249,7 +269,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("scarlettO", "Heisenberg");
         controlCli.seguirUsuario("scarlettO", "benKenobi");
         controlCli.seguirUsuario("scarlettO", "lachiqui");
-        
+
         controlCli.seguirUsuario("ppArgento", "dmode");
         controlCli.seguirUsuario("ppArgento", "bruceTheBoss");
         controlCli.seguirUsuario("ppArgento", "tripleNelson");
@@ -257,7 +277,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("ppArgento", "lachiqui");
         controlCli.seguirUsuario("ppArgento", "cbochinche");
         controlCli.seguirUsuario("ppArgento", "Eleven11");
-        
+
         controlCli.seguirUsuario("Heisenberg", "dmode");
         controlCli.seguirUsuario("Heisenberg", "bruceTheBoss");
         controlCli.seguirUsuario("Heisenberg", "tigerOfWales");
@@ -270,7 +290,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("Heisenberg", "benKenobi");
         controlCli.seguirUsuario("Heisenberg", "lachiqui");
         controlCli.seguirUsuario("Heisenberg", "Eleven11");
-        
+
         controlCli.seguirUsuario("benKenobi", "dmode");
         controlCli.seguirUsuario("benKenobi", "bruceTheBoss");
         controlCli.seguirUsuario("benKenobi", "la_ley");
@@ -283,7 +303,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("benKenobi", "lachiqui");
         controlCli.seguirUsuario("benKenobi", "cbochinche");
         controlCli.seguirUsuario("benKenobi", "Eleven11");
-        
+
         controlCli.seguirUsuario("lachiqui", "bruceTheBoss");
         controlCli.seguirUsuario("lachiqui", "la_ley");
         controlCli.seguirUsuario("lachiqui", "lospimpi");
@@ -291,13 +311,13 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.seguirUsuario("lachiqui", "el_padrino");
         controlCli.seguirUsuario("lachiqui", "scarlettO");
         controlCli.seguirUsuario("lachiqui", "ppArgento");
-        
+
         controlCli.seguirUsuario("cbochinche", "la_ley");
         controlCli.seguirUsuario("cbochinche", "lospimpi");
         controlCli.seguirUsuario("cbochinche", "dyangounchained");
         controlCli.seguirUsuario("cbochinche", "alcides");
         controlCli.seguirUsuario("cbochinche", "ppArgento");
-        
+
         controlCli.seguirUsuario("Eleven11", "la_ley");
         controlCli.seguirUsuario("Eleven11", "el_padrino");
         controlCli.seguirUsuario("Eleven11", "scarlettO");

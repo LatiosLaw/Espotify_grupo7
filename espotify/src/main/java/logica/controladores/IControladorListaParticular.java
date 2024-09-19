@@ -8,6 +8,8 @@ import logica.dt.DataTema;
 public interface IControladorListaParticular {
 
     void crearLista(String nombre, DataCliente cli);
+    
+    void crearListaConVisibilidad(String nombre, DataCliente cli, boolean publica, String foto);
 
     void agregarTema(String nick_cliente, String nombre_lista, DataTema nombre_tema);
 
@@ -20,4 +22,6 @@ public interface IControladorListaParticular {
     Collection<DataListaParticular> devolverListadeCliente(String nickname);
     
     Collection<String> devolverListasParticularesPublicasString(String nickname);
+    
+    DataListaParticular retornarlista(String nickname);
 }

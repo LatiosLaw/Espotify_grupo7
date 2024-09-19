@@ -7,7 +7,7 @@ import logica.dt.DataTema;
 
 public interface IControladorListaPorDefecto {
 
-    void crearLista(String nombre, DataGenero genero);
+    void crearLista(String nombre, DataGenero genero, String foto);
     
     void actualizarLista(DataListaPorDefecto lista);
 
