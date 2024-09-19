@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import logica.controladores.*;
+import logica.dt.DataGenero;
 import logica.factory.Fabrica;
 import logica.dt.DataTema;
 
@@ -180,6 +181,16 @@ public class FormPrin extends javax.swing.JFrame {
         controlGen.crearGeneroUnico("Genero 1");
         controlGen.crearGeneroUnico("Genero 2");
         controlGen.crearGeneroUnico("Genero 3");
+        
+        this.controlListPar.crearLista("Liston", controlCli.consultarPerfilCliente("El listo"));
+        this.controlListPar.crearLista("Liston2 la secuela", controlCli.consultarPerfilCliente("El listo"));
+        this.controlListPar.publicarLista("El listo", "Liston");
+        
+        this.controlGen.crearGeneroUnico("GeneroGeneral");
+       // controlGen.
+       DataGenero genero = new DataGenero("GeneroGeneral");
+        this.controlListPD.crearLista("ListonesGenerales", genero);
+        
     }//GEN-LAST:event_btnCarDatActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

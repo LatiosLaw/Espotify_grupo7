@@ -75,4 +75,25 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         persistence.delete(nombre_tema);
     }
+    
+    @Override
+    public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album) {
+        Collection<String> listaDeTemas = new ArrayList<>();
+        List<tema> retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.findFromAlbum(nombre_album);
+        if (retorno != null) {
+            Iterator<tema> iterator = retorno.iterator();
+            while (iterator.hasNext()) {
+                tema temazo = iterator.next();
+                listaDeTemas.add(temazo.getNickname());
+            }
+            return listaDeTemas;
+        } else {
+            return null;
+        }
+    }
+    
+    
+    
 }

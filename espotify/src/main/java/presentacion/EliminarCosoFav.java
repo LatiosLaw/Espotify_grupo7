@@ -29,9 +29,10 @@ public class EliminarCosoFav extends javax.swing.JPanel {
         btnConfirmar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstCoso = new javax.swing.JList<>();
         txtFav = new javax.swing.JTextField();
         lblFav = new javax.swing.JLabel();
+        cbxLPM = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -55,16 +56,23 @@ public class EliminarCosoFav extends javax.swing.JPanel {
 
         btnBuscar.setText("Buscar");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstCoso.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(lstCoso);
 
         txtFav.setColumns(10);
 
         lblFav.setText("A eliminar de Fav:");
+
+        cbxLPM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listas Particulares", "Listas Por Defecto", " " }));
+        cbxLPM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxLPMActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,13 +84,16 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                         .addGap(136, 136, 136)
                         .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(btnBuscar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                            .addComponent(btnBuscar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(122, 122, 122)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
@@ -106,10 +117,12 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,14 +154,19 @@ public class EliminarCosoFav extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cbxTipoCosoActionPerformed
 
+    private void cbxLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLPMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxLPMActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JComboBox<String> cbxLPM;
     private javax.swing.JComboBox<String> cbxTipoCoso;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFav;
+    private javax.swing.JList<String> lstCoso;
     private javax.swing.JTextField txtFav;
     private javax.swing.JTextField txtNick;
     // End of variables declaration//GEN-END:variables

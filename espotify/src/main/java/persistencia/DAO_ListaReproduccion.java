@@ -81,7 +81,20 @@ public class DAO_ListaReproduccion {
             return null;
         }
     }
-
+    public ListaPorDefecto findListaPorNombre(String nombreLista) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaPorDefecto u WHERE u.nombre = :nombreLista",
+                    ListaPorDefecto.class)
+                    .setParameter("nombreLista", nombreLista)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró ninguna lista con esos parámetros
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depuración
+            return null;
+        }
+    }
     public void update(ListaReproduccion entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
@@ -104,5 +117,31 @@ public class DAO_ListaReproduccion {
         if (entityManagerFactory != null) {
             entityManagerFactory.close();
         }
+    }
+
+    public Collection<String> devolverListasParticularesString(String nickname) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT l.nombre FROM ListaParticular l WHERE l.creador = :nickname ", String.class)
+                    .setParameter("nickname", nickname)
+                    .getResultList();
+
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    
+    
+    }
+
+    public Collection<String> devolverListasPorDefectoString() {
+     try {
+            return entityManager.createQuery(
+                    "SELECT l.nombre FROM ListaPorDefecto l", String.class)
+                    .getResultList();
+
+        } catch (NoResultException e) {
+            return null; //
+        }
+
     }
 }

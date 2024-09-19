@@ -15,4 +15,6 @@ public interface IControladorTema {
     public void actualizarTema(DataTema tema, DataAlbum album);
 
     public void BorrarTema(String nombre_tema);
+    
+    public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album);
 }

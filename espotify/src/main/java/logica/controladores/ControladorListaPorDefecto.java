@@ -1,5 +1,6 @@
 package logica.controladores;
 
+import java.util.Collection;
 import logica.Genero;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
@@ -83,4 +84,37 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return null;
         }
     }
+     @Override
+    public Collection<String> listarListasPorDefecto() {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+       return persistence.devolverListasPorDefectoString();   
+    }
+    @Override
+    public DataListaPorDefecto devolverInformacionChu(String nombre_lista) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        // Obtener la lista particular por nombre de lista y el nickname del creador
+        ListaPorDefecto ls = persistence.findListaPorNombre(nombre_lista);
+
+        if (ls != null) {
+            // Obtener el género asociado a la lista
+            Genero gen = ls.getGenero(); // Asegúrate de que hay un método getGenero()
+
+            // Crear el DataGenero
+            DataGenero dataGenero = new DataGenero(
+                    gen.getNombre() // Suponiendo que existe un método getNombre() en Genero
+            );
+
+            System.out.println("DataLista retornado correctamente.");
+            // Crear y retornar DataListaPorDefecto
+            return new DataListaPorDefecto(
+                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    dataGenero // Pasar el DataGenero creado
+            );
+        } else {
+            System.out.println("No existe, error.");
+            return null;
+        }
+    }
+    
+    
 }
