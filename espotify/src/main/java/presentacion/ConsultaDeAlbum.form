@@ -21,150 +21,124 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabelInput" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMostrarAlb" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="nomGenOrArt" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblConAlb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxConAlb" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxConAlb" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane4" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
-                      <Component id="nomGenOrArt" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelInput" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMostrarAlb" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnGenConsult1" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="lblGenDeAlb" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomAlb" pref="200" max="32767" attributes="0"/>
-                          <Component id="txtAnioCre" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDireccionTema" min="-2" pref="254" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane3" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="lblTemDeAlb" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                              <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtNomTemAlb" min="-2" pref="190" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnDescargarTema" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblTemDeAlb" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblDurTem" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtDurTem" min="-2" pref="89" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="btnDescargarTema" min="-2" pref="188" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtDireccionTema" min="-2" pref="108" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="lblDurTem" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtDurTem" pref="116" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtNomTemAlb" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtAnioCre" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtNomAlb" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="lblGenDeAlb" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
-                  <Component id="btnGenConsult1" min="-2" pref="126" max="-2" attributes="0"/>
-                  <EmptySpace pref="516" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="fotoAlb" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtNomAlb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtAnioCre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblGenDeAlb" min="-2" pref="16" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="77" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="lblTemDeAlb" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtNomTemAlb" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDescargarTema" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDireccionTema" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblConAlb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbxConAlb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" pref="93" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabelInput" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="nomGenOrArt" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="93" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabelInput" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nomGenOrArt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnMostrarAlb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="nomAlbum" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtNomAlb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtAnioCre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lblGenDeAlb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="77" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="fotoAlb" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblTemDeAlb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtNomTemAlb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDurTem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnDescargarTema" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtDireccionTema" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jScrollPane3" min="-2" pref="131" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="nomAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnGenConsult1" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
-                  <Component id="btnGenConsult1" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -172,7 +146,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblConAlb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Consular Album:"/>
+        <Property name="text" type="java.lang.String" value="Consultar Album :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxConAlb">
@@ -217,12 +191,12 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblGenDeAlb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Generos del album"/>
+        <Property name="text" type="java.lang.String" value="Generos del Album :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTemDeAlb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Temas del album"/>
+        <Property name="text" type="java.lang.String" value="Temas del Album :"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -340,7 +314,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelInput">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca el genero o artista :"/>
+        <Property name="text" type="java.lang.String" value="Genero o Artista :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnDescargarTema">
@@ -358,7 +332,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelAlbum">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca el album :"/>
+        <Property name="text" type="java.lang.String" value="Album :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomTemAlb">
@@ -373,7 +347,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Link del tema : "/>
+        <Property name="text" type="java.lang.String" value="Link del Tema : "/>
       </Properties>
     </Component>
   </SubComponents>
