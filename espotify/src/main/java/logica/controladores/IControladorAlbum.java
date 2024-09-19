@@ -13,4 +13,6 @@ public interface IControladorAlbum {
     public Collection<String> retornarAlbumsDelArtista(String nick_arti);
 
     public DataAlbum retornarInfoAlbum(String nombre_album);
+    
+    public Collection<String> retornarAlbumsString();
 }

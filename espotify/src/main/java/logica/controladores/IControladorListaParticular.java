@@ -18,4 +18,6 @@ public interface IControladorListaParticular {
     DataListaParticular devolverInformacion(String nombre_lista, String nick_cliente);
 
     Collection<DataListaParticular> devolverListadeCliente(String nickname);
+    
+    Collection<String> devolverListasParticularesPublicasString(String nickname);
 }

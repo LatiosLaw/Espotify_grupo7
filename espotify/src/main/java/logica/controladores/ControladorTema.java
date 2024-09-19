@@ -60,6 +60,41 @@ public class ControladorTema implements IControladorTema {
             return null;
         }
     }
+    
+    @Override
+    public Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
+        if(tipo_lista == 1){ // CASO POR DEFECTO
+            Collection<DataTema> listaDeTemas = new ArrayList<>();
+        List<tema> retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.findFromListaDefecto(nombre_lista);
+        if (retorno != null) {
+            Iterator<tema> iterator = retorno.iterator();
+            while (iterator.hasNext()) {
+                tema temazo = iterator.next();
+                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+            }
+            return listaDeTemas;
+        } else {
+            return null;
+        }
+        }else{ // CASO PARTICULAR
+            Collection<DataTema> listaDeTemas = new ArrayList<>();
+        List<tema> retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.findFromListaParticular(nombre_lista);
+        if (retorno != null) {
+            Iterator<tema> iterator = retorno.iterator();
+            while (iterator.hasNext()) {
+                tema temazo = iterator.next();
+                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+            }
+            return listaDeTemas;
+        } else {
+            return null;
+        }
+        }
+    }
 
     @Override
     public void actualizarTema(DataTema tema, DataAlbum album) {
@@ -75,4 +110,25 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         persistence.delete(nombre_tema);
     }
+    
+    @Override
+    public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album) {
+        Collection<String> listaDeTemas = new ArrayList<>();
+        List<tema> retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.findFromAlbum(nombre_album);
+        if (retorno != null) {
+            Iterator<tema> iterator = retorno.iterator();
+            while (iterator.hasNext()) {
+                tema temazo = iterator.next();
+                listaDeTemas.add(temazo.getNickname());
+            }
+            return listaDeTemas;
+        } else {
+            return null;
+        }
+    }
+    
+    
+    
 }

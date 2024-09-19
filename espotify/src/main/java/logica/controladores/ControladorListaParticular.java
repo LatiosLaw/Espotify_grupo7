@@ -147,4 +147,29 @@ public class ControladorListaParticular implements IControladorListaParticular {
 
         return dataListas;
     }
+    @Override
+     public Collection<String> devolverListasParticularesPublicasString(String nickname) {
+
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        
+         Collection<ListaParticular> listas = persistence.findListaPorCliente(nickname);
+        
+         Collection<String> coleString = new ArrayList<>();
+        
+        for(ListaParticular listaP : listas){
+            if(listaP.getVisibilidad() == true){
+                coleString.add(listaP.getNombre());
+            }
+        }
+  
+       return coleString;
+
+    }
+    
+    
+    
+    
+    
+    
+    
 }

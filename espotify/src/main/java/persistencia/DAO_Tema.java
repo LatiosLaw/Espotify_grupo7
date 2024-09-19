@@ -40,6 +40,28 @@ public class DAO_Tema {
             return null; // No se encontro ningún tema de este album
         }
     }
+    
+    public List<tema> findFromListaDefecto(String nombre_lista) { // No existen diferencias actualmente, seran implementadas proxima iteracion.
+        try {
+            return entityManager.createQuery("SELECT t FROM tema t JOIN ListaPorDefecto l WHERE l.nombre = :nombre_lista", tema.class)
+                    .setParameter("nombre_lista", nombre_lista)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún tema de este album
+        }
+    }
+
+    
+    public List<tema> findFromListaParticular(String nombre_lista) { // No existen diferencias actualmente, seran implementadas proxima iteracion.
+        try {
+            return entityManager.createQuery("SELECT t FROM tema t JOIN ListaParticular l WHERE l.nombre = :nombre_lista", tema.class)
+                    .setParameter("nombre_lista", nombre_lista)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún tema de este album
+        }
+    }
+
 
     public void update(tema entity) {
         entityManager.getTransaction().begin();

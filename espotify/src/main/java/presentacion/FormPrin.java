@@ -3,10 +3,10 @@ package presentacion;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.swing.JOptionPane;
 import logica.controladores.*;
 import logica.dt.DataGenero;
 import logica.factory.Fabrica;
+import logica.dt.DataTema;
 
 public class FormPrin extends javax.swing.JFrame {
 

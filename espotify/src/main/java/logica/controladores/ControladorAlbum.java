@@ -3,6 +3,7 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import logica.Album;
 import logica.Artista;
 import logica.tema;
@@ -73,4 +74,19 @@ public class ControladorAlbum implements IControladorAlbum {
             return new DataAlbum("ALBUM NO EXISTE");
         }
     }
+    @Override
+     public Collection<String> retornarAlbumsString() {
+        DAO_Album persistence = new DAO_Album();
+                Collection<String> coleString = new ArrayList<>();
+                Collection<Album> cole = persistence.findAll();
+                if(cole == null){
+                    return null;
+                }else{
+                 for(Album al:cole){
+                     coleString.add(al.getNombre());
+                    }
+                }    
+            return coleString;    
+     }
 }
+
