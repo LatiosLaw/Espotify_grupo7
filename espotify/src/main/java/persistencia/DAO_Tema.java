@@ -23,8 +23,8 @@ public class DAO_Tema {
         entityManager.getTransaction().commit();
     }
 
-    public tema find(String nombre) {
-        return entityManager.find(tema.class, nombre);
+    public tema find(tema tema) {
+        return entityManager.find(tema.class, tema);
     }
 
     public List<tema> findAll() {
@@ -69,8 +69,8 @@ public class DAO_Tema {
         entityManager.getTransaction().commit();
     }
 
-    public void delete(String nombre) {
-        tema entity = find(nombre);
+    public void delete(tema tema){
+        tema entity = find(tema);
         if (entity != null) {
             entityManager.getTransaction().begin();
             entityManager.remove(entity);

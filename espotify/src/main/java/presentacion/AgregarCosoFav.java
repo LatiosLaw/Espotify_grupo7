@@ -394,7 +394,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFavActionPerformed
 
     private void btnFav2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFav2ActionPerformed
-        this.controlCli.agregarTema(controlCli.consultarPerfilCliente(this.txtCliente2.getText()), controlTema.retornarTema(this.txtBusqueda2.getText()));
+        this.controlCli.agregarTema(controlCli.consultarPerfilCliente(this.txtCliente2.getText()), controlTema.retornarTema(this.txtBusqueda2.getText(), "POR AHORA"));
     }//GEN-LAST:event_btnFav2ActionPerformed
 
     public void cargarLstFav(Collection<String> cole) {

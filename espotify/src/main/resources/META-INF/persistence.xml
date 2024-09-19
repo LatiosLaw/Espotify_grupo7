@@ -11,6 +11,8 @@
     <class>logica.Genero</class>
     <class>logica.Album</class>
     <class>logica.tema</class>
+    <class>logica.dt.dt_IdTema</class>
+    <class>logica.dt.DT_IdTema</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/espotify?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

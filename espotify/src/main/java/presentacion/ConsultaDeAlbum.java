@@ -413,7 +413,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
     private void listTemAlbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listTemAlbMouseClicked
         String nomtem = listTemAlb.getSelectedValue();
-        tema_seleccionado = controlTem.retornarTema(nomtem);
+        tema_seleccionado = controlTem.retornarTema(nomtem, nomAlbum.getText());
         txtNomTemAlb.setText(tema_seleccionado.getNickname());
 
         if (tema_seleccionado.getArchivo() != null) {

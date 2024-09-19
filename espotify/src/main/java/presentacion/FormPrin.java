@@ -256,10 +256,10 @@ public class FormPrin extends javax.swing.JFrame {
         controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino"), null); // LD2
         controlListPD.crearLista("Música Clásica", new DataGenero("Clásica"), "bit.ly/musicaCla"); // LD3
 
-        DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
-        lista.agregarTema(controlTem.retornarTema("YMCA"));
-        lista.agregarTema(controlTem.retornarTema("Macho Man"));
-        controlListPD.actualizarLista(lista);
+        //DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
+        //lista.agregarTema(controlTem.retornarTema("YMCA"));
+        //lista.agregarTema(controlTem.retornarTema("Macho Man"));
+        //controlListPD.actualizarLista(lista);
 
         try {
             DataCliente VC = controlCli.consultarPerfilCliente("el_padrino");
@@ -288,9 +288,9 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void cargarTemas() {
 
-        controlTem.crearTemaDefault("YMCA", 428, "mp3", "identificador archivo mp3");
-        controlTem.crearTemaDefault("Macho Man", 328, "web", null);
-        controlTem.crearTemaDefault("In the Navy", 313, "mp3", "identificador archivo mp3");
+        //controlTem.crearTemaDefault("YMCA", 428, "mp3", "identificador archivo mp3"); // Usar crearTemaCompleto(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album)
+        //controlTem.crearTemaDefault("Macho Man", 328, "web", null);
+        //controlTem.crearTemaDefault("In the Navy", 313, "mp3", "identificador archivo mp3");
         System.out.println("LISTAS CARGADAS");
     }
 

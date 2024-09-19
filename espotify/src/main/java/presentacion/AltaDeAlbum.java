@@ -371,7 +371,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_jList1HierarchyChanged
 
     private void btnConfTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfTemActionPerformed
-        if (!txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty() && !txtTipMus.getText().isEmpty()) {
+        if (!txtNomAlb.getText().isEmpty() && !txtNomTemaAlb.getText().isEmpty() && !txtPosTemaAlb.getText().isEmpty() && !txtTipMus.getText().isEmpty()) {
             String nombre_tema = txtNomTemaAlb.getText();
             Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
@@ -395,7 +395,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             if (mp3File.hasId3v2Tag()) {
                                 ID3v2 id3v2Tag = mp3File.getId3v2Tag();
                                 long durationInSeconds = mp3File.getLengthInSeconds();
-                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName())) {
+                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName(), txtNomAlb.getText()).getValor()) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
                                     DefaultListModel<String> model = new DefaultListModel();
                                     Iterator<String> iterator = temas_del_album.iterator();
@@ -415,7 +415,11 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                         System.out.println("Error al guardar el archivo.");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                                    if(controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName(), txtNomAlb.getText()).getNumero() == 1){
+                                        JOptionPane.showMessageDialog(null, "Un tema de este mismo album ya existe con el mismo nombre.");
+                                    }else{
+                                        JOptionPane.showMessageDialog(null, "Error al agregar el tema.");
+                                    }
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido.");
@@ -432,7 +436,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 }
 
             } else {
-                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText(), null)) {
+                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText(), null, txtNomAlb.getText()).getValor()) {
                     JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
                     DefaultListModel<String> model = new DefaultListModel();
                     Iterator<String> iterator = temas_del_album.iterator();
@@ -450,7 +454,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(lblMsjArch, "Nombre, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
+            JOptionPane.showMessageDialog(lblMsjArch, "Nombre del album, nombre del tema, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
         }
 
     }//GEN-LAST:event_btnConfTemActionPerformed
@@ -489,7 +493,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     Iterator<String> iterator = temas_del_album.iterator();
                     Integer posicion = 1;
                     while (iterator.hasNext()) {
-                        DataTema tema_actual = controlTem.retornarTema(iterator.next());
+                        DataTema tema_actual = controlTem.retornarTema(iterator.next(), null);
                         tema_actual.setPos(posicion);
                         posicion = posicion + 1;
                         tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
@@ -601,7 +605,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private void btnNukear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNukear1ActionPerformed
         Iterator<String> iterator = temas_del_album.iterator();
         while (iterator.hasNext()) {
-            controlTem.BorrarTema(iterator.next());
+            controlTem.BorrarTema(iterator.next(), null);
         }
         reiniciarCampos();
         JOptionPane.showMessageDialog(lblMsjArch, "Alta de Album cancelada con exito");

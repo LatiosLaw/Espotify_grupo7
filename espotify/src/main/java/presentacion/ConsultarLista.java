@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
@@ -77,11 +78,11 @@ public class ConsultarLista extends javax.swing.JPanel {
         txtListaElegida = new javax.swing.JTextField();
         lblLista = new javax.swing.JLabel();
         txtNombreLista = new javax.swing.JTextField();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        ListaTemasLista = new javax.swing.JList<>();
         jButtonBuscarInfoDeLista = new javax.swing.JButton();
         lblConAlb = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTable = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -160,13 +161,6 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         txtNombreLista.setEditable(false);
 
-        ListaTemasLista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ListaTemasListaMouseClicked(evt);
-            }
-        });
-        jScrollPane10.setViewportView(ListaTemasLista);
-
         jButtonBuscarInfoDeLista.setText("Mostrar Datos");
         jButtonBuscarInfoDeLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +171,24 @@ public class ConsultarLista extends javax.swing.JPanel {
         lblConAlb.setText("Consultar Lista :");
 
         jLabel1.setText("Temas de la Lista :");
+
+        JTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Tema", "Album"
+            }
+        ));
+        JTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -210,12 +222,14 @@ public class ConsultarLista extends javax.swing.JPanel {
                                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
                                     .addComponent(txtNombreLista, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                                     .addComponent(txtDefinidoPor)
                                     .addComponent(txtGeneroLista)
-                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(txtNomTemLista)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(62, 62, 62))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(txtNomTemLista, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -254,9 +268,9 @@ public class ConsultarLista extends javax.swing.JPanel {
                         .addComponent(txtGeneroLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
                         .addComponent(txtNomTemLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -383,25 +397,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonBuscarInfoDeListaActionPerformed
 
-    private void ListaTemasListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaTemasListaMouseClicked
-        String nomtem = ListaTemasLista.getSelectedValue();
-        tema_seleccionado = controlTem.retornarTema(nomtem);
-        txtNomTemLista.setText(tema_seleccionado.getNickname());
-
-        if (tema_seleccionado.getArchivo() != null) {
-            btnDescargarTema1.setVisible(true);
-            txtDireccionTema.setText(tema_seleccionado.getAccess());
-        } else {
-            btnDescargarTema1.setVisible(false);
-            txtDireccionTema.setText(tema_seleccionado.getAccess());
-        }
-        if (tema_seleccionado.getDuracion() != 0) {
-            txtDurTem.setText(convertirSegundos(tema_seleccionado.getDuracion()));
-        } else {
-            txtDurTem.setText(" - ");
-        }
-    }//GEN-LAST:event_ListaTemasListaMouseClicked
-
     private void btnDescargarTema1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTema1ActionPerformed
         Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getArchivo());
         String userHome = System.getProperty("user.home");
@@ -419,16 +414,41 @@ public class ConsultarLista extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDescargarTema1ActionPerformed
 
+    private void JTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableMouseClicked
+        int row = JTable.getSelectedRow(); // Obtener la fila seleccionada
+
+        // Obtener los datos de esa fila
+        String nickname = JTable.getValueAt(row, 0).toString();
+        String album = JTable.getValueAt(row, 1).toString();
+        
+        tema_seleccionado = controlTem.retornarTema(nickname, album);
+        txtNomTemLista.setText(tema_seleccionado.getNickname());
+
+        if (tema_seleccionado.getArchivo() != null) {
+            btnDescargarTema1.setVisible(true);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+        } else {
+            btnDescargarTema1.setVisible(false);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+        }
+        if (tema_seleccionado.getDuracion() != 0) {
+            txtDurTem.setText(convertirSegundos(tema_seleccionado.getDuracion()));
+        } else {
+            txtDurTem.setText(" - ");
+        }
+    }//GEN-LAST:event_JTableMouseClicked
+
     private void cargarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
         Collection<DataTema> temas_de_la_lista = new ArrayList<>();
         temas_de_la_lista = controlTem.retornarTemasDeLaLista(nombre_lista, tipo_lista);
-        DefaultListModel<String> model = new DefaultListModel();
+        DefaultTableModel model = new DefaultTableModel();
         Iterator<DataTema> iterator = temas_de_la_lista.iterator();
         while (iterator.hasNext()) {
             DataTema tema_actual = iterator.next();
-            model.addElement(tema_actual.getNickname());
+            Object[] row = {tema_actual.getNickname(),tema_actual.getAlbum().getNombre()};
+            model.addRow(row);
         }
-        ListaTemasLista.setModel(model);
+        JTable.setModel(model);
     }
     
     public String convertirSegundos(int totalSegundos) {
@@ -441,15 +461,15 @@ public class ConsultarLista extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JListasFiltradas;
+    private javax.swing.JTable JTable;
     private javax.swing.JList<String> ListaGenerosOClientes;
-    private javax.swing.JList<String> ListaTemasLista;
     private javax.swing.JButton btnDescargarTema1;
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;
     private javax.swing.JButton jButtonBuscarInfoDeLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblConAlb;

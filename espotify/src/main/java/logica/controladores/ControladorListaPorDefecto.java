@@ -62,7 +62,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         Iterator<DataTema> iterator = lista.getTemas().iterator();
         while (iterator.hasNext()) {
             DataTema tema = iterator.next();
-            lista_actualizable.agregarTema(dao_t.find(tema.getNickname()));
+            lista_actualizable.agregarTema(dao_t.find(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getAccess())));
         }
         dao_l.update(lista_actualizable);
     }

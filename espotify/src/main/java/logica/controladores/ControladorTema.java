@@ -8,26 +8,38 @@ import logica.Album;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataTema;
+import logica.dt.errorBundle;
 import persistencia.DAO_Album;
 import persistencia.DAO_Tema;
 
 public class ControladorTema implements IControladorTema {
 
     @Override
-    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo) {
+    public errorBundle crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, String nombre_album) {
         tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo);
         DAO_Tema persistence = new DAO_Tema();
-        if (persistence.find(nuevo_tema.getNickname()) != null) {
-            System.out.println("El tema ya existe.");
-            return false;
-        } else {
-            persistence.save(nuevo_tema);
-            if (persistence.find(nuevo_tema.getNickname()) != null) {
+        if (persistence.find(nuevo_tema) != null) { // Existe un tema con el mismo nombre en la BD
+            if(persistence.find(nuevo_tema).getNickname() != nuevo_tema.getNickname() && persistence.find(nuevo_tema).getAlbum().getNombre() != nombre_album){
+                persistence.save(nuevo_tema);
+            if (persistence.find(nuevo_tema) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
-                return true;
+                return new errorBundle(true, null);
             } else {
                 System.out.println("Un error ha ocurrido.");
-                return false;
+                return new errorBundle(false, 2);
+            }
+            }else{
+              System.out.println("El tema ya existe.");
+            return new errorBundle(false, 1);  
+            }
+        } else {
+            persistence.save(nuevo_tema);
+            if (persistence.find(nuevo_tema) != null) {
+                System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                return new errorBundle(true, null);
+            } else {
+                System.out.println("Un error ha ocurrido.");
+                return new errorBundle(false, 2);
             }
         }
     }
@@ -37,12 +49,12 @@ public class ControladorTema implements IControladorTema {
         DAO_Album persistence_alb = new DAO_Album();
         tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo, posicion, persistence_alb.findAlbumByName(album.getNombre()));
         DAO_Tema persistence = new DAO_Tema();
-        if (persistence.find(nuevo_tema.getNickname()) != null) {
+        if (persistence.find(nuevo_tema) != null) {
             System.out.println("El tema ya existe.");
             return false;
         } else {
             persistence.save(nuevo_tema);
-            if (persistence.find(nuevo_tema.getNickname()) != null) {
+            if (persistence.find(nuevo_tema) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
                 return true;
             } else {
@@ -53,10 +65,10 @@ public class ControladorTema implements IControladorTema {
     }
 
     @Override
-    public DataTema retornarTema(String nickname) {
+    public DataTema retornarTema(String nickname, String nombre_album) {
         tema retorno;
         DAO_Tema persistence = new DAO_Tema();
-        retorno = persistence.find(nickname);
+        retorno = persistence.find(new tema(nickname, nombre_album));
         if (retorno != null) {
             return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
@@ -127,9 +139,9 @@ public class ControladorTema implements IControladorTema {
     }
 
     @Override
-    public void BorrarTema(String nombre_tema) {
+    public void BorrarTema(String nombre_tema, String nombre_album) {
         DAO_Tema persistence = new DAO_Tema();
-        persistence.delete(nombre_tema);
+        persistence.delete(new tema(nombre_tema, nombre_album));
     }
     
     @Override
