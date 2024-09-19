@@ -3,6 +3,10 @@ package presentacion;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -129,6 +133,11 @@ public class ConsultarLista extends javax.swing.JPanel {
         lblDurTem.setText("Duracion :");
 
         btnDescargarTema1.setText("Descargar Tema");
+        btnDescargarTema1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarTema1ActionPerformed(evt);
+            }
+        });
 
         txtDireccionTema.setToolTipText("Haz clic para copiar el enlace!");
         txtDireccionTema.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -395,16 +404,12 @@ public class ConsultarLista extends javax.swing.JPanel {
         tema_seleccionado = controlTem.retornarTema(nomtem);
         txtNomTemLista.setText(tema_seleccionado.getNickname());
 
-        if (!tema_seleccionado.getAccess().endsWith(".mp3")) {
-            txtDireccionTema.setVisible(true);
-            btnDescargarTema1.setVisible(false);
-            jLabel2.setVisible(true);
-            txtDireccionTema.setText(tema_seleccionado.getAccess());
-
-        } else {
-            txtDireccionTema.setVisible(false);
+        if (tema_seleccionado.getArchivo() != null) {
             btnDescargarTema1.setVisible(true);
-            jLabel2.setVisible(false);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+        } else {
+            btnDescargarTema1.setVisible(false);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
         }
         if (tema_seleccionado.getDuracion() != 0) {
             txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
@@ -412,6 +417,23 @@ public class ConsultarLista extends javax.swing.JPanel {
             txtDurTem.setText(" - ");
         }
     }//GEN-LAST:event_ListaTemasListaMouseClicked
+
+    private void btnDescargarTema1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTema1ActionPerformed
+        Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getArchivo());
+        String userHome = System.getProperty("user.home");
+        Path descargas = Paths.get(userHome, "Downloads");
+        Path destino = descargas.resolve(tema_seleccionado.getArchivo());
+
+        try {
+            // Copiar el archivo al directorio de destino
+            Files.copy(sourcePath, destino, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Archivo copiado con exito.");
+            JOptionPane.showMessageDialog(null, "Archivo de musica descargado correctamente.\nVerifique su carpeta de descargas");
+        } catch (Exception e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Un error ha ocurrido al descargar el archivo.");
+        }
+    }//GEN-LAST:event_btnDescargarTema1ActionPerformed
 
     private void cargarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
         Collection<DataTema> temas_de_la_lista = new ArrayList<>();

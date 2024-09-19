@@ -48,8 +48,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         initComponents();
         cargarGeneros();
 
-        txtTipMus.setVisible(false);
-
         txtAnio.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -107,9 +105,10 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         listGenSelect = new javax.swing.JList<>();
         lblGenDelSis = new javax.swing.JLabel();
-        lblPosTemaAlb = new javax.swing.JLabel();
+        lblDireccionTema = new javax.swing.JLabel();
         txtPosTemaAlb = new javax.swing.JTextField();
         btnNukear1 = new javax.swing.JButton();
+        lblPosTemaAlb = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -189,7 +188,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
         lblGenDelSis.setText("Generos del Sistema : ");
 
-        lblPosTemaAlb.setText("Posicion del tema :");
+        lblDireccionTema.setText("URL Descargable o Link :");
 
         txtPosTemaAlb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +202,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 btnNukear1ActionPerformed(evt);
             }
         });
+
+        lblPosTemaAlb.setText("Posicion del tema :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -234,47 +235,60 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             .addComponent(lblGenDelSis)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSelGen))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(btnConfTem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addComponent(lblPosTemaAlb))
-                                    .addComponent(lblNomTemaAlb, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbxTipMus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPosTemaAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomTemaAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNomTemaAlb1)
-                                    .addComponent(txtTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblMsjArch, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnArch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(124, 124, 124))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMsjArch, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblNomTemaAlb, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblPosTemaAlb, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addGap(18, 18, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtPosTemaAlb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtNomTemaAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblNomTemaAlb1)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(btnArch)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btnConfTem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblDireccionTema)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(134, 134, 134))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNukear1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
+                        .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblArt)
-                    .addComponent(txtArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomTemaAlb1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblArt)
+                            .addComponent(txtArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNomTemaAlb1)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -300,8 +314,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReiGen)
-                            .addComponent(btnSelGen))
-                        .addGap(33, 33, 33))
+                            .addComponent(btnSelGen)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNukear1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,19 +330,16 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             .addComponent(lblPosTemaAlb))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblDireccionTema)
+                            .addComponent(txtTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConfTem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnArch))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblMsjArch)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNukear1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))))
+                            .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnArch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfTem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMsjArch)))
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -382,7 +394,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             if (mp3File.hasId3v2Tag()) {
                                 ID3v2 id3v2Tag = mp3File.getId3v2Tag();
                                 long durationInSeconds = mp3File.getLengthInSeconds();
-                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, selectedFile.getName())) {
+                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName())) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
                                     DefaultListModel<String> model = new DefaultListModel();
                                     Iterator<String> iterator = temas_del_album.iterator();
@@ -418,7 +430,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 }
 
             } else {
-                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText())) {
+                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText(), null)) {
                     JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
                     DefaultListModel<String> model = new DefaultListModel();
                     Iterator<String> iterator = temas_del_album.iterator();
@@ -430,6 +442,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     txtTipMus.setText(null);
                     txtPosTemaAlb.setText(null);
                     fileChooser.setSelectedFile(null);
+                    txtTipMus.setText(null);
                 } else {
                     JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
                 }
@@ -542,11 +555,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
     private void cbxTipMusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipMusActionPerformed
         if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
-            txtTipMus.setVisible(false);
             btnArch.setVisible(true);
             lblMsjArch.setVisible(true);
         } else {
-            txtTipMus.setVisible(true);
             btnArch.setVisible(false);
             lblMsjArch.setVisible(false);
         }
@@ -623,6 +634,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAnioAlb;
     private javax.swing.JLabel lblArt;
+    private javax.swing.JLabel lblDireccionTema;
     private javax.swing.JLabel lblGenAlb1;
     private javax.swing.JLabel lblGenDelSis;
     private javax.swing.JLabel lblGenSel;

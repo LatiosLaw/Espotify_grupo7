@@ -13,8 +13,8 @@ import persistencia.DAO_Tema;
 public class ControladorTema implements IControladorTema {
 
     @Override
-    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso) {
-        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso);
+    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo) {
+        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo);
         DAO_Tema persistence = new DAO_Tema();
         if (persistence.find(nuevo_tema.getNickname()) != null) {
             System.out.println("El tema ya existe.");
@@ -37,7 +37,7 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         retorno = persistence.find(nickname);
         if (retorno != null) {
-            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso());
+            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }

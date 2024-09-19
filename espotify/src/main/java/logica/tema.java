@@ -15,6 +15,7 @@ public class tema implements Serializable {
     @Id
     private String nickname;
     private String metodo_de_acceso;
+    private String identificador_archivo;
     private Integer duracion;
     private Integer posicion_album;
     
@@ -34,17 +35,19 @@ public class tema implements Serializable {
         this.duracion = duracion;
     }
     
-    public tema(String nickname, Integer duracion, String metodo_de_acceso) {
+    public tema(String nickname, Integer duracion, String metodo_de_acceso, String archivo) {
         this.nickname = nickname;
         this.duracion = duracion;
         this.metodo_de_acceso = metodo_de_acceso;
+        this.identificador_archivo = archivo;
     }
     
-    public tema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso) {
+    public tema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso, String archivo) {
         this.nickname = nickname;
         this.duracion = duracion;
         this.posicion_album = posicion;
         this.metodo_de_acceso = metodo_de_acceso;
+        this.identificador_archivo = archivo;
     }
     
     public tema(String nickname, Integer duracion, Integer posicion_album) {
@@ -67,6 +70,14 @@ public class tema implements Serializable {
 
     public void setPos(Integer posicion) {
         this.posicion_album = posicion;
+    }
+    
+    public String getArchivo() {
+        return identificador_archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.identificador_archivo = archivo;
     }
     
     public void setAcceso(String metodo_de_acceso) {

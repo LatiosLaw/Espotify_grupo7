@@ -6,6 +6,7 @@ public class DataTema {
     private Integer posicion_album;
     private Integer duracion;
     private DataAlbum album;
+    private String identificador_archivo;
     private String metodo_de_acceso;
 
     public DataTema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso) {
@@ -39,11 +40,12 @@ public class DataTema {
         this.album = new DataAlbum();
     }
 
-    public DataTema(String nickname, Integer duracion, DataAlbum dataAlbum, String acceso) {
+    public DataTema(String nickname, Integer duracion, DataAlbum dataAlbum, String acceso, String archivo) {
         this.nickname = nickname;
         this.duracion = duracion;
         this.album = dataAlbum;
         this.metodo_de_acceso = acceso;
+        this.identificador_archivo = archivo;
     }
 
     public String getNickname() {
@@ -68,6 +70,14 @@ public class DataTema {
 
     public String getAccess() {
         return metodo_de_acceso;
+    }
+    
+    public String getArchivo() {
+        return identificador_archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.identificador_archivo = archivo;
     }
 
     public void setAccess(String metodo_de_acceso) {

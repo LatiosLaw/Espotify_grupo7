@@ -40,8 +40,8 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtAnioCre.setEditable(false);
         txtNomTemAlb.setEditable(false);
         txtDurTem.setEditable(false);
-        txtDireccionTema.setEditable(false);
-        jLabel1.setVisible(false);
+        txtDireccionTema.setVisible(true);
+        jLabel1.setVisible(true);
     }
 
     /**
@@ -291,10 +291,10 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_nomGenOrArtActionPerformed
 
     private void btnDescargarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTemaActionPerformed
-        Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getAccess());
+        Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getArchivo());
         String userHome = System.getProperty("user.home");
         Path descargas = Paths.get(userHome, "Downloads");
-        Path destino = descargas.resolve(tema_seleccionado.getAccess());
+        Path destino = descargas.resolve(tema_seleccionado.getArchivo());
 
         try {
             // Copiar el archivo al directorio de destino
@@ -416,16 +416,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         tema_seleccionado = controlTem.retornarTema(nomtem);
         txtNomTemAlb.setText(tema_seleccionado.getNickname());
 
-        if (!tema_seleccionado.getAccess().endsWith(".mp3")) {
-            txtDireccionTema.setVisible(true);
-            btnDescargarTema.setVisible(false);
-            jLabel1.setVisible(true);
-            txtDireccionTema.setText(tema_seleccionado.getAccess());
-
-        } else {
-            txtDireccionTema.setVisible(false);
+        if (tema_seleccionado.getArchivo() != null) {
             btnDescargarTema.setVisible(true);
-            jLabel1.setVisible(false);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
+        } else {
+            btnDescargarTema.setVisible(false);
+            txtDireccionTema.setText(tema_seleccionado.getAccess());
         }
         if (tema_seleccionado.getDuracion() != 0) {
             txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));

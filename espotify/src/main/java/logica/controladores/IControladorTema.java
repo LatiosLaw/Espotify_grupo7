@@ -6,7 +6,7 @@ import logica.dt.DataTema;
 
 public interface IControladorTema {
 
-    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso);
+    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo);
 
     public DataTema retornarTema(String nickname);
     
