@@ -1,9 +1,11 @@
 package presentacion;
 
+import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import logica.controladores.*;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
@@ -19,6 +21,7 @@ public class FormPrin extends javax.swing.JFrame {
     private final IControladorTema controlTem;
     private final IControladorListaParticular controlListPar;
     private final IControladorListaPorDefecto controlListPD;
+    
 
     public FormPrin() {
 
@@ -33,6 +36,8 @@ public class FormPrin extends javax.swing.JFrame {
         controlListPar = factory.getIControladorListaParticular();
 
         initComponents();
+        lblCargando.setVisible(false);
+        jProgressBar1.setVisible(false);
         setLocationRelativeTo(null);
     }
 
@@ -46,6 +51,8 @@ public class FormPrin extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlPrin = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        lblCargando = new javax.swing.JLabel();
         btnAdLi = new javax.swing.JButton();
         btnAdAl = new javax.swing.JButton();
         btnAdUs = new javax.swing.JButton();
@@ -58,15 +65,33 @@ public class FormPrin extends javax.swing.JFrame {
         pnlPrin.setBackground(new java.awt.Color(153, 255, 204));
         pnlPrin.setPreferredSize(new java.awt.Dimension(872, 579));
 
+        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBar1.setForeground(new java.awt.Color(51, 255, 51));
+
+        lblCargando.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
+        lblCargando.setText("Cargando Datos");
+
         javax.swing.GroupLayout pnlPrinLayout = new javax.swing.GroupLayout(pnlPrin);
         pnlPrin.setLayout(pnlPrinLayout);
         pnlPrinLayout.setHorizontalGroup(
             pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlPrinLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(307, 307, 307))
+            .addGroup(pnlPrinLayout.createSequentialGroup()
+                .addGap(363, 363, 363)
+                .addComponent(lblCargando)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrinLayout.setVerticalGroup(
             pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGroup(pnlPrinLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(lblCargando)
+                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(444, Short.MAX_VALUE))
         );
 
         btnAdLi.setText("Administrar Lista");
@@ -169,20 +194,36 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
-        try {
-            cargarClientes();
-            cargarArtistas();
-            cargarGeneros();
-            cargarTemas();
-            cargarSeguimientos();
-            cargarListas();
+         new Thread(() -> {
+            try {
+                lblCargando.setVisible(true);
+                jProgressBar1.setVisible(true);
+                cargarClientes();
+                jProgressBar1.setValue(10); // Actualiza a 10%
+                
+                cargarArtistas();
+                jProgressBar1.setValue(20); // Actualiza a 20%
+                
+                cargarGeneros();
+                jProgressBar1.setValue(30); // Actualiza a 30%
+                
+                cargarTemas();
+                jProgressBar1.setValue(40); // Actualiza a 40%
+                
+                cargarSeguimientos();
+                jProgressBar1.setValue(60); // Actualiza a 60%
+                
+                cargarListas();
+                jProgressBar1.setValue(80); // Actualiza a 80%
 
-            JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+                jProgressBar1.setValue(100); // Completa la barra
+                JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
+                lblCargando.setVisible(false);
+                jProgressBar1.setVisible(false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }).start();
     }//GEN-LAST:event_btnCarDatActionPerformed
 
     private void cargarGeneros() {
@@ -433,6 +474,8 @@ public class FormPrin extends javax.swing.JFrame {
     private javax.swing.JButton btnAdLi;
     private javax.swing.JButton btnAdUs;
     private javax.swing.JButton btnCarDat;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel lblCargando;
     private javax.swing.JPanel pnlPrin;
     // End of variables declaration//GEN-END:variables
 }
