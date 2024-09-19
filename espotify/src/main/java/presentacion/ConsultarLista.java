@@ -43,6 +43,9 @@ public class ConsultarLista extends javax.swing.JPanel {
         initComponents();
         this.revalidate();
         this.repaint();
+        txtNomTemLista.setEditable(false);
+        txtDurTem.setEditable(false);
+        txtDurTem.setEditable(false);
     }
 
     /**
@@ -412,7 +415,7 @@ public class ConsultarLista extends javax.swing.JPanel {
             txtDireccionTema.setText(tema_seleccionado.getAccess());
         }
         if (tema_seleccionado.getDuracion() != 0) {
-            txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
+            txtDurTem.setText(convertirSegundos(tema_seleccionado.getDuracion()));
         } else {
             txtDurTem.setText(" - ");
         }
@@ -445,6 +448,14 @@ public class ConsultarLista extends javax.swing.JPanel {
             model.addElement(tema_actual.getNickname());
         }
         ListaTemasLista.setModel(model);
+    }
+    
+    public String convertirSegundos(int totalSegundos) {
+    int minutos = totalSegundos / 60;
+    int segundos = totalSegundos % 60;
+    
+    // Formatear los segundos para que siempre tengan 2 dígitos
+    return String.format("%d:%02d", minutos, segundos);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

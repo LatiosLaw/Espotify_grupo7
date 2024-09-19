@@ -40,6 +40,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtAnioCre.setEditable(false);
         txtNomTemAlb.setEditable(false);
         txtDurTem.setEditable(false);
+        txtDireccionTema.setEditable(false);
         txtDireccionTema.setVisible(true);
         jLabel1.setVisible(true);
     }
@@ -424,12 +425,20 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             txtDireccionTema.setText(tema_seleccionado.getAccess());
         }
         if (tema_seleccionado.getDuracion() != 0) {
-            txtDurTem.setText(Integer.toString(tema_seleccionado.getDuracion()));
+            txtDurTem.setText(convertirSegundos(tema_seleccionado.getDuracion()));
         } else {
             txtDurTem.setText(" - ");
         }
     }//GEN-LAST:event_listTemAlbMouseClicked
 
+    public String convertirSegundos(int totalSegundos) {
+    int minutos = totalSegundos / 60;
+    int segundos = totalSegundos % 60;
+    
+    // Formatear los segundos para que siempre tengan 2 dígitos
+    return String.format("%d:%02d", minutos, segundos);
+    }
+    
     private void txtDireccionTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTemaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionTemaActionPerformed

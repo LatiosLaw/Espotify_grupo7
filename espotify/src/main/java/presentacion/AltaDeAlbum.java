@@ -405,6 +405,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                     txtNomTemaAlb.setText(null);
                                     txtPosTemaAlb.setText(null);
                                     fileChooser.setSelectedFile(null);
+                                    txtTipMus.setText(null);
                                     lblMsjArch.setText("El archivo no se reconoce como un mp3");
                                     try {
                                         Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
