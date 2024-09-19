@@ -223,12 +223,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                                 .addComponent(lblDurTem)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDurTem, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                            .addComponent(txtNomTemAlb, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtAnioCre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNomAlb, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(lblGenDeAlb))))
+                            .addComponent(lblGenDeAlb)
+                            .addComponent(txtNomAlb)
+                            .addComponent(txtNomTemAlb))))
                 .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
