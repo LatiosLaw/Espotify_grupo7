@@ -1,13 +1,11 @@
 package presentacion;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import logica.controladores.*;
 import logica.dt.DataGenero;
-import logica.dt.DataListaPorDefecto;
 import logica.factory.Fabrica;
 
 public class FormPrin extends javax.swing.JFrame {
@@ -170,20 +168,85 @@ public class FormPrin extends javax.swing.JFrame {
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
         try {
+            cargarClientes();
+            cargarArtistas();
+            cargarGeneros();
+            cargarListas();
+            cargarTemas();
+            
+            
+            JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
 
-            //CLIENTES//
-            controlCli.agregarCliente("Eleven11", "Eleven", "", "Eleven11@gmail.com", "bit.ly/11Eleven11", LocalDate.of(1971, 12, 31)); //EL
-            controlCli.agregarCliente("cbochinche", "Cacho", "Bochinche", "cbochinche@vera.com.uy", "bit.ly/cbochinche", LocalDate.of(1937, 5, 8)); //CB
-            controlCli.agregarCliente("lachiqui", "Mirtha", "Legrand", "lachiqui@hotmail.com.ar", "bit.ly/laChiqui", LocalDate.of(1927, 2, 3)); //ML
-            controlCli.agregarCliente("benKenobi", "Obi-Wan", "Kenobi", "benKenobi@gmail.com", "bit.ly/benKenobi", LocalDate.of(1914, 4, 2)); //OK
-            controlCli.agregarCliente("Heisenberg", "Walter", "White", "Heisenberg@tuta.io", "bit.ly/heisenbergWW", LocalDate.of(1956, 3, 7)); //WW
-            controlCli.agregarCliente("ppArgento", "Pepe", "Argento", "ppArgento@hotmail.com", "bit.ly/ppArgento", LocalDate.of(1955, 2, 14)); //PA
-            controlCli.agregarCliente("scarlettO", "Scarlett", "O’Hara", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
-            controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
-            //-------//
+        } catch (Exception e) {
 
-            //ARTISTAS//
-            controlArt.agregarArtista("vpeople", "Village", "People", "vpeople@tuta.io", "bit.ly/vpeople", LocalDate.of(1977, 1, 1), """
+            JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCarDatActionPerformed
+
+    private void cargarGeneros() {
+
+        Collection<String> subsPop = new ArrayList<>();
+        subsPop.add("Electropop"); // EPO
+        subsPop.add("Dance-pop"); // DPO
+        subsPop.add("Pop Clásico"); // PCL
+
+
+        Collection<String> subsRock = new ArrayList<>();
+        subsRock.add("Rock Clásico"); // RCL
+        subsRock.add("Rock Latino"); // RKL
+        subsRock.add("Rock & Roll"); // RAR
+
+        controlGen.crearGeneroUnico("Clásica"); // CLA
+        controlGen.crearGeneroUnico("Disco"); // DIS
+        controlGen.crearGeneroUnico("Balada"); // BAL
+        controlGen.crearGeneroUnico("Cumbia"); // CUM
+
+        controlGen.crearGeneroConSubgeneros("Rock", subsRock); // ROK
+        controlGen.crearGeneroConSubgeneros("Pop", subsPop); // POP
+        
+        System.out.println("GENEROS CARGADOS");
+    }
+
+    private void cargarListas(){       
+        
+        controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico")); // LD1
+        controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino")); // LD2
+        controlListPD.crearLista("Música Clásica", new DataGenero("Clásica")); // LD3
+            
+           // DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
+            
+           // System.out.println(lista.getNombre());
+            
+           // controlListPD.agregarTema(lista.getNombre(), "Pop Clásico", controlTem.retornarTema("YMCA"));
+ 
+        System.out.println("LISTAS CARGADAS");
+    }
+    
+    private void cargarTemas(){
+        controlTem.crearTemaDefault("YMCA", 428, "mp3");
+        controlTem.crearTemaDefault("Macho Man", 328, "web");
+        controlTem.crearTemaDefault("In the Navy", 313, "mp3");
+        System.out.println("LISTAS CARGADAS");
+    }
+
+    private void cargarClientes() {
+        //CLIENTES//
+        controlCli.agregarCliente("Eleven11", "Eleven", "", "Eleven11@gmail.com", "bit.ly/11Eleven11", LocalDate.of(1971, 12, 31)); //EL
+        controlCli.agregarCliente("cbochinche", "Cacho", "Bochinche", "cbochinche@vera.com.uy", "bit.ly/cbochinche", LocalDate.of(1937, 5, 8)); //CB
+        controlCli.agregarCliente("lachiqui", "Mirtha", "Legrand", "lachiqui@hotmail.com.ar", "bit.ly/laChiqui", LocalDate.of(1927, 2, 3)); //ML
+        controlCli.agregarCliente("benKenobi", "Obi-Wan", "Kenobi", "benKenobi@gmail.com", "bit.ly/benKenobi", LocalDate.of(1914, 4, 2)); //OK
+        controlCli.agregarCliente("Heisenberg", "Walter", "White", "Heisenberg@tuta.io", "bit.ly/heisenbergWW", LocalDate.of(1956, 3, 7)); //WW
+        controlCli.agregarCliente("ppArgento", "Pepe", "Argento", "ppArgento@hotmail.com", "bit.ly/ppArgento", LocalDate.of(1955, 2, 14)); //PA
+        controlCli.agregarCliente("scarlettO", "Scarlett", "O’Hara", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
+        controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
+        //-------//
+        System.out.println("CLIENTES CARGADOS");
+    }
+
+    private void cargarArtistas() {
+
+        //ARTISTAS//
+        controlArt.agregarArtista("vpeople", "Village", "People", "vpeople@tuta.io", "bit.ly/vpeople", LocalDate.of(1977, 1, 1), """
                                                                                                                                      Village People es una
                                                                                                                                      innovadora formaci\u00f3n musical
                                                                                                                                      de estilo disco de finales de los
@@ -193,9 +256,9 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                                      con letras sugerentes y llenas de
                                                                                                                                      dobles sentidos.""", "www.officialvillagepeople.com"); //VP
 
-            controlArt.agregarArtista("dmode", "Depeche", "Mode", "dmode@tuta.io", "bit.ly/depecheMode", LocalDate.of(1980, 6, 14), "", "www.depechemode.com"); //DM
+        controlArt.agregarArtista("dmode", "Depeche", "Mode", "dmode@tuta.io", "bit.ly/depecheMode", LocalDate.of(1980, 6, 14), "", "www.depechemode.com"); //DM
 
-            controlArt.agregarArtista("clauper", "Cyndi", "Lauper", "clauper@hotmail.com", "bit.ly/cLauper", LocalDate.of(1953, 6, 22), """
+        controlArt.agregarArtista("clauper", "Cyndi", "Lauper", "clauper@hotmail.com", "bit.ly/cLauper", LocalDate.of(1953, 6, 22), """
                                                                                                                                         Cynthia Ann Stephanie Lauper,
                                                                                                                                         conocida simplemente como
                                                                                                                                         Cyndi Lauper, es una
@@ -214,9 +277,9 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                                         contenido de las letras de sus
                                                                                                                                         canciones.""", "cyndilauper.com"); //CL
 
-            controlArt.agregarArtista("bruceTheBoss", "Bruce", "Springsteen", "bruceTheBoss@gmail.com", "bit.ly/bruceTheBoss", LocalDate.of(1949, 9, 23), "", "brucespringsteen.net"); //BS
+        controlArt.agregarArtista("bruceTheBoss", "Bruce", "Springsteen", "bruceTheBoss@gmail.com", "bit.ly/bruceTheBoss", LocalDate.of(1949, 9, 23), "", "brucespringsteen.net"); //BS
 
-            controlArt.agregarArtista("tripleNelson", "La", "Triple Nelson", "tripleNelson@tuta.io", "bit.ly/tripleNelson", LocalDate.of(1998, 1, 1), """
+        controlArt.agregarArtista("tripleNelson", "La", "Triple Nelson", "tripleNelson@tuta.io", "bit.ly/tripleNelson", LocalDate.of(1998, 1, 1), """
                                                                                                                                                       La Triple Nelson es un grupo
                                                                                                                                                       de rock uruguayo formado en
                                                                                                                                                       enero de 1998 e integrado
@@ -226,9 +289,9 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                                                       Rub\u00e9n Otonello (actualmente su
                                                                                                                                                       nuevo baterista es Rafael Ugo).""", ""); //TN
 
-            controlArt.agregarArtista("la_ley", "La", "Ley", "la_ley@tuta.io", "", LocalDate.of(1987, 2, 14), "", ""); //LL
+        controlArt.agregarArtista("la_ley", "La", "Ley", "la_ley@tuta.io", "", LocalDate.of(1987, 2, 14), "", ""); //LL
 
-            controlArt.agregarArtista("tigerOfWales", "Tom", "Jones", "tigerOfWales@tuta.io", "", LocalDate.of(1940, 6, 7), """
+        controlArt.agregarArtista("tigerOfWales", "Tom", "Jones", "tigerOfWales@tuta.io", "", LocalDate.of(1940, 6, 7), """
                                                                                                                             Sir Thomas John, conocido por
                                                                                                                             su nombre art\u00edstico de Tom
                                                                                                                             Jones, es un cantante brit\u00e1nico.
@@ -236,22 +299,22 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                             millones de discos en todo el
                                                                                                                             mundo.1""", "www.tomjones.com"); //TJ
 
-            controlArt.agregarArtista("chaiko", "Piotr", "Tchaikovsky", "chaiko@tuta.io", "", LocalDate.of(1840, 4, 25), """
+        controlArt.agregarArtista("chaiko", "Piotr", "Tchaikovsky", "chaiko@tuta.io", "", LocalDate.of(1840, 4, 25), """
                                                                                                                          Piotr Ilich Chaikovski fue un
                                                                                                                          compositor ruso del per\u00edodo del
                                                                                                                          Romanticismo""", ""); //PT
 
-            controlArt.agregarArtista("nicoleneu", "Nicole", "Neumann", "nicoleneu@hotmail.com", "bit.ly/nicoleneu", LocalDate.of(1980, 10, 31), "", ""); //NN
+        controlArt.agregarArtista("nicoleneu", "Nicole", "Neumann", "nicoleneu@hotmail.com", "bit.ly/nicoleneu", LocalDate.of(1980, 10, 31), "", ""); //NN
 
-            controlArt.agregarArtista("lospimpi", "Pimpinela", "", "lospimpi@gmail.com", "bit.ly/losPimpinela", LocalDate.of(1981, 8, 13), "", "www.pimpinela.net"); //PI
+        controlArt.agregarArtista("lospimpi", "Pimpinela", "", "lospimpi@gmail.com", "bit.ly/losPimpinela", LocalDate.of(1981, 8, 13), "", "www.pimpinela.net"); //PI
 
-            controlArt.agregarArtista("dyangounchained", "Dyango", "", "dyangounchained@gmail.com", "", LocalDate.of(1940, 3, 5), """
+        controlArt.agregarArtista("dyangounchained", "Dyango", "", "dyangounchained@gmail.com", "", LocalDate.of(1940, 3, 5), """
                                                                                                                                   Jos\u00e9 G\u00f3mez Romero, conocido
                                                                                                                                   art\u00edsticamente como Dyango es
                                                                                                                                   un cantante espa\u00f1ol de m\u00fasica
                                                                                                                                   rom\u00e1ntica.""", ""); //DY
 
-            controlArt.agregarArtista("alcides", "", "Alcides", "alcides@tuta.io", "", LocalDate.of(1952, 7, 17), """
+        controlArt.agregarArtista("alcides", "", "Alcides", "alcides@tuta.io", "", LocalDate.of(1952, 7, 17), """
                                                                                                                   Su carrera comienza en 1976
                                                                                                                   cuando forma la banda Los
                                                                                                                   Playeros junto a su hermano V\u00edctor.
@@ -267,63 +330,9 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                   interpretada en 1985 por el
                                                                                                                   m\u00fasico brasile\u00f1o Luiz Caldas
                                                                                                                   bajo el t\u00edtulo \u00abFricote\u00bb.""", ""); //AL
-            //---------//
-
-            //GENEROS//
-            Collection<String> generos1 = new ArrayList<>();
-
-            generos1.add("Electropop"); //EPO
-            generos1.add("Dance-pop"); //DPO
-            generos1.add("Pop Clásico"); //PCL
-
-            Collection<String> generos2 = new ArrayList<>();
-
-            generos2.add("Rock Clásico"); //RCL
-            generos2.add("Rock Latino"); //RKL
-            generos2.add("Rock & Roll"); //RAR
-
-            controlGen.crearGeneroUnico("Clásica"); //CLA
-            controlGen.crearGeneroUnico("Disco"); //DIS
-            controlGen.crearGeneroUnico("Balada"); //BAL
-            controlGen.crearGeneroUnico("Cumbia"); //CUM
-
-            controlGen.crearGeneroConSubgeneros("Rock", generos2); //ROK
-            controlGen.crearGeneroConSubgeneros("Pop", generos1); //POP
-            //--------//
-
-            //LISTAS DE REPRODUCCION//
-            controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico")); //LD1
-            controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino")); //LD2
-            controlListPD.crearLista("Música Clásica", new DataGenero("Clásica")); //LD3
-
-            // controlListPar.crearLista("Música Inspiradora", new DataCliente().setNickname("el_padrino")); //en progreso
-            controlTem.crearTemaDefault("YMCA", 428, "mp3");
-            controlTem.crearTemaDefault("Macho Man", 328, "web");
-            controlTem.crearTemaDefault("In the Navy", 313, "mp3");
-
-            DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop");
-
-            //->>>>   lista.agregarTema?////
-            //----------------------//
-            JOptionPane.showMessageDialog(null, "Datos cargados correctamente.");
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "Error al agregar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        //controlArt.agregarArtista("lachiqui", "Mirtha", "Legrand", "imgoingtoalice@gmai.com", "Defoult", LocalDate.of(1927, 2, 3), "Im going to Alice. I want to eat Alice. What is Alice? Im Alice too!", "wonderland@gmail.com");
-        /*controlCli.seguirUsuario("El Listo", "Jose");
-        controlCli.seguirUsuario("El Listo", "Jhon Black Soul");
-        controlCli.seguirUsuario("Jose", "El Listo");*/
-
- /*Collection<DataTema> tem = new ArrayList<>();
-        controlAlb.agregarAlbum("Jhon Black Soul", "Welcome to Wonderland", "Alice.png", 2020, tem);
-        controlGen.crearGeneroUnico("Genero 1");
-        controlGen.crearGeneroUnico("Genero 2");
-        controlGen.crearGeneroUnico("Genero 3");*/
-    }//GEN-LAST:event_btnCarDatActionPerformed
-
+        //---------//
+        System.out.println("ARTISTAS CARGADOS");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdAl;
     private javax.swing.JButton btnAdLi;
