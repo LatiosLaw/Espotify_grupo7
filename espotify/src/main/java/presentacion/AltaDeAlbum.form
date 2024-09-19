@@ -22,7 +22,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -41,52 +41,56 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnReiGen" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblGenSel" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane3" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="lblGenSel" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" pref="151" max="32767" attributes="0"/>
+                          <Component id="btnReiGen" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblGenDelSis" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="151" max="-2" attributes="0"/>
-                          <Component id="btnSelGen" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="151" max="32767" attributes="0"/>
+                          <Component id="btnSelGen" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                              <Component id="lblMsjArch" min="-2" pref="293" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="lblMsjArch" min="-2" pref="293" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblNomTemaAlb" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblPosTemaAlb" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtPosTemaAlb" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
-                                              <Component id="txtNomTemaAlb" min="-2" pref="185" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Component id="lblNomTemaAlb" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPosTemaAlb" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtPosTemaAlb" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
+                                      <Component id="txtNomTemaAlb" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblNomTemaAlb1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="btnNukear1" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="btnConfirmar" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblNomTemaAlb1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane2" min="-2" pref="185" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Component id="cbxTipMus" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="btnArch" min="-2" max="-2" attributes="0"/>
@@ -95,22 +99,16 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblDireccionTema" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtTipMus" min="-2" pref="185" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnNukear1" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="btnConfirmar" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblDireccionTema" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="txtTipMus" min="-2" pref="185" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -158,11 +156,15 @@
                           <Component id="jScrollPane3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnReiGen" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSelGen" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConfirmar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="btnNukear1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnConfirmar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnNukear1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="btnSelGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnReiGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
