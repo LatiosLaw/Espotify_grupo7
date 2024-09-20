@@ -5,13 +5,39 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import logica.controladores.IControladorAlbum;
+import logica.controladores.IControladorCliente;
+import logica.controladores.IControladorListaParticular;
+import logica.controladores.IControladorListaPorDefecto;
+import logica.controladores.IControladorTema;
+import logica.dt.DataAlbum;
+import logica.dt.DataCliente;
+import logica.dt.DataListaParticular;
+import logica.dt.DataListaPorDefecto;
+import logica.dt.DataListaReproduccion;
+import logica.dt.DataTema;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 public class EliminarCosoFav extends javax.swing.JPanel {
+ private final IControladorCliente controlCli;
+    private final IControladorTema controlTema;
+    private final IControladorListaParticular controlLipa;
+    private final IControladorListaPorDefecto controlLiporde;
+    private final IControladorAlbum controlAlb;
 
-    public EliminarCosoFav() {
+    public EliminarCosoFav(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
+        controlCli = icc;
+        controlAlb = ica;
+        controlLipa = iclp;
+        controlLiporde = iclpd;
+        controlTema = ict;
+        
+        
     }
 
     /**
@@ -23,147 +49,258 @@ public class EliminarCosoFav extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        txtNick = new javax.swing.JTextField();
-        cbxTipoCoso = new javax.swing.JComboBox<>();
-        btnConfirmar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        txtCliente = new javax.swing.JTextField();
+        lblCliente = new javax.swing.JLabel();
+        cbxCoso = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
         lstCoso = new javax.swing.JList<>();
-        txtFav = new javax.swing.JTextField();
-        lblFav = new javax.swing.JLabel();
-        cbxLPM = new javax.swing.JComboBox<>();
-        lblFav1 = new javax.swing.JLabel();
+        txtBusqueda1 = new javax.swing.JTextField();
+        lblBusqueda1 = new javax.swing.JLabel();
+        lblPrimeraBusqueda = new javax.swing.JLabel();
+        btnFav = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        jLabel2.setText("Nick Cliente :");
+        txtCliente.setColumns(10);
 
-        txtNick.setColumns(10);
+        lblCliente.setText("Nick Cliente :");
 
-        cbxTipoCoso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Tema", "Lista", "Album", " " }));
-        cbxTipoCoso.addActionListener(new java.awt.event.ActionListener() {
+        cbxCoso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Temas", "Listas", "Albums" }));
+        cbxCoso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTipoCosoActionPerformed(evt);
+                cbxCosoActionPerformed(evt);
             }
         });
 
-        btnConfirmar.setText("OK");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane1.setViewportView(lstCoso);
+
+        txtBusqueda1.setColumns(10);
+
+        lblBusqueda1.setText("Agregar a Favoritos :");
+
+        lblPrimeraBusqueda.setText("Primera Busqueda");
+
+        btnFav.setText("OK");
+        btnFav.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
+                btnFavActionPerformed(evt);
             }
         });
 
-        btnBuscar.setText("Buscar");
-
-        jScrollPane2.setViewportView(lstCoso);
-
-        txtFav.setColumns(10);
-
-        lblFav.setText("Eliminar de Favoritos :");
-
-        cbxLPM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listas Particulares", "Listas Por Defecto", " " }));
-        cbxLPM.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("OK");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLPMActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-
-        lblFav1.setText("Favoritos :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(lblCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblFav1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblFav)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFav))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(172, 172, 172))
+                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(72, 72, 72)
+                        .addComponent(lblPrimeraBusqueda))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addGap(162, 162, 162))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblBusqueda1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFav, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxTipoCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFav1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrimeraBusqueda))
+                        .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFav)
-                    .addComponent(txtFav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(lblBusqueda1)
+                            .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addComponent(btnFav, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCliente))
+                        .addGap(34, 34, 34)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+    private void cbxCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCosoActionPerformed
+        String token = String.valueOf(this.cbxCoso.getSelectedItem());
+        
+        if(null != token)switch (token) {
+         case "OPT":
+             
+             JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
+             
+             break;
+         case "Temas":
+             
+           
+             
+             break;
+         case "Listas":
+          
+             
+             break;
+         case "Albums":
+             
+         
+             
+             break;
+         default:
+             break;
+     }
+        
+        
+        
+    }//GEN-LAST:event_cbxCosoActionPerformed
 
-        String token = String.valueOf(cbxTipoCoso.getSelectedItem());
-
-        switch (token) {
-            case "Lista" -> {
-            }
-            case "Album" -> {
-            }
-            case "Tema" -> {
-            }
-            default -> {
+    private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
+        String token = String.valueOf(cbxCoso.getSelectedItem());
+        String cliente = this.txtCliente.getText();
+        String coso = this.txtBusqueda1.getText();
+        DataCliente cli = controlCli.consultarPerfilCliente(cliente);
+        if(cli == null){
+             JOptionPane.showMessageDialog(null, "No existe usuario con el nickname indicado");
+        }else{
+            switch (token) {
+                case "OPT":
+                    JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
+                    //controlCli.agregarTema(nickcli, tema);
+                    break;
+                case "Temas":
+                    DataTema tema = controlTema.retornarTema2LaSecuela(coso);
+                    if(tema == null){
+                        JOptionPane.showMessageDialog(null, "No existe un tema con ese nombre en los favoritos del Cliente.");
+                    }else{
+                        controlCli.eliminarTema(cli, tema);
+                    }       
+                    break;
+                case "Listas":
+                    DataListaReproduccion losta = this.controlLipa.devolverInformacionListaRepro(coso);
+                    
+                    controlCli.eliminarLista(cli, losta);
+                    
+       
+                    break;
+                case "Albums":
+                    
+                    DataAlbum album = this.controlAlb.retornarInfoAlbum(coso);
+                    if("ALBUM NO EXISTE".equals(album.getNombre())){
+                         JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
+                    }else{
+                        controlCli.eliminarAlbum(cli, album);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+        
+    }//GEN-LAST:event_btnFavActionPerformed
 
-    private void cbxTipoCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCosoActionPerformed
-
-    }//GEN-LAST:event_cbxTipoCosoActionPerformed
-
-    private void cbxLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLPMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxLPMActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       String token = String.valueOf(this.cbxCoso.getSelectedItem());
+        if(controlCli.consultarPerfilCliente(this.txtCliente.getText()) == null){
+             JOptionPane.showMessageDialog(null, "No existe usuario seleccionado");
+        }else{
+             if(null != token)switch (token) {
+         case "OPT":
+           
+             JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
+             
+             break;
+         case "Temas":
+          
+            Collection <String> temas = this.controlCli.obtenerTemaFavCliente(this.txtCliente.getText());
+            
+             if(temas == null){
+                 JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
+             }else{
+                 this.cargarLstFav(temas);
+             }
+             break;
+         case "Listas":
+           
+             
+            
+                    Collection <String> listas = controlCli.obtenerListasFavCliente(txtCliente.getText());
+                    if(listas == null){
+                         JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
+                    }else{
+                      this.cargarLstFav(listas);
+                    }
+             break;
+         case "Albums":
+            
+             Collection <String> albums = controlCli.obtenerAlbumFavCliente(txtCliente.getText());
+             
+             if(albums == null){
+                  JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
+             }else{
+                 this.cargarLstFav(albums);
+             }
+             break;
+         default:
+             break;
+     }
+        }
+       
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JComboBox<String> cbxLPM;
-    private javax.swing.JComboBox<String> cbxTipoCoso;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblFav;
-    private javax.swing.JLabel lblFav1;
+    private javax.swing.JButton btnFav;
+    private javax.swing.JComboBox<String> cbxCoso;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBusqueda1;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblPrimeraBusqueda;
     private javax.swing.JList<String> lstCoso;
-    private javax.swing.JTextField txtFav;
-    private javax.swing.JTextField txtNick;
+    private javax.swing.JTextField txtBusqueda1;
+    private javax.swing.JTextField txtCliente;
     // End of variables declaration//GEN-END:variables
+
+  
+    public void cargarLstFav(Collection<String> cole) {
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<>();
+
+        for (String elemento : cole) {
+            //  System.out.print("Elemento de lstSeguidos"+elemento);
+            String nombre = elemento;
+            model.addElement(nombre);
+        }
+        lstCoso.setModel(model);
+    }
 }

@@ -39,9 +39,10 @@ public class DAO_Album {
     }
 
     public List<Album> findAll() {
-        return entityManager.createQuery("SELECT e FROM Album e", Album.class).getResultList();
+       List<Album> albums = entityManager.createQuery("SELECT e FROM Album e", Album.class).getResultList();
+       return albums.isEmpty() ? null : albums;
     }
-
+    
     public List<String> findAllPorGenero(String nombre_genero) {
         try {
             return entityManager.createQuery(

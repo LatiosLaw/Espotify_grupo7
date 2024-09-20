@@ -150,14 +150,12 @@ public class DAO_ListaReproduccion {
     }
 
     public Collection<String> devolverListasPorDefectoString() {
-     try {
-            return entityManager.createQuery(
-                    "SELECT l.nombre FROM ListaPorDefecto l", String.class)
-                    .getResultList();
-
-        } catch (NoResultException e) {
-            return null; //
-        }
+    
+            Collection<String> listas = 
+             entityManager.createQuery("SELECT l.nombre FROM ListaPorDefecto l", String.class).getResultList();
+               
+              return listas.isEmpty() ? null : listas;
+     
 
     }
 }

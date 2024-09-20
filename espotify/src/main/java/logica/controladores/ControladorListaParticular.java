@@ -10,6 +10,7 @@ import logica.ListaReproduccion;
 import logica.Usuario;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
+import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.tema;
 import persistencia.DAO_ListaReproduccion;
@@ -198,11 +199,20 @@ public class ControladorListaParticular implements IControladorListaParticular {
 
     }
     
-    
-    
-    
-    
     @Override
+      public DataListaReproduccion devolverInformacionListaRepro(String coso){
+          DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+          ListaReproduccion token = persistence.find(coso);
+          
+          if(token == null){
+              return null;
+          }else{
+               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombre());
+          
+               return token2;
+          }
+
+      }
     public DataListaParticular retornarlista(String nickname){
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         ListaReproduccion lista = persistence.find(nickname);

@@ -77,6 +77,7 @@ public class DAO_Usuario {
             return null; // No se encontro ningún cliente con ese nombre
         }
     }
+    
 
     public Collection<String> obtenerAlbumArt(String nick_usuario) {
         try {
@@ -99,7 +100,16 @@ public class DAO_Usuario {
             return null; // No se encontro ningún cliente con ese nombre
         }
     }
-
+    public Collection<String> obtenerListasParticularesFavCliente(String nick_usuario) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT l.nombre FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname ", String.class)
+                    .setParameter("nickname", nick_usuario)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    }
     public Collection<String> obtenerTemaFavCliente(String nick_usuario) {
         try {
             return entityManager.createQuery(
@@ -114,7 +124,7 @@ public class DAO_Usuario {
     public Collection<String> obtenerAlbumFavCliente(String nick_usuario) {
         try {
             return entityManager.createQuery(
-                    "SELECT a.nombre FROM Cliente u JOIN u.albumes_favoritos a l WHERE u.nickname = :nickname ", String.class)
+                    "SELECT a.nombre FROM Cliente u JOIN u.albumes_favoritos a WHERE u.nickname = :nickname ", String.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {

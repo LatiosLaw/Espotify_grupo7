@@ -1,8 +1,10 @@
 package logica.controladores;
 
 import java.util.Collection;
+import logica.ListaReproduccion;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
+import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 
 public interface IControladorListaParticular {
@@ -24,4 +26,6 @@ public interface IControladorListaParticular {
     Collection<String> devolverListasParticularesPublicasString(String nickname);
     
     DataListaParticular retornarlista(String nickname);
+
+   public DataListaReproduccion devolverInformacionListaRepro(String coso);
 }

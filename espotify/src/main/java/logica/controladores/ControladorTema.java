@@ -61,9 +61,21 @@ public class ControladorTema implements IControladorTema {
             return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
+           
         }
     }
-
+     @Override
+    public DataTema retornarTema2LaSecuela(String nickname) {
+        tema retorno;
+        DAO_Tema persistence = new DAO_Tema();
+        retorno = persistence.find(nickname);
+        if (retorno != null) {
+            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
+        } else {
+            return null;
+           
+        }
+    }
     @Override
     public Collection<DataTema> retornarTemasDeAlbum(String nombre_album) {
         Collection<DataTema> listaDeTemas = new ArrayList<>();

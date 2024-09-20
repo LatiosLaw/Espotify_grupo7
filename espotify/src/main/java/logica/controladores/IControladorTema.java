@@ -21,4 +21,6 @@ public interface IControladorTema {
     public void BorrarTema(String nombre_tema);
     
     public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album);
+    
+     public DataTema retornarTema2LaSecuela(String nickname);
 }

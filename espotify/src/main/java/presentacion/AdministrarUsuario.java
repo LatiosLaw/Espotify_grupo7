@@ -161,7 +161,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.repaint();
             }
             case "Eliminar Lista/Album/Tema de Fav" -> {
-                EliminarCosoFav ecf = new EliminarCosoFav();
+                EliminarCosoFav ecf = new EliminarCosoFav(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
                 ecf.setLocation(0, 0);
                 ecf.setSize(860, 471);
 
