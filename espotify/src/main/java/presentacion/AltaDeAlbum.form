@@ -47,7 +47,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblSeg" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtMin1" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="txtSeg" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="txtNomTemaAlb" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
@@ -192,7 +192,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblSeg" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtMin1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtSeg" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -449,9 +449,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMinActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtMin1">
+    <Component class="javax.swing.JTextField" name="txtSeg">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMin1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSegActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnArch">
