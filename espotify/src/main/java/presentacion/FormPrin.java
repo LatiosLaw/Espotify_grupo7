@@ -90,7 +90,7 @@ public class FormPrin extends javax.swing.JFrame {
                         .addGap(363, 363, 363)
                         .addComponent(lblCargando))
                     .addGroup(pnlPrinLayout.createSequentialGroup()
-                        .addGap(428, 428, 428)
+                        .addGap(420, 420, 420)
                         .addComponent(lblProgreso)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -320,28 +320,37 @@ public class FormPrin extends javax.swing.JFrame {
     private void cargarTemas() {
 
         controlTem.crearTemaCompleto("YMCA", 4 * 60 + 28, "web", "bit.ly/SCvpymca", 1, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T11
+        
         controlTem.crearTemaCompleto("Macho Man", 3 * 60 + 28, "mp3", "Macho Man.mp3", 2, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T12
+        
         controlTem.crearTemaCompleto("In the Navy", 3 * 60 + 13, "web", "bit.ly/SCvpinthenavy", 3, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T13
 
         controlTem.crearTemaCompleto("Personal Jesus", 4 * 60 + 56, "mp3", "Personal Jesus.mp3", 1, controlAlb.retornarInfoAlbum("Violator")); // T21
+        
         controlTem.crearTemaCompleto("Enjoy The Silence", 4 * 60 + 21, "mp3", "Enjoy The Silence.mp3", 2, controlAlb.retornarInfoAlbum("Violator")); // T22
 
         controlTem.crearTemaCompleto("Girls Just Want To Have Fun", 3 * 60 + 15, "web", "picosong.com/download/zfER", 1, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T31
+        
         controlTem.crearTemaCompleto("Time After Time", 5 * 60 + 12, "web", "picosong.com/download/zfER", 2, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T32
 
         controlTem.crearTemaCompleto("Born In The U.S.A.", 4 * 60 + 58, "web", "bit.ly/SCbsborninusa", 1, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T41
+        
         controlTem.crearTemaCompleto("Glory Days", 5 * 60 + 23, "web", "bit.ly/SCbsglorydays", 2, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T42
+        
         controlTem.crearTemaCompleto("Dancing In The Park", 3 * 60 + 58, "mp3", "Dancing In The Park.mp3", 3, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T43
 
         controlTem.crearTemaCompleto("It’s Not Unusual", 2 * 60 + 0, "mp3", "It’s Not Unusual.mp3", 1, controlAlb.retornarInfoAlbum("It’s Not Unusual")); // T51
+        
         controlTem.crearTemaCompleto("Adagio De Mi País", 4 * 60 + 50, "web", "bit.ly/SCtnadagiopais", 1, controlAlb.retornarInfoAlbum("Agua Y Sal")); // T61
 
         controlTem.crearTemaCompleto("El Duelo", 5 * 60 + 23, "mp3", "El Duelo.mp3", 1, controlAlb.retornarInfoAlbum("MTV Unplugged")); // T71
+        
         controlTem.crearTemaCompleto("Mentira", 4 * 60 + 48, "mp3", "Mentira.mp3", 2, controlAlb.retornarInfoAlbum("MTV Unplugged")); // T72
 
         controlTem.crearTemaCompleto("Acto 2, Número 10, Escena (Moderato)",
                 2 * 60 + 40, "web", "bit.ly/SCptswanlake",
                 1, controlAlb.retornarInfoAlbum("El Lago De Los Cisnes")); // T81
+        
         controlTem.crearTemaCompleto("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)",
                 21 * 60 + 58, "web", "bit.ly/SCptpiano",
                 1, controlAlb.retornarInfoAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23")); // T91
@@ -587,7 +596,7 @@ public class FormPrin extends javax.swing.JFrame {
         ////
 
         ////
-        controlCli.agregarTema(new DataCliente("cbochinche"), new DataTema("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
+        controlCli.agregarTema(new DataCliente("cbochinche"), new DataTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)"));
 
         controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Noche De La Nostalgia"));
         controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Rock En Español"));

@@ -22,6 +22,7 @@ import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.errorBundle;
 import persistencia.DAO_ListaReproduccion;
+import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
 
 public class ControladorCliente implements IControladorCliente {
@@ -145,11 +146,12 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
         DAO_Usuario persistence = new DAO_Usuario();
+        DAO_Tema persistence2 = new DAO_Tema();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             if (cli instanceof Cliente cliente) {
-                tema tem = new tema(nicktem.getNickname(), nicktem.getDuracion());
-                cliente.temaFav(tem);
+                tema t = persistence2.find(nicktem.getNickname());
+                cliente.temaFav(t);
                 persistence.update(cli);
             }
         } else {
