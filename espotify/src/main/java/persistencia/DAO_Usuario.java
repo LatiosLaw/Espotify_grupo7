@@ -15,6 +15,7 @@ public class DAO_Usuario {
     private EntityManager entityManager;
 
     public DAO_Usuario() {
+        DatabaseInitializer.createDatabaseIfNotExists();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

@@ -13,6 +13,7 @@ public class DAO_Tema {
     private EntityManager entityManager;
 
     public DAO_Tema() {
+        DatabaseInitializer.createDatabaseIfNotExists();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

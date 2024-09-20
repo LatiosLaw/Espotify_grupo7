@@ -13,6 +13,7 @@ public class DAO_Genero {
     private EntityManager entityManager;
 
     public DAO_Genero() {
+        DatabaseInitializer.createDatabaseIfNotExists();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

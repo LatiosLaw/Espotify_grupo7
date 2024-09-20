@@ -11,11 +11,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>presentacion.EspotifyMain</exec.mainClass>
     </properties>
     <dependencies>
-   
-        
         <!-- Dependencia para la API de JPA -->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -29,22 +26,59 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.29</version> <!-- Verifica si hay una versión más reciente -->
         </dependency>
-        
+
         <dependency>
-    <groupId>com.mpatric</groupId>
-    <artifactId>mp3agic</artifactId>
-    <version>0.9.1</version>
-</dependency>
-        
+            <groupId>com.mpatric</groupId>
+            <artifactId>mp3agic</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>2.7.13</version>
         </dependency>
+
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE220</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin para crear el JAR con la clase principal -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Especifica la clase principal aquí -->
+                            <mainClass>presentacion.EspotifyMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para crear un JAR "fat" que incluya todas las dependencias -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>

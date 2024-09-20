@@ -17,6 +17,7 @@ public class DAO_ListaReproduccion {
     private EntityManager entityManager;
 
     public DAO_ListaReproduccion() {
+        DatabaseInitializer.createDatabaseIfNotExists();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }
