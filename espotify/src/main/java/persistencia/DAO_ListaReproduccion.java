@@ -75,12 +75,13 @@ public class DAO_ListaReproduccion {
                     .setParameter("nombreLista", nombreLista)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ninguna lista con esos parámetros
+            return null;
         } catch (Exception e) {
-            e.printStackTrace(); // Para depuración
+            e.printStackTrace();
             return null;
         }
     }
+
     public ListaPorDefecto findListaPorNombre(String nombreLista) {
         try {
             return entityManager.createQuery(
@@ -89,13 +90,29 @@ public class DAO_ListaReproduccion {
                     .setParameter("nombreLista", nombreLista)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ninguna lista con esos parámetros
+            return null;
         } catch (Exception e) {
-            e.printStackTrace(); // Para depuración
+            e.printStackTrace();
             return null;
         }
     }
-       public Collection<ListaPorDefecto> findListasPorGeneros(String generoNombre) {
+
+    public ListaReproduccion findListaReproduccionPorNombre(String nombreLista) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaReproduccion u WHERE u.nombre = :nombreLista",
+                    ListaReproduccion.class)
+                    .setParameter("nombreLista", nombreLista)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Collection<ListaPorDefecto> findListasPorGeneros(String generoNombre) {
         try {
             return entityManager.createQuery(
                     "SELECT u FROM ListaPorDefecto u WHERE u.genero.nombre = :generoNombre",
@@ -109,7 +126,6 @@ public class DAO_ListaReproduccion {
             return null;
         }
     }
-
 
     public void update(ListaReproduccion entity) {
         entityManager.getTransaction().begin();
@@ -145,12 +161,11 @@ public class DAO_ListaReproduccion {
         } catch (NoResultException e) {
             return null; // No se encontro ningún cliente con ese nombre
         }
-    
-    
+
     }
 
     public Collection<String> devolverListasPorDefectoString() {
-     try {
+        try {
             return entityManager.createQuery(
                     "SELECT l.nombre FROM ListaPorDefecto l", String.class)
                     .getResultList();

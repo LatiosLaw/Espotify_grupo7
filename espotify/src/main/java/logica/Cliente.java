@@ -62,11 +62,13 @@ public class Cliente extends Usuario {
     }
     
     public void listasFav(ListaReproduccion lista) {
+
         if(lista instanceof ListaParticular listaParticular){
+            System.out.println("La visibilidad de la lista: " + lista.getNombre() + " es: " + listaParticular.getVisibilidad());
             if(listaParticular.getVisibilidad()==true){
                 this.listas_favoritas.add(lista);
             }else{
-                 System.out.println("Esta lista particular es privada.");
+                System.out.println("Esta lista particular es privada.");
             }
         }else{
             this.listas_favoritas.add(lista);

@@ -21,6 +21,7 @@ import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.errorBundle;
+import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Usuario;
 
 public class ControladorCliente implements IControladorCliente {
@@ -160,12 +161,18 @@ public class ControladorCliente implements IControladorCliente {
     public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+
         if (cli != null) {
-            ListaReproduccion lis;
-            if (nomlista instanceof DataListaParticular) {
-                lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
-            } else {
-                lis = new ListaPorDefecto(nomlista.getNombre());
+            DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
+
+            if (lis == null) {
+                if (nomlista instanceof DataListaParticular) {
+                    lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
+                } else {
+                    lis = new ListaPorDefecto(nomlista.getNombre());
+                }
+                listaPersistence.save(lis);
             }
 
             if (cli instanceof Cliente cliente) {

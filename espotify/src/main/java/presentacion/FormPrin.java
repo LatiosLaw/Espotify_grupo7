@@ -8,6 +8,7 @@ import logica.controladores.*;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
+import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
 import logica.factory.Fabrica;
@@ -529,13 +530,44 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.agregarLista(new DataCliente("el_padrino"), new DataListaPorDefecto("Música Clásica"));
         
         controlCli.agregarTema(new DataCliente("el_padrino"), new DataTema("El Duelo"));
-        
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Violator"));
+        
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("El Lago De Los Cisnes"));
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
         ////
         
+        ////
         controlCli.agregarLista(new DataCliente("scarlettO"), new DataListaPorDefecto("Música Clásica"));
+        ////
+        
+        ////
+        controlCli.agregarTema(new DataCliente("ppArgento"), new DataTema("Adagio De Mi País"));
+        
+        controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Noche De La Nostalgia"));
+        controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Rock En Español"));
+        ////
+        
+        ////
+        controlCli.agregarLista(new DataCliente("Heisenberg"), new DataListaParticular("Música Inspiradora"));
+        ////
+        
+        ////
+        controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
+        controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("El Lago De Los Cisnes"));
+        ////
+        
+        ////
+        controlCli.agregarTema(new DataCliente("cbochinche"), new DataTema("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
+        
+        controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Noche De La Nostalgia"));
+        controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Rock En Español"));
+        
+        controlCli.agregarAlbum(new DataCliente("cbochinche"), new DataAlbum("Hay Amores Que Matan"));
+        ////
+        
+        ////
+        controlCli.agregarTema(new DataCliente("Eleven11"), new DataTema("No Quiero Estudiar"));
+        ////
         
         System.out.println("FAVORITOS CARGADOS");
     }
