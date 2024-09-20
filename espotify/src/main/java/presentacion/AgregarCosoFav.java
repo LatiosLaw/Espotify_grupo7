@@ -242,6 +242,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLPMActionPerformed
+        limpiarListas();
         if("Listas Particulares".equals(String.valueOf(cbxLPM.getSelectedItem()))){
              lblUsuarioDeLasListas.setVisible(true);
             txtUsuarioDeLasListas.setVisible(true);   
@@ -265,7 +266,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
 
     private void cbxCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCosoActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
-
+        limpiarListas();
         if("OPT".equals(token)){
             //this.limpiarCampos();
             
@@ -460,6 +461,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                     }else{
                           controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPar);
                           JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
+                          this.limpiarCampos();
                     }
                 }
                 }
@@ -474,7 +476,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                       controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
             
                  JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
-                
+                this.limpiarCampos();
                 }
                 
                 
@@ -496,6 +498,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                 }else{
                      controlCli.agregarAlbum(cli, album);
                       JOptionPane.showMessageDialog(null, "Se agrego Album a la lista de favoritos");
+                      this.limpiarCampos();
                 }   
             } 
         }
@@ -513,6 +516,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             }else{
                 this.controlCli.agregarTema(cli,tema);   
                 JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
+                this.limpiarCampos();
             }
 
     }//GEN-LAST:event_btnFav2ActionPerformed
@@ -567,6 +571,18 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      this.txtBusqueda1.setText("");
+      this.txtBusqueda2.setText("");
+      this.txtCliente.setText("");
+      this.txtCliente2.setText("");
+      this.txtUsuarioDeLasListas.setText("");
+      limpiarListas();
     }
+    private void limpiarListas() {
+      this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
+      this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
+    }
+    
+    
+    
 }
