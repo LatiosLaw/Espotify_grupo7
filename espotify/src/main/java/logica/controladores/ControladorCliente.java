@@ -21,6 +21,7 @@ import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.errorBundle;
+import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
@@ -204,34 +205,68 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void eliminarTema(DataCliente nickcli, DataTema nicktem) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        tema tem = new tema(nicktem.getNickname(), nicktem.getDuracion());
-        cli.quitarTemaFav(tem);
-        persistence.update(cli);
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+
+        if (cli != null) {
+            DAO_Tema temaPersistence = new DAO_Tema();
+            tema tem = temaPersistence.find(nicktem.getNickname());
+
+            if (tem != null) {
+                if (cli instanceof Cliente cliente) {
+                    cliente.quitarTemaFav(tem);
+                    persistence.update(cliente);
+                }
+            } else {
+                System.out.println("El tema no existe.");
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
 
     @Override
     public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        if (nomlista instanceof DataListaParticular) {
-            ListaReproduccion lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
-            cli.quitarListasFav(lis);
-        } else if (nomlista instanceof DataListaPorDefecto) {
-            ListaReproduccion lis = new ListaPorDefecto(nomlista.getNombre());
-            cli.quitarListasFav(lis);
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+
+        if (cli != null) {
+            DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
+
+            if (lis != null) {
+                if (cli instanceof Cliente cliente) {
+                    cliente.quitarListasFav(lis);
+                }
+                persistence.update(cli);
+            } else {
+                System.out.println("La lista no existe.");
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
         }
-        persistence.update(cli);
     }
 
     @Override
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        Album alb = new Album(nomalbum.getNombre(), nomalbum.getAnioCreacion());
-        cli.quitarAlbumFav(alb);
-        persistence.update(cli);
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+
+        if (cli != null) {
+            DAO_Album albumPersistence = new DAO_Album();
+            Album alb = albumPersistence.findAlbumByName(nomalbum.getNombre());
+
+            if (alb != null) {
+                if (cli instanceof Cliente cliente) {
+                    cliente.quitarAlbumFav(alb);
+                    persistence.update(cliente);
+                }
+            } else {
+                System.out.println("El álbum no existe.");
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
 
     @Override
