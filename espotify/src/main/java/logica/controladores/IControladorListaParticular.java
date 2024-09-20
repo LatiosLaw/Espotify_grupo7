@@ -28,4 +28,6 @@ public interface IControladorListaParticular {
     DataListaParticular retornarlista(String nickname);
 
    public DataListaReproduccion devolverInformacionListaRepro(String coso);
+    
+    void actualizarLista(DataListaParticular lista);
 }

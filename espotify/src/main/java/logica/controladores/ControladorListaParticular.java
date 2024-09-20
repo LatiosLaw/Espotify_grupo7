@@ -3,9 +3,9 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
 import logica.Cliente;
 import logica.ListaParticular;
+import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.Usuario;
 import logica.dt.DataCliente;
@@ -14,6 +14,7 @@ import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.tema;
 import persistencia.DAO_ListaReproduccion;
+import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
 
 public class ControladorListaParticular implements IControladorListaParticular {
@@ -227,5 +228,18 @@ public class ControladorListaParticular implements IControladorListaParticular {
         }
         System.out.println("Error al retornar Lista.");
         return null;
+    }
+    
+    @Override
+    public void actualizarLista(DataListaParticular lista){
+        DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
+        DAO_Tema dao_t = new DAO_Tema();
+        ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreadorNickname().getNickname(), lista.getNombre());
+        Iterator<DataTema> iterator = lista.getTemas().iterator();
+        while (iterator.hasNext()) {
+            DataTema tema = iterator.next();
+            lista_actualizable.agregarTema(dao_t.find(tema.getNickname()));
+        }
+        dao_l.update(lista_actualizable);
     }
 }

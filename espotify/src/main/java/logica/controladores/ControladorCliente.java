@@ -21,6 +21,8 @@ import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.errorBundle;
+import persistencia.DAO_ListaReproduccion;
+import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
 
 public class ControladorCliente implements IControladorCliente {
@@ -143,34 +145,61 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void agregarTema(DataCliente nickcli, DataTema nicktem) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        tema tem = new tema(nicktem.getNickname(), nicktem.getDuracion());
-        cli.temaFav(tem);
-        persistence.update(cli);
+        DAO_Tema persistence2 = new DAO_Tema();
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+        if (cli != null) {
+            if (cli instanceof Cliente cliente) {
+                tema t = persistence2.find(nicktem.getNickname());
+                cliente.temaFav(t);
+                persistence.update(cli);
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
 
     @Override
     public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        if (nomlista instanceof DataListaParticular) {
-            ListaReproduccion lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
-            cli.listasFav(lis);
-        } else if (nomlista instanceof DataListaPorDefecto) {
-            ListaReproduccion lis = new ListaPorDefecto(nomlista.getNombre());
-            cli.listasFav(lis);
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+
+        if (cli != null) {
+            DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
+
+            if (lis == null) {
+                if (nomlista instanceof DataListaParticular) {
+                    lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
+                } else {
+                    lis = new ListaPorDefecto(nomlista.getNombre());
+                }
+                listaPersistence.save(lis);
+            }
+
+            if (cli instanceof Cliente cliente) {
+                cliente.listasFav(lis);
+                persistence.update(cli);
+            }
+
+        } else {
+            System.out.println("Cliente no encontrado.");
         }
-        persistence.update(cli);
     }
 
     @Override
     public void agregarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
-        Cliente cli = new Cliente(nickcli.getNickname(), nickcli.getNombre(), nickcli.getApellido(), nickcli.getCorreo(), nickcli.getFoto(), nickcli.getFechaNac());
         DAO_Usuario persistence = new DAO_Usuario();
-        Album alb = new Album(nomalbum.getNombre(), nomalbum.getAnioCreacion());
-        cli.albumFav(alb);
-        persistence.update(cli);
+        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
+        if (cli != null) {
+            if (cli instanceof Cliente cliente) {
+                Album alb = new Album(nomalbum.getNombre(), nomalbum.getAnioCreacion());
+                cliente.albumFav(alb);
+                persistence.update(cli);
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
 
     @Override
@@ -236,7 +265,6 @@ public class ControladorCliente implements IControladorCliente {
                 cole2.add(usr.getNickname() + "/Artista");
             }
         }
-
         return cole2;
     }
 
@@ -290,7 +318,6 @@ public class ControladorCliente implements IControladorCliente {
             lista.add(usr.getNickname());
         }
         return lista;
-
     }
 
     @Override
@@ -307,7 +334,6 @@ public class ControladorCliente implements IControladorCliente {
                 break;
             }
         }
-
         return token;
     }
 }

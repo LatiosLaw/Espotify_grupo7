@@ -20,7 +20,7 @@ public class Album implements Serializable {
     @ManyToOne
     private Artista creador;
     
-    @ManyToMany(mappedBy = "albumes_del_genero", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "albumes_del_genero", cascade = CascadeType.MERGE)
     private Collection<Genero> generos = new ArrayList<Genero>();
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
@@ -86,6 +86,10 @@ public class Album implements Serializable {
     public void agregarGenero(Genero g) {
         g.agregarAlbumDelGenero(this);
         this.generos.add(g);
+    }
+    
+    public Collection<Genero> getGeneros(){
+        return this.generos;
     }
 
     @Override

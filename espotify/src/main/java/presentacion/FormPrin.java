@@ -1,15 +1,16 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 import logica.controladores.*;
+import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
+import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
+import logica.dt.DataTema;
 import logica.factory.Fabrica;
 
 public class FormPrin extends javax.swing.JFrame {
@@ -21,7 +22,6 @@ public class FormPrin extends javax.swing.JFrame {
     private final IControladorTema controlTem;
     private final IControladorListaParticular controlListPar;
     private final IControladorListaPorDefecto controlListPD;
-    
 
     public FormPrin() {
 
@@ -38,6 +38,7 @@ public class FormPrin extends javax.swing.JFrame {
         initComponents();
         lblCargando.setVisible(false);
         jProgressBar1.setVisible(false);
+        lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
     }
 
@@ -53,6 +54,7 @@ public class FormPrin extends javax.swing.JFrame {
         pnlPrin = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         lblCargando = new javax.swing.JLabel();
+        lblProgreso = new javax.swing.JLabel();
         btnAdLi = new javax.swing.JButton();
         btnAdAl = new javax.swing.JButton();
         btnAdUs = new javax.swing.JButton();
@@ -71,17 +73,25 @@ public class FormPrin extends javax.swing.JFrame {
         lblCargando.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         lblCargando.setText("Cargando Datos");
 
+        lblProgreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblProgreso.setText("0%");
+
         javax.swing.GroupLayout pnlPrinLayout = new javax.swing.GroupLayout(pnlPrin);
         pnlPrin.setLayout(pnlPrinLayout);
         pnlPrinLayout.setHorizontalGroup(
             pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrinLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrinLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(307, 307, 307))
+                .addGap(306, 306, 306))
             .addGroup(pnlPrinLayout.createSequentialGroup()
-                .addGap(363, 363, 363)
-                .addComponent(lblCargando)
+                .addGroup(pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPrinLayout.createSequentialGroup()
+                        .addGap(363, 363, 363)
+                        .addComponent(lblCargando))
+                    .addGroup(pnlPrinLayout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addComponent(lblProgreso)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrinLayout.setVerticalGroup(
@@ -89,9 +99,11 @@ public class FormPrin extends javax.swing.JFrame {
             .addGroup(pnlPrinLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(lblCargando)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(lblProgreso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
 
         btnAdLi.setText("Administrar Lista");
@@ -194,32 +206,52 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
-         new Thread(() -> {
-            try {
-                lblCargando.setVisible(true);
-                jProgressBar1.setVisible(true);
-                cargarClientes();
-                jProgressBar1.setValue(10); // Actualiza a 10%
-                
-                cargarArtistas();
-                jProgressBar1.setValue(20); // Actualiza a 20%
-                
-                cargarGeneros();
-                jProgressBar1.setValue(30); // Actualiza a 30%
-                
-                cargarTemas();
-                jProgressBar1.setValue(40); // Actualiza a 40%
-                
-                cargarSeguimientos();
-                jProgressBar1.setValue(60); // Actualiza a 60%
-                
-                cargarListas();
-                jProgressBar1.setValue(80); // Actualiza a 80%
+        lblCargando.setVisible(true);
+        jProgressBar1.setVisible(true);
+        lblProgreso.setVisible(true);
 
-                jProgressBar1.setValue(100); // Completa la barra
+        new Thread(() -> {
+            try {
+
+                cargarClientes();
+                jProgressBar1.setValue(8);
+                lblProgreso.setText("8%");
+
+                cargarArtistas();
+                jProgressBar1.setValue(19);
+                lblProgreso.setText("19%");
+
+                cargarGeneros();
+                jProgressBar1.setValue(27);
+                lblProgreso.setText("27%");
+
+                cargarAlbumes();
+                jProgressBar1.setValue(35);
+                lblProgreso.setText("35%");
+
+                cargarTemas();
+                jProgressBar1.setValue(44);
+                lblProgreso.setText("44%");
+
+                cargarSeguimientos();
+                jProgressBar1.setValue(62);
+                lblProgreso.setText("67%");
+
+                cargarListas();
+                jProgressBar1.setValue(81);
+                lblProgreso.setText("81%");
+
+                cargarFavoritos();
+                lblProgreso.setText("100%");
+                jProgressBar1.setValue(100);
+
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
+
                 lblCargando.setVisible(false);
                 jProgressBar1.setVisible(false);
+                lblProgreso.setVisible(false);
+                btnCarDat.setEnabled(false);
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -255,10 +287,31 @@ public class FormPrin extends javax.swing.JFrame {
         controlListPD.crearLista("Rock En Español", new DataGenero("Rock Latino"), null); // LD2
         controlListPD.crearLista("Música Clásica", new DataGenero("Clásica"), "bit.ly/musicaCla"); // LD3
 
-        DataListaPorDefecto lista = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
-        lista.agregarTema(controlTem.retornarTema("YMCA"));
-        lista.agregarTema(controlTem.retornarTema("Macho Man"));
-        controlListPD.actualizarLista(lista);
+        // Agregar temas a LD1
+        DataListaPorDefecto listaLD1 = controlListPD.devolverInformacion("Noche De La Nostalgia", "Pop Clásico");
+        listaLD1.agregarTema(controlTem.retornarTema("YMCA")); // VPL-T11
+        listaLD1.agregarTema(controlTem.retornarTema("Macho Man")); // VPL-T12
+        listaLD1.agregarTema(controlTem.retornarTema("In the Navy")); // VPL-T13
+        listaLD1.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun")); // CLU-T31
+        listaLD1.agregarTema(controlTem.retornarTema("Time After Time")); // CLU-T32
+        listaLD1.agregarTema(controlTem.retornarTema("Born In The U.S.A.")); // USA-T41
+        listaLD1.agregarTema(controlTem.retornarTema("Glory Days")); // USA-T42
+        listaLD1.agregarTema(controlTem.retornarTema("Dancing In The Park")); // USA-T43
+        listaLD1.agregarTema(controlTem.retornarTema("It’s Not Unusual")); // INU-T51
+        controlListPD.actualizarLista(listaLD1);
+
+        // Agregar temas a LD2
+        DataListaPorDefecto listaLD2 = controlListPD.devolverInformacion("Rock En Español", "Rock Latino");
+        listaLD2.agregarTema(controlTem.retornarTema("Adagio De Mi País")); // AYS-T61
+        listaLD2.agregarTema(controlTem.retornarTema("El Duelo")); // LLU-T71
+        listaLD2.agregarTema(controlTem.retornarTema("Mentira")); // LLU-T72
+        controlListPD.actualizarLista(listaLD2);
+
+        // Agregar temas a LD3
+        DataListaPorDefecto listaLD3 = controlListPD.devolverInformacion("Música Clásica", "Clásica");
+        listaLD3.agregarTema(controlTem.retornarTema("Acto 2, Número 10, Escena (Moderato)")); // LDC-T81
+        listaLD3.agregarTema(controlTem.retornarTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)")); // CPP-T91
+        controlListPD.actualizarLista(listaLD3);
 
         try {
             DataCliente VC = controlCli.consultarPerfilCliente("el_padrino");
@@ -278,6 +331,54 @@ public class FormPrin extends javax.swing.JFrame {
 
             controlListPar.crearLista("Mis Favoritas", CB);
 
+            // LP1
+            DataListaParticular listaLP1 = controlListPar.devolverInformacion("Música Inspiradora", "el_padrino");
+            listaLP1.agregarTema(controlTem.retornarTema("El Duelo")); // LDC-T81
+            listaLP1.agregarTema(controlTem.retornarTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)")); // CPP-T91
+            listaLP1.agregarTema(controlTem.retornarTema("Personal Jesus")); // DMV-T21
+            controlListPar.actualizarLista(listaLP1);
+
+            // LP2
+            DataListaParticular listaLP2 = controlListPar.devolverInformacion("De Todo Un Poco", "scarlettO");
+            listaLP2.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun")); // CLU-T31
+            listaLP2.agregarTema(controlTem.retornarTema("Time After Time")); // CLU-T32
+            listaLP2.agregarTema(controlTem.retornarTema("It’s Not Unusual")); // INU-T51
+            listaLP2.agregarTema(controlTem.retornarTema("El Duelo")); // LDC-T81
+            controlListPar.actualizarLista(listaLP2);
+
+            // LP3
+            DataListaParticular listaLP3 = controlListPar.devolverInformacion("Para Cocinaro", "Heisenberg");
+            listaLP3.agregarTema(controlTem.retornarTema("Personal Jesus")); // DMV-T21
+            listaLP3.agregarTema(controlTem.retornarTema("Enjoy The Silence")); // DMV-T22
+            listaLP3.agregarTema(controlTem.retornarTema("Born In The U.S.A.")); // USA-T41
+            listaLP3.agregarTema(controlTem.retornarTema("Glory Days")); // USA-T42
+            controlListPar.actualizarLista(listaLP3);
+
+            // LP4
+            DataListaParticular listaLP4 = controlListPar.devolverInformacion("Para Las Chicas", "lachiqui");
+            listaLP4.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun")); // CLU-T31
+            listaLP4.agregarTema(controlTem.retornarTema("It’s Not Unusual")); // INU-T51
+            listaLP4.agregarTema(controlTem.retornarTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)")); // CPP-T91
+            listaLP4.agregarTema(controlTem.retornarTema("No Quiero Estudiar")); // PAM-T101
+            listaLP4.agregarTema(controlTem.retornarTema("Por Ese Hombre")); // LOC-T121
+            controlListPar.actualizarLista(listaLP4);
+
+            // LP5
+            DataListaParticular listaLP5 = controlListPar.devolverInformacion("Fiesteras", "cbochinche");
+            listaLP5.agregarTema(controlTem.retornarTema("YMCA")); // VPL-T11
+            listaLP5.agregarTema(controlTem.retornarTema("Macho Man")); // VPL-T12
+            listaLP5.agregarTema(controlTem.retornarTema("In the Navy")); // VPL-T13
+            listaLP5.agregarTema(controlTem.retornarTema("Glory Days")); // USA-T42
+            listaLP5.agregarTema(controlTem.retornarTema("Violeta")); // VIO-T131
+            controlListPar.actualizarLista(listaLP5);
+
+            // LP6
+            DataListaParticular listaLP6 = controlListPar.devolverInformacion("Mis Favoritas", "cbochinche");
+            listaLP6.agregarTema(controlTem.retornarTema("Adagio De Mi País")); // AYS-T61
+            listaLP6.agregarTema(controlTem.retornarTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)")); // CPP-T91
+            listaLP6.agregarTema(controlTem.retornarTema("Por Ese Hombre")); // AMA-T111
+            controlListPar.actualizarLista(listaLP6);
+
             System.out.println("LISTAS CARGADAS");
         } catch (Exception e) {
 
@@ -287,10 +388,71 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void cargarTemas() {
 
-        controlTem.crearTemaDefault("YMCA", 428, "mp3", "identificador archivo mp3");
-        controlTem.crearTemaDefault("Macho Man", 328, "web", null);
-        controlTem.crearTemaDefault("In the Navy", 313, "mp3", "identificador archivo mp3");
-        System.out.println("LISTAS CARGADAS");
+        controlTem.crearTemaCompleto("YMCA", 4 * 60 + 28, "web", "bit.ly/SCvpymca", 1, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T11
+
+        controlTem.crearTemaCompleto("Macho Man", 3 * 60 + 28, "mp3", "Macho Man.mp3", 2, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T12
+
+        controlTem.crearTemaCompleto("In the Navy", 3 * 60 + 13, "web", "bit.ly/SCvpinthenavy", 3, controlAlb.retornarInfoAlbum("Village People Live and Sleazy")); // T13
+
+        controlTem.crearTemaCompleto("Personal Jesus", 4 * 60 + 56, "mp3", "Personal Jesus.mp3", 1, controlAlb.retornarInfoAlbum("Violator")); // T21
+
+        controlTem.crearTemaCompleto("Enjoy The Silence", 4 * 60 + 21, "mp3", "Enjoy The Silence.mp3", 2, controlAlb.retornarInfoAlbum("Violator")); // T22
+
+        controlTem.crearTemaCompleto("Girls Just Want To Have Fun", 3 * 60 + 15, "web", "picosong.com/download/zfER", 1, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T31
+
+        controlTem.crearTemaCompleto("Time After Time", 5 * 60 + 12, "web", "picosong.com/download/zfER", 2, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T32
+
+        controlTem.crearTemaCompleto("Born In The U.S.A.", 4 * 60 + 58, "web", "bit.ly/SCbsborninusa", 1, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T41
+
+        controlTem.crearTemaCompleto("Glory Days", 5 * 60 + 23, "web", "bit.ly/SCbsglorydays", 2, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T42
+
+        controlTem.crearTemaCompleto("Dancing In The Park", 3 * 60 + 58, "mp3", "Dancing In The Park.mp3", 3, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T43
+
+        controlTem.crearTemaCompleto("It’s Not Unusual", 2 * 60 + 0, "mp3", "It’s Not Unusual.mp3", 1, controlAlb.retornarInfoAlbum("It’s Not Unusual")); // T51
+
+        controlTem.crearTemaCompleto("Adagio De Mi País", 4 * 60 + 50, "web", "bit.ly/SCtnadagiopais", 1, controlAlb.retornarInfoAlbum("Agua Y Sal")); // T61
+
+        controlTem.crearTemaCompleto("El Duelo", 5 * 60 + 23, "mp3", "El Duelo.mp3", 1, controlAlb.retornarInfoAlbum("MTV Unplugged")); // T71
+
+        controlTem.crearTemaCompleto("Mentira", 4 * 60 + 48, "mp3", "Mentira.mp3", 2, controlAlb.retornarInfoAlbum("MTV Unplugged")); // T72
+
+        controlTem.crearTemaCompleto("Acto 2, Número 10, Escena (Moderato)",
+                2 * 60 + 40, "web", "bit.ly/SCptswanlake",
+                1, controlAlb.retornarInfoAlbum("El Lago De Los Cisnes")); // T81
+
+        controlTem.crearTemaCompleto("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)",
+                21 * 60 + 58, "web", "bit.ly/SCptpiano",
+                1, controlAlb.retornarInfoAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23")); // T91
+
+        controlTem.crearTemaCompleto("No Quiero Estudiar",
+                2 * 60 + 12,
+                "mp3",
+                "No Quiero Estudiar.mp3",
+                1,
+                controlAlb.retornarInfoAlbum("Primer Amor")); // T101
+
+        controlTem.crearTemaCompleto("Por Ese Hombre",
+                4 * 60 + 45,
+                "mp3",
+                "Por Ese Hombre.mp3",
+                1,
+                controlAlb.retornarInfoAlbum("Hay Amores Que Matan")); // T111
+
+        controlTem.crearTemaCompleto("Por Ese Hombre",
+                5 * 60 + 13,
+                "web",
+                "bit.ly/SCdyporesehombre",
+                1,
+                controlAlb.retornarInfoAlbum("Un Loco Como Yo")); // T121
+
+        controlTem.crearTemaCompleto("Violeta",
+                1 * 60 + 56,
+                "web",
+                "bit.ly/SCvioleta",
+                1,
+                controlAlb.retornarInfoAlbum("20 Grandes Éxitos")); // T131
+
+        System.out.println("TEMAS CARGADOS");
     }
 
     private void cargarSeguimientos() {
@@ -469,6 +631,162 @@ public class FormPrin extends javax.swing.JFrame {
         //---------//
         System.out.println("ARTISTAS CARGADOS");
     }
+
+    private void cargarFavoritos() {
+        ////
+        controlCli.agregarLista(new DataCliente("el_padrino"), new DataListaPorDefecto("Noche De La Nostalgia"));
+        controlCli.agregarLista(new DataCliente("el_padrino"), new DataListaPorDefecto("Música Clásica"));
+
+        controlCli.agregarTema(new DataCliente("el_padrino"), new DataTema("El Duelo"));
+        controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Violator"));
+
+        controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("El Lago De Los Cisnes"));
+        controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
+        ////
+
+        ////
+        controlCli.agregarLista(new DataCliente("scarlettO"), new DataListaPorDefecto("Música Clásica"));
+        ////
+
+        ////
+        controlCli.agregarTema(new DataCliente("ppArgento"), new DataTema("Adagio De Mi País"));
+
+        controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Noche De La Nostalgia"));
+        controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Rock En Español"));
+        ////
+
+        ////
+        controlCli.agregarLista(new DataCliente("Heisenberg"), new DataListaParticular("Música Inspiradora"));
+        ////
+
+        ////
+        controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
+        controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("El Lago De Los Cisnes"));
+        ////
+
+        ////
+        controlCli.agregarTema(new DataCliente("cbochinche"), new DataTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)"));
+
+        controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Noche De La Nostalgia"));
+        controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Rock En Español"));
+
+        controlCli.agregarAlbum(new DataCliente("cbochinche"), new DataAlbum("Hay Amores Que Matan"));
+        ////
+
+        ////
+        controlCli.agregarTema(new DataCliente("Eleven11"), new DataTema("No Quiero Estudiar"));
+        ////
+
+        System.out.println("FAVORITOS CARGADOS");
+    }
+
+    private void cargarAlbumes() {
+        Collection<DataTema> temas = new ArrayList<>();
+        Collection<DataGenero> genVPL = new ArrayList<>();
+        Collection<DataGenero> genDMV = new ArrayList<>();
+        Collection<DataGenero> genCLU = new ArrayList<>();
+        Collection<DataGenero> genUSA = new ArrayList<>();
+        Collection<DataGenero> genINU = new ArrayList<>();
+        Collection<DataGenero> genAYS = new ArrayList<>();
+        Collection<DataGenero> genLLU = new ArrayList<>();
+        Collection<DataGenero> genLDC = new ArrayList<>();
+        Collection<DataGenero> genCPP = new ArrayList<>();
+        Collection<DataGenero> genPAM = new ArrayList<>();
+        Collection<DataGenero> genAMA = new ArrayList<>();
+        Collection<DataGenero> genLOC = new ArrayList<>();
+        Collection<DataGenero> genVIO = new ArrayList<>();
+
+        DataGenero POP = new DataGenero("Pop");
+        DataGenero EPO = new DataGenero("Electropop");
+        DataGenero DPO = new DataGenero("Dance-pop");
+        DataGenero PCL = new DataGenero("Pop Clásico");
+
+        DataGenero ROK = new DataGenero("Rock");
+        DataGenero RCL = new DataGenero("Rock Clásico");
+        DataGenero RKL = new DataGenero("Rock Latino");
+        DataGenero RAR = new DataGenero("Rock & Roll");
+
+        DataGenero CLA = new DataGenero("Clásica");
+        DataGenero DIS = new DataGenero("Disco");
+        DataGenero BAL = new DataGenero("Balada");
+        DataGenero CUM = new DataGenero("Cumbia");
+
+        controlAlb.agregarAlbum("vpeople", "Village People Live and Sleazy", null, 1980, temas); //VPL
+        DataAlbum VPL = controlAlb.retornarInfoAlbum("Village People Live and Sleazy");
+        genVPL.add(DIS);
+        genVPL.add(DPO);
+        genVPL.add(PCL);
+        controlAlb.actualizarAlbum(VPL, genVPL);
+
+        controlAlb.agregarAlbum("dmode", "Violator", null, 1990, temas); //DMV
+        DataAlbum DMV = controlAlb.retornarInfoAlbum("Violator");
+        genDMV.add(EPO);
+        controlAlb.actualizarAlbum(DMV, genDMV);
+
+        controlAlb.agregarAlbum("clauper", "She’s So Unusual", "bit.ly/shesunusual", 1983, temas); //CLU
+        DataAlbum CLU = controlAlb.retornarInfoAlbum("She’s So Unusual");
+        genCLU.add(PCL);
+        genCLU.add(DPO);
+        controlAlb.actualizarAlbum(CLU, genCLU);
+
+        controlAlb.agregarAlbum("bruceTheBoss", "Born In The U.S.A.", null, 1984, temas); //USA
+        DataAlbum USA = controlAlb.retornarInfoAlbum("Born In The U.S.A.");
+        genUSA.add(RCL);
+        genUSA.add(RAR);
+        genUSA.add(PCL);
+        controlAlb.actualizarAlbum(USA, genUSA);
+
+        controlAlb.agregarAlbum("tigerOfWales", "It’s Not Unusual", "bit.ly/itsNotUnusual", 1965, temas); //INU
+        DataAlbum INU = controlAlb.retornarInfoAlbum("It’s Not Unusual");
+        genINU.add(RCL);
+        genINU.add(PCL);
+        controlAlb.actualizarAlbum(INU, genINU);
+
+        controlAlb.agregarAlbum("tripleNelson", "Agua Y Sal", null, 2012, temas); //AYS
+        DataAlbum AYS = controlAlb.retornarInfoAlbum("Agua Y Sal");
+        genAYS.add(RKL);
+        controlAlb.actualizarAlbum(AYS, genAYS);
+
+        controlAlb.agregarAlbum("la_ley", "MTV Unplugged", "bit.ly/MTVunplugged", 2001, temas); //LLU
+        DataAlbum LLU = controlAlb.retornarInfoAlbum("MTV Unplugged");
+        genLLU.add(RKL);
+        genLLU.add(PCL);
+        controlAlb.actualizarAlbum(LLU, genLLU);
+
+        controlAlb.agregarAlbum("chaiko", "El Lago De Los Cisnes", null, 1875, temas); //LDC
+        DataAlbum LDC = controlAlb.retornarInfoAlbum("El Lago De Los Cisnes");
+        genLDC.add(CLA);
+        controlAlb.actualizarAlbum(LDC, genLDC);
+
+        controlAlb.agregarAlbum("chaiko", "Concierto Para Piano No. 1 En Si Menor, Opus 23", null, 1875, temas); //CPP
+        DataAlbum CPP = controlAlb.retornarInfoAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23");
+        genCPP.add(CLA);
+        controlAlb.actualizarAlbum(CPP, genCPP);
+
+        controlAlb.agregarAlbum("nicoleneu", "Primer Amor", null, 1994, temas); //PAM
+        DataAlbum PAM = controlAlb.retornarInfoAlbum("Primer Amor");
+        genPAM.add(EPO);
+        controlAlb.actualizarAlbum(PAM, genPAM);
+
+        controlAlb.agregarAlbum("lospimpi", "Hay Amores Que Matan", null, 1993, temas); //AMA
+        DataAlbum AMA = controlAlb.retornarInfoAlbum("Hay Amores Que Matan");
+        genAMA.add(BAL);
+        genAMA.add(PCL);
+        controlAlb.actualizarAlbum(AMA, genAMA);
+
+        controlAlb.agregarAlbum("dyangounchained", "Un Loco Como Yo", "bit.ly/UnLocoComo", 1993, temas); //LOC
+        DataAlbum LOC = controlAlb.retornarInfoAlbum("Un Loco Como Yo");
+        genLOC.add(BAL);
+        genLOC.add(PCL);
+        controlAlb.actualizarAlbum(LOC, genLOC);
+
+        controlAlb.agregarAlbum("alcides", "20 Grandes Éxitos", "bit.ly/alcides20", 1989, temas); //VIO
+        DataAlbum VIO = controlAlb.retornarInfoAlbum("Primer Amor");
+        genVIO.add(CUM);
+        controlAlb.actualizarAlbum(VIO, genVIO);
+
+        System.out.println("ALBUMES CARGADOS");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdAl;
     private javax.swing.JButton btnAdLi;
@@ -476,6 +794,7 @@ public class FormPrin extends javax.swing.JFrame {
     private javax.swing.JButton btnCarDat;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblCargando;
+    private javax.swing.JLabel lblProgreso;
     private javax.swing.JPanel pnlPrin;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,6 +16,10 @@ public class DataListaParticular extends DataListaReproduccion {
         this.visibilidad = false;
         this.creador = null;
     }
+    
+    public DataListaParticular(String nombre) {
+        super(nombre);
+    }
 
     public boolean getVisibilidad() {
         return visibilidad;

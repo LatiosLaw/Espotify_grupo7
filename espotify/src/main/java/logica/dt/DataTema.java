@@ -47,6 +47,10 @@ public class DataTema {
         this.metodo_de_acceso = acceso;
         this.identificador_archivo = archivo;
     }
+    
+    public DataTema(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getNickname() {
         return nickname;

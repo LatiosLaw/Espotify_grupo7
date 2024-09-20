@@ -29,6 +29,10 @@ public class DataUsuario {
         this.setFechaNac(null);
     }
 
+    public DataUsuario(String nickname){
+        this.nickname = nickname;
+    }
+    
     public String getNickname() {
         return nickname;
     }
