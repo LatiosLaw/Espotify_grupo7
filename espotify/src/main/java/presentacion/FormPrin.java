@@ -38,6 +38,7 @@ public class FormPrin extends javax.swing.JFrame {
         initComponents();
         lblCargando.setVisible(false);
         jProgressBar1.setVisible(false);
+        lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
     }
 
@@ -53,6 +54,7 @@ public class FormPrin extends javax.swing.JFrame {
         pnlPrin = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         lblCargando = new javax.swing.JLabel();
+        lblProgreso = new javax.swing.JLabel();
         btnAdLi = new javax.swing.JButton();
         btnAdAl = new javax.swing.JButton();
         btnAdUs = new javax.swing.JButton();
@@ -71,17 +73,25 @@ public class FormPrin extends javax.swing.JFrame {
         lblCargando.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         lblCargando.setText("Cargando Datos");
 
+        lblProgreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblProgreso.setText("0%");
+
         javax.swing.GroupLayout pnlPrinLayout = new javax.swing.GroupLayout(pnlPrin);
         pnlPrin.setLayout(pnlPrinLayout);
         pnlPrinLayout.setHorizontalGroup(
             pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrinLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrinLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(307, 307, 307))
+                .addGap(306, 306, 306))
             .addGroup(pnlPrinLayout.createSequentialGroup()
-                .addGap(363, 363, 363)
-                .addComponent(lblCargando)
+                .addGroup(pnlPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPrinLayout.createSequentialGroup()
+                        .addGap(363, 363, 363)
+                        .addComponent(lblCargando))
+                    .addGroup(pnlPrinLayout.createSequentialGroup()
+                        .addGap(428, 428, 428)
+                        .addComponent(lblProgreso)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrinLayout.setVerticalGroup(
@@ -89,9 +99,11 @@ public class FormPrin extends javax.swing.JFrame {
             .addGroup(pnlPrinLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(lblCargando)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(lblProgreso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
 
         btnAdLi.setText("Administrar Lista");
@@ -194,34 +206,52 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
 
+        lblCargando.setVisible(true);
+        jProgressBar1.setVisible(true);
+        lblProgreso.setVisible(true);
+
         new Thread(() -> {
             try {
-                lblCargando.setVisible(true);
-                jProgressBar1.setVisible(true);
+
                 cargarClientes();
-                jProgressBar1.setValue(10); // Actualiza a 10%
+                jProgressBar1.setValue(8);
+                lblProgreso.setText("8%");
 
                 cargarArtistas();
-                jProgressBar1.setValue(20); // Actualiza a 20%
+                jProgressBar1.setValue(19);
+                lblProgreso.setText("19%");
 
                 cargarGeneros();
-                jProgressBar1.setValue(30); // Actualiza a 30%
-                
+                jProgressBar1.setValue(27);
+                lblProgreso.setText("27%");
+
                 cargarAlbumes();
+                jProgressBar1.setValue(35);
+                lblProgreso.setText("35%");
+
                 cargarTemas();
-                jProgressBar1.setValue(40); // Actualiza a 40%
+                jProgressBar1.setValue(44);
+                lblProgreso.setText("44%");
 
                 cargarSeguimientos();
-                jProgressBar1.setValue(60); // Actualiza a 60%
+                jProgressBar1.setValue(62);
+                lblProgreso.setText("67%");
 
                 cargarListas();
-                jProgressBar1.setValue(80); // Actualiza a 80%
-                cargarFavoritos();
+                jProgressBar1.setValue(81);
+                lblProgreso.setText("81%");
 
-                jProgressBar1.setValue(100); // Completa la barra
+                cargarFavoritos();
+                lblProgreso.setText("100%");
+                jProgressBar1.setValue(100);
+                 
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
+                
                 lblCargando.setVisible(false);
                 jProgressBar1.setVisible(false);
+                lblProgreso.setVisible(false);
+                btnCarDat.setEnabled(false);
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -524,54 +554,54 @@ public class FormPrin extends javax.swing.JFrame {
         System.out.println("ARTISTAS CARGADOS");
     }
 
-    private void cargarFavoritos(){
+    private void cargarFavoritos() {
         ////
         controlCli.agregarLista(new DataCliente("el_padrino"), new DataListaPorDefecto("Noche De La Nostalgia"));
         controlCli.agregarLista(new DataCliente("el_padrino"), new DataListaPorDefecto("Música Clásica"));
-        
+
         controlCli.agregarTema(new DataCliente("el_padrino"), new DataTema("El Duelo"));
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Violator"));
-        
+
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("El Lago De Los Cisnes"));
         controlCli.agregarAlbum(new DataCliente("el_padrino"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
         ////
-        
+
         ////
         controlCli.agregarLista(new DataCliente("scarlettO"), new DataListaPorDefecto("Música Clásica"));
         ////
-        
+
         ////
         controlCli.agregarTema(new DataCliente("ppArgento"), new DataTema("Adagio De Mi País"));
-        
+
         controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Noche De La Nostalgia"));
         controlCli.agregarLista(new DataCliente("ppArgento"), new DataListaPorDefecto("Rock En Español"));
         ////
-        
+
         ////
         controlCli.agregarLista(new DataCliente("Heisenberg"), new DataListaParticular("Música Inspiradora"));
         ////
-        
+
         ////
         controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
         controlCli.agregarAlbum(new DataCliente("benKenobi"), new DataAlbum("El Lago De Los Cisnes"));
         ////
-        
+
         ////
         controlCli.agregarTema(new DataCliente("cbochinche"), new DataTema("Concierto Para Piano No. 1 En Si Menor, Opus 23"));
-        
+
         controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Noche De La Nostalgia"));
         controlCli.agregarLista(new DataCliente("cbochinche"), new DataListaPorDefecto("Rock En Español"));
-        
+
         controlCli.agregarAlbum(new DataCliente("cbochinche"), new DataAlbum("Hay Amores Que Matan"));
         ////
-        
+
         ////
         controlCli.agregarTema(new DataCliente("Eleven11"), new DataTema("No Quiero Estudiar"));
         ////
-        
+
         System.out.println("FAVORITOS CARGADOS");
     }
-    
+
     private void cargarAlbumes() {
         Collection<DataTema> temas = new ArrayList<>();
         Collection<DataGenero> genVPL = new ArrayList<>();
@@ -686,6 +716,7 @@ public class FormPrin extends javax.swing.JFrame {
     private javax.swing.JButton btnCarDat;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblCargando;
+    private javax.swing.JLabel lblProgreso;
     private javax.swing.JPanel pnlPrin;
     // End of variables declaration//GEN-END:variables
 }
