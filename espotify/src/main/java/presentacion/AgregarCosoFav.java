@@ -459,6 +459,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                          JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
                     }else{
                           controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPar);
+                          JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
                     }
                 }
                 }
@@ -466,8 +467,21 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             }else{
                 
                 DataListaPorDefecto listaPorDe = this.controlLiporde.devolverInformacionChu(txtBusqueda1.getText());
-                controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
-               // JOptionPane.showMessageDialog(null, "WIP in Progress.");
+                
+                if(listaPorDe == null){
+                       JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
+                }else{
+                      controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
+            
+                 JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
+                
+                }
+                
+                
+                
+              
+                
+                
             }
         }else if("Albums".equals(token)){
             
@@ -481,6 +495,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                      JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
                 }else{
                      controlCli.agregarAlbum(cli, album);
+                      JOptionPane.showMessageDialog(null, "Se agrego Album a la lista de favoritos");
                 }   
             } 
         }
@@ -497,6 +512,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                  JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
             }else{
                 this.controlCli.agregarTema(cli,tema);   
+                JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
             }
 
     }//GEN-LAST:event_btnFav2ActionPerformed

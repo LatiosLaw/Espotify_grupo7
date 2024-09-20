@@ -203,14 +203,17 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "No existe un tema con ese nombre en los favoritos del Cliente.");
                     }else{
                         controlCli.eliminarTema(cli, tema);
+                        JOptionPane.showMessageDialog(null, "Se elimino el Tema de la lista de favoritos");
                     }       
                     break;
                 case "Listas":
                     DataListaReproduccion losta = this.controlLipa.devolverInformacionListaRepro(coso);
-                    
-                    controlCli.eliminarLista(cli, losta);
-                    
-       
+                    if(losta == null){
+                        JOptionPane.showMessageDialog(null, "No existe lista con ese nombre dentro de los favoritos del Cliente");
+                    }else{
+                        controlCli.eliminarLista(cli, losta);
+                    JOptionPane.showMessageDialog(null, "Se elimino la lista de la lista de favoritos");
+                    }
                     break;
                 case "Albums":
                     
@@ -219,6 +222,7 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                          JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
                     }else{
                         controlCli.eliminarAlbum(cli, album);
+                        JOptionPane.showMessageDialog(null, "Se elimino el Album de la lista de favoritos");
                     }
                     break;
                 default:
