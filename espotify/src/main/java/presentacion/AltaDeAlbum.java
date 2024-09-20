@@ -21,6 +21,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import logica.controladores.IControladorArtista;
 import logica.dt.DataAlbum;
+import logica.dt.DataArtista;
+import logica.dt.DataCliente;
 
 public class AltaDeAlbum extends javax.swing.JPanel {
 
@@ -47,8 +49,34 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
         initComponents();
         cargarGeneros();
+        cargarArtistas();
+        
+        lblMin.setVisible(false);
+        lblSeg.setVisible(false);
+        txtMin.setVisible(false);
+        txtSeg.setVisible(false);
 
         txtAnio.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) { // Si no es un número
+                    e.consume(); // Bloquea la tecla
+                }
+            }
+        });
+        
+        txtMin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) { // Si no es un número
+                    e.consume(); // Bloquea la tecla
+                }
+            }
+        });
+        
+        txtSeg.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -114,7 +142,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         lblMin = new javax.swing.JLabel();
         lblSeg = new javax.swing.JLabel();
         txtMin = new javax.swing.JTextField();
-        txtMin1 = new javax.swing.JTextField();
+        txtSeg = new javax.swing.JTextField();
         btnArch = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
@@ -222,9 +250,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             }
         });
 
-        txtMin1.addActionListener(new java.awt.event.ActionListener() {
+        txtSeg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMin1ActionPerformed(evt);
+                txtSegActionPerformed(evt);
             }
         });
 
@@ -261,7 +289,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblSeg)
-                                    .addComponent(txtMin1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtNomTemaAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNomTemaAlb)
                             .addComponent(lblPosTemaAlb)
@@ -375,7 +403,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblSeg)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtSeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
@@ -391,7 +419,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private boolean insertarEnPosicion(ArrayList<String> temas, String temazo, int posicion) {
-        posicion = posicion - 1;
+        if(posicion>0){
+            posicion = posicion - 1;
+        }
         // Verificar que la posición sea válida
         if (posicion < 0) {
             return false;
@@ -453,6 +483,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                     txtPosTemaAlb.setText(null);
                                     fileChooser.setSelectedFile(null);
                                     txtTipMus.setText(null);
+                                    txtMin.setText(null);
+                                    txtSeg.setText(null);
                                     lblMsjArch.setText("El archivo no se reconoce como un mp3");
                                     try {
                                         Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -461,25 +493,26 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                         System.out.println("Error al guardar el archivo.");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                                    JOptionPane.showMessageDialog(null, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido.");
+                                JOptionPane.showMessageDialog(null, "Un error ha ocurrido.");
                             }
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(lblMsjArch, "Error al leer el archivo MP3");
+                            JOptionPane.showMessageDialog(null, "Error al leer el archivo MP3");
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
+                        JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo MP3");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione un archivo MP3");
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo MP3");
                 }
 
             } else {
-                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, 0, txtTipMus.getText(), null)) {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
+                if(!txtMin.getText().isEmpty() && !txtSeg.getText().isEmpty()){
+                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, Integer.parseInt(txtMin.getText())*60+Integer.parseInt(txtSeg.getText()), txtTipMus.getText(), null)) {
+                    JOptionPane.showMessageDialog(null, "Tema agregado con exito");
                     DefaultListModel<String> model = new DefaultListModel();
                     Iterator<String> iterator = temas_del_album.iterator();
                     while (iterator.hasNext()) {
@@ -491,12 +524,17 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     txtPosTemaAlb.setText(null);
                     fileChooser.setSelectedFile(null);
                     txtTipMus.setText(null);
+                    txtMin.setText(null);
+                    txtSeg.setText(null);
                 } else {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                    JOptionPane.showMessageDialog(null, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
                 }
+            }else{
+                    JOptionPane.showMessageDialog(null, "La duracion del tema es obligatoria.");
+           }
             }
         } else {
-            JOptionPane.showMessageDialog(lblMsjArch, "Nombre, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
+            JOptionPane.showMessageDialog(null, "Nombre, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
         }
 
     }//GEN-LAST:event_btnConfTemActionPerformed
@@ -581,6 +619,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         txtTipMus.setText(null);
         txtPosTemaAlb.setText(null);
         fileChooser.setSelectedFile(null);
+        txtMin.setText(null);
+        txtSeg.setText(null);
         lblMsjArch.setText("El archivo no se reconoce como un mp3");
         DefaultListModel<String> model = new DefaultListModel();
         listGenSelect.setModel(model);
@@ -605,9 +645,17 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
             btnArch.setVisible(true);
             lblMsjArch.setVisible(true);
+            lblMin.setVisible(false);
+        lblSeg.setVisible(false);
+        txtMin.setVisible(false);
+        txtSeg.setVisible(false);
         } else {
             btnArch.setVisible(false);
             lblMsjArch.setVisible(false);
+            lblMin.setVisible(true);
+        lblSeg.setVisible(true);
+        txtMin.setVisible(true);
+        txtSeg.setVisible(true);
         }
     }//GEN-LAST:event_cbxTipMusActionPerformed
 
@@ -657,9 +705,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMinActionPerformed
 
-    private void txtMin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMin1ActionPerformed
+    private void txtSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSegActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMin1ActionPerformed
+    }//GEN-LAST:event_txtSegActionPerformed
 
     public void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();
@@ -674,6 +722,19 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             }
         }
         listGen.setModel(model);
+    }
+    
+    public void cargarArtistas() {
+        Collection<DataArtista> cole = controlArt.mostrarArtistas();
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<String>();
+
+        for (DataArtista elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        listArts.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -710,10 +771,10 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JTextField txtArt;
     private javax.swing.JTextField txtLinkImg;
     private javax.swing.JTextField txtMin;
-    private javax.swing.JTextField txtMin1;
     private javax.swing.JTextField txtNomAlb;
     private javax.swing.JTextField txtNomTemaAlb;
     private javax.swing.JTextField txtPosTemaAlb;
+    private javax.swing.JTextField txtSeg;
     private javax.swing.JTextField txtTipMus;
     // End of variables declaration//GEN-END:variables
 }
