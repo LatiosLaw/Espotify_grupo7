@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner.DefaultEditor;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
@@ -26,6 +27,9 @@ public class AgregarUsuario extends javax.swing.JPanel {
         txtDirWeb.setVisible(false);
         txtaBio.setVisible(false);
         lblBiografia.setVisible(false);
+        this.sprFecha.setEnabled(true);
+        ((DefaultEditor) sprFecha.getEditor()).getTextField().setEditable(false);
+        
     }
 
     /**

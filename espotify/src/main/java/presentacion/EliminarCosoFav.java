@@ -204,6 +204,7 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                     }else{
                         controlCli.eliminarTema(cli, tema);
                         JOptionPane.showMessageDialog(null, "Se elimino el Tema de la lista de favoritos");
+                        limpiarCampos();
                     }       
                     break;
                 case "Listas":
@@ -213,6 +214,7 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                     }else{
                         controlCli.eliminarLista(cli, losta);
                     JOptionPane.showMessageDialog(null, "Se elimino la lista de la lista de favoritos");
+                    limpiarCampos();
                     }
                     break;
                 case "Albums":
@@ -223,6 +225,7 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                     }else{
                         controlCli.eliminarAlbum(cli, album);
                         JOptionPane.showMessageDialog(null, "Se elimino el Album de la lista de favoritos");
+                        limpiarCampos();
                     }
                     break;
                 default:
@@ -293,8 +296,13 @@ public class EliminarCosoFav extends javax.swing.JPanel {
     private javax.swing.JTextField txtBusqueda1;
     private javax.swing.JTextField txtCliente;
     // End of variables declaration//GEN-END:variables
-
-  
+    
+    public void limpiarCampos(){
+        
+        this.txtBusqueda1.setText("");
+        this.txtCliente.setText("");
+        
+    }
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
 
