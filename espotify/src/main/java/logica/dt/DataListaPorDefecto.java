@@ -17,6 +17,10 @@ public class DataListaPorDefecto extends DataListaReproduccion {
         super(nombre);
         this.genero = dataGenero;
     }
+    
+    public DataListaPorDefecto(String nombre) {
+        super(nombre);
+    }
 
     public DataGenero getGenero() {
         return genero;

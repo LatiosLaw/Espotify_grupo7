@@ -22,6 +22,10 @@ public class DataCliente extends DataUsuario {
         this.albumesFavoritos = new ArrayList<>();
         this.listasFavoritas = new ArrayList<>();
     }
+    
+    public DataCliente(String nombre){
+    super(nombre);
+    }
 
     public Collection<DataUsuario> getSeguidos() {
         return seguidos;
