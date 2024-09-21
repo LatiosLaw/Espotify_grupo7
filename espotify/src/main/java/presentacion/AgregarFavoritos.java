@@ -414,6 +414,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                           controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPar);
                           JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
                           this.limpiarCampos();
+                           limpiarListas();
                         }
                     }
                 }
@@ -455,6 +456,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                 this.controlCli.agregarTema(cli,tema);   
                 JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
                 this.limpiarCampos();
+                this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
             }
     }//GEN-LAST:event_btnFav2ActionPerformed
 
@@ -508,7 +510,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
       this.txtCliente.setText("");
       this.txtCliente2.setText("");
       this.txtUsuarioDeLasListas.setText("");
-      limpiarListas();
+     
     }
     private void limpiarListas() {
       this.lstTemas.setModel(new javax.swing.DefaultListModel<>());

@@ -269,7 +269,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         
         this.txtBusqueda1.setText("");
         this.txtCliente.setText("");
-        
+        this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
     }
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
