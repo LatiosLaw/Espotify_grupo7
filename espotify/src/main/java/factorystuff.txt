@@ -1,2 +1,0 @@
-En esta carpeta todo lo que sea parte de la fabrica, exceptuando las clases en si (Osea todo el procesamiento de la cosa)
-Estudiar Factory Pattern
