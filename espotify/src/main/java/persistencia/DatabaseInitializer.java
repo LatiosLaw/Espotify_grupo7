@@ -14,7 +14,6 @@ public class DatabaseInitializer {
     public static void createDatabaseIfNotExists() {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement statement = connection.createStatement()) {
-
             String sql = "CREATE DATABASE IF NOT EXISTS espotify";
             statement.executeUpdate(sql);
         } catch (SQLException e) {

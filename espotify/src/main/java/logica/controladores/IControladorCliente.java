@@ -6,11 +6,11 @@ import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
-import logica.dt.errorBundle;
+import logica.dt.DataErrorBundle;
 
 public interface IControladorCliente {
 
-    public errorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
+    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
 
     public void seguirUsuario(String nick1, String nick2);
 

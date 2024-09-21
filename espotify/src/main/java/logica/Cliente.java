@@ -14,8 +14,8 @@ public class Cliente extends Usuario {
 
     @ManyToMany
     @JoinTable(name = "seguidos",
-            joinColumns = @JoinColumn(name = "nick_seguidor"),
-            inverseJoinColumns = @JoinColumn(name = "nick_seguido"))
+            joinColumns = @JoinColumn(name = "nick_seguidor"), // El que sigue
+            inverseJoinColumns = @JoinColumn(name = "nick_seguido")) // El que es seguido
     protected Collection<Usuario> seguidos = new ArrayList<Usuario>();
     @ManyToMany
     @JoinTable(name = "temas_favoritos",
@@ -62,7 +62,6 @@ public class Cliente extends Usuario {
     }
     
     public void listasFav(ListaReproduccion lista) {
-
         if(lista instanceof ListaParticular listaParticular){
             System.out.println("La visibilidad de la lista: " + lista.getNombre() + " es: " + listaParticular.getVisibilidad());
             if(listaParticular.getVisibilidad()==true){

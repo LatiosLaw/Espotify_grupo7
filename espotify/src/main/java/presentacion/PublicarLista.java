@@ -16,10 +16,8 @@ public class PublicarLista extends javax.swing.JPanel {
 
     public PublicarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc) {
         initComponents();
-
         controlListPart = iclp;
         controlCli = iclc;
-
         this.cargarClientesLst(controlCli.mostrarClientes());
     }
 
@@ -56,11 +54,6 @@ public class PublicarLista extends javax.swing.JPanel {
             }
         });
 
-        lstLista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(lstLista);
 
         txtNombreLista.setColumns(10);
@@ -74,11 +67,9 @@ public class PublicarLista extends javax.swing.JPanel {
             }
         });
 
-        lstListaParticular.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        lstListaParticular.setMaximumSize(new java.awt.Dimension(44, 100));
+        lstListaParticular.setMinimumSize(new java.awt.Dimension(44, 100));
+        lstListaParticular.setPreferredSize(new java.awt.Dimension(44, 100));
         jScrollPane3.setViewportView(lstListaParticular);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -103,8 +94,8 @@ public class PublicarLista extends javax.swing.JPanel {
                             .addGap(44, 44, 44)
                             .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(44, 44, 44)
-                            .addComponent(jScrollPane3))))
-                .addGap(164, 164, 164))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(266, 266, 266))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,14 +118,12 @@ public class PublicarLista extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscarN)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
         if (txtNombre.getText().equals("") || txtNombreLista.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "No debes dejar campos vacios.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -148,32 +137,25 @@ public class PublicarLista extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
-
         if (txtNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "El campo 'Nombre' no puede estar vacio.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         } else {
-
             Collection<DataListaParticular> listas = controlListPart.devolverListadeCliente(txtNombre.getText());
-
             if (listas != null && !listas.isEmpty()) {
                 System.out.println("Listas encontradas: " + listas.size());
-
                 for (DataListaParticular lista : listas) {
                     System.out.println(lista.getNombre());
                     cargarListasLst(controlListPart.devolverListadeCliente(txtNombre.getText()));
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron listas para el cliente con el nickname: " + txtNombre.getText(),
-                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontraron listas para el cliente con el nickname: " + txtNombre.getText(), "Informacion", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnBuscarNActionPerformed
 
     public void cargarClientesLst(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
@@ -183,9 +165,7 @@ public class PublicarLista extends javax.swing.JPanel {
 
     public void cargarListasLst(Collection<DataListaParticular> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (DataListaParticular elemento : cole) {
             String nombreLista = elemento.getNombre();
             model.addElement(nombreLista);

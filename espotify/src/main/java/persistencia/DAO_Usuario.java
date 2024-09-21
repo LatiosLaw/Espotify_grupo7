@@ -51,7 +51,6 @@ public class DAO_Usuario {
                     "SELECT s.nickname FROM Usuario u JOIN u.seguidores s WHERE u.nickname = :nickname ", String.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
-
         } catch (NoResultException e) {
             return null; // No se encontro ningún cliente con ese nombre
         }

@@ -5,7 +5,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
 import logica.dt.DataCliente;
-import logica.dt.DataUsuario;
 
 public class SeguirUsuario extends javax.swing.JPanel {
 
@@ -13,7 +12,6 @@ public class SeguirUsuario extends javax.swing.JPanel {
 
     public SeguirUsuario(IControladorCliente controlador) {
         initComponents();
-
         this.controlCli = controlador;
         this.cargarClientesLst(controlCli.mostrarClientes());
         this.cargarUsuariosLst(controlCli.mostrarUsuarios());
@@ -134,7 +132,6 @@ public class SeguirUsuario extends javax.swing.JPanel {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAseguir.getText();
-
         if (nickCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
         } else {
@@ -143,7 +140,6 @@ public class SeguirUsuario extends javax.swing.JPanel {
             } else {
                 DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
                 if (usr != null) {
-
                     DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
                     if (usr2 != null) {
                         if (controlCli.corroborarSiEstaenSeguidos(nickCliente, nickAseguir) == false) {
@@ -155,7 +151,6 @@ public class SeguirUsuario extends javax.swing.JPanel {
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
                     }
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Cliente no encontrado");
                 }
@@ -164,9 +159,7 @@ public class SeguirUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConfirmarActionPerformed
     public void cargarClientesLst(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
@@ -176,9 +169,7 @@ public class SeguirUsuario extends javax.swing.JPanel {
 
     public void cargarUsuariosLst(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (String elemento : cole) {
             String nick = elemento;
             model.addElement(nick);

@@ -1,11 +1,11 @@
 package logica.dt;
 
-public class errorBundle {
+public class DataErrorBundle {
 
     private boolean verificacion;
     private Integer numero_error_interno;
 
-    public errorBundle(boolean valor, Integer numero) {
+    public DataErrorBundle(boolean valor, Integer numero) {
         this.verificacion = valor;
         this.numero_error_interno = numero;
     }

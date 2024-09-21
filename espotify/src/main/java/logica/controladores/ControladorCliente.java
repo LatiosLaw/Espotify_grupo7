@@ -17,10 +17,9 @@ import logica.Usuario;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
-import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
-import logica.dt.errorBundle;
+import logica.dt.DataErrorBundle;
 import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Tema;
@@ -29,57 +28,48 @@ import persistencia.DAO_Usuario;
 public class ControladorCliente implements IControladorCliente {
 
     @Override
-    public errorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
-        // Verificar si el nickname o el correo electronico ya estan en uso
+    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
         DAO_Usuario persistence = new DAO_Usuario();
-
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false, 1);
+            return new DataErrorBundle(false, 1);
         }
-
         if (persistence.findUsuarioByMail(mail) != null) {
             System.out.println("El correo electronico: " + mail + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false, 2);
+            return new DataErrorBundle(false, 2);
         }
-
         // Crear el nuevo cliente
         Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, mail, foto, fechaNac);
-
         // Guardar el cliente en la base de datos
         try {
             persistence.save(nuevoCliente);
             System.out.println("Cliente agregado exitosamente.");
-            return new errorBundle(true, null);
+            return new DataErrorBundle(true, null);
         } catch (PersistenceException e) {
             System.out.println("Error al guardar el cliente: " + e.getMessage());
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
             }
-            return new errorBundle(true, null);
+            return new DataErrorBundle(true, null);
         }
     }
 
     @Override
     public void seguirUsuario(String nick1, String nick2) {
         DAO_Usuario persistence = new DAO_Usuario();
-
         // Obtener Usuario usando nick1
         Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
         if (usuarioBase == null) {
             throw new IllegalArgumentException("Cliente no encontrado.");
         }
-
         // Hacer el cast a Cliente
         if (!(usuarioBase instanceof Cliente cliente)) {
             throw new IllegalArgumentException("El usuario encontrado no es un cliente.");
         }
-
         Usuario usuario = persistence.findUsuarioByNick(nick2);
         if (usuario == null) {
             throw new IllegalArgumentException("Usuario a seguir no encontrado.");
         }
-
         if (usuario instanceof Cliente dataCliente) {
             cliente.seguir(new Cliente(dataCliente.getNickname(), dataCliente.getNombre(), dataCliente.getApellido(), dataCliente.getEmail(), dataCliente.getFoto(), dataCliente.getNacimiento()));
         } else if (usuario instanceof Artista dataArtista) {
@@ -88,32 +78,26 @@ public class ControladorCliente implements IControladorCliente {
             // Manejar el caso donde usuario no es ni un DataCliente ni un DataArtista
             throw new IllegalArgumentException("El usuario a seguir no es ni un cliente ni un artista.");
         }
-
         persistence.update(cliente);
     }
 
     @Override
     public void dejarDeSeguirUsuario(String nick1, String nick2) {
         DAO_Usuario persistence = new DAO_Usuario();
-
         // Obtener Usuario usando nick1
         Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
         if (usuarioBase == null) {
             throw new IllegalArgumentException("Cliente no encontrado.");
         }
-
         // Hacer el cast a Cliente
         if (!(usuarioBase instanceof Cliente cliente)) {
             throw new IllegalArgumentException("El usuario encontrado no es un cliente.");
         }
-
         Usuario usuario = persistence.findUsuarioByNick(nick2);
         if (usuario == null) {
             throw new IllegalArgumentException("Usuario a dejar de seguir no encontrado.");
         }
-
         cliente.dejarDeSeguir(usuario);
-
         // Actualizar la tabla
         persistence.update(cliente);
     }
@@ -122,7 +106,6 @@ public class ControladorCliente implements IControladorCliente {
     public DataCliente consultarPerfilCliente(String nick_cli) {
         Usuario retorno;
         DAO_Usuario persistence = new DAO_Usuario();
-
         try {
             retorno = persistence.findUsuarioByNick(nick_cli);
             if (retorno != null && retorno instanceof Cliente cliente) {
@@ -132,8 +115,7 @@ public class ControladorCliente implements IControladorCliente {
                         retorno.getApellido(),
                         retorno.getFoto(),
                         retorno.getEmail(),
-                        retorno.getNacimiento()
-                );
+                        retorno.getNacimiento());
             } else {
                 System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");
                 return null;
@@ -164,11 +146,9 @@ public class ControladorCliente implements IControladorCliente {
     public void agregarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
-
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
             ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
-
             if (lis == null) {
                 if (nomlista instanceof DataListaParticular) {
                     lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
@@ -177,12 +157,10 @@ public class ControladorCliente implements IControladorCliente {
                 }
                 listaPersistence.save(lis);
             }
-
             if (cli instanceof Cliente cliente) {
                 cliente.listasFav(lis);
                 persistence.update(cli);
             }
-
         } else {
             System.out.println("Cliente no encontrado.");
         }
@@ -207,11 +185,9 @@ public class ControladorCliente implements IControladorCliente {
     public void eliminarTema(DataCliente nickcli, DataTema nicktem) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
-
         if (cli != null) {
             DAO_Tema temaPersistence = new DAO_Tema();
             tema tem = temaPersistence.find(nicktem.getNickname());
-
             if (tem != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarTemaFav(tem);
@@ -229,11 +205,9 @@ public class ControladorCliente implements IControladorCliente {
     public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
-
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
             ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
-
             if (lis != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarListasFav(lis);
@@ -251,11 +225,9 @@ public class ControladorCliente implements IControladorCliente {
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
-
         if (cli != null) {
             DAO_Album albumPersistence = new DAO_Album();
             Album alb = albumPersistence.findAlbumByName(nomalbum.getNombre());
-
             if (alb != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarAlbumFav(alb);
@@ -362,9 +334,7 @@ public class ControladorCliente implements IControladorCliente {
         boolean token = false;
         for (String elemento : cole) {
             String nick = elemento;
-            System.out.println("Nick dentro de la lista: " + nick);
             if (nick.equals(nickSeguido)) {
-                System.out.println("Ah jah!");
                 token = true;
                 break;
             }

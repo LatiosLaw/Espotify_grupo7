@@ -1,12 +1,6 @@
 package presentacion;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorAlbum;
@@ -16,28 +10,23 @@ import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
-import logica.dt.DataListaParticular;
-import logica.dt.DataListaPorDefecto;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-public class EliminarCosoFav extends javax.swing.JPanel {
+public class EliminarFavoritos extends javax.swing.JPanel {
  private final IControladorCliente controlCli;
     private final IControladorTema controlTema;
     private final IControladorListaParticular controlLipa;
     private final IControladorListaPorDefecto controlLiporde;
     private final IControladorAlbum controlAlb;
 
-    public EliminarCosoFav(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
+    public EliminarFavoritos(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
         controlCli = icc;
         controlAlb = ica;
         controlLipa = iclp;
         controlLiporde = iclpd;
         controlTema = ict;
-        
-        
     }
 
     /**
@@ -77,7 +66,7 @@ public class EliminarCosoFav extends javax.swing.JPanel {
 
         txtBusqueda1.setColumns(10);
 
-        lblBusqueda1.setText("Agregar a Favoritos :");
+        lblBusqueda1.setText("Eliminar de  Favoritos :");
 
         lblPrimeraBusqueda.setText("Primera Busqueda");
 
@@ -155,33 +144,23 @@ public class EliminarCosoFav extends javax.swing.JPanel {
 
     private void cbxCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCosoActionPerformed
         String token = String.valueOf(this.cbxCoso.getSelectedItem());
-        
         if(null != token)switch (token) {
          case "OPT":
-             
              JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
-             
+             lblPrimeraBusqueda.setText("Primera Busqueda :");
              break;
          case "Temas":
-             
-           
-             
+             lblPrimeraBusqueda.setText("Temas Favoritos :");
              break;
          case "Listas":
-          
-             
+             lblPrimeraBusqueda.setText("Listas Favoritas :");
              break;
          case "Albums":
-             
-         
-             
+             lblPrimeraBusqueda.setText("Albums Favoritos :");
              break;
          default:
              break;
-     }
-        
-        
-        
+        }
     }//GEN-LAST:event_cbxCosoActionPerformed
 
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
@@ -195,7 +174,6 @@ public class EliminarCosoFav extends javax.swing.JPanel {
             switch (token) {
                 case "OPT":
                     JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
-                    //controlCli.agregarTema(nickcli, tema);
                     break;
                 case "Temas":
                     DataTema tema = controlTema.retornarTema2LaSecuela(coso);
@@ -232,7 +210,6 @@ public class EliminarCosoFav extends javax.swing.JPanel {
                     break;
             }
         }
-        
     }//GEN-LAST:event_btnFavActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -240,46 +217,37 @@ public class EliminarCosoFav extends javax.swing.JPanel {
         if(controlCli.consultarPerfilCliente(this.txtCliente.getText()) == null){
              JOptionPane.showMessageDialog(null, "No existe usuario seleccionado");
         }else{
-             if(null != token)switch (token) {
-         case "OPT":
-           
-             JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
-             
-             break;
-         case "Temas":
-          
-            Collection <String> temas = this.controlCli.obtenerTemaFavCliente(this.txtCliente.getText());
-            
-             if(temas == null){
-                 JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
-             }else{
-                 this.cargarLstFav(temas);
-             }
-             break;
-         case "Listas":
-           
-             
-            
+            if(null != token)switch (token) {
+                case "OPT":
+                    JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
+                    break;
+                case "Temas":
+                    Collection <String> temas = this.controlCli.obtenerTemaFavCliente(this.txtCliente.getText());
+                    if(temas == null){
+                        JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
+                    }else{
+                        this.cargarLstFav(temas);
+                    }
+                    break;
+                case "Listas":
                     Collection <String> listas = controlCli.obtenerListasFavCliente(txtCliente.getText());
                     if(listas == null){
                          JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
                     }else{
                       this.cargarLstFav(listas);
                     }
-             break;
-         case "Albums":
-            
-             Collection <String> albums = controlCli.obtenerAlbumFavCliente(txtCliente.getText());
-             
-             if(albums == null){
-                  JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
-             }else{
-                 this.cargarLstFav(albums);
-             }
-             break;
-         default:
-             break;
-     }
+                    break;
+                case "Albums":
+                    Collection <String> albums = controlCli.obtenerAlbumFavCliente(txtCliente.getText());
+                    if(albums == null){
+                        JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
+                    }else{
+                        this.cargarLstFav(albums);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
        
     }//GEN-LAST:event_btnBuscarActionPerformed

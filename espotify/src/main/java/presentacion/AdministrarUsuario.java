@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Color;
 import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
@@ -23,7 +24,6 @@ public class AdministrarUsuario extends javax.swing.JPanel {
         controlAlb = icalb;
         controlListPar = iclp;
         controlListPD = icld;
-
         initComponents();
     }
 
@@ -36,45 +36,34 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         pnlAU = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(872, 579));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(872, 579));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
-        );
-
-        pnlAU.setBackground(new java.awt.Color(255, 153, 153));
+        pnlAU.setBackground(new java.awt.Color(204, 204, 204));
         pnlAU.setPreferredSize(new java.awt.Dimension(860, 471));
 
         javax.swing.GroupLayout pnlAULayout = new javax.swing.GroupLayout(pnlAU);
         pnlAU.setLayout(pnlAULayout);
         pnlAULayout.setHorizontalGroup(
             pnlAULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlAULayout.setVerticalGroup(
             pnlAULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar Lista/Album/Tema de Fav", "Agregar Tema/Album/Lista a Fav" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Operaciones de Usuario : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,34 +75,25 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                     .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 620, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
         String token = String.valueOf(jComboBox1.getSelectedItem());
-
         switch (token) {
             case "OPT" -> {
                 pnlAU.removeAll();
@@ -139,7 +119,6 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
-
             case "Dejar de seguir Usuario" -> {
                 DejarDeSeguirUsuario ddsu = new DejarDeSeguirUsuario(controlCli);
                 ddsu.setLocation(0, 0);
@@ -160,8 +139,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
-            case "Eliminar Lista/Album/Tema de Fav" -> {
-                EliminarCosoFav ecf = new EliminarCosoFav(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
+            case "Eliminar de Favoritos" -> {
+                EliminarFavoritos ecf = new EliminarFavoritos(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
                 ecf.setLocation(0, 0);
                 ecf.setSize(860, 471);
 
@@ -170,8 +149,8 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
-            case "Agregar Tema/Album/Lista a Fav" -> {
-                AgregarCosoFav acf = new AgregarCosoFav(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
+            case "Agregar a Favoritos" -> {
+                AgregarFavoritos acf = new AgregarFavoritos(controlCli, controlTem, controlListPar, controlListPD, controlAlb);
                 acf.setLocation(0, 0);
                 acf.setSize(860, 471);
 
@@ -180,7 +159,6 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
-
             default ->
                 jComboBox1.setSelectedIndex(0);
         }
@@ -188,7 +166,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnlAU;
     // End of variables declaration//GEN-END:variables
 }

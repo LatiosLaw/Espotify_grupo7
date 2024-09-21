@@ -61,7 +61,6 @@ public class ControladorTema implements IControladorTema {
             return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
-           
         }
     }
      @Override
@@ -98,34 +97,34 @@ public class ControladorTema implements IControladorTema {
     public Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
         if(tipo_lista == 1){ // CASO POR DEFECTO
             Collection<DataTema> listaDeTemas = new ArrayList<>();
-        List<tema> retorno;
-        DAO_Tema persistence = new DAO_Tema();
-        retorno = persistence.findFromListaDefecto(nombre_lista);
-        if (retorno != null) {
-            Iterator<tema> iterator = retorno.iterator();
-            while (iterator.hasNext()) {
-                tema temazo = iterator.next();
-                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+            List<tema> retorno;
+            DAO_Tema persistence = new DAO_Tema();
+            retorno = persistence.findFromListaDefecto(nombre_lista);
+            if (retorno != null) {
+                Iterator<tema> iterator = retorno.iterator();
+                while (iterator.hasNext()) {
+                    tema temazo = iterator.next();
+                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+                }
+                return listaDeTemas;
+            } else {
+                return null;
             }
-            return listaDeTemas;
-        } else {
-            return null;
-        }
         }else{ // CASO PARTICULAR
             Collection<DataTema> listaDeTemas = new ArrayList<>();
-        List<tema> retorno;
-        DAO_Tema persistence = new DAO_Tema();
-        retorno = persistence.findFromListaParticular(nombre_lista);
-        if (retorno != null) {
-            Iterator<tema> iterator = retorno.iterator();
-            while (iterator.hasNext()) {
-                tema temazo = iterator.next();
-                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+            List<tema> retorno;
+            DAO_Tema persistence = new DAO_Tema();
+            retorno = persistence.findFromListaParticular(nombre_lista);
+            if (retorno != null) {
+                Iterator<tema> iterator = retorno.iterator();
+                while (iterator.hasNext()) {
+                    tema temazo = iterator.next();
+                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+                }
+                return listaDeTemas;
+            } else {
+                return null;
             }
-            return listaDeTemas;
-        } else {
-            return null;
-        }
         }
     }
 

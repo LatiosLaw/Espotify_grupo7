@@ -23,16 +23,13 @@ public class ControladorGenero implements IControladorGenero {
     public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre) {
         DAO_Genero persistence = new DAO_Genero();
         Genero nuevo_genero = new Genero(nombre);
-        
         for(String genero : genero_padre){
             nuevo_genero.agregarSubgenero(new Genero(genero));
         }
-        
         Genero genero_vacio = new Genero();
         genero_vacio.setNombre(nuevo_genero.getNombre());
         persistence.save(genero_vacio);
         persistence.update(nuevo_genero);
-        
         System.out.println("Genero con subgeneros agregado exitosamente.");
     }
 

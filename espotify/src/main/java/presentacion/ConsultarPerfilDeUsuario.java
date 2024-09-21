@@ -23,13 +23,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private JList<DataUsuario> listUsuarios;
 
     public ConsultarPerfilDeUsuario(IControladorCliente icc, IControladorArtista ica) {
-
         controlCli = icc;
         controlArt = ica;
-
         initComponents();
-        //lstUsuarios = new javax.swing.JList<DataUsuario>();
-
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
         lstListas.setVisible(false);
@@ -47,6 +43,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
+        txtIMAGEN_AFUTURO = new javax.swing.JLabel();
         txtNickName = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtCorreoElectronico = new javax.swing.JTextField();
@@ -80,18 +77,27 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        panel1.setBackground(new java.awt.Color(255, 102, 102));
+        panel1.setBackground(new java.awt.Color(204, 204, 204));
         panel1.setPreferredSize(new java.awt.Dimension(149, 149));
+
+        txtIMAGEN_AFUTURO.setForeground(new java.awt.Color(0, 0, 0));
+        txtIMAGEN_AFUTURO.setText("IMAGEN");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addGap(65, 65, 65))
         );
 
         txtNickName.setEditable(false);
@@ -109,7 +115,9 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtFechaNaci1.setEditable(false);
 
+        txtaBiografia.setEditable(false);
         txtaBiografia.setColumns(20);
+        txtaBiografia.setLineWrap(true);
         txtaBiografia.setRows(5);
         jScrollPane2.setViewportView(txtaBiografia);
 
@@ -135,18 +143,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
         });
 
-        lstSeguidores.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane6.setViewportView(lstSeguidores);
 
-        lstListas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane7.setViewportView(lstListas);
 
         jScrollPane8.setViewportView(lstUsuarios);
@@ -160,22 +158,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
         });
 
-        lstAlbumSiguiendo1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane9.setViewportView(lstAlbumSiguiendo1);
 
         lblListas.setText("Listas :");
 
         lblFavs.setText("Favs :");
 
-        lstFavs.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane10.setViewportView(lstFavs);
 
         cbxFavss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temas", "Albums", "Listas" }));
@@ -217,7 +205,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                     .addComponent(txtPaginaWeb, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNickName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +297,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                                     .addComponent(cbxFavss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -318,19 +306,15 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxOptItemStateChanged
     private void lenarLista(List<Usuario> lista) {
 
-        //lstUsuarios.add("a");
     }
 
     private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {
-
         int token = cbxOpt.getSelectedIndex();
-
         switch (token) {
             case 0 -> {// OPT
                 limpiarCampos();
                 break;
             }
-
             case 1 -> {
                 // Cliente
                 limpiarCampos();
@@ -354,10 +338,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
             case 2 -> {
                 // Artista
-
                 Collection<DataArtista> cole = controlArt.mostrarArtistas();
                 cargarArtistasLstBuscar(cole);
-
                 lblAlbumSiguiendo.setText("Album");
                 limpiarCampos();
                 txtPaginaWeb.setVisible(true);
@@ -391,17 +373,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lstAlbumSiguiendo1.setModel(new javax.swing.DefaultListModel<>());
         lstFavs.setModel(new javax.swing.DefaultListModel<>());
         txtNumeroDeSeguidoresPosta.setText("0");
-
-        /*
-        txtPaginaWeb.setVisible(false);
-        txtaBiografia.setVisible(false);
-        lstAlbumSiguiendo.setVisible(false);
-        lstSeguidores.setVisible(false);
-        lblNroSeguidores.setVisible(false);
-        lblSeguidores.setVisible(false);
-        txtNumeroDeSeguidoresPosta.setVisible(false);
-        lblAlbumSiguiendo.setVisible(false);
-         */
     }
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -411,12 +382,10 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
         } else {
             limpiarCampos(); // Limpia los campos antes de buscar
-
             if (!"OPT".equals(token)) {
                 if ("Cliente".equals(token)) {
                     DataCliente usr = controlCli.consultarPerfilCliente(nickBuscar);
                     if (usr != null) {
-
                         txtNickName.setText(usr.getNickname());
                         txtNombre.setText(usr.getNombre());
                         txtApellido.setText(usr.getApellido());
@@ -425,21 +394,17 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtPaginaWeb.setText("");
                         txtaBiografia.setText("");
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlCli.obtenerNumeroSeguidores(usr.getNickname())));
-
                         Collection<String> coleSeguidores = controlCli.obtenerSeguidoresUsuario(usr.getNickname());
                         Collection<String> coleSeguidos = controlCli.obtenerSeguidosUsuario(usr.getNickname());
                         Collection<String> coleListas = controlCli.obtenerListasDeUsuario(usr.getNickname());
                         cargarUsuariosLstSegudidores(coleSeguidores);
                         cargarUsuariosLstSeguidos(coleSeguidos);
                         cargarListasLst(coleListas);
-
                         String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
                         switch (tokenFav) {
                             case "Temas":
-                                //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
                                 Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr.getNickname());
                                 cargarLstFav(favTema);
-
                                 break;
                             case "Albums":
                                 Collection<String> favAlbum = controlCli.obtenerAlbumFavCliente(usr.getNickname());
@@ -452,15 +417,12 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                             default:
                                 break;
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
                     }
                 } else if ("Artista".equals(token)) {
-
                     DataArtista art = controlArt.retornarArtista(nickBuscar);
                     if (art != null) {
-
                         txtNickName.setText(art.getNickname());
                         txtNombre.setText(art.getNombre());
                         txtApellido.setText(art.getApellido());
@@ -471,10 +433,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         txtNumeroDeSeguidoresPosta.setText(valueOf(controlArt.obtenerNumeroSeguidores(art.getNickname())));
                         Collection<String> coleSeguidores = controlArt.obtenerSeguidoresArt(art.getNickname());
                         cargarUsuariosLstSegudidores(coleSeguidores);
-
                         Collection<String> artAlbum = controlArt.obtenerAlbumsArt(art.getNickname());
                         cargarUsuariosLstSeguidos(artAlbum);
-
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el artista.");
                     }
@@ -489,15 +449,11 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     private void cbxFavssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFavssActionPerformed
         String usr = txtNickName.getText();
-
         String tokenFav = String.valueOf(cbxFavss.getSelectedItem());
-        //  System.out.println(tokenFav);
         switch (tokenFav) {
             case "Temas":
-                //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA-1");
                 Collection<String> favTema = controlCli.obtenerTemaFavCliente(usr);
                 cargarLstFav(favTema);
-
                 break;
             case "Albums":
                 Collection<String> favAlbum = controlCli.obtenerAlbumFavCliente(usr);
@@ -514,9 +470,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarUsuariosLstBuscar(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
@@ -527,9 +481,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarArtistasLstBuscar(Collection<DataArtista> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (DataArtista elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
@@ -540,11 +492,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarUsuariosLstSegudidores(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (String elemento : cole) {
-            // System.out.print("Elemento de lstSeguidores"+elemento);
             String nick = elemento;
             model.addElement(nick);
         }
@@ -554,11 +503,8 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarListasLst(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (String elemento : cole) {
-            //System.out.print("Elemento de lstSeguidores"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }
@@ -568,30 +514,22 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
     public void cargarUsuariosLstSeguidos(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (String elemento : cole) {
-            // System.out.print("Elemento de lstSeguidos"+elemento);
             String nick = elemento;
             model.addElement(nick);
         }
         lstAlbumSiguiendo1.setModel(model);
-
     }
 
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (String elemento : cole) {
-            //  System.out.print("Elemento de lstSeguidos"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }
         lstFavs.setModel(model);
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -621,6 +559,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCorreoElectronico;
     private javax.swing.JTextField txtFechaNaci1;
+    private javax.swing.JLabel txtIMAGEN_AFUTURO;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JLabel txtNumeroDeSeguidoresPosta;

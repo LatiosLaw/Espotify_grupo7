@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import logica.Cliente;
 import logica.ListaParticular;
-import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.Usuario;
 import logica.dt.DataCliente;
@@ -23,28 +22,23 @@ public class ControladorListaParticular implements IControladorListaParticular {
     public void crearLista(String nombre, DataCliente dataCliente) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         DAO_Usuario daoUsuario = new DAO_Usuario();
-
         // Buscar el usuario existente usando el nickname
         Usuario clienteExistente = daoUsuario.findUsuarioByNick(dataCliente.getNickname());
         if (clienteExistente == null) {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + dataCliente.getNickname());
         }
-
         // Verificar si la lista ya existe
         ListaReproduccion listaExistente = daoLista.find(nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
-
         // Crear la nueva lista particular y asociar el cliente existente
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
         nuevaLista.setVisibilidad(false);
-
         ListaParticular ls = new ListaParticular();
         ls.setNombre(nuevaLista.getNombre());
         daoLista.save(ls);
         daoLista.update(nuevaLista);
-
         System.out.println("Lista Particular creada exitosamente.");
     }
     
@@ -52,30 +46,24 @@ public class ControladorListaParticular implements IControladorListaParticular {
     public void crearListaConVisibilidad(String nombre, DataCliente cli, boolean publica, String foto){
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         DAO_Usuario daoUsuario = new DAO_Usuario();
-
         // Buscar el usuario existente usando el nickname
         Usuario clienteExistente = daoUsuario.findUsuarioByNick(cli.getNickname());
         if (clienteExistente == null) {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + cli.getNickname());
         }
-
         // Verificar si la lista ya existe
         ListaReproduccion listaExistente = daoLista.find(nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
-
         // Crear la nueva lista particular y asociar el cliente existente
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
         nuevaLista.setVisibilidad(publica);
         nuevaLista.setFoto(foto);
-        
-
         ListaParticular ls = new ListaParticular();
         ls.setNombre(nuevaLista.getNombre());
         daoLista.save(ls);
         daoLista.update(nuevaLista);
-
         System.out.println("Lista Particular creada exitosamente.");
     }
 
@@ -90,11 +78,11 @@ public class ControladorListaParticular implements IControladorListaParticular {
             String nombrel = lista.getNombre();
             if(nombrel == nombre_lista){
                 if(lista == null){
-          System.out.println("No existen listas en el sistema."); 
-        }else{
-        lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
-        daoLista.update(lista);
-        }
+                    System.out.println("No existen listas en el sistema."); 
+                }else{
+                    lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
+                    daoLista.update(lista);
+                }
                 break;
             }
         }
@@ -123,11 +111,9 @@ public class ControladorListaParticular implements IControladorListaParticular {
     public DataListaParticular devolverInformacion(String nombre_lista, String nick_cliente) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         ListaParticular ls = persistence.findListaPorNicks(nick_cliente, nombre_lista);
-
         if (ls != null) {
             // Obtener el cliente asociado a la lista
             Cliente cliente = ls.getCliente(); // Suponiendo que getCliente() retorna un objeto Cliente
-
             // Crear el DataCliente con los atributos necesarios
             DataCliente dataCliente = new DataCliente(
                     cliente.getNickname(),
@@ -135,9 +121,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
                     cliente.getApellido(),
                     cliente.getEmail(),
                     cliente.getFoto(),
-                    cliente.getNacimiento()
-            );
-
+                    cliente.getNacimiento());
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaParticular
             return new DataListaParticular(
@@ -146,7 +130,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
                     ls.getVisibilidad() // Suponiendo que hay un método getVisibilidad()
             );
         } else {
-            System.out.println("No existe, error.");
+            System.out.println("La lista con nombre " + nombre_lista + " no existe, error.");
             return null;
         }
     }
@@ -154,12 +138,9 @@ public class ControladorListaParticular implements IControladorListaParticular {
     @Override
     public Collection<DataListaParticular> devolverListadeCliente(String nickname) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-
         Collection<DataListaParticular> dataListas = new ArrayList<>();
-
         // Obtener listas de un cliente
         Collection<ListaParticular> listas = persistence.findListaPorCliente(nickname);
-
         if (!listas.isEmpty()) {
             for (ListaParticular listaP : listas) {
                 DataCliente cli = new DataCliente(
@@ -168,56 +149,43 @@ public class ControladorListaParticular implements IControladorListaParticular {
                         listaP.getCliente().getApellido(),
                         listaP.getCliente().getEmail(),
                         listaP.getCliente().getFoto(),
-                        listaP.getCliente().getNacimiento()
-                );
-
+                        listaP.getCliente().getNacimiento());
                 dataListas.add(new DataListaParticular(listaP.getNombre(), cli, listaP.getVisibilidad()));
             }
-
             System.out.println("Listas retornadas correctamente.");
         } else {
             System.out.println("No se encontraron listas para el cliente con nickname: " + nickname);
         }
-
         return dataListas;
     }
+    
     @Override
      public Collection<String> devolverListasParticularesPublicasString(String nickname) {
-
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-        
-         Collection<ListaParticular> listas = persistence.findListaPorCliente(nickname);
-        
-         Collection<String> coleString = new ArrayList<>();
-        
+        Collection<ListaParticular> listas = persistence.findListaPorCliente(nickname);
+        Collection<String> coleString = new ArrayList<>();
         for(ListaParticular listaP : listas){
             if(listaP.getVisibilidad() == true){
                 coleString.add(listaP.getNombre());
             }
         }
-  
        return coleString;
-
     }
     
     @Override
       public DataListaReproduccion devolverInformacionListaRepro(String coso){
           DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
           ListaReproduccion token = persistence.find(coso);
-          
           if(token == null){
               return null;
           }else{
                DataListaReproduccion token2 = new DataListaReproduccion(token.getNombre());
-          
                return token2;
           }
-
       }
     public DataListaParticular retornarlista(String nickname){
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         ListaReproduccion lista = persistence.find(nickname);
-        
         if(lista != null){
             if(lista instanceof ListaParticular listaP){
                 DataListaParticular listaRetorno = new DataListaParticular();

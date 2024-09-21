@@ -14,7 +14,6 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
         this.controlCli = controlador;
         initComponents();
         this.cargarClientesLst(controlCli.mostrarClientes());
-
         this.cargarUsuariosLst(controlCli.mostrarUsuarios());
     }
 
@@ -56,18 +55,8 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
 
         txtUsuarioAdejarDeSeguir.setColumns(10);
 
-        lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(lstUsuarios);
 
-        lstClientes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(lstClientes);
 
         lblCliente1.setText("Cliente :");
@@ -132,16 +121,13 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAdejarDeSeguir.getText();
-
         if (nickCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
         } else {
-
             DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
             if (usr != null) {
                 DataCliente usr2 = controlCli.consultarPerfilCliente(nickCliente);
                 if (usr2 != null) {
-
                     if (controlCli.corroborarSiEstaenSeguidos(nickCliente, nickAseguir) == true) {
                         controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir);
                         JOptionPane.showMessageDialog(null, "Seguimiento terminado con exito.");
@@ -151,33 +137,25 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "Cliente no encontrado");
             }
-
         }
-
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     public void cargarClientesLst(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
         }
         lstClientes.setModel(model);
-
     }
 
     public void cargarUsuariosLst(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (String elemento : cole) {
             String nick = elemento;
             model.addElement(nick);

@@ -86,6 +86,6 @@ public abstract class Usuario implements Serializable {
         this.fecha_nac = fecha_nac;
     }
 
-    // Método abstracto para que las subclases implementen
+
     public abstract void mostrarInformacion();
 }

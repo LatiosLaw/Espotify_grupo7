@@ -58,6 +58,7 @@ public class ConsultarLista extends javax.swing.JPanel {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
+        txtIMAGEN_AFUTURO = new javax.swing.JLabel();
         txtGeneroLista = new javax.swing.JTextField();
         txtDefinidoPor = new javax.swing.JTextField();
         cbxOpt = new javax.swing.JComboBox<>();
@@ -85,18 +86,27 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
-        panel1.setBackground(new java.awt.Color(255, 102, 102));
+        panel1.setBackground(new java.awt.Color(204, 204, 204));
         panel1.setPreferredSize(new java.awt.Dimension(149, 149));
+
+        txtIMAGEN_AFUTURO.setForeground(new java.awt.Color(0, 0, 0));
+        txtIMAGEN_AFUTURO.setText("IMAGEN");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         txtGeneroLista.setEditable(false);
@@ -281,11 +291,9 @@ public class ConsultarLista extends javax.swing.JPanel {
 
     private void cbxOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOptActionPerformed
         int token = cbxOpt.getSelectedIndex();
-
         switch (token) {
             case 0 -> {
             }
-
             case 1 -> {
                 cargarGeneros();
             }
@@ -307,9 +315,7 @@ public class ConsultarLista extends javax.swing.JPanel {
     
     private void cargarClientes(Collection<DataCliente> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (DataCliente elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
@@ -320,24 +326,24 @@ public class ConsultarLista extends javax.swing.JPanel {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         String buscar = txtFiltrarPorEsteGeneroOCliente.getText();
         if(cbxOpt.getSelectedIndex() == 1){
-        Collection<String> ld = controlListPD.retornarListasDelGenero(buscar);
-        DefaultListModel<String> model;
-        model = new DefaultListModel<>();
-        for (String elemento : ld) {
-            model.addElement(elemento);
-        }
-        JListasFiltradas.setModel(model);
-        nombre_genero = buscar;
+            Collection<String> ld = controlListPD.retornarListasDelGenero(buscar);
+            DefaultListModel<String> model;
+            model = new DefaultListModel<>();
+            for (String elemento : ld) {
+                model.addElement(elemento);
+            }
+            JListasFiltradas.setModel(model);
+            nombre_genero = buscar;
         }else if(cbxOpt.getSelectedIndex() == 2){
             Collection<DataListaParticular> lp = controlListPar.devolverListadeCliente(buscar);
             DefaultListModel<String> model;
-        model = new DefaultListModel<>();
-        for (DataListaParticular elemento : lp) {
-            String nombre_lista = elemento.getNombre();
-            model.addElement(nombre_lista);
-        }
-        JListasFiltradas.setModel(model);
-        nombre_cliente = buscar;
+            model = new DefaultListModel<>();
+            for (DataListaParticular elemento : lp) {
+                String nombre_lista = elemento.getNombre();
+                model.addElement(nombre_lista);
+            }
+            JListasFiltradas.setModel(model);
+            nombre_cliente = buscar;
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, seleccione una opcion de filtrado coherente (Cliente o Genero).");
         }
@@ -345,13 +351,10 @@ public class ConsultarLista extends javax.swing.JPanel {
 
     private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
         StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
-
         // Obtener el portapapeles del sistema
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-
         // Copiar el texto al portapapeles
         clipboard.setContents(stringSelection, null);
-
         JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
     }//GEN-LAST:event_txtDireccionTemaMouseClicked
 
@@ -360,24 +363,24 @@ public class ConsultarLista extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
     private void jButtonBuscarInfoDeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInfoDeListaActionPerformed
-       if (!txtListaElegida.getText().isEmpty()) {
-           if(cbxOpt.getSelectedIndex() == 1){
-               DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), nombre_genero);
-            txtNombreLista.setText(lista.getNombre());
-               txtDefinidoPor.setText(" - ");
-               DataGenero gen = lista.getGenero();
-               txtGeneroLista.setText(gen.getNombre());
-            cargarTemasDeLaLista(lista.getNombre(), 1);
-        }else if(cbxOpt.getSelectedIndex() == 2){
-            DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
-               txtNombreLista.setText(lista.getNombre());
-               DataCliente cli = lista.getCreadorNickname();
-               txtDefinidoPor.setText(cli.getNickname());
-               txtGeneroLista.setText(" - ");
-               cargarTemasDeLaLista(lista.getNombre(), 2);
-        }else{
-            JOptionPane.showMessageDialog(null, "Disculpe, un error ha ocurrido.");
-        }
+        if (!txtListaElegida.getText().isEmpty()) {
+            if(cbxOpt.getSelectedIndex() == 1){
+                DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), nombre_genero);
+                txtNombreLista.setText(lista.getNombre());
+                txtDefinidoPor.setText(" - ");
+                DataGenero gen = lista.getGenero();
+                txtGeneroLista.setText(gen.getNombre());
+                cargarTemasDeLaLista(lista.getNombre(), 1);
+            }else if(cbxOpt.getSelectedIndex() == 2){
+                DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
+                txtNombreLista.setText(lista.getNombre());
+                DataCliente cli = lista.getCreadorNickname();
+                txtDefinidoPor.setText(cli.getNickname());
+                txtGeneroLista.setText(" - ");
+                cargarTemasDeLaLista(lista.getNombre(), 2);
+            }else{
+                JOptionPane.showMessageDialog(null, "Disculpe, un error ha ocurrido.");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, introduzca la lista de la que quiere saber la informacion en el formulario.");
         }
@@ -387,7 +390,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         String nomtem = ListaTemasLista.getSelectedValue();
         tema_seleccionado = controlTem.retornarTema(nomtem);
         txtNomTemLista.setText(tema_seleccionado.getNickname());
-
         if (tema_seleccionado.getArchivo() != null) {
             btnDescargarTema1.setVisible(true);
             txtDireccionTema.setText(tema_seleccionado.getAccess());
@@ -407,7 +409,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         String userHome = System.getProperty("user.home");
         Path descargas = Paths.get(userHome, "Downloads");
         Path destino = descargas.resolve(tema_seleccionado.getArchivo());
-
         try {
             // Copiar el archivo al directorio de destino
             Files.copy(sourcePath, destino, StandardCopyOption.REPLACE_EXISTING);
@@ -432,11 +433,10 @@ public class ConsultarLista extends javax.swing.JPanel {
     }
     
     public String convertirSegundos(int totalSegundos) {
-    int minutos = totalSegundos / 60;
-    int segundos = totalSegundos % 60;
-    
-    // Formatear los segundos para que siempre tengan 2 dígitos
-    return String.format("%d:%02d", minutos, segundos);
+        int minutos = totalSegundos / 60;
+        int segundos = totalSegundos % 60;
+        // Formatear los segundos para que siempre tengan 2 dígitos
+        return String.format("%d:%02d", minutos, segundos);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -462,6 +462,7 @@ public class ConsultarLista extends javax.swing.JPanel {
     private javax.swing.JTextField txtDurTem;
     private javax.swing.JTextField txtFiltrarPorEsteGeneroOCliente;
     private javax.swing.JTextField txtGeneroLista;
+    private javax.swing.JLabel txtIMAGEN_AFUTURO;
     private javax.swing.JTextField txtListaElegida;
     private javax.swing.JTextField txtNomTemLista;
     private javax.swing.JTextField txtNombreLista;

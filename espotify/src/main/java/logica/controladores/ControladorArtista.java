@@ -9,7 +9,7 @@ import javax.persistence.PersistenceException;
 import logica.Artista;
 import logica.Usuario;
 import logica.dt.DataArtista;
-import logica.dt.errorBundle;
+import logica.dt.DataErrorBundle;
 import persistencia.DAO_Usuario;
 
 public class ControladorArtista implements IControladorArtista {
@@ -18,7 +18,6 @@ public class ControladorArtista implements IControladorArtista {
     public DataArtista retornarArtista(String nickname) {
         Usuario retorno;
         DAO_Usuario persistence = new DAO_Usuario();
-
         try {
             retorno = persistence.findUsuarioByNick(nickname);
             if (retorno != null && retorno instanceof Artista artista) {
@@ -30,8 +29,7 @@ public class ControladorArtista implements IControladorArtista {
                         retorno.getFoto(),
                         retorno.getNacimiento(),
                         artista.getBiografia(),
-                        artista.getDirWeb()
-                );
+                        artista.getDirWeb());
             } else {
                 System.out.println("El usuario con nickname " + nickname + " no es un Artista.");
                 return null;
@@ -43,34 +41,29 @@ public class ControladorArtista implements IControladorArtista {
     }
 
     @Override
-    public errorBundle agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb) {
-        // Verificar que el nickname y el mail no esten en uso
+    public DataErrorBundle agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb) {
         DAO_Usuario persistence = new DAO_Usuario();
-
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false, 1);
+            return new DataErrorBundle(false, 1);
         }
-
         if (persistence.findUsuarioByMail(mail) != null) {
             System.out.println("El correo electronico: " + mail + " ya esta en uso. Por favor, elige otro.");
-            return new errorBundle(false, 2);
+            return new DataErrorBundle(false, 2);
         }
-
         // Crear el nuevo artista
         Artista nuevoArtista = new Artista(nickname, nombre, apellido, mail, foto, fechaNac, biografia, dirWeb);
-
         // Guardar el artista en la base de datos
         try {
             persistence.save(nuevoArtista);
             System.out.println("Artista agregado exitosamente.");
-            return new errorBundle(true, null);
+            return new DataErrorBundle(true, null);
         } catch (PersistenceException e) {
             System.out.println("Error al guardar el artista: " + e.getMessage());
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
             }
-            return new errorBundle(true, null);
+            return new DataErrorBundle(true, null);
         }
     }
 

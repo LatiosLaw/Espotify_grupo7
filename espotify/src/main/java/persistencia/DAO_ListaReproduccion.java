@@ -58,12 +58,12 @@ public class DAO_ListaReproduccion {
                     "SELECT u FROM ListaParticular u WHERE u.creador.nickname = :nick_creador",
                     ListaParticular.class)
                     .setParameter("nick_creador", nick_creador)
-                    .getResultList(); // Change here to getResultList()
+                    .getResultList();
         } catch (NoResultException e) {
-            return new ArrayList<>(); // Return an empty list instead of null
+            return new ArrayList<>(); // No se encontraron listas para este cliente
         } catch (Exception e) {
-            e.printStackTrace(); // For debugging
-            return new ArrayList<>(); // Return an empty list in case of an error
+            e.printStackTrace(); // Para depuracion
+            return null;
         }
     }
 
@@ -162,16 +162,12 @@ public class DAO_ListaReproduccion {
         } catch (NoResultException e) {
             return null; // No se encontro ningún cliente con ese nombre
         }
-
     }
 
     public Collection<String> devolverListasPorDefectoString() {
-    
-            Collection<String> listas = 
-             entityManager.createQuery("SELECT l.nombre FROM ListaPorDefecto l", String.class).getResultList();
-               
-              return listas.isEmpty() ? null : listas;
-     
-
+        Collection<String> listas = 
+        entityManager.createQuery("SELECT l.nombre FROM ListaPorDefecto l", String.class).getResultList();
+        return listas.isEmpty() ? null : listas;
     }
+    
 }

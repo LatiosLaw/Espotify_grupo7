@@ -24,9 +24,7 @@ public class FormPrin extends javax.swing.JFrame {
     private final IControladorListaPorDefecto controlListPD;
 
     public FormPrin() {
-
         Fabrica factory = Fabrica.getInstance();
-
         controlCli = factory.getIControladorCliente();
         controlArt = factory.getIControladorArtista();
         controlAlb = factory.getIControladorAlbum();
@@ -34,7 +32,6 @@ public class FormPrin extends javax.swing.JFrame {
         controlTem = factory.getIControladorTema();
         controlListPD = factory.getIControladorListaPorDefecto();
         controlListPar = factory.getIControladorListaParticular();
-
         initComponents();
         lblCargando.setVisible(false);
         jProgressBar1.setVisible(false);
@@ -64,16 +61,18 @@ public class FormPrin extends javax.swing.JFrame {
         setTitle("Espotify");
         setResizable(false);
 
-        pnlPrin.setBackground(new java.awt.Color(153, 255, 204));
+        pnlPrin.setBackground(new java.awt.Color(135, 184, 184));
         pnlPrin.setPreferredSize(new java.awt.Dimension(872, 579));
 
         jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
         jProgressBar1.setForeground(new java.awt.Color(51, 255, 51));
 
         lblCargando.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
+        lblCargando.setForeground(new java.awt.Color(0, 0, 0));
         lblCargando.setText("Cargando Datos");
 
         lblProgreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblProgreso.setForeground(new java.awt.Color(0, 0, 0));
         lblProgreso.setText("0%");
 
         javax.swing.GroupLayout pnlPrinLayout = new javax.swing.GroupLayout(pnlPrin);
@@ -170,11 +169,9 @@ public class FormPrin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdUsActionPerformed
-
         AdministrarUsuario au = new AdministrarUsuario(controlCli, controlArt, controlTem, controlListPar, controlListPD, controlAlb);
         au.setLocation(0, 0);
         au.setSize(872, 579);
-
         pnlPrin.removeAll();
         pnlPrin.add(au);
         pnlPrin.revalidate();
@@ -182,11 +179,9 @@ public class FormPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdUsActionPerformed
 
     private void btnAdAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdAlActionPerformed
-
         AdministrarAlbum aa = new AdministrarAlbum(controlAlb, controlGen, controlTem, controlArt);
         aa.setLocation(0, 0);
         aa.setSize(872, 579);
-
         pnlPrin.removeAll();
         pnlPrin.add(aa);
         pnlPrin.revalidate();
@@ -197,7 +192,6 @@ public class FormPrin extends javax.swing.JFrame {
         AdministrarLista aL = new AdministrarLista(controlListPD, controlListPar, controlCli, controlGen, controlTem);
         aL.setLocation(0, 0);
         aL.setSize(872, 579);
-
         pnlPrin.removeAll();
         pnlPrin.add(aL);
         pnlPrin.revalidate();
@@ -205,53 +199,40 @@ public class FormPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdLiActionPerformed
 
     private void btnCarDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarDatActionPerformed
-
         lblCargando.setVisible(true);
         jProgressBar1.setVisible(true);
         lblProgreso.setVisible(true);
-
         new Thread(() -> {
             try {
-
                 cargarClientes();
                 jProgressBar1.setValue(8);
                 lblProgreso.setText("8%");
-
                 cargarArtistas();
                 jProgressBar1.setValue(19);
                 lblProgreso.setText("19%");
-
                 cargarGeneros();
                 jProgressBar1.setValue(27);
                 lblProgreso.setText("27%");
-
                 cargarAlbumes();
                 jProgressBar1.setValue(35);
                 lblProgreso.setText("35%");
-
                 cargarTemas();
                 jProgressBar1.setValue(44);
                 lblProgreso.setText("44%");
-
                 cargarSeguimientos();
                 jProgressBar1.setValue(62);
                 lblProgreso.setText("67%");
-
                 cargarListas();
                 jProgressBar1.setValue(81);
                 lblProgreso.setText("81%");
-
                 cargarFavoritos();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
-
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
-
                 lblCargando.setVisible(false);
                 jProgressBar1.setVisible(false);
                 lblProgreso.setVisible(false);
                 btnCarDat.setEnabled(false);
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

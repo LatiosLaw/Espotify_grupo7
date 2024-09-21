@@ -51,7 +51,7 @@ public class DAO_Album {
                     .setParameter("nombre_genero", nombre_genero)
                     .getResultList();
         } catch (NoResultException e) {
-            return null; // No se encontro ningún album con ese nombre
+            return null; // No se encontro ningún album con ese genero
         }
     }
 
@@ -62,7 +62,7 @@ public class DAO_Album {
                     .setParameter("nick_artista", nick_artista)
                     .getResultList();
         } catch (NoResultException e) {
-            return null; // No se encontro ningún album con ese nombre
+            return null; // No se encontro ningún album con ese artista
         }
     }
 

@@ -40,7 +40,7 @@ public class DAO_Genero {
                     .setParameter("nombre_album", nombre_album)
                     .getResultList();
         } catch (NoResultException e) {
-            return null; // No se encontro ningún tema de este album
+            return null; // No se encontro ningún genero de ese album
         }
 
     }

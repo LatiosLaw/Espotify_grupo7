@@ -20,16 +20,13 @@ public class AgregarUsuario extends javax.swing.JPanel {
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
         controlArt = ica;
-
         initComponents();
-        txtNull.setVisible(false);
         lblDirWeb.setVisible(false);
         txtDirWeb.setVisible(false);
         txtaBio.setVisible(false);
         lblBiografia.setVisible(false);
         this.sprFecha.setEnabled(true);
         ((DefaultEditor) sprFecha.getEditor()).getTextField().setEditable(false);
-        
     }
 
     /**
@@ -60,7 +57,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
         btnConfirmar = new javax.swing.JButton();
         lblIMGG = new javax.swing.JLabel();
         txtIMG = new javax.swing.JTextField();
-        txtNull = new javax.swing.JTextField();
         lblIMGG1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
@@ -101,6 +97,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblBiografia.setText("Biografia :");
 
         txtaBio.setColumns(20);
+        txtaBio.setLineWrap(true);
         txtaBio.setRows(5);
         jScrollPane1.setViewportView(txtaBio);
 
@@ -118,13 +115,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblIMGG.setText("URL Perfil :");
 
         txtIMG.setColumns(10);
-
-        txtNull.setColumns(10);
-        txtNull.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNullActionPerformed(evt);
-            }
-        });
 
         lblIMGG1.setText("Tipo de Usuario :");
 
@@ -157,7 +147,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -168,9 +158,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGap(214, 214, 214))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,74 +167,59 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79))
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(txtNull, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDirWeb))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDirWeb))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblBiografia)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblIMGG)
-                                    .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblFechaNaci)
-                                    .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBiografia)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblIMGG)
+                            .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFechaNaci)
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIMGG1)
                     .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
         if (cbxTipoUsr.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione el tipo de usuario.");
         } else {
             String pattern = "MM/dd/yyyy";
-
             DateFormat df = new SimpleDateFormat(pattern);
-
             Date today = (Date) sprFecha.getValue();
-
             String fechaString = df.format(today);
-
             System.out.println("Today is: " + fechaString);
-
-            DateTimeFormatter formatter
-                    = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-            LocalDate fechaFinal
-                    = LocalDate.parse(fechaString, formatter);
-
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate fechaFinal = LocalDate.parse(fechaString, formatter);
             String nick = txtNickName.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
@@ -257,7 +230,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 if (cbxTipoUsr.getSelectedIndex() == 2) {
                     String biografia = txtaBio.getText();
                     String webPag = txtDirWeb.getText();
-                    //deborlber cosas CON bio y web
                     if (txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true) {
                         if (txtIMG.getText().isEmpty()) {
                             if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getValor()) {
@@ -286,9 +258,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
                     }
                 } else {
-
                     if (txtIMG.getText().isEmpty()) {
-
                         if (controlCli.agregarCliente(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal).getValor() == true) {
                             JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
                             vaciarCampos();
@@ -335,35 +305,26 @@ public class AgregarUsuario extends javax.swing.JPanel {
 
     private void cbxTipoUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUsrActionPerformed
         int token = cbxTipoUsr.getSelectedIndex();
-
         switch (token) {
             case 0:
-
                 lblDirWeb.setVisible(false);
                 txtDirWeb.setVisible(false);
                 txtaBio.setVisible(false);
                 lblBiografia.setVisible(false);
-
             case 1:
                 lblDirWeb.setVisible(false);
                 txtDirWeb.setVisible(false);
                 txtaBio.setVisible(false);
                 lblBiografia.setVisible(false);
-
                 break;
             case 2:
                 lblDirWeb.setVisible(true);
                 txtDirWeb.setVisible(true);
                 txtaBio.setVisible(true);
                 lblBiografia.setVisible(true);
-
                 break;
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
-
-    private void txtNullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNullActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNullActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
@@ -385,7 +346,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtIMG;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNull;
     private javax.swing.JTextArea txtaBio;
     // End of variables declaration//GEN-END:variables
 }

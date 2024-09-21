@@ -32,7 +32,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         controlArt = ica;
         controlGen = icg;
         controlTem = ict;
-
         initComponents();
         txtDireccionTema.setVisible(false);
         btnDescargarTema.setVisible(false);
@@ -68,6 +67,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtDurTem = new javax.swing.JTextField();
         lblDurTem = new javax.swing.JLabel();
         fotoAlb = new java.awt.Panel();
+        txtIMAGEN_AFUTURO = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         listGenOrArt = new javax.swing.JList<>();
         btnMostrarAlb = new javax.swing.JButton();
@@ -125,18 +125,27 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         lblDurTem.setText("Duracion :");
 
-        fotoAlb.setBackground(new java.awt.Color(255, 102, 102));
+        fotoAlb.setBackground(new java.awt.Color(204, 204, 204));
         fotoAlb.setPreferredSize(new java.awt.Dimension(149, 149));
+
+        txtIMAGEN_AFUTURO.setForeground(new java.awt.Color(0, 0, 0));
+        txtIMAGEN_AFUTURO.setText("IMAGEN");
 
         javax.swing.GroupLayout fotoAlbLayout = new javax.swing.GroupLayout(fotoAlb);
         fotoAlb.setLayout(fotoAlbLayout);
         fotoAlbLayout.setHorizontalGroup(
             fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(fotoAlbLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         fotoAlbLayout.setVerticalGroup(
             fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(fotoAlbLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(txtIMAGEN_AFUTURO)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         jScrollPane4.setViewportView(listGenOrArt);
@@ -209,14 +218,14 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                         .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(172, 172, 172)
                                 .addComponent(btnDescargarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(140, 140, 140)
+                                .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTemDeAlb)
                             .addGroup(layout.createSequentialGroup()
@@ -295,7 +304,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         String userHome = System.getProperty("user.home");
         Path descargas = Paths.get(userHome, "Downloads");
         Path destino = descargas.resolve(tema_seleccionado.getArchivo());
-
         try {
             // Copiar el archivo al directorio de destino
             Files.copy(sourcePath, destino, StandardCopyOption.REPLACE_EXISTING);
@@ -331,13 +339,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
     private void cbxConAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxConAlbActionPerformed
         int token = cbxConAlb.getSelectedIndex();
-
         switch (token) {
             case 0, 1 -> {
                 reinicarAlbumInfo();
                 cargarGeneros();
             }
-
             case 2 -> {
                 reinicarAlbumInfo();
                 cargarArtistas();
@@ -415,7 +421,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         String nomtem = listTemAlb.getSelectedValue();
         tema_seleccionado = controlTem.retornarTema(nomtem);
         txtNomTemAlb.setText(tema_seleccionado.getNickname());
-
         if (tema_seleccionado.getArchivo() != null) {
             btnDescargarTema.setVisible(true);
             txtDireccionTema.setText(tema_seleccionado.getAccess());
@@ -433,7 +438,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     public String convertirSegundos(int totalSegundos) {
     int minutos = totalSegundos / 60;
     int segundos = totalSegundos % 60;
-    
     // Formatear los segundos para que siempre tengan 2 dígitos
     return String.format("%d:%02d", minutos, segundos);
     }
@@ -456,16 +460,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
     private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
         StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
-
         // Obtener el portapapeles del sistema
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-
         // Copiar el texto al portapapeles
         clipboard.setContents(stringSelection, null);
-
         JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
     }//GEN-LAST:event_txtDireccionTemaMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescargarTema;
@@ -493,6 +493,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JTextField txtAnioCre;
     private javax.swing.JTextField txtDireccionTema;
     private javax.swing.JTextField txtDurTem;
+    private javax.swing.JLabel txtIMAGEN_AFUTURO;
     private javax.swing.JTextField txtNomAlb;
     private javax.swing.JTextField txtNomTemAlb;
     // End of variables declaration//GEN-END:variables

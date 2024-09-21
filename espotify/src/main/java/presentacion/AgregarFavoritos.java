@@ -14,7 +14,7 @@ import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
 
-public class AgregarCosoFav extends javax.swing.JPanel {
+public class AgregarFavoritos extends javax.swing.JPanel {
 
     private final IControladorCliente controlCli;
     private final IControladorTema controlTema;
@@ -22,7 +22,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     private final IControladorListaPorDefecto controlLiporde;
     private final IControladorAlbum controlAlb;
 
-    public AgregarCosoFav(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
+    public AgregarFavoritos(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
         lblBusqueda1.setVisible(true);
         lstCoso.setVisible(true);
@@ -31,19 +31,15 @@ public class AgregarCosoFav extends javax.swing.JPanel {
         lstTemas.setVisible(false);
         lblTemasAgregar.setVisible(false);
         btnBuscar.setVisible(false);
-        
-         lblUsuarioDeLasListas.setVisible(false);
+        lblUsuarioDeLasListas.setVisible(false);
         txtUsuarioDeLasListas.setVisible(false);
-        
         this.btnFav2.setVisible(false);
-            this.txtBusqueda2.setVisible(false);
-            lblBusqueda2.setVisible(false);
-            lblCliente2.setVisible(false);
-            txtCliente2.setVisible(false);
-            lstTemas.setVisible(false);
-            lblTemasAgregar.setVisible(false);
-        
-        
+        this.txtBusqueda2.setVisible(false);
+        lblBusqueda2.setVisible(false);
+        lblCliente2.setVisible(false);
+        txtCliente2.setVisible(false);
+        lstTemas.setVisible(false);
+        lblTemasAgregar.setVisible(false);
         controlCli = icc;
         controlAlb = ica;
         controlLipa = iclp;
@@ -128,7 +124,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
 
         txtUsuarioDeLasListas.setColumns(10);
 
-        lblUsuarioDeLasListas.setText("ImGoinToAlice");
+        lblUsuarioDeLasListas.setText(" ");
 
         txtBusqueda2.setColumns(10);
 
@@ -244,32 +240,29 @@ public class AgregarCosoFav extends javax.swing.JPanel {
     private void cbxLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLPMActionPerformed
         limpiarListas();
         if("Listas Particulares".equals(String.valueOf(cbxLPM.getSelectedItem()))){
-             lblUsuarioDeLasListas.setVisible(true);
+            lblUsuarioDeLasListas.setVisible(true);
             txtUsuarioDeLasListas.setVisible(true);   
             btnBuscar.setVisible(true);
             lblUsuarioDeLasListas.setText("Cliente:");
-               // Collection<String> lista =  controlLipa.devolverListasParticularesPublicasString(txtUsuario.getText());
-             //this.cargarLstFav(lista);
-            }else{
-             lblUsuarioDeLasListas.setVisible(false);
-             btnBuscar.setVisible(false);
+            // Collection<String> lista =  controlLipa.devolverListasParticularesPublicasString(txtUsuario.getText());
+            //this.cargarLstFav(lista);
+        }else{
+            lblUsuarioDeLasListas.setVisible(false);
+            btnBuscar.setVisible(false);
             txtUsuarioDeLasListas.setVisible(false);
-                Collection<String> lista =   controlLiporde.listarListasPorDefecto();
-
-                if(lista == null){
-                    JOptionPane.showMessageDialog(null, "No hay listas por defecto en el sistema. Cargue datos por favor");
-                }else{
-                    this.cargarLstFav(lista);
-                }   
-            }
+            Collection<String> lista =   controlLiporde.listarListasPorDefecto();
+            if(lista == null){
+                JOptionPane.showMessageDialog(null, "No hay listas por defecto en el sistema. Cargue datos por favor");
+            }else{
+                this.cargarLstFav(lista);
+            }   
+        }
     }//GEN-LAST:event_cbxLPMActionPerformed
 
     private void cbxCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCosoActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
         limpiarListas();
         if("OPT".equals(token)){
-            //this.limpiarCampos();
-            
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             cbxLPM.setVisible(false);
@@ -278,11 +271,6 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             btnBuscar.setVisible(false);
             this.lblBusqueda1.setText("Busqueda 1");
             lblPrimeraBusqueda.setText("Busqueda 1:");
-            
-            
-          //  this.txtCliente.setVisible(false);
-           // this.lblCliente.setVisible(false);
-            
             this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
@@ -290,10 +278,7 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             txtCliente2.setVisible(false);
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
-            
-            
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
-           
         }else if("Temas".equals(token)){
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
@@ -303,11 +288,8 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             btnBuscar.setVisible(false);
             this.lblBusqueda1.setText("Album");
             lblPrimeraBusqueda.setText("Albums:");
-            
-            
             this.txtCliente.setVisible(false);
             this.lblCliente.setVisible(false);
-            
             this.btnFav2.setVisible(true);
             this.txtBusqueda2.setVisible(true);
             lblBusqueda2.setVisible(true);
@@ -315,54 +297,40 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             txtCliente2.setVisible(true);
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
-            
             Collection<String> colec = this.controlAlb.retornarAlbumsString();
-               
-             if(colec == null){
+            if(colec == null){
                    JOptionPane.showMessageDialog(null, "No hay albums en el sistema. Cargue datos por favor");
-             }else{
+            }else{
                  this.cargarLstFav(colec);
-             }
-             
-               
-            
+            }
         }else if ("Listas".equals(token)){
-             this.txtCliente.setVisible(true);
-             lblCliente.setVisible(true);
+            this.txtCliente.setVisible(true);
+            lblCliente.setVisible(true);
             cbxLPM.setVisible(true);
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             lblUsuarioDeLasListas.setVisible(true);
             txtUsuarioDeLasListas.setVisible(true);
-            
-             this.btnFav2.setVisible(false);
+            this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
             lblCliente2.setVisible(false);
             txtCliente2.setVisible(false);
             lstTemas.setVisible(false);
-            
             this.lblBusqueda1.setText("Lista");
             lblPrimeraBusqueda.setText("Listas:");
             if("Listas Particulares".equals(String.valueOf(cbxLPM.getSelectedItem()))){
-                lblUsuarioDeLasListas.setText("Cliente:");
-              
-               
+               lblUsuarioDeLasListas.setText("Cliente:");
                btnBuscar.setVisible(true);
-               
-              
-
             }else{
                 btnBuscar.setVisible(false);
                 Collection<String> lista =   controlLiporde.listarListasPorDefecto();
-
                 if(lista == null){
                     JOptionPane.showMessageDialog(null, "No hay listas por defecto en el sistema. Cargue datos por favor");
                 }else{
                     this.cargarLstFav(lista);
                 }   
             }
-            
         }else{
             //Albums
             lstTemas.setVisible(false);
@@ -373,7 +341,6 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             this.lblBusqueda1.setText("Album");
             lblPrimeraBusqueda.setText("Albums:");
             btnBuscar.setVisible(false);
-            
             this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
@@ -382,22 +349,18 @@ public class AgregarCosoFav extends javax.swing.JPanel {
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             this.txtCliente.setVisible(true);
-             lblCliente.setVisible(true);
-            
+            lblCliente.setVisible(true);
             Collection<String> colec = this.controlAlb.retornarAlbumsString();
             if(colec == null){
                    JOptionPane.showMessageDialog(null, "No hay albums en el sistema. Cargue datos por favor");
-             }else{
+            }else{
                  this.cargarLstFav(colec);
-             }
-            
+            }
         }
-        
     }//GEN-LAST:event_cbxCosoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-         String token = String.valueOf(cbxCoso.getSelectedItem());
-        
+        String token = String.valueOf(cbxCoso.getSelectedItem());
         if("OPT".equals(token)){
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if ("Listas".equals(token)){
@@ -413,38 +376,28 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                 } else{
                     JOptionPane.showMessageDialog(null, "No existe Cliente con ese Nick");
                 }
-
             }
-  
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
          String token = String.valueOf(cbxCoso.getSelectedItem());
         if("OPT".equals(token)){
-           
-              JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
-           //controlCli.agregarTema(nickcli, tema);
+           JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if(token == "Temas"){
-          
             DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
             DataCliente cli = controlCli.consultarPerfilCliente(txtCliente.getText());
-            
             if("ALBUM NO EXISTE".equals(album.getNombre())){
-                 JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
+                JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
             }else{
-                     Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText()); 
-                    
+                Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText()); 
                     if(cole.isEmpty() || cole == null){
                          JOptionPane.showMessageDialog(null, "El album seleccionado no tiene Temas");
                     }else{
                         this.cargarLstTemas(cole);
                     }
                 }   
-            
-           
         }else if(token == "Listas"){
-            
             String token2 = String.valueOf(cbxLPM.getSelectedItem());
             if("Listas Particulares".equals(token2)){
                 DataCliente usuarioDeLaLista = controlCli.consultarPerfilCliente(txtUsuarioDeLasListas.getText());
@@ -453,43 +406,30 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                 }else{
                      DataListaParticular listaPar = this.controlLipa.devolverInformacion(txtBusqueda1.getText(),txtUsuarioDeLasListas.getText());
                     if(listaPar == null){
-                    JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
-                }else{
-                    
-                    if(controlCli.consultarPerfilCliente(txtCliente.getText()) == null){
-                         JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
+                        JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
                     }else{
+                        if(controlCli.consultarPerfilCliente(txtCliente.getText()) == null){
+                            JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
+                        }else{
                           controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPar);
                           JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
                           this.limpiarCampos();
+                        }
                     }
                 }
-                }
-
             }else{
-                
                 DataListaPorDefecto listaPorDe = this.controlLiporde.devolverInformacionChu(txtBusqueda1.getText());
-                
                 if(listaPorDe == null){
                        JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
                 }else{
-                      controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
-            
-                 JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
-                this.limpiarCampos();
+                    controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
+                    JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
+                    this.limpiarCampos();
                 }
-                
-                
-                
-              
-                
-                
             }
         }else if("Albums".equals(token)){
-            
             DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
             DataCliente cli = controlCli.consultarPerfilCliente(txtCliente.getText());
-            
             if("ALBUM NO EXISTE".equals(album.getNombre())){
                  JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
             }else{
@@ -499,16 +439,14 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                      controlCli.agregarAlbum(cli, album);
                       JOptionPane.showMessageDialog(null, "Se agrego Album a la lista de favoritos");
                       this.limpiarCampos();
-                }   
-            } 
+                }
+            }
         }
     }//GEN-LAST:event_btnFavActionPerformed
 
     private void btnFav2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFav2ActionPerformed
-        
         DataCliente cli = controlCli.consultarPerfilCliente(this.txtCliente2.getText());
         DataTema tema = controlTema.retornarTema2LaSecuela(this.txtBusqueda2.getText());
-        
         if(tema == null){
              JOptionPane.showMessageDialog(null, "No existe tema a ese nombre");
         }else if(cli == null){
@@ -518,28 +456,22 @@ public class AgregarCosoFav extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
                 this.limpiarCampos();
             }
-
     }//GEN-LAST:event_btnFav2ActionPerformed
 
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (String elemento : cole) {
-            //  System.out.print("Elemento de lstSeguidos"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }
         lstCoso.setModel(model);
     }
+    
     public void cargarLstTemas(Collection<String> cole) {
         DefaultListModel<String> model;
-
         model = new DefaultListModel<>();
-
         for (String elemento : cole) {
-            //  System.out.print("Elemento de lstSeguidos"+elemento);
             String nombre = elemento;
             model.addElement(nombre);
         }

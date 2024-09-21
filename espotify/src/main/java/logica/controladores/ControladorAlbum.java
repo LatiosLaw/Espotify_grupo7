@@ -30,7 +30,6 @@ public class ControladorAlbum implements IControladorAlbum {
         album_vacio.setNombre(nuevo_album.getNombre());
         persistence.save(album_vacio);
         persistence.update(nuevo_album);
-
         if (persistence.find(nuevo_album.getNombre()) != null) {
             System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
             return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
@@ -96,33 +95,24 @@ public class ControladorAlbum implements IControladorAlbum {
     public void actualizarAlbum(DataAlbum dataAlbum, Collection<DataGenero> nuevosGeneros) {
         DAO_Album persistence = new DAO_Album();
         DAO_Genero persistence2 = new DAO_Genero();
-
         Album albumExistente = persistence.find(dataAlbum.getNombre());
-
         if (albumExistente != null) {
             albumExistente.setImagen(dataAlbum.getImagen());
             albumExistente.setanioCreacion(dataAlbum.getAnioCreacion());
-
             for (DataTema tema : dataAlbum.getTemas()) {
                 albumExistente.agregarTema(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
             }
-            // ayudaa
-
             for (DataGenero dataGenero : nuevosGeneros) {
                 Genero generoExistente = new Genero(dataGenero.getNombre());
-
                 if (!albumExistente.getGeneros().contains(generoExistente)) {
                     Genero genero = persistence2.find(dataGenero.getNombre());
-
                     if (genero != null) {
                         albumExistente.agregarGenero(genero);
                         genero.agregarAlbumDelGenero(albumExistente);
                     }
                 }
             }
-
             persistence.update(albumExistente);
-
             System.out.println("El álbum " + dataAlbum.getNombre() + " fue actualizado correctamente.");
         } else {
             System.out.println("El álbum con nombre: " + dataAlbum.getNombre() + " no existe.");

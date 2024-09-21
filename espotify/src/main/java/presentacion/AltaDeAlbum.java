@@ -22,7 +22,6 @@ import java.awt.event.KeyEvent;
 import logica.controladores.IControladorArtista;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
-import logica.dt.DataCliente;
 
 public class AltaDeAlbum extends javax.swing.JPanel {
 
@@ -43,14 +42,11 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setDialogTitle("Selecciona un archivo MP3");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
-
         generos_seleccionados = new ArrayList<>();
         temas_del_album = new ArrayList<>();
-
         initComponents();
         cargarGeneros();
         cargarArtistas();
-        
         lblMin.setVisible(false);
         lblSeg.setVisible(false);
         txtMin.setVisible(false);
@@ -417,26 +413,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean insertarEnPosicion(ArrayList<String> temas, String temazo, int posicion) {
-        if(posicion>0){
-            posicion = posicion - 1;
-        }
-        // Verificar que la posición sea válida
-        if (posicion < 0) {
-            return false;
-        }
-
-        if (posicion > temas.size()) {
-            temas.add(temazo);
-            return true;
-        } else {
-            temas.add(posicion, temazo); // El método add en ArrayList automáticamente mueve los elementos hacia abajo
-            return true;
-        }
-
-        // Insertar el nuevo elemento en la posición deseada
-    }
-
     private void txtNomTemaAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomTemaAlbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomTemaAlbActionPerformed
@@ -454,24 +430,21 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                 if (fileChooser.getSelectedFile() != null) {
                     selectedFile = fileChooser.getSelectedFile();
                     File destinationDir = new File("espotify\\src\\main\\java\\temas");
-
                     if (!destinationDir.exists()) {
                         destinationDir.mkdirs(); // Crear la carpeta si no existe
                     }
-
                     // Crear el archivo de destino con el mismo nombre que el seleccionado
                     File destinationFile = new File(destinationDir, selectedFile.getName());
-
                     // Copiar el archivo al destino
                     if (selectedFile.getName().endsWith(".mp3")) {
                         try {
-                            // Extract duration from the MP3 file
+                            // Extrae la duracion del archivo mp3
                             Mp3File mp3File = new Mp3File(selectedFile.getAbsolutePath());
                             if (mp3File.hasId3v2Tag()) {
                                 ID3v2 id3v2Tag = mp3File.getId3v2Tag();
                                 long durationInSeconds = mp3File.getLengthInSeconds();
                                 if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName())) {
-                                    JOptionPane.showMessageDialog(lblMsjArch, "Tema agregado con exito");
+                                    JOptionPane.showMessageDialog(null, "Tema agregado con exito");
                                     DefaultListModel<String> model = new DefaultListModel();
                                     Iterator<String> iterator = temas_del_album.iterator();
                                     while (iterator.hasNext()) {
@@ -500,7 +473,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, "Error al leer el archivo MP3");
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo MP3");
                     }
@@ -525,49 +497,42 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     txtTipMus.setText(null);
                     txtMin.setText(null);
                     txtSeg.setText(null);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
-                }
-            }else{
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Un error ha ocurrido, es posible que la posicion del tema en la lista no sea valida o el nombre se encuentre repetido.");
+                    }
+                }else{
                     JOptionPane.showMessageDialog(null, "La duracion del tema es obligatoria.");
-           }
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Nombre, posicion del tema y un link de descarga o para escucharlo son obligatorios.");
         }
-
     }//GEN-LAST:event_btnConfTemActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         if (txtArt.getText().isEmpty() || txtNomAlb.getText().isEmpty() || txtAnio.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(lblMsjArch, "Por favor, complete el formulario con la informacion necesaria");
+            JOptionPane.showMessageDialog(null, "Por favor, complete el formulario con la informacion necesaria");
         } else {
             if (controlArt.retornarArtista(txtArt.getText()) != null) {
                 String nick_artista = txtArt.getText();
                 String nombre_album = txtNomAlb.getText();
                 String imagen = txtLinkImg.getText();
                 Integer año_album = Integer.parseInt(txtAnio.getText());
-
                 //// CALCULAR GENEROS SELECCIONADOS
                 Collection<DataGenero> generos = new ArrayList<>();
                 if (generos_seleccionados.isEmpty()) {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, seleccione generos para el album");
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione generos para el album");
                 } else {
                     Iterator<String> iterator = generos_seleccionados.iterator();
                     while (iterator.hasNext()) {
                         String elemento = iterator.next();
                         generos.add(new DataGenero(elemento));
                     }
-                    while (iterator.hasNext()) {
-
-                    }
                 }
-                ////
-
                 //// CALCULAR TEMAS SELECCIONADOS
                 Collection<DataTema> temas = new ArrayList<>();
                 if (temas_del_album.isEmpty()) {
-                    JOptionPane.showMessageDialog(lblMsjArch, "Por favor, genere temas para el album");
+                    JOptionPane.showMessageDialog(null, "Por favor, genere temas para el album");
                 } else {
                     Iterator<String> iterator = temas_del_album.iterator();
                     Integer posicion = 1;
@@ -578,7 +543,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
                         temas.add(tema_actual);
                     }
-
                     if (txtLinkImg.getText().isEmpty()) {
                         DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);
                         Iterator<String> iterator_gen = generos_seleccionados.iterator();
@@ -587,7 +551,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
                             controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
                         }
-                        JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
+                        JOptionPane.showMessageDialog(null, "Album agregado con exito");
                         reiniciarCampos();
                     } else {
                         DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, temas);
@@ -597,14 +561,12 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             Collection<String> albumes = controlAlb.retornarAlbumsDelGenero(genero);
                             controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
                         }
-                        JOptionPane.showMessageDialog(lblMsjArch, "Album agregado con exito");
+                        JOptionPane.showMessageDialog(null, "Album agregado con exito");
                         reiniciarCampos();
                     }
                 }
-                //// 
-
             } else {
-                JOptionPane.showMessageDialog(lblMsjArch, "El nickname seleccionado no existe o pertenece a un usuario común");
+                JOptionPane.showMessageDialog(null, "El nickname seleccionado no existe o pertenece a un usuario común");
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -645,28 +607,26 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             btnArch.setVisible(true);
             lblMsjArch.setVisible(true);
             lblMin.setVisible(false);
-        lblSeg.setVisible(false);
-        txtMin.setVisible(false);
-        txtSeg.setVisible(false);
+            lblSeg.setVisible(false);
+            txtMin.setVisible(false);
+            txtSeg.setVisible(false);
         } else {
             btnArch.setVisible(false);
             lblMsjArch.setVisible(false);
             lblMin.setVisible(true);
-        lblSeg.setVisible(true);
-        txtMin.setVisible(true);
-        txtSeg.setVisible(true);
+            lblSeg.setVisible(true);
+            txtMin.setVisible(true);
+            txtSeg.setVisible(true);
         }
     }//GEN-LAST:event_cbxTipMusActionPerformed
 
     private void btnSelGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelGenActionPerformed
         if (generos_seleccionados.contains(listGen.getSelectedValue())) {
-            JOptionPane.showMessageDialog(lblMsjArch, "Este album ya cuenta con este genero");
+            JOptionPane.showMessageDialog(null, "Este album ya cuenta con este genero");
         } else {
             generos_seleccionados.add(listGen.getSelectedValue());
             DefaultListModel<String> model = new DefaultListModel();
-            if (generos_seleccionados.isEmpty()) {
-
-            } else {
+            if (!generos_seleccionados.isEmpty()) {
                 Iterator<String> iterator = generos_seleccionados.iterator();
                 while (iterator.hasNext()) {
                     model.addElement(iterator.next());
@@ -684,7 +644,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReiGenActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // * basura * //
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtPosTemaAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPosTemaAlbActionPerformed
@@ -697,7 +657,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             controlTem.BorrarTema(iterator.next());
         }
         reiniciarCampos();
-        JOptionPane.showMessageDialog(lblMsjArch, "Alta de Album cancelada con exito");
+        JOptionPane.showMessageDialog(null, "Alta de Album cancelada con exito");
     }//GEN-LAST:event_btnNukear1ActionPerformed
 
     private void txtMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinActionPerformed
@@ -711,12 +671,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     public void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
-        if (retorno.isEmpty()) {
-
-        } else {
+        if (!retorno.isEmpty()) {
             Iterator<String> iterator = retorno.iterator();
             while (iterator.hasNext()) {
-
                 model.addElement(iterator.next());
             }
         }
@@ -726,14 +683,29 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     public void cargarArtistas() {
         Collection<DataArtista> cole = controlArt.mostrarArtistas();
         DefaultListModel<String> model;
-
         model = new DefaultListModel<String>();
-
         for (DataArtista elemento : cole) {
             String nick = elemento.getNickname();
             model.addElement(nick);
         }
         listArts.setModel(model);
+    }
+    
+    private boolean insertarEnPosicion(ArrayList<String> temas, String temazo, int posicion) {
+        if(posicion>0){
+            posicion = posicion - 1;
+        }
+        // Verificar que la posición sea válida
+        if (posicion < 0) {
+            return false;
+        }
+        if (posicion > temas.size()) {
+            temas.add(temazo);
+            return true;
+        } else {
+            temas.add(posicion, temazo); // El método add en ArrayList automáticamente mueve los elementos hacia abajo
+            return true;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

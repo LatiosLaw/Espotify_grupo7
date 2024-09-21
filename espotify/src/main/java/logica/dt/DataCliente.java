@@ -24,7 +24,7 @@ public class DataCliente extends DataUsuario {
     }
     
     public DataCliente(String nombre){
-    super(nombre);
+        super(nombre);
     }
 
     public Collection<DataUsuario> getSeguidos() {
