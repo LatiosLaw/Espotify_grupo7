@@ -336,6 +336,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     Collection <String> temas = this.controlCli.obtenerTemaFavCliente(cliente);
                     if(temas.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
+                        limpiarCampos();
                     }else{
                         this.cargarLstFav(temas);
                     }
@@ -344,6 +345,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     Collection <String> listas = controlCli.obtenerListasFavCliente(cliente);
                     if(listas.isEmpty()){
                          JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
+                         limpiarCampos();
                     }else{
                       this.cargarLstFav(listas);
                     }
@@ -352,6 +354,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     Collection <String> albums = controlCli.obtenerAlbumFavCliente(cliente);
                     if(albums.isEmpty()){
                         JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
+                        limpiarCampos();
                     }else{
                         this.cargarLstFav(albums);
                     }
