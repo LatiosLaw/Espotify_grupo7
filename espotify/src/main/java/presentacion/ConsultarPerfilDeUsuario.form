@@ -34,10 +34,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSeguidores1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtBuscar" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="btnOK" min="-2" pref="124" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -112,8 +108,6 @@
                       <Component id="lblSeguidores1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="txtBuscar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnOK" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="txtNickName" min="-2" max="-2" attributes="0"/>
@@ -361,14 +355,6 @@
       <Properties>
         <Property name="columns" type="int" value="10"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnOK">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane9">
       <AuxValues>

@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
@@ -33,6 +35,8 @@ public class ConsultarLista extends javax.swing.JPanel {
     private String nombre_cliente;
     private String nombre_genero;
     private DataTema tema_seleccionado;
+    String selectedFilter;
+    String selectedList;
     
     public ConsultarLista(IControladorGenero icg, IControladorCliente icc, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorTema ict) {
         controlGen = icg;
@@ -46,6 +50,37 @@ public class ConsultarLista extends javax.swing.JPanel {
         txtNomTemLista.setEditable(false);
         txtDurTem.setEditable(false);
         txtDurTem.setEditable(false);
+        
+        ListaGenerosOClientes.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedFilter = ListaGenerosOClientes.getSelectedValue();
+                    txtFiltrarPorEsteGeneroOCliente.setText(selectedFilter);
+                    if(!txtFiltrarPorEsteGeneroOCliente.getText().isEmpty()){
+                        filtrarPorClienteOGenero();
+                    }
+                }
+            }
+        });
+        
+        JListasFiltradas.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedList = JListasFiltradas.getSelectedValue();
+                    txtListaElegida.setText(selectedList);
+                    vaciarCampos();
+                    if(!txtListaElegida.getText().isEmpty()){
+                        buscarInfoLista();
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -65,7 +100,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         jScrollPane8 = new javax.swing.JScrollPane();
         ListaGenerosOClientes = new javax.swing.JList<>();
         txtFiltrarPorEsteGeneroOCliente = new javax.swing.JTextField();
-        btnOK = new javax.swing.JButton();
         lblGeneroOCliente = new javax.swing.JLabel();
         txtNomTemLista = new javax.swing.JTextField();
         txtDurTem = new javax.swing.JTextField();
@@ -80,7 +114,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         txtNombreLista = new javax.swing.JTextField();
         jScrollPane10 = new javax.swing.JScrollPane();
         ListaTemasLista = new javax.swing.JList<>();
-        jButtonBuscarInfoDeLista = new javax.swing.JButton();
         lblConAlb = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -127,14 +160,10 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         jScrollPane8.setViewportView(ListaGenerosOClientes);
 
+        txtFiltrarPorEsteGeneroOCliente.setEditable(false);
+        txtFiltrarPorEsteGeneroOCliente.setBackground(new java.awt.Color(204, 204, 204));
         txtFiltrarPorEsteGeneroOCliente.setColumns(10);
-
-        btnOK.setText("Mostrar Listas");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
+        txtFiltrarPorEsteGeneroOCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         lblGeneroOCliente.setText("Genero o Cliente : ");
 
@@ -164,7 +193,10 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         jScrollPane9.setViewportView(JListasFiltradas);
 
+        txtListaElegida.setEditable(false);
+        txtListaElegida.setBackground(new java.awt.Color(204, 204, 204));
         txtListaElegida.setColumns(10);
+        txtListaElegida.setForeground(new java.awt.Color(0, 0, 0));
 
         lblLista.setText("Lista :");
 
@@ -177,13 +209,6 @@ public class ConsultarLista extends javax.swing.JPanel {
         });
         jScrollPane10.setViewportView(ListaTemasLista);
 
-        jButtonBuscarInfoDeLista.setText("Mostrar Datos");
-        jButtonBuscarInfoDeLista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarInfoDeListaActionPerformed(evt);
-            }
-        });
-
         lblConAlb.setText("Consultar Lista :");
 
         jLabel1.setText("Temas de la Lista :");
@@ -194,43 +219,39 @@ public class ConsultarLista extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLista)
+                    .addComponent(lblGeneroOCliente)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtFiltrarPorEsteGeneroOCliente)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblConAlb)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtListaElegida))
+                .addGap(140, 140, 140)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDescargarTema1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(lblDurTem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblLista)
-                            .addComponent(lblGeneroOCliente)
-                            .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(txtFiltrarPorEsteGeneroOCliente)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblConAlb)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtListaElegida))
-                        .addGap(140, 140, 140)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDescargarTema1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(lblDurTem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtNombreLista, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(txtDefinidoPor)
-                                    .addComponent(txtGeneroLista)
-                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(txtNomTemLista)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButtonBuscarInfoDeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)
+                            .addComponent(txtNombreLista, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(txtDefinidoPor)
+                            .addComponent(txtGeneroLista)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txtNomTemLista)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,9 +271,7 @@ public class ConsultarLista extends javax.swing.JPanel {
                             .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnOK)
-                        .addGap(12, 12, 12)
+                        .addGap(52, 52, 52)
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLista))
@@ -279,9 +298,7 @@ public class ConsultarLista extends javax.swing.JPanel {
                             .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtListaElegida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarInfoDeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -323,7 +340,7 @@ public class ConsultarLista extends javax.swing.JPanel {
         ListaGenerosOClientes.setModel(model);
     }
     
-    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+    public void filtrarPorClienteOGenero(){
         String buscar = txtFiltrarPorEsteGeneroOCliente.getText();
         if(cbxOpt.getSelectedIndex() == 1){
             Collection<String> ld = controlListPD.retornarListasDelGenero(buscar);
@@ -347,8 +364,8 @@ public class ConsultarLista extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, seleccione una opcion de filtrado coherente (Cliente o Genero).");
         }
-    }//GEN-LAST:event_btnOKActionPerformed
-
+    }
+    
     private void txtDireccionTemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionTemaMouseClicked
         StringSelection stringSelection = new StringSelection(txtDireccionTema.getText());
         // Obtener el portapapeles del sistema
@@ -358,11 +375,7 @@ public class ConsultarLista extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Enlace copiado al portapapeles.");
     }//GEN-LAST:event_txtDireccionTemaMouseClicked
 
-    private void txtDireccionTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTemaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionTemaActionPerformed
-
-    private void jButtonBuscarInfoDeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInfoDeListaActionPerformed
+    public void buscarInfoLista(){
         if (!txtListaElegida.getText().isEmpty()) {
             if(cbxOpt.getSelectedIndex() == 1){
                 DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), nombre_genero);
@@ -384,7 +397,11 @@ public class ConsultarLista extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, introduzca la lista de la que quiere saber la informacion en el formulario.");
         }
-    }//GEN-LAST:event_jButtonBuscarInfoDeListaActionPerformed
+    }
+    
+    private void txtDireccionTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTemaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
     private void ListaTemasListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaTemasListaMouseClicked
         String nomtem = ListaTemasLista.getSelectedValue();
@@ -439,14 +456,24 @@ public class ConsultarLista extends javax.swing.JPanel {
         return String.format("%d:%02d", minutos, segundos);
     }
     
+    public void vaciarCampos(){
+        txtNombreLista.setText(null);
+        txtDefinidoPor.setText(null);
+        txtGeneroLista.setText(null);
+        txtNomTemLista.setText(null);
+        txtDurTem.setText(null);
+        txtDireccionTema.setText(null);
+        DefaultListModel<String> model;
+        model = new DefaultListModel<>();
+        ListaTemasLista.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JListasFiltradas;
     private javax.swing.JList<String> ListaGenerosOClientes;
     private javax.swing.JList<String> ListaTemasLista;
     private javax.swing.JButton btnDescargarTema1;
-    private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxOpt;
-    private javax.swing.JButton jButtonBuscarInfoDeLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane10;

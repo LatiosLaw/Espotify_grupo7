@@ -1,11 +1,13 @@
 package presentacion;
 
 import java.awt.Component;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner.DefaultEditor;
 import logica.controladores.IControladorCliente;
@@ -16,11 +18,16 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private final IControladorCliente controlCli;
     private final IControladorArtista controlArt;
     private Component lblMsjArch;
+    private final JFileChooser fileChooserImagen;
 
     public AgregarUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
         controlArt = ica;
         initComponents();
+        fileChooserImagen = new JFileChooser();
+        fileChooserImagen.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooserImagen.setDialogTitle("Selecciona una imagen de perfil");
+        fileChooserImagen.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagenes (JPG, PNG)", "jpg", "png"));
         lblDirWeb.setVisible(false);
         txtDirWeb.setVisible(false);
         txtaBio.setVisible(false);
@@ -56,8 +63,8 @@ public class AgregarUsuario extends javax.swing.JPanel {
         txtDirWeb = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
         lblIMGG = new javax.swing.JLabel();
-        txtIMG = new javax.swing.JTextField();
         lblIMGG1 = new javax.swing.JLabel();
+        jButtonImagen = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -112,11 +119,16 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblIMGG.setText("URL Perfil :");
-
-        txtIMG.setColumns(10);
+        lblIMGG.setText("Imagen Perfil :");
 
         lblIMGG1.setText("Tipo de Usuario :");
+
+        jButtonImagen.setText("Subir");
+        jButtonImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImagenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,12 +143,12 @@ public class AgregarUsuario extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(lblIMGG))
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(txtNickName, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblIMGG1)
                         .addGap(30, 30, 30)
@@ -196,7 +208,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblIMGG)
-                            .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonImagen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFechaNaci)
@@ -205,7 +217,7 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIMGG1)
                     .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,14 +236,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String correo = txtCorreo.getText();
-            String foto = "foto"; //DE MOMENTO
+            File selectedFile = fileChooserImagen.getSelectedFile();
             System.out.println("Converted LocalDate: " + fechaFinal);
             if (txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true) {
                 if (cbxTipoUsr.getSelectedIndex() == 2) {
                     String biografia = txtaBio.getText();
                     String webPag = txtDirWeb.getText();
                     if (txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true) {
-                        if (txtIMG.getText().isEmpty()) {
+                        if (selectedFile==null) {
                             if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getValor()) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
                                 vaciarCampos();
@@ -243,11 +255,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
                                 }
                             }
                         } else {
-                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal, biografia, webPag).getValor()) {
+                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getValor()) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
                                 vaciarCampos();
                             } else {
-                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal, biografia, webPag).getNumero() == 1) {
+                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getNumero() == 1) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                                 } else {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
@@ -258,12 +270,12 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
                     }
                 } else {
-                    if (txtIMG.getText().isEmpty()) {
-                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal).getValor() == true) {
+                    if (selectedFile==null) {
+                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getValor() == true) {
                             JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
                             vaciarCampos();
                         } else {
-                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, txtIMG.getText(), fechaFinal).getNumero() == 1) {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getNumero() == 1) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                             } else {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
@@ -292,7 +304,8 @@ public class AgregarUsuario extends javax.swing.JPanel {
         txtNickName.setText(null);
         txtNombre.setText(null);
         txtCorreo.setText(null);
-        txtIMG.setText(null);
+        fileChooserImagen.setSelectedFile(null);
+        jButtonImagen.setText("Subir");
         txtApellido.setText(null);
         txtDirWeb.setText(null);
         txtaBio.setText(null);
@@ -325,10 +338,23 @@ public class AgregarUsuario extends javax.swing.JPanel {
                 break;
     }//GEN-LAST:event_cbxTipoUsrActionPerformed
     }
+    
+    private void jButtonImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImagenActionPerformed
+        int result = fileChooserImagen.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooserImagen.getSelectedFile();
+            if (selectedFile.getName().endsWith(".png") || selectedFile.getName().endsWith(".jpg")) {
+                jButtonImagen.setText("Imagen: " + selectedFile.getName());
+            } else {
+                jButtonImagen.setText("Subir");
+            }
+        }
+    }//GEN-LAST:event_jButtonImagenActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JComboBox<String> cbxTipoUsr;
+    private javax.swing.JButton jButtonImagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,7 +369,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDirWeb;
-    private javax.swing.JTextField txtIMG;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextArea txtaBio;

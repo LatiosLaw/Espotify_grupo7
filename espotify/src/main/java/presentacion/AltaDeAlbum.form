@@ -68,12 +68,12 @@
                           <Component id="lblGenAlb1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAnioAlb" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtArt" max="32767" attributes="0"/>
                           <Component id="txtNomAlb" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtLinkImg" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtAnio" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="txtAnio" alignment="0" pref="160" max="32767" attributes="0"/>
+                          <Component id="jButtonImagen" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -96,7 +96,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="128" max="32767" attributes="0"/>
+              <EmptySpace pref="134" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -123,9 +123,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblGenAlb1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLinkImg" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonImagen" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblAnioAlb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtAnio" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -336,8 +336,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfTemActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLinkImg">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtAnio">
     </Component>
     <Component class="javax.swing.JButton" name="btnSelGen">
@@ -459,6 +457,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArchActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonImagen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Subir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImagenActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

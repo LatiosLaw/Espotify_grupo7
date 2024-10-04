@@ -31,12 +31,12 @@
                           <Component id="lblIMGG" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtIMG" min="-2" pref="190" max="-2" attributes="0"/>
-                          <Component id="txtApellido" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                          <Component id="txtNickName" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                          <Component id="txtCorreo" min="-2" pref="190" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtApellido" alignment="0" pref="190" max="32767" attributes="0"/>
+                          <Component id="txtNombre" alignment="0" pref="190" max="32767" attributes="0"/>
+                          <Component id="txtNickName" alignment="0" pref="190" max="32767" attributes="0"/>
+                          <Component id="txtCorreo" pref="190" max="32767" attributes="0"/>
+                          <Component id="jButtonImagen" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -115,7 +115,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblIMGG" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIMG" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonImagen" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -129,7 +129,7 @@
                   <Component id="lblIMGG1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbxTipoUsr" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -251,18 +251,21 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblIMGG">
       <Properties>
-        <Property name="text" type="java.lang.String" value="URL Perfil :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtIMG">
-      <Properties>
-        <Property name="columns" type="int" value="10"/>
+        <Property name="text" type="java.lang.String" value="Imagen Perfil :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblIMGG1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo de Usuario :"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonImagen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Subir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImagenActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

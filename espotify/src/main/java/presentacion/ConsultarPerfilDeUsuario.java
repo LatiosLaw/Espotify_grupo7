@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.Usuario;
 import logica.dt.DataCliente;
 import logica.dt.DataArtista;
@@ -21,6 +23,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private final IControladorArtista controlArt;
     private JComboBox<DataUsuario> comboBoxUsuarios;
     private JList<DataUsuario> listUsuarios;
+    String selectedUser;
 
     public ConsultarPerfilDeUsuario(IControladorCliente icc, IControladorArtista ica) {
         controlCli = icc;
@@ -36,6 +39,21 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         lblAlbumSiguiendo.setVisible(false);
         this.revalidate();
         this.repaint();
+        
+        lstUsuarios.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedUser = lstUsuarios.getSelectedValue();
+                    txtBuscar.setText(selectedUser);
+                    if(!txtBuscar.getText().isEmpty()){
+                    buscarInfo();
+                    }
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +82,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         jScrollPane8 = new javax.swing.JScrollPane();
         lstUsuarios = new javax.swing.JList<>();
         txtBuscar = new javax.swing.JTextField();
-        btnOK = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         lstAlbumSiguiendo1 = new javax.swing.JList<>();
         lblListas = new javax.swing.JLabel();
@@ -151,13 +168,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         txtBuscar.setColumns(10);
 
-        btnOK.setText("Buscar");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
-
         jScrollPane9.setViewportView(lstAlbumSiguiendo1);
 
         lblListas.setText("Listas :");
@@ -192,10 +202,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSeguidores1)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,9 +258,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSeguidores1)
                         .addGap(12, 12, 12)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -375,7 +380,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         txtNumeroDeSeguidoresPosta.setText("0");
     }
 
-    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+    public void buscarInfo(){
         String nickBuscar = txtBuscar.getText();
         String token = String.valueOf(cbxOpt.getSelectedItem());
         if (nickBuscar.isBlank()) {
@@ -441,8 +446,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                 }
             }
         }
-    }//GEN-LAST:event_btnOKActionPerformed
-
+    }
     private void txtCorreoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoElectronicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
@@ -533,7 +537,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbxFavss;
     private javax.swing.JComboBox<String> cbxOpt;
     private javax.swing.JLabel jLabel1;

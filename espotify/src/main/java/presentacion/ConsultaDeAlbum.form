@@ -25,7 +25,6 @@
               <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabelInput" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnMostrarAlb" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
                   <Component id="nomGenOrArt" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -34,7 +33,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbxConAlb" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnGenConsult1" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                   <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -125,19 +123,15 @@
                       <Component id="jLabelInput" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="nomGenOrArt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMostrarAlb" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="nomAlbum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnGenConsult1" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -297,14 +291,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnMostrarAlb">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mostrar Albumes"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMostrarAlbActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane5">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -325,6 +311,15 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="nomGenOrArt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomGenOrArtActionPerformed"/>
       </Events>
@@ -343,6 +338,15 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomAlbum">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomAlbumActionPerformed"/>
       </Events>
@@ -353,14 +357,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomTemAlb">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnGenConsult1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mostrar Datos"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenConsult1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

@@ -1,20 +1,53 @@
 package presentacion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.controladores.IControladorCliente;
 import logica.dt.DataCliente;
 
 public class DejarDeSeguirUsuario extends javax.swing.JPanel {
 
     private IControladorCliente controlCli;
+    String selectedClient;
+    String selectedUser;
 
     public DejarDeSeguirUsuario(IControladorCliente controlador) {
         this.controlCli = controlador;
         initComponents();
         this.cargarClientesLst(controlCli.mostrarClientes());
-        this.cargarUsuariosLst(controlCli.mostrarUsuarios());
+        
+        lstClientes.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedClient = lstClientes.getSelectedValue();
+                    txtCliente.setText(selectedClient);
+                    Collection<String> seguidores = controlCli.obtenerSeguidosUsuario(selectedClient);
+                    cargarUsuariosLst(seguidores);
+                }
+            }
+        });
+        
+        lstUsuarios.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedUser = lstUsuarios.getSelectedValue();
+                    if(selectedUser!=null){
+                    selectedUser = selectedUser.replaceAll("/.*", "");
+                    txtUsuarioAdejarDeSeguir.setText(selectedUser);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -51,9 +84,13 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
             }
         });
 
+        txtCliente.setBackground(new java.awt.Color(204, 204, 204));
         txtCliente.setColumns(10);
+        txtCliente.setForeground(new java.awt.Color(0, 0, 0));
 
+        txtUsuarioAdejarDeSeguir.setBackground(new java.awt.Color(204, 204, 204));
         txtUsuarioAdejarDeSeguir.setColumns(10);
+        txtUsuarioAdejarDeSeguir.setForeground(new java.awt.Color(0, 0, 0));
 
         jScrollPane3.setViewportView(lstUsuarios);
 
@@ -122,7 +159,7 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAdejarDeSeguir.getText();
         if (nickCliente.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un nombre de usuario.");
         } else {
             DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
             if (usr != null) {
@@ -131,8 +168,10 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
                     if (controlCli.corroborarSiEstaenSeguidos(nickCliente, nickAseguir) == true) {
                         controlCli.dejarDeSeguirUsuario(nickCliente, nickAseguir);
                         JOptionPane.showMessageDialog(null, "Seguimiento terminado con exito.");
+                        reiniciarCampos();
                     } else {
                         JOptionPane.showMessageDialog(null, "El cliente " + txtCliente.getText() + " no esta siguiendo a " + txtUsuarioAdejarDeSeguir.getText());
+                        reiniciarCampos();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
@@ -162,7 +201,21 @@ public class DejarDeSeguirUsuario extends javax.swing.JPanel {
         }
         lstUsuarios.setModel(model);
     }
+    
+    public void vaciarSeguidos(){
+        DefaultListModel<String> model;
+        model = new DefaultListModel<>();
+        lstUsuarios.setModel(model);
+    }
 
+    public void reiniciarCampos(){
+        txtCliente.setText(null);
+        txtUsuarioAdejarDeSeguir.setText(null);
+        selectedClient = null;
+        selectedUser = null;
+        vaciarSeguidos();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel jLabel1;
