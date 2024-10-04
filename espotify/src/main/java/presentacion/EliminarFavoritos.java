@@ -28,7 +28,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         controlLipa = iclp;
         controlLiporde = iclpd;
         controlTema = ict;
-        cargarCbxClienteFav()
+        cargarCbxClienteFav();
     }
 
     /**

@@ -29,6 +29,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         controlCli = icc;
         controlArt = ica;
         initComponents();
+        txtBuscar.setVisible(false);
         txtPaginaWeb.setVisible(false);
         txtaBiografia.setVisible(false);
         lstListas.setVisible(false);
@@ -89,7 +90,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
         jScrollPane10 = new javax.swing.JScrollPane();
         lstFavs = new javax.swing.JList<>();
         cbxFavss = new javax.swing.JComboBox<>();
-        lblSeguidores1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
@@ -183,8 +183,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
         });
 
-        lblSeguidores1.setText("Usuario Seleccionado : ");
-
         jLabel1.setText("Tipo de Usuario :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -200,9 +198,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                         .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSeguidores1)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,9 +251,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSeguidores1)
-                        .addGap(12, 12, 12)
+                        .addGap(40, 40, 40)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -551,7 +545,6 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel lblListas;
     private javax.swing.JLabel lblNroSeguidores;
     private javax.swing.JLabel lblSeguidores;
-    private javax.swing.JLabel lblSeguidores1;
     private javax.swing.JList<String> lstAlbumSiguiendo1;
     private javax.swing.JList<String> lstFavs;
     private javax.swing.JList<String> lstListas;

@@ -39,7 +39,7 @@ public class PublicarLista extends javax.swing.JPanel {
                     cargarListasLst(controlListPart.devolverListadeCliente(selectedUser));
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron listas publicas para el cliente : " + selectedUser);
+                JOptionPane.showMessageDialog(null, "No se encontraron listas privadas para el cliente : " + selectedUser);
                 vaciarListaListas();
             }
                 }
@@ -199,7 +199,7 @@ public class PublicarLista extends javax.swing.JPanel {
         }
         lstListaParticular.setModel(model);
         if(model.size() == 0){
-            JOptionPane.showMessageDialog(null, "No se encontraron listas publicas para el cliente : " + selectedUser);
+            JOptionPane.showMessageDialog(null, "No se encontraron listas privadas para el cliente : " + selectedUser);
         vaciarListaListas();
         }
             
