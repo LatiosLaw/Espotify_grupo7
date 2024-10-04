@@ -3,18 +3,46 @@ package presentacion;
 import java.util.Collection;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.controladores.IControladorCliente;
 import logica.dt.DataCliente;
 
 public class SeguirUsuario extends javax.swing.JPanel {
 
     private IControladorCliente controlCli;
+    String selectedClient;
+    String selectedUser;
 
     public SeguirUsuario(IControladorCliente controlador) {
         initComponents();
         this.controlCli = controlador;
         this.cargarClientesLst(controlCli.mostrarClientes());
         this.cargarUsuariosLst(controlCli.mostrarUsuarios());
+        
+        lstClientes.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedClient = lstClientes.getSelectedValue();
+                    txtCliente.setText(selectedClient);
+                }
+            }
+        });
+        
+        lstUsuarios.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    selectedUser = lstUsuarios.getSelectedValue();
+                    txtUsuarioAseguir.setText(selectedUser);
+                }
+            }
+        });
     }
 
     /**
@@ -51,9 +79,15 @@ public class SeguirUsuario extends javax.swing.JPanel {
             }
         });
 
+        txtCliente.setEditable(false);
+        txtCliente.setBackground(new java.awt.Color(204, 204, 204));
         txtCliente.setColumns(10);
+        txtCliente.setForeground(new java.awt.Color(0, 0, 0));
 
+        txtUsuarioAseguir.setEditable(false);
+        txtUsuarioAseguir.setBackground(new java.awt.Color(204, 204, 204));
         txtUsuarioAseguir.setColumns(10);
+        txtUsuarioAseguir.setForeground(new java.awt.Color(0, 0, 0));
 
         lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -133,7 +167,7 @@ public class SeguirUsuario extends javax.swing.JPanel {
         String nickCliente = txtCliente.getText();
         String nickAseguir = txtUsuarioAseguir.getText();
         if (nickCliente.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor ingresa un nombre de usuario.");
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un nombre de usuario.");
         } else {
             if (nickCliente.equals(nickAseguir)) {
                 JOptionPane.showMessageDialog(null, "Un cliente no puede seguirse a si mismo.");
@@ -145,8 +179,10 @@ public class SeguirUsuario extends javax.swing.JPanel {
                         if (controlCli.corroborarSiEstaenSeguidos(nickCliente, nickAseguir) == false) {
                             controlCli.seguirUsuario(nickCliente, nickAseguir);
                             JOptionPane.showMessageDialog(null, "Seguimiento realizado con exito.");
+                            reiniciarCampos();
                         } else {
                             JOptionPane.showMessageDialog(null, "El usuario " + txtCliente.getText() + " ya sigue a " + txtUsuarioAseguir.getText());
+                            reiniciarCampos();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
@@ -175,6 +211,13 @@ public class SeguirUsuario extends javax.swing.JPanel {
             model.addElement(nick);
         }
         lstUsuarios.setModel(model);
+    }
+    
+    public void reiniciarCampos(){
+        txtCliente.setText(null);
+        txtUsuarioAseguir.setText(null);
+        selectedClient = null;
+        selectedUser = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

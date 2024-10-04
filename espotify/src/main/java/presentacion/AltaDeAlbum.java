@@ -29,7 +29,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private final IControladorGenero controlGen;
     private final IControladorArtista controlArt;
     private final IControladorTema controlTem;
-    private final JFileChooser fileChooser;
+    private final JFileChooser fileChooserAudio;
+    private final JFileChooser fileChooserImagen;
     private final Collection<String> generos_seleccionados;
     private final ArrayList<String> temas_del_album;
 
@@ -38,10 +39,14 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         controlGen = icg;
         controlArt = ica;
         controlTem = ict;
-        fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.setDialogTitle("Selecciona un archivo MP3");
-        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
+        fileChooserAudio = new JFileChooser();
+        fileChooserImagen = new JFileChooser();
+        fileChooserImagen.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooserAudio.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooserImagen.setDialogTitle("Selecciona una imagen para el album");
+        fileChooserImagen.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagenes (JPG, PNG)", "jpg", "png"));
+        fileChooserAudio.setDialogTitle("Selecciona un archivo MP3");
+        fileChooserAudio.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos MP3", "mp3"));
         generos_seleccionados = new ArrayList<>();
         temas_del_album = new ArrayList<>();
         initComponents();
@@ -120,7 +125,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         btnConfirmar = new javax.swing.JButton();
         lblMsjArch = new javax.swing.JLabel();
         btnConfTem = new javax.swing.JButton();
-        txtLinkImg = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
         btnSelGen = new javax.swing.JButton();
         btnReiGen = new javax.swing.JButton();
@@ -140,6 +144,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         txtMin = new javax.swing.JTextField();
         txtSeg = new javax.swing.JTextField();
         btnArch = new javax.swing.JButton();
+        jButtonImagen = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -259,6 +264,13 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             }
         });
 
+        jButtonImagen.setText("Subir");
+        jButtonImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -304,8 +316,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtArt)
                             .addComponent(txtNomAlb)
-                            .addComponent(txtLinkImg)
-                            .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAnio, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblGenSel)
@@ -322,7 +334,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                 .addComponent(btnArch, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cbxTipMus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSelGen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblMsjArch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -344,7 +356,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGenAlb1)
-                            .addComponent(txtLinkImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAnioAlb)
@@ -427,8 +439,8 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             Integer posicion_deseada = Integer.parseInt(txtPosTemaAlb.getText());
             if (cbxTipMus.getSelectedItem() == "Archivo mp3") {
                 File selectedFile;
-                if (fileChooser.getSelectedFile() != null) {
-                    selectedFile = fileChooser.getSelectedFile();
+                if (fileChooserAudio.getSelectedFile() != null) {
+                    selectedFile = fileChooserAudio.getSelectedFile();
                     File destinationDir = new File("espotify\\src\\main\\java\\temas");
                     if (!destinationDir.exists()) {
                         destinationDir.mkdirs(); // Crear la carpeta si no existe
@@ -453,7 +465,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                                     jList1.setModel(model);
                                     txtNomTemaAlb.setText(null);
                                     txtPosTemaAlb.setText(null);
-                                    fileChooser.setSelectedFile(null);
+                                    fileChooserAudio.setSelectedFile(null);
                                     txtTipMus.setText(null);
                                     txtMin.setText(null);
                                     txtSeg.setText(null);
@@ -493,7 +505,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     txtNomTemaAlb.setText(null);
                     txtTipMus.setText(null);
                     txtPosTemaAlb.setText(null);
-                    fileChooser.setSelectedFile(null);
+                    fileChooserAudio.setSelectedFile(null);
                     txtTipMus.setText(null);
                     txtMin.setText(null);
                     txtSeg.setText(null);
@@ -516,7 +528,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             if (controlArt.retornarArtista(txtArt.getText()) != null) {
                 String nick_artista = txtArt.getText();
                 String nombre_album = txtNomAlb.getText();
-                String imagen = txtLinkImg.getText();
+                File selectedFile = fileChooserImagen.getSelectedFile();
                 Integer año_album = Integer.parseInt(txtAnio.getText());
                 //// CALCULAR GENEROS SELECCIONADOS
                 Collection<DataGenero> generos = new ArrayList<>();
@@ -543,7 +555,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
                         temas.add(tema_actual);
                     }
-                    if (txtLinkImg.getText().isEmpty()) {
+                    if (selectedFile.getName().isBlank()) {
                         DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);
                         Iterator<String> iterator_gen = generos_seleccionados.iterator();
                         while (iterator_gen.hasNext()) {
@@ -554,7 +566,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Album agregado con exito");
                         reiniciarCampos();
                     } else {
-                        DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, imagen, año_album, temas);
+                        DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, selectedFile.getName(), año_album, temas);
                         Iterator<String> iterator_gen = generos_seleccionados.iterator();
                         while (iterator_gen.hasNext()) {
                             String genero = iterator_gen.next();
@@ -574,12 +586,13 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private void reiniciarCampos() {
         txtArt.setText(null);
         txtNomAlb.setText(null);
-        txtLinkImg.setText(null);
+        fileChooserAudio.setSelectedFile(null);
+        jButtonImagen.setText("Subir");
         txtAnio.setText(null);
         txtNomTemaAlb.setText(null);
         txtTipMus.setText(null);
         txtPosTemaAlb.setText(null);
-        fileChooser.setSelectedFile(null);
+        fileChooserAudio.setSelectedFile(null);
         txtMin.setText(null);
         txtSeg.setText(null);
         lblMsjArch.setText("El archivo no se reconoce como un mp3");
@@ -591,9 +604,9 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }
 
     private void btnArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchActionPerformed
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooserAudio.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
+            File selectedFile = fileChooserAudio.getSelectedFile();
             if (selectedFile.getName().endsWith(".mp3")) {
                 lblMsjArch.setText("Archivo seleccionado: " + selectedFile.getName());
             } else {
@@ -668,6 +681,18 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSegActionPerformed
 
+    private void jButtonImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImagenActionPerformed
+        int result = fileChooserImagen.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooserImagen.getSelectedFile();
+            if (selectedFile.getName().endsWith(".png") || selectedFile.getName().endsWith(".jpg")) {
+                jButtonImagen.setText("Imagen: " + selectedFile.getName());
+            } else {
+                jButtonImagen.setText("Subir");
+            }
+        }
+    }//GEN-LAST:event_jButtonImagenActionPerformed
+
     public void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();
         Collection<String> retorno = controlGen.mostrarGeneros();
@@ -716,6 +741,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JButton btnReiGen;
     private javax.swing.JButton btnSelGen;
     private javax.swing.JComboBox<String> cbxTipMus;
+    private javax.swing.JButton jButtonImagen;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -740,7 +766,6 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JList<String> listGenSelect;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtArt;
-    private javax.swing.JTextField txtLinkImg;
     private javax.swing.JTextField txtMin;
     private javax.swing.JTextField txtNomAlb;
     private javax.swing.JTextField txtNomTemaAlb;
