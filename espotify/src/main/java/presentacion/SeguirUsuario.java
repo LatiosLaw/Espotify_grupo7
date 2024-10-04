@@ -171,6 +171,7 @@ public class SeguirUsuario extends javax.swing.JPanel {
         } else {
             if (nickCliente.equals(nickAseguir)) {
                 JOptionPane.showMessageDialog(null, "Un cliente no puede seguirse a si mismo.");
+                reiniciarCampos();
             } else {
                 DataCliente usr = controlCli.consultarPerfilCliente(nickCliente);
                 if (usr != null) {
@@ -186,9 +187,11 @@ public class SeguirUsuario extends javax.swing.JPanel {
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario a seguir no encontrado");
+                        reiniciarCampos();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+                    reiniciarCampos();
                 }
             }
         }

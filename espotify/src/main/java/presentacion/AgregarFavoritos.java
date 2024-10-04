@@ -4,6 +4,8 @@ import java.util.Collection;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorTema;
 import logica.controladores.IControladorListaParticular;
@@ -23,6 +25,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     private final IControladorListaParticular controlLipa;
     private final IControladorListaPorDefecto controlLiporde;
     private final IControladorAlbum controlAlb;
+    String SelectedAlbum;
 
     public AgregarFavoritos(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
@@ -48,6 +51,24 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         controlLiporde = iclpd;
         controlTema = ict;
         //this.cargarCbxClienteFav();
+        
+        lstCoso.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar acciones repetidas cuando la selección sigue cambiando
+                String token = String.valueOf(cbxCoso.getSelectedItem());
+                if(token == "Temas"){
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el nombre seleccionado
+                    SelectedAlbum = lstCoso.getSelectedValue();
+        txtBusqueda1.setText(SelectedAlbum);
+        if(!txtBusqueda1.getText().isEmpty()){
+                    mostrarTemasAlbum();
+        }
+                }
+            }
+            }
+        });
     }
 
     /**
@@ -120,7 +141,10 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
         lblTemasAgregar.setText("Temas del Album:");
 
+        txtBusqueda2.setEditable(false);
+        txtBusqueda2.setBackground(new java.awt.Color(204, 204, 204));
         txtBusqueda2.setColumns(10);
+        txtBusqueda2.setForeground(new java.awt.Color(0, 0, 0));
 
         lblBusqueda2.setText("Agregar a Favoritos :");
 
@@ -155,7 +179,9 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
         lblBusqueda1.setText("Agregar a Favoritos :");
 
+        txtBusqueda1.setBackground(new java.awt.Color(204, 204, 204));
         txtBusqueda1.setColumns(10);
+        txtBusqueda1.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -302,7 +328,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
             cbxLPM.setVisible(false);
-          
+            btnFav.setVisible(false);
             cbxClienteBuscar.setVisible(false);
             this.lblBusqueda1.setText("Album");
             lblPrimeraBusqueda.setText("Albums:");
@@ -403,10 +429,24 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFav2ActionPerformed
 
     private void lstCosoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCosoMouseClicked
-        String nomCoso = lstCoso.getSelectedValue();
-        txtBusqueda1.setText(nomCoso);
+        
     }//GEN-LAST:event_lstCosoMouseClicked
 
+    public void mostrarTemasAlbum(){
+        DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
+            DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
+            if("ALBUM NO EXISTE".equals(album.getNombre())){
+                JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
+            }else{
+                Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText());
+                if(cole.isEmpty() || cole == null){
+                    JOptionPane.showMessageDialog(null, "El album seleccionado no tiene Temas");
+                }else{
+                    this.cargarLstTemas(cole);
+                }
+            }
+    }
+    
     private void cbxClienteBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteBuscarActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
         String token3 = String.valueOf(cbxClienteBuscar.getSelectedItem());
@@ -441,10 +481,6 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxClienteAgregarFavChuActionPerformed
 
-    private void cbxClienteAgregarFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAgregarFavActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxClienteAgregarFavActionPerformed
-
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
         String clienteFav = String.valueOf(cbxClienteAgregarFav.getSelectedItem());
@@ -453,19 +489,6 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         
         if("OPT".equals(token)){
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
-        }else if(token == "Temas"){
-            DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
-            DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
-            if("ALBUM NO EXISTE".equals(album.getNombre())){
-                JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
-            }else{
-                Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText());
-                if(cole.isEmpty() || cole == null){
-                    JOptionPane.showMessageDialog(null, "El album seleccionado no tiene Temas");
-                }else{
-                    this.cargarLstTemas(cole);
-                }
-            }
         }else if(token == "Listas"){
             String token2 = String.valueOf(cbxLPM.getSelectedItem());
             if("Listas Particulares".equals(token2)){
@@ -540,6 +563,10 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnFavActionPerformed
+
+    private void cbxClienteAgregarFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAgregarFavActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxClienteAgregarFavActionPerformed
 
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;

@@ -68,7 +68,10 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(lstCoso);
 
+        txtBusqueda1.setEditable(false);
+        txtBusqueda1.setBackground(new java.awt.Color(204, 204, 204));
         txtBusqueda1.setColumns(10);
+        txtBusqueda1.setForeground(new java.awt.Color(0, 0, 0));
         txtBusqueda1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBusqueda1ActionPerformed(evt);
