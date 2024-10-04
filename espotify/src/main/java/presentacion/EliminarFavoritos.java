@@ -28,7 +28,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         controlLipa = iclp;
         controlLiporde = iclpd;
         controlTema = ict;
-        cargarCbxClienteFav()
+        cargarCbxClienteFav();
     }
 
     /**
@@ -48,7 +48,6 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         lblBusqueda1 = new javax.swing.JLabel();
         lblPrimeraBusqueda = new javax.swing.JLabel();
         btnFav = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
         cbxClienteBuscar = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
@@ -62,9 +61,19 @@ public class EliminarFavoritos extends javax.swing.JPanel {
             }
         });
 
+        lstCoso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstCosoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstCoso);
 
         txtBusqueda1.setColumns(10);
+        txtBusqueda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusqueda1ActionPerformed(evt);
+            }
+        });
 
         lblBusqueda1.setText("Eliminar de  Favoritos :");
 
@@ -74,13 +83,6 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         btnFav.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFavActionPerformed(evt);
-            }
-        });
-
-        btnBuscar.setText("OK");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -95,21 +97,16 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(222, 222, 222)
-                                .addComponent(lblPrimeraBusqueda))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCliente)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(222, 222, 222)
+                        .addComponent(lblPrimeraBusqueda))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblCliente)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addGap(162, 162, 162))
@@ -142,9 +139,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCliente)
-                            .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -158,12 +153,15 @@ public class EliminarFavoritos extends javax.swing.JPanel {
              break;
          case "Temas":
              lblPrimeraBusqueda.setText("Temas Favoritos :");
+              this.buscarCosas(token);
              break;
          case "Listas":
              lblPrimeraBusqueda.setText("Listas Favoritas :");
+              this.buscarCosas(token);
              break;
          case "Albums":
              lblPrimeraBusqueda.setText("Albums Favoritos :");
+              this.buscarCosas(token);
              break;
          default:
              break;
@@ -171,25 +169,36 @@ public class EliminarFavoritos extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxCosoActionPerformed
 
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
-        String token = String.valueOf(cbxCoso.getSelectedItem());
+          String token = String.valueOf(this.cbxCoso.getSelectedItem());
         String cliente = String.valueOf(cbxClienteBuscar.getSelectedItem());
         String coso = this.txtBusqueda1.getText();
         DataCliente cli = controlCli.consultarPerfilCliente(cliente);
-        if(cli == null){
+        
+        if("OPT".equals(String.valueOf(cbxClienteBuscar.getSelectedItem()))){
+            
+        }else{
+            if(cli == null){
              JOptionPane.showMessageDialog(null, "No existe usuario con el nickname indicado");
         }else{
             switch (token) {
                 case "OPT":
-                    JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
+                    //JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
                     break;
                 case "Temas":
                     DataTema tema = controlTema.retornarTema2LaSecuela(coso);
                     if(tema == null){
                         JOptionPane.showMessageDialog(null, "No existe un tema con ese nombre en los favoritos del Cliente.");
                     }else{
-                        controlCli.eliminarTema(cli, tema);
-                        JOptionPane.showMessageDialog(null, "Se elimino el Tema de la lista de favoritos");
-                        limpiarCampos();
+                        Collection<String> temas = controlCli.obtenerTemaFavCliente(cliente);
+                        boolean booli = corroborarCosoEnFav(temas,coso);
+                        
+                        if(booli == true){
+                            controlCli.eliminarTema(cli, tema);
+                            JOptionPane.showMessageDialog(null, "Se elimino el Tema de la lista de favoritos");
+                            limpiarCampos();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "El Cliente no tiene ese tema en su lista de favoritos");
+                        }
                     }       
                     break;
                 case "Listas":
@@ -197,9 +206,17 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     if(losta == null){
                         JOptionPane.showMessageDialog(null, "No existe lista con ese nombre dentro de los favoritos del Cliente");
                     }else{
-                        controlCli.eliminarLista(cli, losta);
-                    JOptionPane.showMessageDialog(null, "Se elimino la lista de la lista de favoritos");
-                    limpiarCampos();
+                         Collection<String> listas = controlCli.obtenerListasFavCliente(cliente);
+                         boolean booli = corroborarCosoEnFav(listas,coso);
+                        
+                        if(booli == true){
+                            controlCli.eliminarLista(cli, losta);
+                            JOptionPane.showMessageDialog(null, "Se elimino la lista de la lista de favoritos");
+                            limpiarCampos();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "El Cliente no tiene esa lista en su lista de favoritos");
+                        }
+                        
                     }
                     break;
                 case "Albums":
@@ -208,65 +225,43 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     if("ALBUM NO EXISTE".equals(album.getNombre())){
                          JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
                     }else{
-                        controlCli.eliminarAlbum(cli, album);
+                        
+                         Collection<String> albums = controlCli.obtenerAlbumFavCliente(cliente);
+                         boolean booli = corroborarCosoEnFav(albums,coso);
+                        
+                        if(booli == true){
+                            controlCli.eliminarAlbum(cli, album);
                         JOptionPane.showMessageDialog(null, "Se elimino el Album de la lista de favoritos");
                         limpiarCampos();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "El Cliente no tiene ese album en su lista de favoritos");
+                        }
                     }
                     break;
                 default:
                     break;
             }
+        }
         }
     }//GEN-LAST:event_btnFavActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void cbxClienteBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteBuscarActionPerformed
       String token = String.valueOf(this.cbxCoso.getSelectedItem());
-      String clienteBus = String.valueOf(cbxClienteBuscar.getSelectedItem());
-      
-        if(controlCli.consultarPerfilCliente(clienteBus) == null){
-             JOptionPane.showMessageDialog(null, "No existe usuario seleccionado");
-        }else{
-            if(null != token)switch (token) {
-                case "OPT":
-                    JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
-                    break;
-                case "Temas":
-                    Collection <String> temas = this.controlCli.obtenerTemaFavCliente(clienteBus);
-                    if(temas == null){
-                        JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
-                    }else{
-                        this.cargarLstFav(temas);
-                    }
-                    break;
-                case "Listas":
-                    Collection <String> listas = controlCli.obtenerListasFavCliente(clienteBus);
-                    if(listas == null){
-                         JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
-                    }else{
-                      this.cargarLstFav(listas);
-                    }
-                    break;
-                case "Albums":
-                    Collection <String> albums = controlCli.obtenerAlbumFavCliente(clienteBus);
-                    if(albums == null){
-                        JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
-                    }else{
-                        this.cargarLstFav(albums);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+
+       this.buscarCosas(token);
        
     }//GEN-LAST:event_cbxClienteBuscarActionPerformed
 
+    private void lstCosoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCosoMouseClicked
+        String nomCoso = lstCoso.getSelectedValue();
+        txtBusqueda1.setText(nomCoso);
+    }//GEN-LAST:event_lstCosoMouseClicked
+
+    private void txtBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusqueda1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusqueda1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFav;
     private javax.swing.JComboBox<String> cbxClienteBuscar;
     private javax.swing.JComboBox<String> cbxCoso;
@@ -283,6 +278,9 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         this.txtBusqueda1.setText("");
 
         this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
+        
+        this.cbxClienteBuscar.setSelectedItem("OPT");
+        
     }
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
@@ -308,7 +306,72 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         }
         this.cbxClienteBuscar.setModel(model);
     }
+    public boolean corroborarCosoEnFav(Collection<String> cole, String cosoName){
+         
+        boolean tpken = false;
+         for (String elemento : cole) {
+            String coso = elemento;
+            
+            if(coso.equals(cosoName)){
+                  tpken = true;
+            }
+
+        }
+        return tpken;
+    }
     
-    
+    public void buscarCosas(String token){
+        //String token = String.valueOf(this.cbxCoso.getSelectedItem());
+        String cliente = String.valueOf(this.cbxClienteBuscar.getSelectedItem());
+        
+        if(!"OPT".equals(cliente)){
+             if(controlCli.consultarPerfilCliente(cliente) == null){
+             JOptionPane.showMessageDialog(null, "No existe usuario seleccionado");
+        }else{
+            if(null != token)switch (token) {
+                case "OPT":
+                    //JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
+                    break;
+                case "Temas":
+                    Collection <String> temas = this.controlCli.obtenerTemaFavCliente(cliente);
+                    if(temas.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
+                    }else{
+                        this.cargarLstFav(temas);
+                    }
+                    break;
+                case "Listas":
+                    Collection <String> listas = controlCli.obtenerListasFavCliente(cliente);
+                    if(listas.isEmpty()){
+                         JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
+                    }else{
+                      this.cargarLstFav(listas);
+                    }
+                    break;
+                case "Albums":
+                    Collection <String> albums = controlCli.obtenerAlbumFavCliente(cliente);
+                    if(albums.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
+                    }else{
+                        this.cargarLstFav(albums);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+
+         
+        }
+        
+        
+      
+        
+        }
+        
+        
+        
+        
     
 }
