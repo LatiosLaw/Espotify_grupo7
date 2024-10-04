@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.util.Collection;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorCliente;
@@ -12,6 +13,7 @@ import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
+import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 
 public class AgregarFavoritos extends javax.swing.JPanel {
@@ -24,20 +26,20 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
     public AgregarFavoritos(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
+        
         lblBusqueda1.setVisible(true);
         lstCoso.setVisible(true);
         txtBusqueda1.setVisible(true);
         cbxLPM.setVisible(false);
         lstTemas.setVisible(false);
         lblTemasAgregar.setVisible(false);
-        btnBuscar.setVisible(false);
-        lblUsuarioDeLasListas.setVisible(false);
-        txtUsuarioDeLasListas.setVisible(false);
+        cbxClienteBuscar.setVisible(false);
+  
         this.btnFav2.setVisible(false);
         this.txtBusqueda2.setVisible(false);
         lblBusqueda2.setVisible(false);
         lblCliente2.setVisible(false);
-        txtCliente2.setVisible(false);
+        cbxClienteAgregarFavChu.setVisible(false);
         lstTemas.setVisible(false);
         lblTemasAgregar.setVisible(false);
         controlCli = icc;
@@ -45,6 +47,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         controlLipa = iclp;
         controlLiporde = iclpd;
         controlTema = ict;
+        //this.cargarCbxClienteFav();
     }
 
     /**
@@ -56,31 +59,27 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCliente = new javax.swing.JTextField();
         lblCliente = new javax.swing.JLabel();
         cbxCoso = new javax.swing.JComboBox<>();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstCoso = new javax.swing.JList<>();
-        txtBusqueda1 = new javax.swing.JTextField();
-        lblBusqueda1 = new javax.swing.JLabel();
         btnFav = new javax.swing.JButton();
         cbxLPM = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstTemas = new javax.swing.JList<>();
         lblTemasAgregar = new javax.swing.JLabel();
-        txtUsuarioDeLasListas = new javax.swing.JTextField();
-        lblUsuarioDeLasListas = new javax.swing.JLabel();
         txtBusqueda2 = new javax.swing.JTextField();
         lblBusqueda2 = new javax.swing.JLabel();
         btnFav2 = new javax.swing.JButton();
         lblPrimeraBusqueda = new javax.swing.JLabel();
         lblCliente2 = new javax.swing.JLabel();
-        txtCliente2 = new javax.swing.JTextField();
+        cbxClienteBuscar = new javax.swing.JComboBox<>();
+        cbxClienteAgregarFav = new javax.swing.JComboBox<>();
+        cbxClienteAgregarFavChu = new javax.swing.JComboBox<>();
+        lblBusqueda1 = new javax.swing.JLabel();
+        txtBusqueda1 = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
-
-        txtCliente.setColumns(10);
 
         lblCliente.setText("Nick Cliente :");
 
@@ -91,18 +90,12 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             }
         });
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+        lstCoso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstCosoMouseClicked(evt);
             }
         });
-
         jScrollPane1.setViewportView(lstCoso);
-
-        txtBusqueda1.setColumns(10);
-
-        lblBusqueda1.setText("Agregar a Favoritos :");
 
         btnFav.setText("OK");
         btnFav.addActionListener(new java.awt.event.ActionListener() {
@@ -118,13 +111,14 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             }
         });
 
+        lstTemas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstTemasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstTemas);
 
         lblTemasAgregar.setText("Temas del Album:");
-
-        txtUsuarioDeLasListas.setColumns(10);
-
-        lblUsuarioDeLasListas.setText(" ");
 
         txtBusqueda2.setColumns(10);
 
@@ -141,115 +135,140 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
         lblCliente2.setText("Nick Cliente :");
 
-        txtCliente2.setColumns(10);
+        cbxClienteBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteBuscarActionPerformed(evt);
+            }
+        });
+
+        cbxClienteAgregarFav.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteAgregarFavActionPerformed(evt);
+            }
+        });
+
+        cbxClienteAgregarFavChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteAgregarFavChuActionPerformed(evt);
+            }
+        });
+
+        lblBusqueda1.setText("Agregar a Favoritos :");
+
+        txtBusqueda1.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPrimeraBusqueda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFav, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblBusqueda1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCliente, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbxClienteAgregarFav, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtBusqueda1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                                .addGap(6, 6, 6))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPrimeraBusqueda)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 121, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTemasAgregar)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblBusqueda2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBusqueda2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCliente2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblBusqueda1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBusqueda1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUsuarioDeLasListas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUsuarioDeLasListas, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnFav, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblBusqueda2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtBusqueda2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblCliente2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtCliente2))
-                        .addComponent(jScrollPane2))
-                    .addComponent(btnFav2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTemasAgregar)
-                .addContainerGap(64, Short.MAX_VALUE))
+                                .addComponent(cbxClienteAgregarFavChu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFav2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPrimeraBusqueda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(lblTemasAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(cbxLPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuarioDeLasListas)
-                    .addComponent(txtUsuarioDeLasListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrimeraBusqueda))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblBusqueda1)
-                            .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCliente))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFav, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTemasAgregar))
-                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblBusqueda2)
                             .addComponent(txtBusqueda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCliente2))
+                            .addComponent(lblCliente2)
+                            .addComponent(cbxClienteAgregarFavChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnFav2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                        .addComponent(btnFav2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBusqueda1)
+                            .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(btnFav, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxClienteAgregarFav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCliente))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxLPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLPMActionPerformed
-        limpiarListas();
+        limpiarListasYcombos();
+        limpiarCampos();
         if("Listas Particulares".equals(String.valueOf(cbxLPM.getSelectedItem()))){
-            lblUsuarioDeLasListas.setVisible(true);
-            txtUsuarioDeLasListas.setVisible(true);   
-            btnBuscar.setVisible(true);
-            lblUsuarioDeLasListas.setText("Cliente:");
+           
+            cbxClienteBuscar.setVisible(true);
+           
             // Collection<String> lista =  controlLipa.devolverListasParticularesPublicasString(txtUsuario.getText());
             //this.cargarLstFav(lista);
+          cargarCbxCliente();
+            
+            
+            
+            
         }else{
-            lblUsuarioDeLasListas.setVisible(false);
-            btnBuscar.setVisible(false);
-            txtUsuarioDeLasListas.setVisible(false);
+            
+            cbxClienteBuscar.setVisible(false);
+           
             Collection<String> lista =   controlLiporde.listarListasPorDefecto();
             if(lista == null){
                 JOptionPane.showMessageDialog(null, "No hay listas por defecto en el sistema. Cargue datos por favor");
@@ -261,40 +280,39 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
     private void cbxCosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCosoActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
-        limpiarListas();
+        limpiarListasYcombos();
         if("OPT".equals(token)){
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             cbxLPM.setVisible(false);
-            lblUsuarioDeLasListas.setVisible(false);
-            txtUsuarioDeLasListas.setVisible(false);
-            btnBuscar.setVisible(false);
+         
+            cbxClienteBuscar.setVisible(false);
             this.lblBusqueda1.setText("Busqueda 1");
             lblPrimeraBusqueda.setText("Busqueda 1:");
             this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
             lblCliente2.setVisible(false);
-            txtCliente2.setVisible(false);
+            cbxClienteAgregarFavChu.setVisible(false);
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if("Temas".equals(token)){
+            this.cargarCbxClienteFavChu();
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
             cbxLPM.setVisible(false);
-            lblUsuarioDeLasListas.setVisible(false);
-            txtUsuarioDeLasListas.setVisible(false);
-            btnBuscar.setVisible(false);
+          
+            cbxClienteBuscar.setVisible(false);
             this.lblBusqueda1.setText("Album");
             lblPrimeraBusqueda.setText("Albums:");
-            this.txtCliente.setVisible(false);
+            this.cbxClienteAgregarFav.setVisible(false);
             this.lblCliente.setVisible(false);
             this.btnFav2.setVisible(true);
             this.txtBusqueda2.setVisible(true);
             lblBusqueda2.setVisible(true);
             lblCliente2.setVisible(true);
-            txtCliente2.setVisible(true);
+            cbxClienteAgregarFavChu.setVisible(true);
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
             Collection<String> colec = this.controlAlb.retornarAlbumsString();
@@ -304,26 +322,27 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                  this.cargarLstFav(colec);
             }
         }else if ("Listas".equals(token)){
-            this.txtCliente.setVisible(true);
+            this.cargarCbxClienteFav();
+            this.cbxClienteAgregarFav.setVisible(true);
             lblCliente.setVisible(true);
             cbxLPM.setVisible(true);
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
-            lblUsuarioDeLasListas.setVisible(true);
-            txtUsuarioDeLasListas.setVisible(true);
+       
             this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
             lblCliente2.setVisible(false);
-            txtCliente2.setVisible(false);
+            cbxClienteAgregarFavChu.setVisible(false);
             lstTemas.setVisible(false);
             this.lblBusqueda1.setText("Lista");
             lblPrimeraBusqueda.setText("Listas:");
             if("Listas Particulares".equals(String.valueOf(cbxLPM.getSelectedItem()))){
-               lblUsuarioDeLasListas.setText("Cliente:");
-               btnBuscar.setVisible(true);
+              
+               cbxClienteBuscar.setVisible(true);
+               cargarCbxCliente();
             }else{
-                btnBuscar.setVisible(false);
+                cbxClienteBuscar.setVisible(false);
                 Collection<String> lista =   controlLiporde.listarListasPorDefecto();
                 if(lista == null){
                     JOptionPane.showMessageDialog(null, "No hay listas por defecto en el sistema. Cargue datos por favor");
@@ -333,22 +352,22 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             }
         }else{
             //Albums
+            this.cargarCbxClienteFav();
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             cbxLPM.setVisible(false);
-            lblUsuarioDeLasListas.setVisible(false);
-            txtUsuarioDeLasListas.setVisible(false);
+          
             this.lblBusqueda1.setText("Album");
             lblPrimeraBusqueda.setText("Albums:");
-            btnBuscar.setVisible(false);
+            cbxClienteBuscar.setVisible(false);
             this.btnFav2.setVisible(false);
             this.txtBusqueda2.setVisible(false);
             lblBusqueda2.setVisible(false);
             lblCliente2.setVisible(false);
-            txtCliente2.setVisible(false);
+            cbxClienteAgregarFavChu.setVisible(false);
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
-            this.txtCliente.setVisible(true);
+            this.cbxClienteAgregarFav.setVisible(true);
             lblCliente.setVisible(true);
             Collection<String> colec = this.controlAlb.retornarAlbumsString();
             if(colec == null){
@@ -359,17 +378,50 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbxCosoActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnFav2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFav2ActionPerformed
+        DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFavChu.getSelectedItem()));
+        DataTema tema = controlTema.retornarTema2LaSecuela(this.txtBusqueda2.getText());
+        if(tema == null){
+             JOptionPane.showMessageDialog(null, "No existe tema a ese nombre");
+        }else if(cli == null){
+                 JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
+            }else{
+            
+                boolean tomacorriente = this.corroborarListaEnFav(controlCli.obtenerTemaFavCliente(cli.getNombre()), tema.getNickname());
+            
+                if(tomacorriente == true){
+                    JOptionPane.showMessageDialog(null, "El cliente indicado ya tiene ese tema es sus Favoritos");
+                }else{
+                    this.controlCli.agregarTema(cli,tema);   
+                JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
+                this.limpiarCampos();
+               // this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
+                limpiarListasYcombos();
+                }
+                
+            }
+    }//GEN-LAST:event_btnFav2ActionPerformed
+
+    private void lstCosoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCosoMouseClicked
+        String nomCoso = lstCoso.getSelectedValue();
+        txtBusqueda1.setText(nomCoso);
+    }//GEN-LAST:event_lstCosoMouseClicked
+
+    private void cbxClienteBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteBuscarActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
+        String token3 = String.valueOf(cbxClienteBuscar.getSelectedItem());
         if("OPT".equals(token)){
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if ("Listas".equals(token)){
             String token2 = String.valueOf(cbxLPM.getSelectedItem());
-            if("Listas Particulares".equals(token2)){
-                if(controlCli.consultarPerfilCliente(txtUsuarioDeLasListas.getText()) != null){
-                    Collection<String> lista =  controlLipa.devolverListasParticularesPublicasString(txtUsuarioDeLasListas.getText());
+            if("OPT".equals(token3)){
+                
+            }else if("Listas Particulares".equals(token2)){
+                if(controlCli.consultarPerfilCliente(String.valueOf(this.cbxClienteBuscar.getSelectedItem())) != null){
+                    Collection<String> lista =  controlLipa.devolverListasParticularesPublicasString(String.valueOf(this.cbxClienteBuscar.getSelectedItem()));
                     if(lista.isEmpty()){
                          JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene listas particulares.");
+                         limpiarListasYcombos();
                     }else{
                          this.cargarLstFav(lista);
                     }
@@ -378,87 +430,116 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                 }
             }
         }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_cbxClienteBuscarActionPerformed
+
+    private void lstTemasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstTemasMouseClicked
+         String nomCoso = lstTemas.getSelectedValue();
+         txtBusqueda2.setText(nomCoso);
+    }//GEN-LAST:event_lstTemasMouseClicked
+
+    private void cbxClienteAgregarFavChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAgregarFavChuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxClienteAgregarFavChuActionPerformed
+
+    private void cbxClienteAgregarFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAgregarFavActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxClienteAgregarFavActionPerformed
 
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
-         String token = String.valueOf(cbxCoso.getSelectedItem());
+        String token = String.valueOf(cbxCoso.getSelectedItem());
+        String clienteFav = String.valueOf(cbxClienteAgregarFav.getSelectedItem());
+        String clienteBuscar = String.valueOf(cbxClienteBuscar.getSelectedItem());
+        
+        
         if("OPT".equals(token)){
-           JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
+            JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if(token == "Temas"){
             DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
-            DataCliente cli = controlCli.consultarPerfilCliente(txtCliente.getText());
+            DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
             if("ALBUM NO EXISTE".equals(album.getNombre())){
                 JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
             }else{
-                Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText()); 
-                    if(cole.isEmpty() || cole == null){
-                         JOptionPane.showMessageDialog(null, "El album seleccionado no tiene Temas");
-                    }else{
-                        this.cargarLstTemas(cole);
-                    }
-                }   
+                Collection<String> cole = this.controlTema.retornarTemasDeAlbumStringEdition(this.txtBusqueda1.getText());
+                if(cole.isEmpty() || cole == null){
+                    JOptionPane.showMessageDialog(null, "El album seleccionado no tiene Temas");
+                }else{
+                    this.cargarLstTemas(cole);
+                }
+            }
         }else if(token == "Listas"){
             String token2 = String.valueOf(cbxLPM.getSelectedItem());
             if("Listas Particulares".equals(token2)){
-                DataCliente usuarioDeLaLista = controlCli.consultarPerfilCliente(txtUsuarioDeLasListas.getText());
+                DataCliente usuarioDeLaLista = controlCli.consultarPerfilCliente(clienteBuscar);
                 if(usuarioDeLaLista == null){
-                     JOptionPane.showMessageDialog(null, "El Cliente poseedor de las listas no existe");
+                    JOptionPane.showMessageDialog(null, "El Cliente poseedor de las listas no existe");
                 }else{
-                     DataListaParticular listaPar = this.controlLipa.devolverInformacion(txtBusqueda1.getText(),txtUsuarioDeLasListas.getText());
+                    DataListaParticular listaPar = this.controlLipa.devolverInformacion(txtBusqueda1.getText(),clienteBuscar);
                     if(listaPar == null){
                         JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
                     }else{
-                        if(controlCli.consultarPerfilCliente(txtCliente.getText()) == null){
+                        if(controlCli.consultarPerfilCliente(clienteFav) == null){
                             JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
                         }else{
-                          controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPar);
-                          JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
-                          this.limpiarCampos();
-                           limpiarListas();
+                            
+                    Collection<String> listaFav = this.controlCli.obtenerListasFavCliente(clienteFav);
+                    boolean losta = corroborarListaEnFav(listaFav,listaPar.getNombre());
+                    if(losta == true){
+                        JOptionPane.showMessageDialog(null, "Cliente indicado ya tiene esa Lista en sus Favoritos");
+                    }else{
+                        
+                        controlCli.agregarLista(controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem())), listaPar);
+                            JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
+                            this.limpiarCampos();
+                          
+                            limpiarListasYcombos();
+                    }
+  
                         }
                     }
                 }
             }else{
                 DataListaPorDefecto listaPorDe = this.controlLiporde.devolverInformacionChu(txtBusqueda1.getText());
                 if(listaPorDe == null){
-                       JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
+                    JOptionPane.showMessageDialog(null, "No existe Lista a ese Nombre");
                 }else{
-                    controlCli.agregarLista(controlCli.consultarPerfilCliente(txtCliente.getText()), listaPorDe);
+                    
+                    Collection<String> listaFav = this.controlCli.obtenerListasFavCliente(clienteFav);
+                    boolean losta = corroborarListaEnFav(listaFav,listaPorDe.getNombre());
+                    if(losta == true){
+                        JOptionPane.showMessageDialog(null, "Cliente indicado ya tiene esa Lista en sus Favoritos");
+                    }else{
+                         controlCli.agregarLista(controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem())), listaPorDe);
                     JOptionPane.showMessageDialog(null, "Se agrego la Lista a la lista de favoritos");
                     this.limpiarCampos();
+                    limpiarListasYcombos();
+                    }
                 }
             }
         }else if("Albums".equals(token)){
             DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
-            DataCliente cli = controlCli.consultarPerfilCliente(txtCliente.getText());
+            DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
             if("ALBUM NO EXISTE".equals(album.getNombre())){
-                 JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
+                JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
             }else{
                 if(cli == null){
-                     JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
+                    JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
                 }else{
-                     controlCli.agregarAlbum(cli, album);
-                      JOptionPane.showMessageDialog(null, "Se agrego Album a la lista de favoritos");
-                      this.limpiarCampos();
+                    boolean albom = corroborarListaEnFav(this.controlCli.obtenerAlbumFavCliente(clienteFav),album.getNombre());
+                    
+                    if(albom == true){
+                         JOptionPane.showMessageDialog(null, "Cliente indicado ya tiene ese album en sus Favoritos");
+                    }else{
+                        controlCli.agregarAlbum(cli, album);
+                        JOptionPane.showMessageDialog(null, "Se agrego Album a la lista de favoritos");
+                        this.limpiarCampos();
+                        limpiarListasYcombos();
+                    }
+                    
+                    
                 }
             }
         }
     }//GEN-LAST:event_btnFavActionPerformed
-
-    private void btnFav2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFav2ActionPerformed
-        DataCliente cli = controlCli.consultarPerfilCliente(this.txtCliente2.getText());
-        DataTema tema = controlTema.retornarTema2LaSecuela(this.txtBusqueda2.getText());
-        if(tema == null){
-             JOptionPane.showMessageDialog(null, "No existe tema a ese nombre");
-        }else if(cli == null){
-                 JOptionPane.showMessageDialog(null, "No Cliente con ese Nick");
-            }else{
-                this.controlCli.agregarTema(cli,tema);   
-                JOptionPane.showMessageDialog(null, "Se agrego el Tema a la lista de favoritos");
-                this.limpiarCampos();
-                this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
-            }
-    }//GEN-LAST:event_btnFav2ActionPerformed
 
     public void cargarLstFav(Collection<String> cole) {
         DefaultListModel<String> model;
@@ -468,6 +549,17 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             model.addElement(nombre);
         }
         lstCoso.setModel(model);
+    }
+    public void cargarCbxCliente() {
+        Collection<DataCliente> cole = this.controlCli.mostrarClientes();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        this.cbxClienteBuscar.setModel(model);
     }
     
     public void cargarLstTemas(Collection<String> cole) {
@@ -481,9 +573,11 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFav;
     private javax.swing.JButton btnFav2;
+    private javax.swing.JComboBox<String> cbxClienteAgregarFav;
+    private javax.swing.JComboBox<String> cbxClienteAgregarFavChu;
+    private javax.swing.JComboBox<String> cbxClienteBuscar;
     private javax.swing.JComboBox<String> cbxCoso;
     private javax.swing.JComboBox<String> cbxLPM;
     private javax.swing.JScrollPane jScrollPane1;
@@ -494,28 +588,70 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     private javax.swing.JLabel lblCliente2;
     private javax.swing.JLabel lblPrimeraBusqueda;
     private javax.swing.JLabel lblTemasAgregar;
-    private javax.swing.JLabel lblUsuarioDeLasListas;
     private javax.swing.JList<String> lstCoso;
     private javax.swing.JList<String> lstTemas;
     private javax.swing.JTextField txtBusqueda1;
     private javax.swing.JTextField txtBusqueda2;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtCliente2;
-    private javax.swing.JTextField txtUsuarioDeLasListas;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
       this.txtBusqueda1.setText("");
       this.txtBusqueda2.setText("");
-      this.txtCliente.setText("");
-      this.txtCliente2.setText("");
-      this.txtUsuarioDeLasListas.setText("");
+     
+      
      
     }
-    private void limpiarListas() {
+    private void limpiarListasYcombos() {
+      this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
+      this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
+     // this.cbxClienteBuscar.setModel(new javax.swing.DefaultComboBoxModel<>());
+        this.cbxClienteAgregarFav.setSelectedItem("OPT");
+        this.cbxClienteBuscar.setSelectedItem("OPT");
+         this.cbxClienteAgregarFavChu.setSelectedItem("OPT");
+        
+        
+    }
+     private void limpiarListas() {
       this.lstTemas.setModel(new javax.swing.DefaultListModel<>());
       this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
     }
+    public void cargarCbxClienteFav() {
+        Collection<DataCliente> cole = this.controlCli.mostrarClientes();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        this.cbxClienteAgregarFav.setModel(model);
+    }
+    public void cargarCbxClienteFavChu() {
+        Collection<DataCliente> cole = this.controlCli.mostrarClientes();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        this.cbxClienteAgregarFavChu.setModel(model);
+    }
+    public boolean corroborarListaEnFav(Collection<String> cole, String cosoName){
+         
+        boolean tpken = false;
+         for (String elemento : cole) {
+            String coso = elemento;
+            
+            System.out.println(coso + "/" +cosoName);
+            if(coso.equals(cosoName)){
+                  tpken = true;
+            }
+
+        }
+        return tpken;
+    }
+    
     
     
     

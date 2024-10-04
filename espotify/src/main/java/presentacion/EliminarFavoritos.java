@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.util.Collection;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import logica.controladores.IControladorAlbum;
@@ -27,6 +28,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         controlLipa = iclp;
         controlLiporde = iclpd;
         controlTema = ict;
+        cargarCbxClienteFav()
     }
 
     /**
@@ -38,7 +40,6 @@ public class EliminarFavoritos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCliente = new javax.swing.JTextField();
         lblCliente = new javax.swing.JLabel();
         cbxCoso = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -48,10 +49,9 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         lblPrimeraBusqueda = new javax.swing.JLabel();
         btnFav = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        cbxClienteBuscar = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
-
-        txtCliente.setColumns(10);
 
         lblCliente.setText("Nick Cliente :");
 
@@ -84,6 +84,12 @@ public class EliminarFavoritos extends javax.swing.JPanel {
             }
         });
 
+        cbxClienteBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,13 +99,14 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(222, 222, 222)
+                                .addComponent(lblPrimeraBusqueda))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(72, 72, 72)
-                        .addComponent(lblPrimeraBusqueda))
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -134,8 +141,8 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                         .addComponent(cbxCoso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCliente))
+                            .addComponent(lblCliente)
+                            .addComponent(cbxClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(99, Short.MAX_VALUE))
@@ -165,7 +172,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
 
     private void btnFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavActionPerformed
         String token = String.valueOf(cbxCoso.getSelectedItem());
-        String cliente = this.txtCliente.getText();
+        String cliente = String.valueOf(cbxClienteBuscar.getSelectedItem());
         String coso = this.txtBusqueda1.getText();
         DataCliente cli = controlCli.consultarPerfilCliente(cliente);
         if(cli == null){
@@ -213,8 +220,14 @@ public class EliminarFavoritos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFavActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       String token = String.valueOf(this.cbxCoso.getSelectedItem());
-        if(controlCli.consultarPerfilCliente(this.txtCliente.getText()) == null){
+       
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void cbxClienteBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteBuscarActionPerformed
+      String token = String.valueOf(this.cbxCoso.getSelectedItem());
+      String clienteBus = String.valueOf(cbxClienteBuscar.getSelectedItem());
+      
+        if(controlCli.consultarPerfilCliente(clienteBus) == null){
              JOptionPane.showMessageDialog(null, "No existe usuario seleccionado");
         }else{
             if(null != token)switch (token) {
@@ -222,7 +235,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
                     break;
                 case "Temas":
-                    Collection <String> temas = this.controlCli.obtenerTemaFavCliente(this.txtCliente.getText());
+                    Collection <String> temas = this.controlCli.obtenerTemaFavCliente(clienteBus);
                     if(temas == null){
                         JOptionPane.showMessageDialog(null, "No existe temas en la lista de favoritos del cliente indicado");
                     }else{
@@ -230,7 +243,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     }
                     break;
                 case "Listas":
-                    Collection <String> listas = controlCli.obtenerListasFavCliente(txtCliente.getText());
+                    Collection <String> listas = controlCli.obtenerListasFavCliente(clienteBus);
                     if(listas == null){
                          JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni una lista favorita");
                     }else{
@@ -238,7 +251,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     }
                     break;
                 case "Albums":
-                    Collection <String> albums = controlCli.obtenerAlbumFavCliente(txtCliente.getText());
+                    Collection <String> albums = controlCli.obtenerAlbumFavCliente(clienteBus);
                     if(albums == null){
                         JOptionPane.showMessageDialog(null, "El Cliente indicado no tiene ni un album favorita");
                     }else{
@@ -250,11 +263,12 @@ public class EliminarFavoritos extends javax.swing.JPanel {
             }
         }
        
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_cbxClienteBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFav;
+    private javax.swing.JComboBox<String> cbxClienteBuscar;
     private javax.swing.JComboBox<String> cbxCoso;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBusqueda1;
@@ -262,13 +276,12 @@ public class EliminarFavoritos extends javax.swing.JPanel {
     private javax.swing.JLabel lblPrimeraBusqueda;
     private javax.swing.JList<String> lstCoso;
     private javax.swing.JTextField txtBusqueda1;
-    private javax.swing.JTextField txtCliente;
     // End of variables declaration//GEN-END:variables
     
     public void limpiarCampos(){
         
         this.txtBusqueda1.setText("");
-        this.txtCliente.setText("");
+
         this.lstCoso.setModel(new javax.swing.DefaultListModel<>());
     }
     public void cargarLstFav(Collection<String> cole) {
@@ -283,4 +296,19 @@ public class EliminarFavoritos extends javax.swing.JPanel {
         }
         lstCoso.setModel(model);
     }
+    
+     public void cargarCbxClienteFav() {
+        Collection<DataCliente> cole = this.controlCli.mostrarClientes();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        this.cbxClienteBuscar.setModel(model);
+    }
+    
+    
+    
 }
