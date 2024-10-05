@@ -406,7 +406,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
 
     private void btnFav2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFav2ActionPerformed
         DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFavChu.getSelectedItem()));
-        DataTema tema = controlTema.retornarTema2LaSecuela(this.txtBusqueda2.getText());
+        DataTema tema = controlTema.retornarTema2LaSecuela(separarTemaAlbum(this.txtBusqueda2.getText())[0], separarTemaAlbum(this.txtBusqueda2.getText())[1]);
         if(tema == null){
              JOptionPane.showMessageDialog(null, "No existe tema a ese nombre");
         }else if(cli == null){
@@ -432,9 +432,14 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         
     }//GEN-LAST:event_lstCosoMouseClicked
 
+    public static String[] separarTemaAlbum(String nombreCompleto) {
+        // Dividir directamente sin validación
+        return nombreCompleto.split("/", 2); // Limitar a 2 partes
+    }
+    
     public void mostrarTemasAlbum(){
         DataAlbum album = controlAlb.retornarInfoAlbum(txtBusqueda1.getText());
-            DataCliente cli = controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
+            controlCli.consultarPerfilCliente(String.valueOf(cbxClienteAgregarFav.getSelectedItem()));
             if("ALBUM NO EXISTE".equals(album.getNombre())){
                 JOptionPane.showMessageDialog(null, "No hay Album a ese nombre");
             }else{

@@ -23,7 +23,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
+            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getNomAlb(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
         }
         DAO_Album persistence = new DAO_Album();
         Album album_vacio = new Album();
@@ -100,7 +100,7 @@ public class ControladorAlbum implements IControladorAlbum {
             albumExistente.setImagen(dataAlbum.getImagen());
             albumExistente.setanioCreacion(dataAlbum.getAnioCreacion());
             for (DataTema tema : dataAlbum.getTemas()) {
-                albumExistente.agregarTema(new tema(tema.getNickname(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
+                albumExistente.agregarTema(new tema(tema.getNickname(), tema.getNomAlb(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
             }
             for (DataGenero dataGenero : nuevosGeneros) {
                 Genero generoExistente = new Genero(dataGenero.getNombre());

@@ -24,6 +24,7 @@ import logica.dt.DataGenero;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
+import static presentacion.AgregarFavoritos.separarTemaAlbum;
 
 public class ConsultarLista extends javax.swing.JPanel {
 
@@ -409,8 +410,8 @@ public class ConsultarLista extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDireccionTemaActionPerformed
 
     private void ListaTemasListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaTemasListaMouseClicked
-        String nomtem = ListaTemasLista.getSelectedValue();
-        tema_seleccionado = controlTem.retornarTema(nomtem);
+        String nombre_completo_tema = ListaTemasLista.getSelectedValue();
+        tema_seleccionado = controlTem.retornarTema(separarTemaAlbum(nombre_completo_tema)[0], separarTemaAlbum(nombre_completo_tema)[1]);
         txtNomTemLista.setText(tema_seleccionado.getNickname());
         if (tema_seleccionado.getArchivo() != null) {
             btnDescargarTema1.setVisible(true);
@@ -426,6 +427,11 @@ public class ConsultarLista extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ListaTemasListaMouseClicked
 
+    public static String[] separarTemaAlbum(String nombreCompleto) {
+        // Dividir directamente sin validación
+        return nombreCompleto.split("/", 2); // Limitar a 2 partes
+    }
+    
     private void btnDescargarTema1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarTema1ActionPerformed
         Path sourcePath = Paths.get("espotify/src/main/java/temas/" + tema_seleccionado.getArchivo());
         String userHome = System.getProperty("user.home");
@@ -449,7 +455,7 @@ public class ConsultarLista extends javax.swing.JPanel {
         Iterator<DataTema> iterator = temas_de_la_lista.iterator();
         while (iterator.hasNext()) {
             DataTema tema_actual = iterator.next();
-            model.addElement(tema_actual.getNickname());
+            model.addElement(tema_actual.getNickname().concat("/").concat(tema_actual.getNomAlb()));
         }
         ListaTemasLista.setModel(model);
     }

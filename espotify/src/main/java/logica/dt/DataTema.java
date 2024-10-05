@@ -3,22 +3,25 @@ package logica.dt;
 public class DataTema {
 
     private String nickname;
+    private String nombre_album;
     private Integer posicion_album;
     private Integer duracion;
     private DataAlbum album;
     private String identificador_archivo;
     private String metodo_de_acceso;
 
-    public DataTema(String nickname, Integer duracion, Integer posicion, String metodo_de_acceso) {
+    public DataTema(String nickname, String nombre_album, Integer duracion, Integer posicion, String metodo_de_acceso) {
         this.nickname = nickname;
+        this.nombre_album = nombre_album;
         this.duracion = duracion;
         this.posicion_album = posicion_album;
         this.metodo_de_acceso = metodo_de_acceso;
     }
 
-    public DataTema(String nickname, Integer duracion) {
+    public DataTema(String nickname, String nombre_album, Integer duracion) {
         this.nickname = nickname;
         this.duracion = duracion;
+        this.nombre_album = nombre_album;
     }
 
     public DataTema(String nickname, Integer duracion, DataAlbum album) {
@@ -27,8 +30,9 @@ public class DataTema {
         this.album = album;
     }
 
-    public DataTema(String nickname, Integer duracion, DataAlbum album, Integer posicion_album) {
+    public DataTema(String nickname, String nombre_album, Integer duracion, DataAlbum album, Integer posicion_album) {
         this.nickname = nickname;
+        this.nombre_album = nombre_album;
         this.duracion = duracion;
         this.album = album;
         this.posicion_album = posicion_album;
@@ -36,20 +40,27 @@ public class DataTema {
 
     public DataTema() {
         this.setNickname(new String());
+        this.setNomAlb(null);
         this.setDuracion(null);
         this.album = new DataAlbum();
     }
 
-    public DataTema(String nickname, Integer duracion, DataAlbum dataAlbum, String acceso, String archivo) {
+    public DataTema(String nickname, String nombre_album, Integer duracion, DataAlbum dataAlbum, String acceso, String archivo) {
         this.nickname = nickname;
+        this.nombre_album = nombre_album;
         this.duracion = duracion;
         this.album = dataAlbum;
         this.metodo_de_acceso = acceso;
         this.identificador_archivo = archivo;
     }
     
-    public DataTema(String nickname) {
+    public DataTema(String nickname, String nombre_album) {
         this.nickname = nickname;
+        this.nombre_album = nombre_album;
+    }
+    
+    public String getNomAlb() {
+        return nombre_album;
     }
 
     public String getNickname() {
@@ -70,6 +81,10 @@ public class DataTema {
 
     public void setPos(Integer posicion) {
         this.posicion_album = posicion;
+    }
+    
+    public void setNomAlb(String nombre_album) {
+        this.nombre_album = nombre_album;
     }
 
     public String getAccess() {

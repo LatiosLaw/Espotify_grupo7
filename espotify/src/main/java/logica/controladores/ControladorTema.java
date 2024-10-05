@@ -14,15 +14,15 @@ import persistencia.DAO_Tema;
 public class ControladorTema implements IControladorTema {
 
     @Override
-    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo) {
-        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo);
+    public boolean crearTemaDefault(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo) {
+        tema nuevo_tema = new tema(nombre_tema, nombre_album, duracion, metodo_de_acceso, archivo);
         DAO_Tema persistence = new DAO_Tema();
-        if (persistence.find(nuevo_tema.getNickname()) != null) {
+        if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
             System.out.println("El tema ya existe.");
             return false;
         } else {
             persistence.save(nuevo_tema);
-            if (persistence.find(nuevo_tema.getNickname()) != null) {
+            if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
                 return true;
             } else {
@@ -33,16 +33,16 @@ public class ControladorTema implements IControladorTema {
     }
     
     @Override
-    public boolean crearTemaCompleto(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album) {
+    public boolean crearTemaCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album) {
         DAO_Album persistence_alb = new DAO_Album();
-        tema nuevo_tema = new tema(nombre_tema, duracion, metodo_de_acceso, archivo, posicion, persistence_alb.findAlbumByName(album.getNombre()));
+        tema nuevo_tema = new tema(nombre_tema, nombre_album, duracion, metodo_de_acceso, archivo, posicion, persistence_alb.findAlbumByName(album.getNombre()));
         DAO_Tema persistence = new DAO_Tema();
-        if (persistence.find(nuevo_tema.getNickname()) != null) {
+        if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
             System.out.println("El tema ya existe.");
             return false;
         } else {
             persistence.save(nuevo_tema);
-            if (persistence.find(nuevo_tema.getNickname()) != null) {
+            if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
                 return true;
             } else {
@@ -53,23 +53,23 @@ public class ControladorTema implements IControladorTema {
     }
 
     @Override
-    public DataTema retornarTema(String nickname) {
+    public DataTema retornarTema(String nickname, String nombre_album) {
         tema retorno;
         DAO_Tema persistence = new DAO_Tema();
-        retorno = persistence.find(nickname);
+        retorno = persistence.find(nickname, nombre_album);
         if (retorno != null) {
-            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
+            return new DataTema(retorno.getNickname(), retorno.getNombreAlbum(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }
     }
      @Override
-    public DataTema retornarTema2LaSecuela(String nickname) {
+    public DataTema retornarTema2LaSecuela(String nickname, String nombre_album) {
         tema retorno;
         DAO_Tema persistence = new DAO_Tema();
-        retorno = persistence.find(nickname);
+        retorno = persistence.find(nickname, nombre_album);
         if (retorno != null) {
-            return new DataTema(retorno.getNickname(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
+            return new DataTema(retorno.getNickname(), retorno.getNombreAlbum(), retorno.getDuracion(), new DataAlbum("placeholder"), retorno.getAcceso(), retorno.getArchivo());
         } else {
             return null;
            
@@ -85,7 +85,7 @@ public class ControladorTema implements IControladorTema {
             Iterator<tema> iterator = retorno.iterator();
             while (iterator.hasNext()) {
                 tema temazo = iterator.next();
-                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getNombreAlbum(), temazo.getDuracion()));
             }
             return listaDeTemas;
         } else {
@@ -104,7 +104,7 @@ public class ControladorTema implements IControladorTema {
                 Iterator<tema> iterator = retorno.iterator();
                 while (iterator.hasNext()) {
                     tema temazo = iterator.next();
-                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getNombreAlbum(), temazo.getDuracion()));
                 }
                 return listaDeTemas;
             } else {
@@ -119,7 +119,7 @@ public class ControladorTema implements IControladorTema {
                 Iterator<tema> iterator = retorno.iterator();
                 while (iterator.hasNext()) {
                     tema temazo = iterator.next();
-                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getDuracion()));
+                    listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getNombreAlbum(), temazo.getDuracion()));
                 }
                 return listaDeTemas;
             } else {
@@ -138,9 +138,9 @@ public class ControladorTema implements IControladorTema {
     }
 
     @Override
-    public void BorrarTema(String nombre_tema) {
+    public void BorrarTema(String nickname, String nombre_album) {
         DAO_Tema persistence = new DAO_Tema();
-        persistence.delete(nombre_tema);
+        persistence.delete(nickname, nombre_album);
     }
     
     @Override
@@ -153,7 +153,7 @@ public class ControladorTema implements IControladorTema {
             Iterator<tema> iterator = retorno.iterator();
             while (iterator.hasNext()) {
                 tema temazo = iterator.next();
-                listaDeTemas.add(temazo.getNickname());
+                listaDeTemas.add(temazo.getNickname().concat("/").concat(temazo.getNombreAlbum()));
             }
             return listaDeTemas;
         } else {

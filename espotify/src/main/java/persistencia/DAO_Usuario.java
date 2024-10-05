@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Cliente;
 import logica.Usuario;
+import logica.dt.DT_IdTema;
 
 public class DAO_Usuario {
 
@@ -110,10 +111,10 @@ public class DAO_Usuario {
             return null; // No se encontro ningún cliente con ese nombre
         }
     }
-    public Collection<String> obtenerTemaFavCliente(String nick_usuario) {
+    public Collection<DT_IdTema> obtenerTemaFavCliente(String nick_usuario) {
         try {
             return entityManager.createQuery(
-                    "SELECT g.nickname FROM Cliente u JOIN u.temas_favoritos g WHERE u.nickname = :nickname ", String.class)
+                    "SELECT g.identificador FROM Cliente u JOIN u.temas_favoritos g WHERE u.nickname = :nickname ", DT_IdTema.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {
