@@ -89,18 +89,8 @@ public class SeguirUsuario extends javax.swing.JPanel {
         txtUsuarioAseguir.setColumns(10);
         txtUsuarioAseguir.setForeground(new java.awt.Color(0, 0, 0));
 
-        lstUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(lstUsuarios);
 
-        lstClientes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(lstClientes);
 
         lblCliente1.setText("Clientes :");

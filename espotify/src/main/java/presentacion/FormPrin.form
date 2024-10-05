@@ -25,28 +25,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="btnAdUs" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAdLi" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAdAl" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnCarDat" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <Component id="btnAdUs" min="-2" pref="143" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAdLi" min="-2" pref="146" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAdAl" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="btnAdGn" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnCarDat" min="-2" pref="149" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlPrin" alignment="0" max="32767" attributes="0"/>
+          <Component id="pnlPrin" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAdLi" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdLi" alignment="3" pref="28" max="32767" attributes="0"/>
                   <Component id="btnAdAl" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnAdUs" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnCarDat" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnAdGn" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlPrin" min="-2" max="-2" attributes="0"/>
@@ -69,7 +71,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="311" max="32767" attributes="0"/>
                   <Component id="jProgressBar1" min="-2" pref="255" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
               </Group>
@@ -179,6 +181,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCarDatActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAdGn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Administar Genero"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[210, 23]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdGnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

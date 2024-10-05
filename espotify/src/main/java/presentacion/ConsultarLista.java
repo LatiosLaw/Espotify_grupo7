@@ -167,6 +167,10 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         lblGeneroOCliente.setText("Genero o Cliente : ");
 
+        txtNomTemLista.setMaximumSize(new java.awt.Dimension(13, 28));
+        txtNomTemLista.setName(""); // NOI18N
+        txtNomTemLista.setOpaque(true);
+
         lblDurTem.setText("Duracion :");
 
         btnDescargarTema1.setText("Descargar Tema");
@@ -202,6 +206,7 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         txtNombreLista.setEditable(false);
 
+        ListaTemasLista.setMaximumSize(new java.awt.Dimension(95, 146));
         ListaTemasLista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ListaTemasListaMouseClicked(evt);
@@ -247,7 +252,7 @@ public class ConsultarLista extends javax.swing.JPanel {
                             .addComponent(txtDefinidoPor)
                             .addComponent(txtGeneroLista)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(txtNomTemLista)))
+                            .addComponent(txtNomTemLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

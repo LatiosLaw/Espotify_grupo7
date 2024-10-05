@@ -132,6 +132,10 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         lblTemDeAlb.setText("Temas del Album :");
 
+        listTemAlb.setMaximumSize(new java.awt.Dimension(95, 146));
+        listTemAlb.setMinimumSize(new java.awt.Dimension(95, 146));
+        listTemAlb.setName(""); // NOI18N
+        listTemAlb.setPreferredSize(new java.awt.Dimension(95, 146));
         listTemAlb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listTemAlbMouseClicked(evt);
@@ -214,6 +218,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         jLabelAlbum.setText("Album :");
 
+        txtNomTemAlb.setMaximumSize(new java.awt.Dimension(13, 28));
+        txtNomTemAlb.setName(""); // NOI18N
+
         jLabel1.setText("Link del Tema : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -256,11 +263,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDurTem, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                             .addComponent(txtAnioCre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(lblGenDeAlb)
                             .addComponent(txtNomAlb)
-                            .addComponent(txtNomTemAlb))))
+                            .addComponent(txtNomTemAlb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(

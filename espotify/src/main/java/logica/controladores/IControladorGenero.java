@@ -8,7 +8,7 @@ public interface IControladorGenero {
 
     public void crearGeneroUnico(String nombre);
 
-    public void crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre);
+    public boolean crearGeneroConSubgeneros(String nombre, Collection<String> genero_padre);
 
     public Collection<String> mostrarGeneros();
 

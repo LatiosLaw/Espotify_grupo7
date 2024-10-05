@@ -160,6 +160,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             }
         });
 
+        lstSeguidores.setMaximumSize(new java.awt.Dimension(90, 125));
         jScrollPane6.setViewportView(lstSeguidores);
 
         jScrollPane7.setViewportView(lstListas);
@@ -174,6 +175,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
 
         lblFavs.setText("Favs :");
 
+        lstFavs.setMaximumSize(new java.awt.Dimension(90, 125));
         jScrollPane10.setViewportView(lstFavs);
 
         cbxFavss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temas", "Albums", "Listas" }));
@@ -274,15 +276,16 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
                                 .addComponent(lblNroSeguidores))
                             .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblAlbumSiguiendo)
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSeguidores)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

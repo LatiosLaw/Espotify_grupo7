@@ -25,11 +25,7 @@
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="151" max="-2" attributes="0"/>
-                          <Component id="lblArtList" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
@@ -70,10 +66,10 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtArt" max="32767" attributes="0"/>
                           <Component id="txtNomAlb" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtAnio" alignment="0" pref="160" max="32767" attributes="0"/>
                           <Component id="jButtonImagen" max="32767" attributes="0"/>
+                          <Component id="CmbArtistas" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -92,7 +88,6 @@
                               <Component id="btnArch" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
                           <Component id="cbxTipMus" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSelGen" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,11 +106,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblArt" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtArt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblArt" min="-2" max="-2" attributes="0"/>
+                          <Component id="CmbArtistas" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNomAlb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNomAlb" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -131,22 +126,14 @@
                           <Component id="txtAnio" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblArtList" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNomTemaAlb1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblNomTemaAlb1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPane2" min="-2" pref="201" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnConfTem" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btnNukear1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="btnConfirmar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jScrollPane4" min="-2" pref="240" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="201" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnConfTem" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="btnNukear1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="btnConfirmar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -163,10 +150,7 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnSelGen" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnReiGen" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnReiGen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
@@ -220,8 +204,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Artista creador del album :"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtArt">
     </Component>
     <Component class="javax.swing.JLabel" name="lblNomAlb">
       <Properties>
@@ -338,15 +320,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtAnio">
     </Component>
-    <Component class="javax.swing.JButton" name="btnSelGen">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccionar Genero"/>
-        <Property name="toolTipText" type="java.lang.String" value="Selecciona con un click el genero en la lista de la derecha, luego presiona seleccionar genero"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelGenActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnReiGen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reinicar Generos"/>
@@ -407,30 +380,6 @@
         <Property name="text" type="java.lang.String" value="Posicion del tema :"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JList" name="listArts">
-          <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JLabel" name="lblArtList">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lista de artistas :"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblMin">
       <Properties>
         <Property name="text" type="java.lang.String" value="Minutos :"/>
@@ -466,6 +415,18 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImagenActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="CmbArtistas">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="OPT"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
