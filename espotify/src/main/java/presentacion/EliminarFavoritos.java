@@ -9,10 +9,12 @@ import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
+import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
+import static presentacion.AgregarFavoritos.separarTemaAlbum;
 
 public class EliminarFavoritos extends javax.swing.JPanel {
  private final IControladorCliente controlCli;
@@ -188,7 +190,7 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     //JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
                     break;
                 case "Temas":
-                    DataTema tema = controlTema.retornarTema2LaSecuela(coso);
+                    DataTema tema = controlTema.retornarTema2LaSecuela(separarTemaAlbum(coso)[0], separarTemaAlbum(coso)[1]);
                     if(tema == null){
                         JOptionPane.showMessageDialog(null, "No existe un tema con ese nombre en los favoritos del Cliente.");
                     }else{
@@ -321,6 +323,11 @@ public class EliminarFavoritos extends javax.swing.JPanel {
 
         }
         return tpken;
+    }
+    
+    public static String[] separarTemaAlbum(String nombreCompleto) {
+        // Dividir directamente sin validación
+        return nombreCompleto.split("/", 2); // Limitar a 2 partes
     }
     
     public void buscarCosas(String token){

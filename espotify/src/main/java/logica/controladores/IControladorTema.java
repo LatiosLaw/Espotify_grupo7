@@ -6,11 +6,11 @@ import logica.dt.DataTema;
 
 public interface IControladorTema {
 
-    public boolean crearTemaDefault(String nombre_tema, int duracion, String metodo_de_acceso, String archivo);
+    public boolean crearTemaDefault(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo);
 
-    boolean crearTemaCompleto(String nombre_tema, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album);
+    boolean crearTemaCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album);
             
-    public DataTema retornarTema(String nickname);
+    public DataTema retornarTema(String nickname, String nombre_album);
     
     Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista);
 
@@ -18,9 +18,9 @@ public interface IControladorTema {
 
     public void actualizarTema(DataTema tema, DataAlbum album);
 
-    public void BorrarTema(String nombre_tema);
+    public void BorrarTema(String nickname, String nombre_album);
     
     public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album);
     
-     public DataTema retornarTema2LaSecuela(String nickname);
+     public DataTema retornarTema2LaSecuela(String nickname, String nombre_album);
 }

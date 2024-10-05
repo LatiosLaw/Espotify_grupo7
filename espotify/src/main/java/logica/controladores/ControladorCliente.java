@@ -14,6 +14,7 @@ import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
 import logica.tema;
 import logica.Usuario;
+import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
@@ -133,7 +134,7 @@ public class ControladorCliente implements IControladorCliente {
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             if (cli instanceof Cliente cliente) {
-                tema t = persistence2.find(nicktem.getNickname());
+                tema t = persistence2.find(nicktem.getNickname(), nicktem.getNomAlb());
                 cliente.temaFav(t);
                 persistence.update(cli);
             }
@@ -187,7 +188,7 @@ public class ControladorCliente implements IControladorCliente {
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             DAO_Tema temaPersistence = new DAO_Tema();
-            tema tem = temaPersistence.find(nicktem.getNickname());
+            tema tem = temaPersistence.find(nicktem.getNickname(), nicktem.getNomAlb());
             if (tem != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarTemaFav(tem);
@@ -305,7 +306,14 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public Collection<String> obtenerTemaFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
-        return dao.obtenerTemaFavCliente(nick);
+        Collection<DT_IdTema> lista =  dao.obtenerTemaFavCliente(nick);
+        Collection<String> retornable = new ArrayList<>();
+        Iterator<DT_IdTema> iterator = lista.iterator();
+                while (iterator.hasNext()) {
+                    DT_IdTema temazo = iterator.next();
+                    retornable.add(temazo.getNombreTema().concat("/").concat(temazo.getNombreAlbumTema()));
+        }
+                return retornable;
     }
 
     @Override

@@ -2,6 +2,7 @@ package logica.controladores;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;

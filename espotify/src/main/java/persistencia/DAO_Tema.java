@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
+import logica.dt.DT_IdTema;
 import logica.tema;
 
 public class DAO_Tema {
@@ -24,8 +25,15 @@ public class DAO_Tema {
         entityManager.getTransaction().commit();
     }
 
-    public tema find(String nombre) {
-        return entityManager.find(tema.class, nombre);
+    public tema find(String nombre_tem, String nombre_albu) {
+        try {
+        return entityManager.createQuery("SELECT t FROM tema t WHERE t.identificador.nombre_tema = :nombre_tem AND t.identificador.nombre_album = :nombre_albu", tema.class)
+                    .setParameter("nombre_tem", nombre_tem)
+                .setParameter("nombre_albu", nombre_albu)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún tema de este album
+        }
     }
 
     public List<tema> findAll() {
@@ -55,7 +63,7 @@ public class DAO_Tema {
     
     public List<tema> findFromListaParticular(String nombre_lista) { // No existen diferencias actualmente, seran implementadas proxima iteracion.
         try {
-            return entityManager.createQuery("SELECT t FROM tema t JOIN t.listas WHERE l.nombre = :nombre_lista", tema.class)
+            return entityManager.createQuery("SELECT t FROM tema t JOIN t.listas l WHERE l.nombre = :nombre_lista", tema.class)
                     .setParameter("nombre_lista", nombre_lista)
                     .getResultList();
         } catch (NoResultException e) {
@@ -70,8 +78,8 @@ public class DAO_Tema {
         entityManager.getTransaction().commit();
     }
 
-    public void delete(String nombre) {
-        tema entity = find(nombre);
+    public void delete(String nombre, String nombre_album) {
+        tema entity = find(nombre, nombre_album);
         if (entity != null) {
             entityManager.getTransaction().begin();
             entityManager.remove(entity);

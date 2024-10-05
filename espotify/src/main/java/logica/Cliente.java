@@ -20,7 +20,10 @@ public class Cliente extends Usuario {
     @ManyToMany
     @JoinTable(name = "temas_favoritos",
             joinColumns = @JoinColumn(name = "nick_cliente"),
-            inverseJoinColumns = @JoinColumn(name = "nombre_tema"))
+            inverseJoinColumns = {
+            @JoinColumn(name = "nombre_tema", referencedColumnName = "nombre_tema"),  // Referencia a TemaId.campo1
+            @JoinColumn(name = "nombre_album", referencedColumnName = "nombre_album")   // Referencia a TemaId.campo2
+        })
     protected Collection<tema> temas_favoritos = new ArrayList<tema>();
     @ManyToMany
     @JoinTable(name = "albumes_favoritos",

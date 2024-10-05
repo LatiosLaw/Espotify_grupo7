@@ -461,7 +461,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             if (mp3File.hasId3v2Tag()) {
                                 ID3v2 id3v2Tag = mp3File.getId3v2Tag();
                                 long durationInSeconds = mp3File.getLengthInSeconds();
-                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName())) {
+                                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && !txtTipMus.getText().isEmpty() && controlTem.crearTemaDefault(nombre_tema, txtNomAlb.getText(), (int) durationInSeconds, txtTipMus.getText(), selectedFile.getName())) {
                                     JOptionPane.showMessageDialog(null, "Tema agregado con exito");
                                     DefaultListModel<String> model = new DefaultListModel();
                                     Iterator<String> iterator = temas_del_album.iterator();
@@ -500,7 +500,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
 
             } else {
                 if(!txtMin.getText().isEmpty() && !txtSeg.getText().isEmpty()){
-                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, Integer.parseInt(txtMin.getText())*60+Integer.parseInt(txtSeg.getText()), txtTipMus.getText(), null)) {
+                if (insertarEnPosicion(temas_del_album, nombre_tema, posicion_deseada) && controlTem.crearTemaDefault(nombre_tema, txtNomAlb.getText(), Integer.parseInt(txtMin.getText())*60+Integer.parseInt(txtSeg.getText()), txtTipMus.getText(), null)) {
                     JOptionPane.showMessageDialog(null, "Tema agregado con exito");
                     DefaultListModel<String> model = new DefaultListModel();
                     Iterator<String> iterator = temas_del_album.iterator();
@@ -540,7 +540,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     }
     
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if (String.valueOf(CmbArtistas.getSelectedItem()) != "OPT" || txtNomAlb.getText().isEmpty() || txtAnio.getText().isEmpty()) {
+        if (String.valueOf(CmbArtistas.getSelectedItem()) == "OPT" || txtNomAlb.getText().isEmpty() || txtAnio.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, complete el formulario con la informacion necesaria");
         } else {
             if (controlArt.retornarArtista(String.valueOf(CmbArtistas.getSelectedItem())) != null) {
@@ -567,13 +567,13 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                     Iterator<String> iterator = temas_del_album.iterator();
                     Integer posicion = 1;
                     while (iterator.hasNext()) {
-                        DataTema tema_actual = controlTem.retornarTema(iterator.next());
+                        DataTema tema_actual = controlTem.retornarTema(iterator.next(), txtNomAlb.getText());
                         tema_actual.setPos(posicion);
                         posicion = posicion + 1;
                         tema_actual.setAlbum(new DataAlbum(txtNomAlb.getText()));
                         temas.add(tema_actual);
                     }
-                    if (selectedFile.getName().isBlank()) {
+                    if (selectedFile == null) {
                         DataAlbum album_nuevo = controlAlb.agregarAlbum(nick_artista, nombre_album, "default", año_album, temas);
                         Iterator<String> iterator_gen = generos_seleccionados.iterator();
                         while (iterator_gen.hasNext()) {
@@ -671,7 +671,7 @@ public class AltaDeAlbum extends javax.swing.JPanel {
     private void btnNukear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNukear1ActionPerformed
         Iterator<String> iterator = temas_del_album.iterator();
         while (iterator.hasNext()) {
-            controlTem.BorrarTema(iterator.next());
+            controlTem.BorrarTema(iterator.next(), txtNomAlb.getText());
         }
         reiniciarCampos();
         JOptionPane.showMessageDialog(null, "Alta de Album cancelada con exito");
