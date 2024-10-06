@@ -32,8 +32,8 @@ public class DAO_ListaReproduccion {
         return entityManager.find(ListaReproduccion.class, nombre);
     }
 
-    public List<ListaReproduccion> findAll() {
-        return entityManager.createQuery("SELECT e FROM MyEntity e", ListaReproduccion.class).getResultList();
+    public List<ListaParticular> findAllListasParticulares() {
+        return entityManager.createQuery("SELECT lp FROM ListaParticular lp", ListaParticular.class).getResultList();
     }
 
     public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
@@ -168,6 +168,12 @@ public class DAO_ListaReproduccion {
         Collection<String> listas = 
         entityManager.createQuery("SELECT l.nombre FROM ListaPorDefecto l", String.class).getResultList();
         return listas.isEmpty() ? null : listas;
+    }
+    
+    public Collection<ListaPorDefecto> devolverListasPorDefecto() {
+        Collection<ListaPorDefecto> listas = 
+        entityManager.createQuery("SELECT l FROM ListaPorDefecto l", ListaPorDefecto.class).getResultList();
+        return listas;
     }
     
 }

@@ -1,5 +1,6 @@
 package presentacion;
 
+import logica.controladores.IControladorAlbum;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
@@ -13,13 +14,15 @@ public class AdministrarLista extends javax.swing.JPanel {
     private final IControladorGenero controlGen;
     private final IControladorCliente controlCli;
     private final IControladorTema controlTem;
+    private final IControladorAlbum controlAlb;
 
-    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc, IControladorGenero icg, IControladorTema ict) {
+    public AdministrarLista(IControladorListaPorDefecto iclpd, IControladorListaParticular iclp, IControladorCliente iclc, IControladorGenero icg, IControladorTema ict, IControladorAlbum ilb) {
         controlGen = icg;
         controlListPart = iclp;
         controlListPD = iclpd;
         controlCli = iclc;
         controlTem = ict;
+        controlAlb = ilb;
         initComponents();
     }
 
@@ -55,7 +58,10 @@ public class AdministrarLista extends javax.swing.JPanel {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(872, 579));
 
-        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", "Consultar Lista" }));
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", "Consultar Lista", "Agregar Tema a Lista", "Eliminar Tema De Lista" }));
+        cbxOPT.setMaximumSize(new java.awt.Dimension(117, 26));
+        cbxOPT.setMinimumSize(new java.awt.Dimension(117, 26));
+        cbxOPT.setPreferredSize(new java.awt.Dimension(117, 26));
         cbxOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxOPTActionPerformed(evt);
@@ -69,22 +75,22 @@ public class AdministrarLista extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 620, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxOPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(499, Short.MAX_VALUE))
+                .addContainerGap(510, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -137,6 +143,24 @@ public class AdministrarLista extends javax.swing.JPanel {
                 cl.setSize(860, 471);
                 pnlAL.removeAll();
                 pnlAL.add(cl);
+                pnlAL.revalidate();
+                pnlAL.repaint();
+            }
+            case "Agregar Tema a Lista" -> {
+                AgregarTemaALista al = new AgregarTemaALista(controlCli, controlListPart, controlListPD, controlTem, controlAlb);
+                al.setLocation(0, 0);
+                al.setSize(860, 471);
+                pnlAL.removeAll();
+                pnlAL.add(al);
+                pnlAL.revalidate();
+                pnlAL.repaint();
+            }
+            case "Eliminar Tema De Lista" -> {
+                EliminarTemaDeLista el = new EliminarTemaDeLista(controlCli, controlListPart, controlListPD, controlTem, controlAlb);
+                el.setLocation(0, 0);
+                el.setSize(860, 471);
+                pnlAL.removeAll();
+                pnlAL.add(el);
                 pnlAL.revalidate();
                 pnlAL.repaint();
             }

@@ -200,7 +200,7 @@ public class FormPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdAlActionPerformed
 
     private void btnAdLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdLiActionPerformed
-        AdministrarLista aL = new AdministrarLista(controlListPD, controlListPar, controlCli, controlGen, controlTem);
+        AdministrarLista aL = new AdministrarLista(controlListPD, controlListPar, controlCli, controlGen, controlTem, controlAlb);
         aL.setLocation(0, 0);
         aL.setSize(872, 579);
         pnlPrin.removeAll();

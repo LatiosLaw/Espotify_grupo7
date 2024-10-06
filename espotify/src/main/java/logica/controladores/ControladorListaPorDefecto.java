@@ -64,13 +64,18 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     public void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         ListaPorDefecto lista = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
-        lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
+        lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
         daoLista.update(lista);
     }
 
     @Override
-    public void quitarTema(String nombre_lista, String nombre_tema) {
-
+    public void quitarTema(String nombre_lista, String nombre_genero, String nombre_tema, String nombre_album_tema) {
+        DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+        DAO_Tema daoTema = new DAO_Tema();
+        tema temazo = daoTema.find(nombre_tema, nombre_album_tema);
+        ListaPorDefecto lista = daoLista.findListaPorGeneroYNombre(nombre_genero, nombre_lista);
+        lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
+        daoLista.update(lista);
     }
     
     @Override
@@ -114,6 +119,19 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     public Collection<String> listarListasPorDefecto() {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
        return persistence.devolverListasPorDefectoString();   
+    }
+    
+    @Override
+    public Collection<String> listarListasPorDefectoConGenero() {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        Collection<ListaPorDefecto> listadPD = persistence.devolverListasPorDefecto();
+        Collection<String> retorno = new ArrayList<>();
+        Iterator<ListaPorDefecto> iterator = listadPD.iterator();
+        while (iterator.hasNext()) {
+            ListaPorDefecto lista = iterator.next();
+            retorno.add(lista.getNombre().concat("/").concat(lista.getGenero().getNombre()));
+        }
+        return retorno;
     }
     
     @Override

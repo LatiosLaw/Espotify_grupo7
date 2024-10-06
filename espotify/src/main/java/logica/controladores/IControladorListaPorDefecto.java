@@ -13,8 +13,10 @@ public interface IControladorListaPorDefecto {
 
     void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo);
 
-    void quitarTema(String nombre_lista, String nombre_tema);
+    void quitarTema(String nombre_lista, String genero, String nombre_tema, String nombre_album_tema);
 
+    Collection<String> listarListasPorDefectoConGenero();
+    
     DataListaPorDefecto devolverInformacion(String ls, String nombre_genero);
     
     Collection<String> listarListasPorDefecto() ;

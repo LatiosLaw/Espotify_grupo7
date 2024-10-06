@@ -42,6 +42,10 @@ public abstract class ListaReproduccion implements Serializable {
         this.temas.add(tema);
     }
     
+    public void eliminarTema(tema tema) {
+        this.temas.remove(tema);
+    }
+    
     public String getFoto() {
         return foto;
     }

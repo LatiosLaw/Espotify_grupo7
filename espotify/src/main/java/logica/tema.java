@@ -36,6 +36,13 @@ public class tema implements Serializable {
         this.identificador.setNombreTema(nickname);
         this.identificador.setNombreAlbumTema(nombre_album);
     }
+     
+     public tema(String nickname, String nombre_album, Integer duracion) {
+        this.identificador = new DT_IdTema();
+        this.identificador.setNombreTema(nickname);
+        this.identificador.setNombreAlbumTema(nombre_album);
+        this.duracion = duracion;
+    }
     
     public tema(String nickname, Integer duracion) {
         this.identificador = new DT_IdTema();

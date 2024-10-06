@@ -287,6 +287,11 @@ public class AltaDeAlbum extends javax.swing.JPanel {
         });
 
         CmbArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT" }));
+        CmbArtistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbArtistasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -696,6 +701,10 @@ public class AltaDeAlbum extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jButtonImagenActionPerformed
+
+    private void CmbArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbArtistasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CmbArtistasActionPerformed
 
     public void cargarGeneros() {
         DefaultListModel<String> model = new DefaultListModel();

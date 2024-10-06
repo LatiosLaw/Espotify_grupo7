@@ -19,6 +19,19 @@ import persistencia.DAO_Usuario;
 public class ControladorListaParticular implements IControladorListaParticular {
 
     @Override
+    public Collection<String> retornarListasPublicas(){
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        Collection<ListaParticular> listas = persistence.findAllListasParticulares();
+        Collection<String> coleString = new ArrayList<>();
+        for(ListaParticular listaP : listas){
+                if(listaP.getVisibilidad() == true){
+                coleString.add(listaP.getNombre());
+                }
+        }
+       return coleString;
+    }
+    
+    @Override
     public void crearLista(String nombre, DataCliente dataCliente) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         DAO_Usuario daoUsuario = new DAO_Usuario();
@@ -80,7 +93,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
                 if(lista == null){
                     System.out.println("No existen listas en el sistema."); 
                 }else{
-                    lista.agregarTema(new tema(temazo.getNickname(), temazo.getDuracion()));
+                    lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
                     daoLista.update(lista);
                 }
                 break;
@@ -89,8 +102,26 @@ public class ControladorListaParticular implements IControladorListaParticular {
     }
 
     @Override
-    public void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema) {
-
+    public void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema, String nombre_album_tema) {
+DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+DAO_Tema daoTema = new DAO_Tema();
+        ListaParticular lista = null;
+        Collection<ListaParticular> listas = daoLista.findListaPorCliente(nick_cliente);
+        tema temazo = daoTema.find(nombre_tema, nombre_album_tema);
+        Iterator<ListaParticular> iterator = listas.iterator();
+        while (iterator.hasNext()) {
+            lista = iterator.next();
+            String nombrel = lista.getNombre();
+            if(nombrel == nombre_lista){
+                if(lista == null){
+                    System.out.println("No existen listas en el sistema."); 
+                }else{
+                    lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
+                    daoLista.update(lista);
+                }
+                break;
+            }
+        }
     }
 
     @Override
