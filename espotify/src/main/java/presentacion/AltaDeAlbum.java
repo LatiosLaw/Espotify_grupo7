@@ -597,7 +597,22 @@ public class AltaDeAlbum extends javax.swing.JPanel {
                             controlGen.actualizarGenero(new DataGenero(genero), albumes, album_nuevo);
                         }
                         JOptionPane.showMessageDialog(null, "Album agregado con exito");
-                        reiniciarCampos();
+                        if (fileChooserImagen.getSelectedFile() != null) {
+                    selectedFile = fileChooserImagen.getSelectedFile();
+                    File destinationDir = new File("espotify\\src\\main\\java\\imagenes\\albumes");
+                    if (!destinationDir.exists()) {
+                        destinationDir.mkdirs(); // Crear la carpeta si no existe
+                    }
+                    // Crear el archivo de destino con el mismo nombre que el seleccionado
+                    File destinationFile = new File(destinationDir, selectedFile.getName());
+                    try{
+                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+                    }catch(Exception e){
+                        System.out.println("Un error ha ocurrido");
+                    }
+                        }
+                    reiniciarCampos();
                     }
                 }
             } else {

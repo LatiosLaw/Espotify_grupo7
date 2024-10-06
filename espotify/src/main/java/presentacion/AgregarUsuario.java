@@ -2,6 +2,8 @@ package presentacion;
 
 import java.awt.Component;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -257,7 +259,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         } else {
                             if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getValor()) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
-                                vaciarCampos();
                             } else {
                                 if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getNumero() == 1) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
@@ -265,23 +266,28 @@ public class AgregarUsuario extends javax.swing.JPanel {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
                                 }
                             }
+                            if (fileChooserImagen.getSelectedFile() != null) {
+                    selectedFile = fileChooserImagen.getSelectedFile();
+                    File destinationDir = new File("espotify\\src\\main\\java\\imagenes\\perfiles");
+                    if (!destinationDir.exists()) {
+                        destinationDir.mkdirs(); // Crear la carpeta si no existe
+                    }
+                    // Crear el archivo de destino con el mismo nombre que el seleccionado
+                    File destinationFile = new File(destinationDir, selectedFile.getName());
+                    try{
+                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+                    }catch(Exception e){
+                        System.out.println("Un error ha ocurrido");
+                    }
+                        }
+                        vaciarCampos();
                         }
                     } else {
                         JOptionPane.showMessageDialog(lblMsjArch, "Por favor, completa los campos de biografia y direccion web correctamente.");
                     }
                 } else {
                     if (selectedFile==null) {
-                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getValor() == true) {
-                            JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
-                            vaciarCampos();
-                        } else {
-                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getNumero() == 1) {
-                                JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
-                            } else {
-                                JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
-                            }
-                        }
-                    } else {
                         if (controlCli.agregarCliente(nick, nombre, apellido, correo, "default", fechaFinal).getValor() == true) {
                             JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
                             vaciarCampos();
@@ -292,6 +298,32 @@ public class AgregarUsuario extends javax.swing.JPanel {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
                             }
                         }
+                    } else {
+                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getValor() == true) {
+                            JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
+                        } else {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getNumero() == 1) {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
+                            } else {
+                                JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
+                            }
+                        }
+                        if (fileChooserImagen.getSelectedFile() != null) {
+                    selectedFile = fileChooserImagen.getSelectedFile();
+                    File destinationDir = new File("espotify\\src\\main\\java\\imagenes\\perfiles");
+                    if (!destinationDir.exists()) {
+                        destinationDir.mkdirs(); // Crear la carpeta si no existe
+                    }
+                    // Crear el archivo de destino con el mismo nombre que el seleccionado
+                    File destinationFile = new File(destinationDir, selectedFile.getName());
+                    try{
+                        Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("Archivo guardado exitosamente en: " + destinationFile.getAbsolutePath());
+                    }catch(Exception e){
+                        System.out.println("Un error ha ocurrido");
+                    }
+                        }
+                        vaciarCampos();
                     }
                 }
             } else {
