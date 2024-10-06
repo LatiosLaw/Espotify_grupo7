@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -10,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -46,6 +48,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtDireccionTema.setEditable(false);
         txtDireccionTema.setVisible(true);
         jLabel1.setVisible(true);
+        JLABELFOTOALBUM.setText("");
         
         listGenOrArt.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -101,8 +104,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         txtDireccionTema = new javax.swing.JTextField();
         txtDurTem = new javax.swing.JTextField();
         lblDurTem = new javax.swing.JLabel();
-        fotoAlb = new java.awt.Panel();
-        txtIMAGEN_AFUTURO = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         listGenOrArt = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -114,6 +115,8 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         jLabelAlbum = new javax.swing.JLabel();
         txtNomTemAlb = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabelImagen = new javax.swing.JLabel();
+        JLABELFOTOALBUM = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -162,31 +165,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         lblDurTem.setText("Duracion :");
 
-        fotoAlb.setBackground(new java.awt.Color(204, 204, 204));
-        fotoAlb.setPreferredSize(new java.awt.Dimension(149, 149));
-
-        txtIMAGEN_AFUTURO.setForeground(new java.awt.Color(0, 0, 0));
-        txtIMAGEN_AFUTURO.setText("IMAGEN");
-
-        javax.swing.GroupLayout fotoAlbLayout = new javax.swing.GroupLayout(fotoAlb);
-        fotoAlb.setLayout(fotoAlbLayout);
-        fotoAlbLayout.setHorizontalGroup(
-            fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fotoAlbLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(txtIMAGEN_AFUTURO)
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        fotoAlbLayout.setVerticalGroup(
-            fotoAlbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fotoAlbLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(txtIMAGEN_AFUTURO)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-
         jScrollPane4.setViewportView(listGenOrArt);
 
+        listAlb.setMaximumSize(new java.awt.Dimension(95, 208));
+        listAlb.setMinimumSize(new java.awt.Dimension(95, 208));
+        listAlb.setPreferredSize(new java.awt.Dimension(95, 208));
         jScrollPane5.setViewportView(listAlb);
 
         nomGenOrArt.setEditable(false);
@@ -210,6 +193,7 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         nomAlbum.setEditable(false);
         nomAlbum.setBackground(new java.awt.Color(204, 204, 204));
         nomAlbum.setForeground(new java.awt.Color(0, 0, 0));
+        nomAlbum.setMaximumSize(new java.awt.Dimension(13, 28));
         nomAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomAlbumActionPerformed(evt);
@@ -223,6 +207,14 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         jLabel1.setText("Link del Tema : ");
 
+        JLABELFOTOALBUM.setBackground(new java.awt.Color(0, 0, 0));
+        JLABELFOTOALBUM.setText("Imagen");
+        JLABELFOTOALBUM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        JLABELFOTOALBUM.setIconTextGap(0);
+        JLABELFOTOALBUM.setMaximumSize(new java.awt.Dimension(148, 148));
+        JLABELFOTOALBUM.setMinimumSize(new java.awt.Dimension(148, 148));
+        JLABELFOTOALBUM.setPreferredSize(new java.awt.Dimension(148, 148));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,44 +223,41 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelInput)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(nomGenOrArt)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblConAlb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxConAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nomAlbum)
-                    .addComponent(jLabelAlbum))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nomAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAlbum)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(btnDescargarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDescargarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JLABELFOTOALBUM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTemDeAlb)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDurTem)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDurTem, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                                .addComponent(txtDurTem))
                             .addComponent(txtAnioCre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(lblGenDeAlb)
                             .addComponent(txtNomAlb)
                             .addComponent(txtNomTemAlb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(97, 97, 97))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(46, 46, 46)
+                .addComponent(jLabelImagen)
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,16 +265,13 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fotoAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNomAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtAnioCre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblGenDeAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNomAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtAnioCre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGenDeAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTemDeAlb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,18 +292,24 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                             .addComponent(lblConAlb)
                             .addComponent(cbxConAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelInput)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomGenOrArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelAlbum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelImagen)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelInput)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nomGenOrArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(JLABELFOTOALBUM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelAlbum)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(76, 76, 76))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -370,6 +362,23 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             txtAnioCre.setText(Integer.toString(album.getAnioCreacion()));
             cargarGenerosDelAlbum(album.getNombre());
             cargarTemasDelAlbum(album.getNombre());
+            ImageIcon defaultIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\albumes\\Default.jpg");
+            Image DefaultImage = defaultIcon.getImage();
+            Image resizedDefault = DefaultImage.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
+            ImageIcon resizedIconDefault = new ImageIcon(resizedDefault);
+            if(album.getImagen()!="default" && album.getImagen()!=null && (album.getImagen().endsWith(".png") || album.getImagen().endsWith(".jpg"))){
+            ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\albumes\\"+album.getImagen());
+            if(imageIcon.getImage()!=null){
+                Image DefaultProfile = imageIcon.getImage();
+            Image resizedProfile = DefaultProfile.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
+            ImageIcon resizedIconProfile = new ImageIcon(resizedProfile);
+            JLABELFOTOALBUM.setIcon(resizedIconProfile);
+            }else{
+            JLABELFOTOALBUM.setIcon(resizedIconDefault);    
+            }
+            }else{
+            JLABELFOTOALBUM.setIcon(resizedIconDefault);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, introduzca el album del que quiere saber la informacion en el formulario.");
         }
@@ -503,14 +512,16 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         model = new DefaultListModel<>();
         listGenAlb.setModel(model);
         listTemAlb.setModel(model);
+        JLABELFOTOALBUM.setIcon(null);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLABELFOTOALBUM;
     private javax.swing.JButton btnDescargarTema;
     private javax.swing.JComboBox<String> cbxConAlb;
-    private java.awt.Panel fotoAlb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAlbum;
+    private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -529,7 +540,6 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
     private javax.swing.JTextField txtAnioCre;
     private javax.swing.JTextField txtDireccionTema;
     private javax.swing.JTextField txtDurTem;
-    private javax.swing.JLabel txtIMAGEN_AFUTURO;
     private javax.swing.JTextField txtNomAlb;
     private javax.swing.JTextField txtNomTemAlb;
     // End of variables declaration//GEN-END:variables
