@@ -129,6 +129,10 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
             }
         });
 
+        txtNomAlb.setMaximumSize(new java.awt.Dimension(208, 26));
+        txtNomAlb.setMinimumSize(new java.awt.Dimension(208, 26));
+        txtNomAlb.setPreferredSize(new java.awt.Dimension(208, 26));
+
         jScrollPane1.setViewportView(listGenAlb);
 
         lblGenDeAlb.setText("Generos del Album :");
@@ -193,7 +197,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
         nomAlbum.setEditable(false);
         nomAlbum.setBackground(new java.awt.Color(204, 204, 204));
         nomAlbum.setForeground(new java.awt.Color(0, 0, 0));
-        nomAlbum.setMaximumSize(new java.awt.Dimension(13, 28));
+        nomAlbum.setMaximumSize(new java.awt.Dimension(208, 28));
+        nomAlbum.setMinimumSize(new java.awt.Dimension(208, 28));
+        nomAlbum.setName(""); // NOI18N
+        nomAlbum.setPreferredSize(new java.awt.Dimension(208, 28));
+        nomAlbum.setRequestFocusEnabled(false);
         nomAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomAlbumActionPerformed(evt);
@@ -202,8 +210,11 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
 
         jLabelAlbum.setText("Album :");
 
-        txtNomTemAlb.setMaximumSize(new java.awt.Dimension(13, 28));
+        txtNomTemAlb.setMaximumSize(new java.awt.Dimension(208, 26));
+        txtNomTemAlb.setMinimumSize(new java.awt.Dimension(208, 26));
         txtNomTemAlb.setName(""); // NOI18N
+        txtNomTemAlb.setPreferredSize(new java.awt.Dimension(208, 26));
+        txtNomTemAlb.setRequestFocusEnabled(false);
 
         jLabel1.setText("Link del Tema : ");
 
@@ -229,9 +240,9 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                         .addComponent(lblConAlb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxConAlb, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nomAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelAlbum)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(nomAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -252,12 +263,12 @@ public class ConsultaDeAlbum extends javax.swing.JPanel {
                             .addComponent(txtAnioCre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(lblGenDeAlb)
-                            .addComponent(txtNomAlb)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtNomTemAlb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNomAlb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(46, 46, 46)
                 .addComponent(jLabelImagen)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
