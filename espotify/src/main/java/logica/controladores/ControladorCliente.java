@@ -114,8 +114,8 @@ public class ControladorCliente implements IControladorCliente {
                         retorno.getNickname(),
                         retorno.getNombre(),
                         retorno.getApellido(),
-                        retorno.getFoto(),
                         retorno.getEmail(),
+                        retorno.getFoto(),
                         retorno.getNacimiento());
             } else {
                 System.out.println("El usuario con nickname " + nick_cli + " no es un Cliente.");

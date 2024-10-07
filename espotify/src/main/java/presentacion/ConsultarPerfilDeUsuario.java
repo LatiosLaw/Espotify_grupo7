@@ -402,6 +402,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             Image DefaultImage = defaultIcon.getImage();
             Image resizedDefault = DefaultImage.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
             ImageIcon resizedIconDefault = new ImageIcon(resizedDefault);
+             System.out.println(usr.getFoto());
             if(usr.getFoto()!="default" && usr.getFoto()!=null && (usr.getFoto().endsWith(".png") || usr.getFoto().endsWith(".jpg"))){
             ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\perfiles\\"+usr.getFoto());
             if(imageIcon.getImage()!=null){
