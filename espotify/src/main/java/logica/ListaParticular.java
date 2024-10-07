@@ -25,7 +25,7 @@ public class ListaParticular extends ListaReproduccion implements Serializable {
     }
 
     public ListaParticular(String nombre, Cliente cliente) {
-        super(nombre);
+        super(nombre,cliente.getNickname());
         this.creador = cliente;
     }
 

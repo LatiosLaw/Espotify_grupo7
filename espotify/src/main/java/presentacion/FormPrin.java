@@ -233,10 +233,11 @@ public class FormPrin extends javax.swing.JFrame {
                 cargarSeguimientos();
                 jProgressBar1.setValue(62);
                 lblProgreso.setText("67%");
-                cargarListas();
+               // cargarListas();
+               probarListas();
                 jProgressBar1.setValue(81);
                 lblProgreso.setText("81%");
-                cargarFavoritos();
+               // cargarFavoritos();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
@@ -282,7 +283,12 @@ public class FormPrin extends javax.swing.JFrame {
 
         System.out.println("GENEROS CARGADOS");
     }
-
+    private void probarListas() {
+        controlListPar.crearLista("Sexo", controlCli.consultarPerfilCliente("el_padrino"));
+        DataListaParticular listaLP1 = controlListPar.devolverInformacion("Música Inspiradora", "el_padrino");
+        listaLP1.agregarTema(controlTem.retornarTema("El Duelo", "MTV Unplugged")); // LDC-T81
+            
+    }
     private void cargarListas() {
 
         controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico"), "bit.ly/laNocheNostalgia"); // LD1
@@ -800,4 +806,6 @@ public class FormPrin extends javax.swing.JFrame {
     private javax.swing.JLabel lblProgreso;
     private javax.swing.JPanel pnlPrin;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -25,7 +25,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
         Collection<String> coleString = new ArrayList<>();
         for(ListaParticular listaP : listas){
                 if(listaP.getVisibilidad() == true){
-                coleString.add(listaP.getNombre());
+                coleString.add(listaP.getNombreLista());
                 }
         }
        return coleString;
@@ -41,15 +41,16 @@ public class ControladorListaParticular implements IControladorListaParticular {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + dataCliente.getNickname());
         }
         // Verificar si la lista ya existe
-        ListaReproduccion listaExistente = daoLista.find(nombre);
+      /*  ListaReproduccion listaExistente = daoLista.find(nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
+        */
         // Crear la nueva lista particular y asociar el cliente existente
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
         nuevaLista.setVisibilidad(false);
         ListaParticular ls = new ListaParticular();
-        ls.setNombre(nuevaLista.getNombre());
+        ls.setNombreLista(nuevaLista.getNombreLista());
         daoLista.save(ls);
         daoLista.update(nuevaLista);
         System.out.println("Lista Particular creada exitosamente.");
@@ -74,7 +75,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
         nuevaLista.setVisibilidad(publica);
         nuevaLista.setFoto(foto);
         ListaParticular ls = new ListaParticular();
-        ls.setNombre(nuevaLista.getNombre());
+        ls.setNombreLista(nuevaLista.getNombreLista());
         daoLista.save(ls);
         daoLista.update(nuevaLista);
         System.out.println("Lista Particular creada exitosamente.");
@@ -88,7 +89,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
         Iterator<ListaParticular> iterator = listas.iterator();
         while (iterator.hasNext()) {
             lista = iterator.next();
-            String nombrel = lista.getNombre();
+            String nombrel = lista.getNombreLista();
             if(nombrel == nombre_lista){
                 if(lista == null){
                     System.out.println("No existen listas en el sistema."); 
@@ -111,7 +112,7 @@ DAO_Tema daoTema = new DAO_Tema();
         Iterator<ListaParticular> iterator = listas.iterator();
         while (iterator.hasNext()) {
             lista = iterator.next();
-            String nombrel = lista.getNombre();
+            String nombrel = lista.getNombreLista();
             if(nombrel == nombre_lista){
                 if(lista == null){
                     System.out.println("No existen listas en el sistema."); 
@@ -156,7 +157,7 @@ DAO_Tema daoTema = new DAO_Tema();
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaParticular
             return new DataListaParticular(
-                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     dataCliente, // Pasar el DataCliente creado
                     ls.getVisibilidad() // Suponiendo que hay un método getVisibilidad()
             );
@@ -181,7 +182,7 @@ DAO_Tema daoTema = new DAO_Tema();
                         listaP.getCliente().getEmail(),
                         listaP.getCliente().getFoto(),
                         listaP.getCliente().getNacimiento());
-                dataListas.add(new DataListaParticular(listaP.getNombre(), cli, listaP.getVisibilidad()));
+                dataListas.add(new DataListaParticular(listaP.getNombreLista(), cli, listaP.getVisibilidad()));
             }
             System.out.println("Listas retornadas correctamente.");
         } else {
@@ -197,7 +198,7 @@ DAO_Tema daoTema = new DAO_Tema();
         Collection<String> coleString = new ArrayList<>();
         for(ListaParticular listaP : listas){
             if(listaP.getVisibilidad() == true){
-                coleString.add(listaP.getNombre());
+                coleString.add(listaP.getNombreLista());
             }
         }
        return coleString;
@@ -210,7 +211,7 @@ DAO_Tema daoTema = new DAO_Tema();
           if(token == null){
               return null;
           }else{
-               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombre());
+               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombreLista());
                return token2;
           }
       }
@@ -220,7 +221,7 @@ DAO_Tema daoTema = new DAO_Tema();
         if(lista != null){
             if(lista instanceof ListaParticular listaP){
                 DataListaParticular listaRetorno = new DataListaParticular();
-                listaRetorno.setNombre(listaP.getNombre());
+                listaRetorno.setNombre(listaP.getNombreLista());
                 System.out.println("Listas retornadas correctamente.");
                 return listaRetorno;
             }

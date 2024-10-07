@@ -38,7 +38,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         // Guardar la nueva lista en la base de datos
         try {
             ListaPorDefecto ls = new ListaPorDefecto();
-            ls.setNombre(nuevaLista.getNombre());
+            ls.setNombreLista(nuevaLista.getNombreLista());
             dao.save(ls);
             dao.update(nuevaLista);
             System.out.println("Lista Por Defecto creada exitosamente.");
@@ -86,7 +86,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         Iterator<ListaPorDefecto> iterator = albu.iterator();
         while (iterator.hasNext()) {
             ListaPorDefecto lista = iterator.next();
-            lista_final.add(lista.getNombre());
+            lista_final.add(lista.getNombreLista());
         }
         return lista_final;
     }
@@ -106,7 +106,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaPorDefecto
             return new DataListaPorDefecto(
-                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     dataGenero // Pasar el DataGenero creado
             );
         } else {
@@ -129,7 +129,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         Iterator<ListaPorDefecto> iterator = listadPD.iterator();
         while (iterator.hasNext()) {
             ListaPorDefecto lista = iterator.next();
-            retorno.add(lista.getNombre().concat("/").concat(lista.getGenero().getNombre()));
+            retorno.add(lista.getNombreLista().concat("/").concat(lista.getGenero().getNombre()));
         }
         return retorno;
     }
@@ -149,7 +149,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaPorDefecto
             return new DataListaPorDefecto(
-                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     dataGenero // Pasar el DataGenero creado
             );
         } else {

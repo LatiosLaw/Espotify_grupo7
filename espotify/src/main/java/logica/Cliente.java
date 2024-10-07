@@ -33,7 +33,11 @@ public class Cliente extends Usuario {
     @ManyToMany
     @JoinTable(name = "listas_favoritas",
             joinColumns = @JoinColumn(name = "nick_cliente"),
-            inverseJoinColumns = @JoinColumn(name = "nombre_lista"))
+            inverseJoinColumns = {
+                @JoinColumn(name = "nombre_lista", referencedColumnName = "nombre_lista"),
+                 @JoinColumn(name = "nombre_cliente", referencedColumnName = "nombre_cliente")
+            }
+    )
     protected Collection<ListaReproduccion> listas_favoritas = new ArrayList<ListaReproduccion>();
 
     @OneToMany(mappedBy = "creador")
@@ -66,7 +70,7 @@ public class Cliente extends Usuario {
     
     public void listasFav(ListaReproduccion lista) {
         if(lista instanceof ListaParticular listaParticular){
-            System.out.println("La visibilidad de la lista: " + lista.getNombre() + " es: " + listaParticular.getVisibilidad());
+            System.out.println("La visibilidad de la lista: " + lista.getNombreLista() + " es: " + listaParticular.getVisibilidad());
             if(listaParticular.getVisibilidad()==true){
                 this.listas_favoritas.add(lista);
             }else{
