@@ -16,6 +16,7 @@ public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String apellido;
     protected String correo;
+    protected String contraseña;
     protected String foto_perfil;
     protected LocalDate fecha_nac;
     @ManyToMany(mappedBy = "seguidos")
@@ -28,10 +29,11 @@ public abstract class Usuario implements Serializable {
         this.nickname = nickname;
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fecha_naci) {
+    public Usuario(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fecha_naci) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.contraseña = contraseña;
         this.correo = correo;
         this.foto_perfil = foto_perfil;
         LocalDate fechaNacimiento = fecha_naci;
@@ -59,12 +61,21 @@ public abstract class Usuario implements Serializable {
     }
     
     public String getFoto() {
+        return contraseña;
+    }
+
+    public void setFoto(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
+    public String getContra() {
         return foto_perfil;
     }
 
-    public void setFoto(String nueva_foto) {
+    public void setContra(String nueva_foto) {
         this.foto_perfil = nueva_foto;
     }
+
 
     public void setNickname(String nickname) {
         this.nickname = nickname;

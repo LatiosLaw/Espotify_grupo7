@@ -11,7 +11,7 @@ import logica.dt.DataErrorBundle;
 
 public interface IControladorCliente {
 
-    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac);
+    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String contra, String mail, String foto, LocalDate fechaNac);
 
     public void seguirUsuario(String nick1, String nick2);
 

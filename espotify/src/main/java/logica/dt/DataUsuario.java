@@ -7,14 +7,16 @@ public class DataUsuario {
     private String nickname;
     private String nombre;
     private String apellido;
+    private String contraseña;
     private String correo;
     private String foto_perfil;
     private LocalDate fechaNac;
 
-    public DataUsuario(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fechaNac) {
+    public DataUsuario(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.contraseña = contraseña;
         this.correo = correo;
         this.foto_perfil = foto_perfil;
         this.fechaNac = fechaNac;
@@ -55,6 +57,14 @@ public class DataUsuario {
 
     public String getFoto() {
         return foto_perfil;
+    }
+    
+    public String getContra() {
+        return contraseña;
+    }
+
+    public void setContra(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public void setFoto(String nueva_foto) {

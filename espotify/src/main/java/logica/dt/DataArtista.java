@@ -14,8 +14,8 @@ public class DataArtista extends DataUsuario {
 
     }
 
-    public DataArtista(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fechaNac, String biografia, String dirWeb) {
-        super(nickname, nombre, apellido, correo, foto_perfil, fechaNac);
+    public DataArtista(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac, String biografia, String dirWeb) {
+        super(nickname, nombre, apellido, contraseña, correo, foto_perfil, fechaNac);
         this.biografia = biografia;
         this.dirWeb = dirWeb;
         this.albumes = new ArrayList<>();

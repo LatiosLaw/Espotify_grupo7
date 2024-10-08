@@ -32,7 +32,7 @@ public class ControladorAlbum implements IControladorAlbum {
         persistence.update(nuevo_album);
         if (persistence.find(nuevo_album.getNombre()) != null) {
             System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
-            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
         } else {
             System.out.println("El album no fue persistido correctamente.");
             return null;
@@ -70,7 +70,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Album album = persistence.findAlbumByName(nombre_album);
         if (album != null) {
             Artista art = album.getCreador();
-            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(),  art.getContra(),  art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
         } else {
             return new DataAlbum("ALBUM NO EXISTE");
         }

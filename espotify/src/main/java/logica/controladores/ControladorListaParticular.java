@@ -150,6 +150,7 @@ DAO_Tema daoTema = new DAO_Tema();
                     cliente.getNickname(),
                     cliente.getNombre(),
                     cliente.getApellido(),
+                    cliente.getContra(),
                     cliente.getEmail(),
                     cliente.getFoto(),
                     cliente.getNacimiento());
@@ -178,6 +179,7 @@ DAO_Tema daoTema = new DAO_Tema();
                         listaP.getCliente().getNickname(),
                         listaP.getCliente().getNombre(),
                         listaP.getCliente().getApellido(),
+                        listaP.getCliente().getContra(),
                         listaP.getCliente().getEmail(),
                         listaP.getCliente().getFoto(),
                         listaP.getCliente().getNacimiento());
