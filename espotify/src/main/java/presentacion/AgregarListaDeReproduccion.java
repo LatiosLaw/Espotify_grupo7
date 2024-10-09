@@ -273,18 +273,18 @@ public class AgregarListaDeReproduccion extends javax.swing.JPanel {
     
     private boolean verificarListaDefecto() {
         if(String.valueOf(ComboGenero.getSelectedItem()) != "OPT" && !txtNombre.getText().isEmpty()){
-            Collection<String> listas = controlListPD.retornarListasDelGenero(String.valueOf(ComboGenero.getSelectedItem()));
+            Collection<String> listas = controlListPD.listarListasPorDefecto();
             Iterator<String> iterator = listas.iterator();
         while (iterator.hasNext()) {
             String nombre_lista = iterator.next();
             if(nombre_lista.equals(txtNombre.getText())){
-                JOptionPane.showMessageDialog(null, "La lista está repetida en este cliente.");
+                JOptionPane.showMessageDialog(null, "Ya existe una lista por defecto a ese nombre.");
                 return false;
             }
         }
         return true;
         }else{
-            JOptionPane.showMessageDialog(null, "La lista está repetida en este genero.");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un genero y complete el funcionario.");
             return false;
         }
     }
@@ -296,7 +296,7 @@ public class AgregarListaDeReproduccion extends javax.swing.JPanel {
         while (iterator.hasNext()) {
             DataListaParticular lista = iterator.next();
             if(lista.getNombre().equals(txtNombre.getText())){
-                JOptionPane.showMessageDialog(null, "El nombre de la lista en este cliente esta repetido.");
+                JOptionPane.showMessageDialog(null, "Ya existe una lista con ese nombre en ese cliente.");
                 return false;
             }
         }
