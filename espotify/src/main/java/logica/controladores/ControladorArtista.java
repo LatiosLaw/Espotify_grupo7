@@ -77,7 +77,7 @@ public class ControladorArtista implements IControladorArtista {
         while (iterator.hasNext()) {
             Usuario art = iterator.next();
             if (art instanceof Artista arti) {
-                lista.add(new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getFoto(), arti.getEmail(), art.getFoto(), arti.getNacimiento(), arti.getBiografia(), arti.getBiografia()));
+                lista.add(new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getContra(), arti.getEmail(), art.getFoto(), arti.getNacimiento(), arti.getBiografia(), arti.getBiografia()));
             }
         }
         return lista;

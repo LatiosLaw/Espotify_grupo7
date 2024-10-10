@@ -9,8 +9,8 @@ public class DataListaPorDefecto extends DataListaReproduccion {
         this.genero = genero;
     }
     
-    public DataListaPorDefecto(String nombre, String foto, DataGenero genero) {
-        super(nombre, foto);
+    public DataListaPorDefecto(String nombre, String foto, Integer diferenciador, DataGenero genero) {
+        super(nombre, foto, diferenciador);
         this.genero = genero;
     }
 

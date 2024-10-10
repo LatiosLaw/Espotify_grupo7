@@ -13,7 +13,6 @@ import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorGenero;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
-import logica.dt.DataArtista;
 import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataListaParticular;
@@ -174,6 +173,7 @@ public class AgregarListaDeReproduccion extends javax.swing.JPanel {
             }
             case "Lista Particular" -> {
                 if(verificarListaParticular() == true){
+                    System.out.println(selectedFile);
                     if(selectedFile!=null){
                         controlListPar.crearListaConVisibilidad(txtNombre.getText(), controlCli.consultarPerfilCliente(String.valueOf(ComboCliente.getSelectedItem())), false, selectedFile.getName());
                      SubirFoto(); 
@@ -214,7 +214,7 @@ public class AgregarListaDeReproduccion extends javax.swing.JPanel {
     private void btnSubirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagenActionPerformed
         int result = fileChooserImagen.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooserImagen.getSelectedFile();
+            selectedFile = fileChooserImagen.getSelectedFile();
             if (selectedFile.getName().endsWith(".png") || selectedFile.getName().endsWith(".jpg")) {
                 btnSubirImagen.setText("Imagen: " + selectedFile.getName());
             } else {
@@ -225,6 +225,7 @@ public class AgregarListaDeReproduccion extends javax.swing.JPanel {
 
     private void vaciarCampos() {
         txtNombre.setText(null);
+        btnSubirImagen.setText("Subir");
         ComboGenero.setSelectedIndex(0);
         ComboCliente.setSelectedIndex(0);
         fileChooserImagen.setSelectedFile(null);

@@ -169,6 +169,7 @@ DAO_Tema daoTema = new DAO_Tema();
             return new DataListaParticular(
                     ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     dataCliente, // Pasar el DataCliente creado
+                    ls.getFoto(),
                     ls.getVisibilidad() // Suponiendo que hay un método getVisibilidad()
             );
         } else {

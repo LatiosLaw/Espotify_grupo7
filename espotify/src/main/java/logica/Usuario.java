@@ -61,7 +61,7 @@ public abstract class Usuario implements Serializable {
     }
     
     public String getFoto() {
-        return contraseña;
+        return foto_perfil;
     }
 
     public void setFoto(String contraseña) {

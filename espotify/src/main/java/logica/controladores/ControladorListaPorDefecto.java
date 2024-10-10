@@ -114,7 +114,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return new DataListaPorDefecto(
                     ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     ls.getFoto(),
-
+                    0,
                     dataGenero // Pasar el DataGenero creado
             );
         } else {

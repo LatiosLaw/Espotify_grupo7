@@ -403,8 +403,7 @@ public class ConsultarPerfilDeUsuario extends javax.swing.JPanel {
             Image resizedDefault = DefaultImage.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
             ImageIcon resizedIconDefault = new ImageIcon(resizedDefault);
              System.out.println("Foto:" +usr.getFoto());
-            if(!"default".equals(usr.getFoto()) && usr.getFoto()!=null && (usr.getFoto().endsWith(".png") || usr.getFoto().endsWith(".jpg")|| usr.getFoto().endsWith(".PNG"))){
-            JOptionPane.showMessageDialog(null, "dentri.");
+            if(!usr.getFoto().equals("default") && usr.getFoto()!=null && (usr.getFoto().endsWith(".png") || usr.getFoto().endsWith(".jpg"))){
             ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\perfiles\\"+usr.getFoto());
             if(imageIcon.getImage()!=null){
                 Image DefaultProfile = imageIcon.getImage();
@@ -439,7 +438,7 @@ ImageIcon defaultIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\perf
             Image DefaultImage = defaultIcon.getImage();
             Image resizedDefault = DefaultImage.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
             ImageIcon resizedIconDefault = new ImageIcon(resizedDefault);
-            if(art.getFoto()!="default" && art.getFoto()!=null && (art.getFoto().endsWith(".png") || art.getFoto().endsWith(".jpg"))){
+            if(!art.getFoto().equals("default") && art.getFoto()!=null && (art.getFoto().endsWith(".png") || art.getFoto().endsWith(".jpg"))){
             ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\perfiles\\"+art.getFoto());
             if(imageIcon.getImage()!=null){
                 Image DefaultProfile = imageIcon.getImage();

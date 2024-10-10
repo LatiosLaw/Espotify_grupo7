@@ -380,7 +380,6 @@ public class ConsultarLista extends javax.swing.JPanel {
                 DataGenero gen = lista.getGenero();
                 txtGeneroLista.setText(gen.getNombre());
                 cargarTemasDeLaLista(lista.getNombre(), 1);
-                System.out.print(lista.getFoto());
                 if(lista.getFoto()!="default" && lista.getFoto()!=null && (lista.getFoto().endsWith(".png") || lista.getFoto().endsWith(".jpg"))){
             ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\listaS\\"+lista.getFoto());
             if(imageIcon.getImage()!=null){
@@ -401,7 +400,6 @@ public class ConsultarLista extends javax.swing.JPanel {
                 txtDefinidoPor.setText(cli.getNickname());
                 txtGeneroLista.setText(" - ");
                 cargarTemasDeLaLista(lista.getNombre(), 2);
-                System.out.print(lista.getFoto());
                 if(lista.getFoto()!="default" && lista.getFoto()!=null && (lista.getFoto().endsWith(".png") || lista.getFoto().endsWith(".jpg"))){
             ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\listas\\"+lista.getFoto());
             if(imageIcon.getImage()!=null){
