@@ -14,7 +14,14 @@ public class DataListaReproduccion {
         this.creador = creador;
         this.temas = new ArrayList<>();
     }
-
+    
+    public DataListaReproduccion(String nombre, String creadirNick) {
+        this.nombre = nombre;
+        this.creador = new DataCliente();
+        creador.setNickname(creadirNick);
+        this.temas = new ArrayList<>();
+    }
+    
     public DataListaReproduccion(String nombre) {
         this.nombre = nombre;
         this.temas = new ArrayList<>();

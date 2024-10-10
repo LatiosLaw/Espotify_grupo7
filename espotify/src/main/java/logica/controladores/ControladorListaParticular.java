@@ -214,14 +214,14 @@ DAO_Tema daoTema = new DAO_Tema();
     }
     
     @Override
-      public DataListaReproduccion devolverInformacionListaRepro(String coso){
+      public DataListaReproduccion devolverInformacionListaRepro(String coso, String nombre){
           DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-          ListaReproduccion token = persistence.findListaReproduccionPorNombre(coso,"none");
+          ListaReproduccion token = persistence.findListaReproduccionPorNombre(coso,nombre);
             //WARNINMG
           if(token == null){
               return null;
           }else{
-               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombreLista());
+               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombreLista(), token.getNombreCliente());
                return token2;
           }
       }

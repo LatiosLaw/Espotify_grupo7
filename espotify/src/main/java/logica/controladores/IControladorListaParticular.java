@@ -29,7 +29,7 @@ public interface IControladorListaParticular {
     
     DataListaParticular retornarlista(String nickname, String nombreCliente);
 
-   public DataListaReproduccion devolverInformacionListaRepro(String coso);
+   public DataListaReproduccion devolverInformacionListaRepro(String coso, String nombre);
     
     void actualizarLista(DataListaParticular lista);
     
