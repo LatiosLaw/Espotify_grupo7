@@ -21,7 +21,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
         DAO_Genero gdao = new DAO_Genero();
         // Verificar si la lista ya existe
-        ListaReproduccion listaExistente = dao.find(nombre);
+        ListaReproduccion listaExistente = dao.findListaPorDefectoPorNombre(nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproducción ya existe.");
         }
@@ -36,10 +36,14 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         ListaPorDefecto nuevaLista = new ListaPorDefecto(nombre, generoExistente);
         nuevaLista.setFoto(foto);
         // Guardar la nueva lista en la base de datos
+       // System.out.println("Antes del try");
         try {
+           
             ListaPorDefecto ls = new ListaPorDefecto();
-            ls.setNombre(nuevaLista.getNombre());
+            ls.setNombreLista(nuevaLista.getNombreLista());
+            ls.setNombreCliente(nuevaLista.getNombreCliente());
             dao.save(ls);
+
             dao.update(nuevaLista);
             System.out.println("Lista Por Defecto creada exitosamente.");
         } catch (Exception e) {
@@ -51,7 +55,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     public void actualizarLista(DataListaPorDefecto lista){
         DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
         DAO_Tema dao_t = new DAO_Tema();
-        ListaPorDefecto lista_actualizable = dao_l.findListaPorGeneroYNombre(lista.getGenero().getNombre(), lista.getNombre());
+        ListaPorDefecto lista_actualizable = dao_l.findListaPorDefectoPorNombre(lista.getNombre());
+        
+        
         Iterator<DataTema> iterator = lista.getTemas().iterator();
         while (iterator.hasNext()) {
             DataTema tema = iterator.next();
@@ -63,7 +69,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     @Override
     public void agregarTema(String nombre_lista, String nombre_genero, DataTema temazo) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
-        ListaPorDefecto lista = daoLista.findListaPorGeneroYNombre(nombre_lista, nombre_genero);
+        ListaPorDefecto lista = daoLista.findListaPorDefectoPorNombre(nombre_lista);
         lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
         daoLista.update(lista);
     }
@@ -73,7 +79,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         DAO_Tema daoTema = new DAO_Tema();
         tema temazo = daoTema.find(nombre_tema, nombre_album_tema);
-        ListaPorDefecto lista = daoLista.findListaPorGeneroYNombre(nombre_genero, nombre_lista);
+        ListaPorDefecto lista = daoLista.findListaPorDefectoPorNombre(nombre_lista);
         lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
         daoLista.update(lista);
     }
@@ -86,7 +92,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         Iterator<ListaPorDefecto> iterator = albu.iterator();
         while (iterator.hasNext()) {
             ListaPorDefecto lista = iterator.next();
-            lista_final.add(lista.getNombre());
+            lista_final.add(lista.getNombreLista());
         }
         return lista_final;
     }
@@ -95,7 +101,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     public DataListaPorDefecto devolverInformacion(String nombre_lista, String nombre_genero) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         // Obtener la lista particular por nombre de lista y el nickname del creador
-        ListaPorDefecto ls = persistence.findListaPorGeneroYNombre(nombre_genero, nombre_lista);
+        ListaPorDefecto ls = persistence.findListaPorDefectoPorNombre(nombre_lista);
         if (ls != null) {
             // Obtener el género asociado a la lista
             Genero gen = ls.getGenero(); // Asegúrate de que hay un método getGenero()
@@ -108,6 +114,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return new DataListaPorDefecto(
                     ls.getNombre(), // Suponiendo que hay un método getNombre()
                     ls.getFoto(),
+
                     dataGenero // Pasar el DataGenero creado
             );
         } else {
@@ -130,7 +137,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         Iterator<ListaPorDefecto> iterator = listadPD.iterator();
         while (iterator.hasNext()) {
             ListaPorDefecto lista = iterator.next();
-            retorno.add(lista.getNombre().concat("/").concat(lista.getGenero().getNombre()));
+            retorno.add(lista.getNombreLista().concat("/").concat(lista.getGenero().getNombre()));
         }
         return retorno;
     }
@@ -150,7 +157,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaPorDefecto
             return new DataListaPorDefecto(
-                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     dataGenero // Pasar el DataGenero creado
             );
         } else {

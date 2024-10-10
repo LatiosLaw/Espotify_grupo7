@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -207,7 +208,15 @@ public class EliminarFavoritos extends javax.swing.JPanel {
                     }       
                     break;
                 case "Listas":
-                    DataListaReproduccion losta = this.controlLipa.devolverInformacionListaRepro(coso);
+                    String [] cosoSeparado = separarListas(coso);
+                    System.out.print(cosoSeparado[0]);
+                    String nombreLista = cosoSeparado[0];
+                    String nombreCliente = cosoSeparado[1];
+                    System.out.println("nombreLista:" + nombreLista + " nombreClente:" + nombreCliente);
+                    if("Por Defecto".equals(nombreCliente)){
+                        nombreCliente = "none";
+                    }
+                    DataListaReproduccion losta = this.controlLipa.devolverInformacionListaRepro(nombreLista, nombreCliente);
                     if(losta == null){
                         JOptionPane.showMessageDialog(null, "No existe lista con ese nombre dentro de los favoritos del Cliente");
                     }else{
@@ -382,6 +391,13 @@ public class EliminarFavoritos extends javax.swing.JPanel {
       
         
         }
+
+    private String[] separarListas(String coso) {
+       
+        String[] arrayDef = coso.split("/", 2);
+
+        return arrayDef;
+    }
         
         
         

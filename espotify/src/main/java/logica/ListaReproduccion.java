@@ -3,15 +3,18 @@ package logica;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import logica.dt.DT_IdLista;
+
 
 @Entity
 public abstract class ListaReproduccion implements Serializable {
 
-    @Id
-    protected String nombre;
+    @EmbeddedId
+    protected DT_IdLista identificador;
     
     protected String foto;
     
@@ -19,19 +22,33 @@ public abstract class ListaReproduccion implements Serializable {
     private Collection<tema> temas;
 
     public ListaReproduccion() {
-
+          this.identificador = new DT_IdLista();
+    }
+    
+    public ListaReproduccion(String nombreLista) {
+        this.identificador = new DT_IdLista();
+        this.identificador.setNombre_lista(nombreLista);
+        identificador.setNombre_cliente("none");
+    }
+     public ListaReproduccion(String nombreLista, String nombreCliente) {
+        this.identificador = new DT_IdLista();
+        this.identificador.setNombre_lista(nombreLista);
+        identificador.setNombre_cliente(nombreCliente);
+    }
+    public String getNombreCliente() {
+        return identificador.getNombre_cliente();
     }
 
-    public ListaReproduccion(String nombre) {
-        this.nombre = nombre;
+    public void setNombreCliente(String nombre) {
+        this.identificador.setNombre_cliente(nombre);
+    }
+    
+    public String getNombreLista() {
+        return this.identificador.getNombre_lista();
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreLista(String nombre) {
+        this.identificador.setNombre_lista(nombre);
     }
     
     public Collection<tema> getTemas() {
@@ -60,7 +77,7 @@ public abstract class ListaReproduccion implements Serializable {
             return false;
         }
         ListaReproduccion other = (ListaReproduccion) object;
-        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
+        if ((this.identificador.getNombre_lista() == null && other.identificador.getNombre_lista() != null) || (this.identificador.getNombre_lista() != null && !this.identificador.getNombre_lista().equals(other.identificador.getNombre_lista()))) {
             return false;
         }
         return true;
@@ -68,6 +85,6 @@ public abstract class ListaReproduccion implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.ListaReproduccion[ nombre=" + nombre + " ]";
+        return "logica.ListaReproduccion[ nombre=" + identificador.getNombre_lista() + " ]";
     }
 }

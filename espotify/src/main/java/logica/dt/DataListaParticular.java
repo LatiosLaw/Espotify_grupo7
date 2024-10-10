@@ -10,7 +10,10 @@ public class DataListaParticular extends DataListaReproduccion {
         this.visibilidad = visibilidad;
         this.creador = creador;
     }
-
+     public DataListaParticular(String nombre, DataCliente creador) {
+        super(nombre, creador);
+        this.creador = creador;
+    }
     public DataListaParticular() {
         super();
         this.visibilidad = false;

@@ -150,15 +150,21 @@ public class ControladorCliente implements IControladorCliente {
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
-            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
-            if (lis == null) {
+            ListaReproduccion lis;
+            //if (lis == null) {
                 if (nomlista instanceof DataListaParticular) {
-                    lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
+                     lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreadorNickname().getNickname());
+                     if (lis == null) {
+                          lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
+                     }
                 } else {
-                    lis = new ListaPorDefecto(nomlista.getNombre());
+                    lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), "none");
+                     if (lis == null) {
+                           lis = new ListaPorDefecto(nomlista.getNombre());
+                     }
                 }
                 listaPersistence.save(lis);
-            }
+           // }
             if (cli instanceof Cliente cliente) {
                 cliente.listasFav(lis);
                 persistence.update(cli);
@@ -209,7 +215,7 @@ public class ControladorCliente implements IControladorCliente {
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
-            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre());
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(),nomlista.getCreadorNickname().getNickname());
             if (lis != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarListasFav(lis);
@@ -301,7 +307,19 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public Collection<String> obtenerListasFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
-        return dao.obtenerListasFavCliente(nick);
+        Collection<String> listDef = dao.obtenerListasFavPorDefectoCliente(nick);
+        Collection<String> listPar = dao.obtenerListasParticularesFavCliente(nick);
+        
+        Collection<String> listaDefi = new ArrayList<>();
+         for (String elemento : listDef) {
+            listaDefi.add(elemento + "/Por Defecto");
+        }
+        for (String elemento : listPar) {
+            listaDefi.add(elemento);
+        }
+         
+         
+         return listaDefi;
     }
 
     @Override

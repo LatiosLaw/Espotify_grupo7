@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -71,7 +72,7 @@ public class DAO_Usuario {
     public Collection<String> obtenerListasDeUsuario(String nick_usuario) {
         try {
             return entityManager.createQuery(
-                    "SELECT l.nombre FROM Cliente u JOIN u.listasReproduccion l WHERE u.nickname = :nickname ", String.class)
+                    "SELECT l.identificador.nombre_lista FROM Cliente u JOIN u.listasReproduccion l WHERE u.nickname = :nickname ", String.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {
@@ -91,10 +92,10 @@ public class DAO_Usuario {
         }
     }
 
-    public Collection<String> obtenerListasFavCliente(String nick_usuario) {
+    public Collection<String> obtenerListasFavPorDefectoCliente(String nick_usuario) {
         try {
             return entityManager.createQuery(
-                    "SELECT l.nombre FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname ", String.class)
+                    "SELECT l.identificador.nombre_lista FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname AND l.identificador.nombre_cliente = 'none' ", String.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {
@@ -103,10 +104,24 @@ public class DAO_Usuario {
     }
     public Collection<String> obtenerListasParticularesFavCliente(String nick_usuario) {
         try {
-            return entityManager.createQuery(
-                    "SELECT l.nombre FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname ", String.class)
+        Collection<String> cole1 =  entityManager.createQuery(
+                    "SELECT l.identificador.nombre_lista FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname AND l.identificador.nombre_cliente != 'none' ", String.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
+                    Collection<String> coleDef = new ArrayList<>(); 
+          
+              for(String ele : cole1){
+              String nomLista = ele;
+               String nomCreador = entityManager.createQuery(
+                    "SELECT l.identificador.nombre_cliente FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname AND l.identificador.nombre_cliente != 'none' AND l.identificador.nombre_lista = :nomLista ", String.class)
+                    .setParameter("nickname", nick_usuario)
+                    .setParameter("nomLista", ele)
+                    .getSingleResult();
+               nomLista = nomLista + "/" + nomCreador;
+               coleDef.add(nomLista);       
+           }
+           
+            return coleDef;
         } catch (NoResultException e) {
             return null; // No se encontro ningún cliente con ese nombre
         }
