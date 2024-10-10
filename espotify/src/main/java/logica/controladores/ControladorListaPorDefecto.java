@@ -112,7 +112,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaPorDefecto
             return new DataListaPorDefecto(
-                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
                     ls.getFoto(),
 
                     dataGenero // Pasar el DataGenero creado
@@ -146,7 +146,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
     public DataListaPorDefecto devolverInformacionChu(String nombre_lista) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         // Obtener la lista particular por nombre de lista y el nickname del creador
-        ListaPorDefecto ls = persistence.findListaPorNombre(nombre_lista);
+        ListaPorDefecto ls = persistence.findListaPorDefectoPorNombre(nombre_lista);
         if (ls != null) {
             // Obtener el género asociado a la lista
             Genero gen = ls.getGenero(); // Asegúrate de que hay un método getGenero()

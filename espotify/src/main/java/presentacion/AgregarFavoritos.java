@@ -26,7 +26,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
     private final IControladorListaPorDefecto controlLiporde;
     private final IControladorAlbum controlAlb;
     String SelectedAlbum;
-
+    String SelectedLista;
     public AgregarFavoritos(IControladorCliente icc, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto iclpd, IControladorAlbum ica) {
         initComponents();
         
@@ -61,12 +61,17 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                 if (!e.getValueIsAdjusting()) {
                     // Obtener el nombre seleccionado
                     SelectedAlbum = lstCoso.getSelectedValue();
-        txtBusqueda1.setText(SelectedAlbum);
-        if(!txtBusqueda1.getText().isEmpty()){
-                    mostrarTemasAlbum();
-        }
+                    txtBusqueda1.setText(SelectedAlbum);
+                    if(!txtBusqueda1.getText().isEmpty()){
+                                mostrarTemasAlbum();
+                    }
                 }
-            }
+            }else{
+                    txtBusqueda1.setText(lstCoso.getSelectedValue());
+                }   
+                 
+                
+                
             }
         });
     }
@@ -308,6 +313,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
         String token = String.valueOf(cbxCoso.getSelectedItem());
         limpiarListasYcombos();
         if("OPT".equals(token)){
+            
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);
             cbxLPM.setVisible(false);
@@ -324,6 +330,8 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             lblTemasAgregar.setVisible(false);
             JOptionPane.showMessageDialog(null, "Seleccione otra opcion a parte de OPT.");
         }else if("Temas".equals(token)){
+            
+            btnFav.setVisible(false);
             this.cargarCbxClienteFavChu();
             lstTemas.setVisible(true);
             lblTemasAgregar.setVisible(true);
@@ -348,6 +356,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
                  this.cargarLstFav(colec);
             }
         }else if ("Listas".equals(token)){
+            btnFav.setVisible(true);
             this.cargarCbxClienteFav();
             this.cbxClienteAgregarFav.setVisible(true);
             lblCliente.setVisible(true);
@@ -378,6 +387,7 @@ public class AgregarFavoritos extends javax.swing.JPanel {
             }
         }else{
             //Albums
+            btnFav.setVisible(true);
             this.cargarCbxClienteFav();
             lstTemas.setVisible(false);
             lblTemasAgregar.setVisible(false);

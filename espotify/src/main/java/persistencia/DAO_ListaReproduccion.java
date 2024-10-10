@@ -180,7 +180,7 @@ public class DAO_ListaReproduccion {
 
     public Collection<String> devolverListasPorDefectoString() {
         Collection<String> listas = 
-        entityManager.createQuery("SELECT l.nombre FROM ListaPorDefecto l", String.class).getResultList();
+        entityManager.createQuery("SELECT l.identificador.nombre_lista FROM ListaPorDefecto l", String.class).getResultList();
         return listas.isEmpty() ? null : listas;
     }
     

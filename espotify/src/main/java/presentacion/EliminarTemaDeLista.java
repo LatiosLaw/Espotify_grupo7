@@ -228,10 +228,12 @@ jComboCliente.setVisible(false);
                 controlListPart.quitarTema(selectedCliente, separarString(selectedLista)[0], separarString(selectedTema)[0], separarString(selectedTema)[1]);
                 JOptionPane.showMessageDialog(null, "Tema eliminado de la lista con exito.");
                 reiniciarCampos();
+                jComboCliente.setSelectedItem("OPT");
             }else{
                 controlListPD.quitarTema(separarString(selectedLista)[0], separarString(selectedLista)[1], separarString(selectedTema)[0], separarString(selectedTema)[1]);
                 JOptionPane.showMessageDialog(null, "Tema eliminado de la lista con exito.");
                 reiniciarCampos();
+                jComboCliente.setSelectedItem("OPT");
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
