@@ -58,7 +58,7 @@ public class AdministrarLista extends javax.swing.JPanel {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(872, 579));
 
-        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Publicar Lista", "Consultar Lista", "Agregar Tema a Lista", "Eliminar Tema De Lista" }));
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Crear Lista", "Publicar Lista", "Consultar Lista", "Agregar Tema a Lista", "Eliminar Tema De Lista" }));
         cbxOPT.setMaximumSize(new java.awt.Dimension(117, 26));
         cbxOPT.setMinimumSize(new java.awt.Dimension(117, 26));
         cbxOPT.setPreferredSize(new java.awt.Dimension(117, 26));
@@ -126,6 +126,15 @@ public class AdministrarLista extends javax.swing.JPanel {
         switch (tokenx) {
             case "OPT" -> {
                 pnlAL.removeAll();
+                pnlAL.repaint();
+            }
+            case "Crear Lista" -> {
+                AgregarListaDeReproduccion al = new AgregarListaDeReproduccion(controlCli, controlGen, controlListPart, controlListPD);
+                al.setLocation(0, 0);
+                al.setSize(860, 471);
+                pnlAL.removeAll();
+                pnlAL.add(al);
+                pnlAL.revalidate();
                 pnlAL.repaint();
             }
             case "Publicar Lista" -> {

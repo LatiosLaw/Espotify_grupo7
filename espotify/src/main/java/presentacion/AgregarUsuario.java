@@ -12,6 +12,9 @@ import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorArtista;
 
@@ -36,6 +39,40 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblBiografia.setVisible(false);
         this.sprFecha.setEnabled(true);
         ((DefaultEditor) sprFecha.getEditor()).getTextField().setEditable(false);
+
+         txtcontraseña.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+        });
+         
+         txtVercontraseña.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificarContra();
+            }
+        });
     }
 
     /**
@@ -67,6 +104,11 @@ public class AgregarUsuario extends javax.swing.JPanel {
         lblIMGG = new javax.swing.JLabel();
         lblIMGG1 = new javax.swing.JLabel();
         jButtonImagen = new javax.swing.JButton();
+        lblContra = new javax.swing.JLabel();
+        lbVerContra = new javax.swing.JLabel();
+        txtVercontraseña = new javax.swing.JPasswordField();
+        txtcontraseña = new javax.swing.JPasswordField();
+        lblVerificacion = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
@@ -132,55 +174,95 @@ public class AgregarUsuario extends javax.swing.JPanel {
             }
         });
 
+        lblContra.setText("Contraseña : ");
+
+        lbVerContra.setText("Verifique Contraseña : ");
+
+        txtVercontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVercontraseñaActionPerformed(evt);
+            }
+        });
+
+        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontraseñaActionPerformed(evt);
+            }
+        });
+
+        lblVerificacion.setText("Por favor, ingrese una contraseña.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(lblIMGG))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtNickName, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIMGG1)
-                        .addGap(30, 30, 30)
-                        .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFechaNaci)
-                        .addGap(18, 18, 18)
-                        .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtNickName)))
+                            .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtVercontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblDirWeb)
                             .addComponent(lblBiografia))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDirWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblIMGG)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButtonImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(61, 61, 61)
+                                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(344, 344, 344))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblIMGG1)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblFechaNaci)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbVerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(526, 526, 526))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblContra)
+                                    .addGap(553, 553, 553))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblVerificacion)
+                                    .addGap(444, 444, 444))))))
                 .addGap(214, 214, 214))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -203,23 +285,36 @@ public class AgregarUsuario extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblContra)
+                            .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblIMGG)
-                            .addComponent(jButtonImagen))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lbVerContra)
+                            .addComponent(txtVercontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVerificacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonImagen)
+                    .addComponent(lblIMGG))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFechaNaci)
-                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIMGG1)
-                    .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(137, Short.MAX_VALUE))
+                            .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblIMGG1)
+                            .addComponent(cbxTipoUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,30 +332,34 @@ public class AgregarUsuario extends javax.swing.JPanel {
             String nick = txtNickName.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
+            char[] password = txtcontraseña.getPassword();
+            char[] passwordVeri = txtVercontraseña.getPassword();
+            String passwordText = new String(password);
+            String passwordVeriText = new String(passwordVeri);
             String correo = txtCorreo.getText();
             File selectedFile = fileChooserImagen.getSelectedFile();
             System.out.println("Converted LocalDate: " + fechaFinal);
-            if (txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true) {
+            if (txtNickName.getText().isEmpty() != true && txtNombre.getText().isEmpty() != true && txtApellido.getText().isEmpty() != true && txtCorreo.getText().isEmpty() != true && password.length != 0 && passwordVeri.length != 0 && passwordText.equals(passwordVeriText)) {
                 if (cbxTipoUsr.getSelectedIndex() == 2) {
                     String biografia = txtaBio.getText();
                     String webPag = txtDirWeb.getText();
                     if (txtaBio.getText().isEmpty() != true && txtDirWeb.getText().isEmpty() != true) {
                         if (selectedFile==null) {
-                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getValor()) {
+                            if (controlArt.agregarArtista(nick, nombre, apellido, passwordText, correo, "default", fechaFinal, biografia, webPag).getValor()) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
                                 vaciarCampos();
                             } else {
-                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, "default", fechaFinal, biografia, webPag).getNumero() == 1) {
+                                if (controlArt.agregarArtista(nick, nombre, apellido, passwordText, correo, "default", fechaFinal, biografia, webPag).getNumero() == 1) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                                 } else {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
                                 }
                             }
                         } else {
-                            if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getValor()) {
+                            if (controlArt.agregarArtista(nick, nombre, apellido, passwordText, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getValor()) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "Artista agregado correctamente.");
                             } else {
-                                if (controlArt.agregarArtista(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getNumero() == 1) {
+                                if (controlArt.agregarArtista(nick, nombre, apellido, passwordText, correo, selectedFile.getName(), fechaFinal, biografia, webPag).getNumero() == 1) {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                                 } else {
                                     JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
@@ -288,21 +387,21 @@ public class AgregarUsuario extends javax.swing.JPanel {
                     }
                 } else {
                     if (selectedFile==null) {
-                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, "default", fechaFinal).getValor() == true) {
+                        if (controlCli.agregarCliente(nick, nombre, apellido, passwordText, correo, "default", fechaFinal).getValor() == true) {
                             JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
                             vaciarCampos();
                         } else {
-                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, "default", fechaFinal).getNumero() == 1) {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, passwordText, correo, "default", fechaFinal).getNumero() == 1) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                             } else {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
                             }
                         }
                     } else {
-                        if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getValor() == true) {
+                        if (controlCli.agregarCliente(nick, nombre, apellido, passwordText, correo, selectedFile.getName(), fechaFinal).getValor() == true) {
                             JOptionPane.showMessageDialog(lblMsjArch, "Cliente agregado correctamente.");
                         } else {
-                            if (controlCli.agregarCliente(nick, nombre, apellido, correo, selectedFile.getName(), fechaFinal).getNumero() == 1) {
+                            if (controlCli.agregarCliente(nick, nombre, apellido, passwordText, correo, selectedFile.getName(), fechaFinal).getNumero() == 1) {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El nickname del usuario ya esta en uso, por favor, elija otro.");
                             } else {
                                 JOptionPane.showMessageDialog(lblMsjArch, "El correo ya esta en uso, por favor, elija otro.");
@@ -332,6 +431,22 @@ public class AgregarUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void verificarContra() {
+        char[] password = txtcontraseña.getPassword();
+        String passwordText = new String(password);
+        if(passwordText=="" || password.length==0){
+            lblVerificacion.setText("Por favor, ingrese una contraseña.");
+        }else{
+            char[] passwordVer = txtVercontraseña.getPassword();
+            String passwordVerText = new String(passwordVer);
+            if(passwordText.equals(passwordVerText)){
+                lblVerificacion.setText("Contraseñas coinciden.");
+            }else{
+                lblVerificacion.setText("Las contraseñas no coinciden.");
+            }
+        }
+    }
+
     private void vaciarCampos() {
         txtNickName.setText(null);
         txtNombre.setText(null);
@@ -341,6 +456,8 @@ public class AgregarUsuario extends javax.swing.JPanel {
         txtApellido.setText(null);
         txtDirWeb.setText(null);
         txtaBio.setText(null);
+        txtcontraseña.setText(null);
+        txtVercontraseña.setText(null);      
         cbxTipoUsr.setSelectedIndex(0);
     }
 
@@ -383,6 +500,14 @@ public class AgregarUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonImagenActionPerformed
 
+    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
+
+    }//GEN-LAST:event_txtcontraseñaActionPerformed
+
+    private void txtVercontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVercontraseñaActionPerformed
+
+    }//GEN-LAST:event_txtVercontraseñaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JComboBox<String> cbxTipoUsr;
@@ -392,17 +517,22 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbVerContra;
     private javax.swing.JLabel lblBiografia;
+    private javax.swing.JLabel lblContra;
     private javax.swing.JLabel lblDirWeb;
     private javax.swing.JLabel lblFechaNaci;
     private javax.swing.JLabel lblIMGG;
     private javax.swing.JLabel lblIMGG1;
+    private javax.swing.JLabel lblVerificacion;
     private javax.swing.JSpinner sprFecha;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDirWeb;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JPasswordField txtVercontraseña;
     private javax.swing.JTextArea txtaBio;
+    private javax.swing.JPasswordField txtcontraseña;
     // End of variables declaration//GEN-END:variables
 }

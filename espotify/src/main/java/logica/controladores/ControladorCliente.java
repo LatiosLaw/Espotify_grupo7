@@ -29,7 +29,7 @@ import persistencia.DAO_Usuario;
 public class ControladorCliente implements IControladorCliente {
 
     @Override
-    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac) {
+    public DataErrorBundle agregarCliente(String nickname, String nombre, String apellido, String contra, String mail, String foto, LocalDate fechaNac) {
         DAO_Usuario persistence = new DAO_Usuario();
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
@@ -40,7 +40,7 @@ public class ControladorCliente implements IControladorCliente {
             return new DataErrorBundle(false, 2);
         }
         // Crear el nuevo cliente
-        Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, mail, foto, fechaNac);
+        Cliente nuevoCliente = new Cliente(nickname, nombre, apellido, contra, mail, foto, fechaNac);
         // Guardar el cliente en la base de datos
         try {
             persistence.save(nuevoCliente);
@@ -72,9 +72,9 @@ public class ControladorCliente implements IControladorCliente {
             throw new IllegalArgumentException("Usuario a seguir no encontrado.");
         }
         if (usuario instanceof Cliente dataCliente) {
-            cliente.seguir(new Cliente(dataCliente.getNickname(), dataCliente.getNombre(), dataCliente.getApellido(), dataCliente.getEmail(), dataCliente.getFoto(), dataCliente.getNacimiento()));
+            cliente.seguir(new Cliente(dataCliente.getNickname(), dataCliente.getNombre(), dataCliente.getApellido(), dataCliente.getContra(), dataCliente.getEmail(), dataCliente.getFoto(), dataCliente.getNacimiento()));
         } else if (usuario instanceof Artista dataArtista) {
-            cliente.seguir(new Artista(dataArtista.getNickname(), dataArtista.getNombre(), dataArtista.getApellido(), dataArtista.getEmail(), dataArtista.getFoto(), dataArtista.getNacimiento(), dataArtista.getBiografia(), dataArtista.getDirWeb()));
+            cliente.seguir(new Artista(dataArtista.getNickname(), dataArtista.getNombre(), dataArtista.getApellido(), dataArtista.getContra(), dataArtista.getEmail(), dataArtista.getFoto(), dataArtista.getNacimiento(), dataArtista.getBiografia(), dataArtista.getDirWeb()));
         } else {
             // Manejar el caso donde usuario no es ni un DataCliente ni un DataArtista
             throw new IllegalArgumentException("El usuario a seguir no es ni un cliente ni un artista.");
@@ -114,6 +114,7 @@ public class ControladorCliente implements IControladorCliente {
                         retorno.getNickname(),
                         retorno.getNombre(),
                         retorno.getApellido(),
+                        retorno.getContra(),
                         retorno.getEmail(),
                         retorno.getFoto(),
                         retorno.getNacimiento());
@@ -297,7 +298,7 @@ public class ControladorCliente implements IControladorCliente {
         while (iterator.hasNext()) {
             Usuario usr = iterator.next();
             if (usr instanceof Cliente cli) {
-                lista.add(new DataCliente(cli.getNickname(), cli.getNombre(), cli.getApellido(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
+                lista.add(new DataCliente(cli.getNickname(), cli.getNombre(), cli.getApellido(), cli.getFoto(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
             }
         }
         return lista;

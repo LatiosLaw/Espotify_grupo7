@@ -25,6 +25,7 @@ public class ControladorArtista implements IControladorArtista {
                         retorno.getNickname(),
                         retorno.getNombre(),
                         retorno.getApellido(),
+                        retorno.getContra(),
                         retorno.getEmail(),
                         retorno.getFoto(),
                         retorno.getNacimiento(),
@@ -41,7 +42,7 @@ public class ControladorArtista implements IControladorArtista {
     }
 
     @Override
-    public DataErrorBundle agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb) {
+    public DataErrorBundle agregarArtista(String nickname, String nombre, String apellido, String contra, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb) {
         DAO_Usuario persistence = new DAO_Usuario();
         if (persistence.findUsuarioByNick(nickname) != null) {
             System.out.println("El nickname: " + nickname + " ya esta en uso. Por favor, elige otro.");
@@ -52,7 +53,7 @@ public class ControladorArtista implements IControladorArtista {
             return new DataErrorBundle(false, 2);
         }
         // Crear el nuevo artista
-        Artista nuevoArtista = new Artista(nickname, nombre, apellido, mail, foto, fechaNac, biografia, dirWeb);
+        Artista nuevoArtista = new Artista(nickname, nombre, apellido, contra, mail, foto, fechaNac, biografia, dirWeb);
         // Guardar el artista en la base de datos
         try {
             persistence.save(nuevoArtista);
@@ -76,7 +77,7 @@ public class ControladorArtista implements IControladorArtista {
         while (iterator.hasNext()) {
             Usuario art = iterator.next();
             if (art instanceof Artista arti) {
-                lista.add(new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getEmail(), art.getFoto(), arti.getNacimiento(), arti.getBiografia(), arti.getBiografia()));
+                lista.add(new DataArtista(arti.getNickname(), arti.getNombre(), arti.getApellido(), arti.getFoto(), arti.getEmail(), art.getFoto(), arti.getNacimiento(), arti.getBiografia(), arti.getBiografia()));
             }
         }
         return lista;

@@ -9,7 +9,7 @@ public interface IControladorArtista {
 
     public DataArtista retornarArtista(String nickname);
 
-    public DataErrorBundle agregarArtista(String nickname, String nombre, String apellido, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb);
+    public DataErrorBundle agregarArtista(String nickname, String nombre, String apellido, String contra, String mail, String foto, LocalDate fechaNac, String biografia, String dirWeb);
 
     public Collection<DataArtista> mostrarArtistas();
 

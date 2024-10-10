@@ -15,8 +15,8 @@ public class DataCliente extends DataUsuario {
 
     }
 
-    public DataCliente(String nickname, String nombre, String apellido, String correo, String foto_perfil, LocalDate fechaNac) {
-        super(nickname, nombre, apellido, correo, foto_perfil, fechaNac);
+    public DataCliente(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac) {
+        super(nickname, nombre, apellido, contraseña, correo, foto_perfil, fechaNac);
         this.seguidos = new ArrayList<>();
         this.temasFavoritos = new ArrayList<>();
         this.albumesFavoritos = new ArrayList<>();

@@ -32,9 +32,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbxConAlb" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="nomAlbum" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabelAlbum" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="nomAlbum" alignment="0" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -59,15 +59,15 @@
                           <Component id="txtAnioCre" alignment="1" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="1" pref="0" max="32767" attributes="0"/>
                           <Component id="lblGenDeAlb" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomAlb" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="txtNomTemAlb" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane3" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
+                          <Component id="txtNomAlb" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="jLabelImagen" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="212" max="32767" attributes="0"/>
+              <EmptySpace pref="180" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -160,6 +160,17 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomAlb">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 26]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 26]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 26]"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAnioCre">
     </Component>
@@ -325,8 +336,16 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[13, 28]"/>
+          <Dimension value="[208, 28]"/>
         </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 28]"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 28]"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomAlbumActionPerformed"/>
@@ -340,9 +359,16 @@
     <Component class="javax.swing.JTextField" name="txtNomTemAlb">
       <Properties>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[13, 28]"/>
+          <Dimension value="[208, 26]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 26]"/>
         </Property>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[208, 26]"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

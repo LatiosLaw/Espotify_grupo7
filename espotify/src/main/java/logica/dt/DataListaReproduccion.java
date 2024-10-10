@@ -6,6 +6,7 @@ import java.util.Collection;
 public class DataListaReproduccion {
 
     private String nombre;
+    private String foto;
     private DataCliente creador;
     private Collection<DataTema> temas;
 
@@ -15,13 +16,20 @@ public class DataListaReproduccion {
         this.temas = new ArrayList<>();
     }
     
+    /*
     public DataListaReproduccion(String nombre, String creadirNick) {
         this.nombre = nombre;
         this.creador = new DataCliente();
         creador.setNickname(creadirNick);
         this.temas = new ArrayList<>();
     }
-    
+    */
+    public DataListaReproduccion(String nombre, String foto) {
+        this.nombre = nombre;
+        this.foto = foto;
+        this.temas = new ArrayList<>();
+    }
+
     public DataListaReproduccion(String nombre) {
         this.nombre = nombre;
         this.temas = new ArrayList<>();
@@ -37,6 +45,10 @@ public class DataListaReproduccion {
 
     public DataCliente getCreadorNickname() {
         return creador;
+    }
+    
+    public String getFoto() {
+        return foto;
     }
     public Collection<DataTema> getTemas() {
         return temas;

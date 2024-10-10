@@ -112,7 +112,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.out.println("DataLista retornado correctamente.");
             // Crear y retornar DataListaPorDefecto
             return new DataListaPorDefecto(
-                    ls.getNombreLista(), // Suponiendo que hay un método getNombre()
+                    ls.getNombre(), // Suponiendo que hay un método getNombre()
+                    ls.getFoto(),
+
                     dataGenero // Pasar el DataGenero creado
             );
         } else {
