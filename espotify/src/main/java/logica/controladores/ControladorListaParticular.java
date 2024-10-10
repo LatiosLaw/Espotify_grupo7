@@ -41,18 +41,26 @@ public class ControladorListaParticular implements IControladorListaParticular {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + dataCliente.getNickname());
         }
         // Verificar si la lista ya existe
-      /*  ListaReproduccion listaExistente = daoLista.find(nombre);
+        ListaReproduccion listaExistente = daoLista.findListaPorNicks(clienteExistente.getNickname(),nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
-        */
+        
         // Crear la nueva lista particular y asociar el cliente existente
+        //System.out.println("Antes");
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
+       // System.out.println("Despues");
         nuevaLista.setVisibilidad(false);
+       // System.out.println("Despues2");
         ListaParticular ls = new ListaParticular();
+       // System.out.println("Despues3");
         ls.setNombreLista(nuevaLista.getNombreLista());
+        ls.setNombreCliente(nuevaLista.getNombreCliente());
+        //System.out.println("Despues4");
         daoLista.save(ls);
+       // System.out.println("Despues5");
         daoLista.update(nuevaLista);
+        //System.out.println("Despues6");
         System.out.println("Lista Particular creada exitosamente.");
     }
     
@@ -66,7 +74,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + cli.getNickname());
         }
         // Verificar si la lista ya existe
-        ListaReproduccion listaExistente = daoLista.find(nombre);
+        ListaReproduccion listaExistente = daoLista.findListaPorNicks(nombre, clienteExistente.getNickname());
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
@@ -76,6 +84,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
         nuevaLista.setFoto(foto);
         ListaParticular ls = new ListaParticular();
         ls.setNombreLista(nuevaLista.getNombreLista());
+        ls.setNombreCliente(nuevaLista.getNombreCliente());
         daoLista.save(ls);
         daoLista.update(nuevaLista);
         System.out.println("Lista Particular creada exitosamente.");
@@ -207,7 +216,8 @@ DAO_Tema daoTema = new DAO_Tema();
     @Override
       public DataListaReproduccion devolverInformacionListaRepro(String coso){
           DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-          ListaReproduccion token = persistence.find(coso);
+          ListaReproduccion token = persistence.findListaReproduccionPorNombre(coso,"none");
+            //WARNINMG
           if(token == null){
               return null;
           }else{
@@ -215,9 +225,10 @@ DAO_Tema daoTema = new DAO_Tema();
                return token2;
           }
       }
-    public DataListaParticular retornarlista(String nickname){
+    @Override
+    public DataListaParticular retornarlista(String nickname, String nombreCliente){
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-        ListaReproduccion lista = persistence.find(nickname);
+        ListaReproduccion lista = persistence.findListaPorNicks(nombreCliente, nickname);
         if(lista != null){
             if(lista instanceof ListaParticular listaP){
                 DataListaParticular listaRetorno = new DataListaParticular();

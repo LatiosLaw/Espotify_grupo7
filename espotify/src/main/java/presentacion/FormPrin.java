@@ -233,11 +233,11 @@ public class FormPrin extends javax.swing.JFrame {
                 cargarSeguimientos();
                 jProgressBar1.setValue(62);
                 lblProgreso.setText("67%");
-               // cargarListas();
-               probarListas();
+                cargarListas();
+                //probarListas();
                 jProgressBar1.setValue(81);
                 lblProgreso.setText("81%");
-               // cargarFavoritos();
+                cargarFavoritos();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
@@ -284,9 +284,21 @@ public class FormPrin extends javax.swing.JFrame {
         System.out.println("GENEROS CARGADOS");
     }
     private void probarListas() {
-        controlListPar.crearLista("Sexo", controlCli.consultarPerfilCliente("el_padrino"));
-        DataListaParticular listaLP1 = controlListPar.devolverInformacion("Música Inspiradora", "el_padrino");
-        listaLP1.agregarTema(controlTem.retornarTema("El Duelo", "MTV Unplugged")); // LDC-T81
+      // this.cargarGeneros();
+        controlCli.agregarCliente("scarlettO", "Scarlett", "O’Hara", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
+        controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
+
+         controlListPD.crearLista("Noche De La Nostalgia", new DataGenero("Pop Clásico"), "bit.ly/laNocheNostalgia"); // LD1
+        
+        
+        
+        //controlListPar.crearLista("Sexo", controlCli.consultarPerfilCliente("el_padrino"));
+      // controlListPar.agregarTema(nick_cliente, nombre_lista, nombre_tema);
+
+
+
+//DataListaParticular listaLP1 = controlListPar.devolverInformacion("Música Inspiradora", "el_padrino");
+        //listaLP1.agregarTema(controlTem.retornarTema("El Duelo", "MTV Unplugged")); // LDC-T81
             
     }
     private void cargarListas() {
@@ -664,7 +676,7 @@ public class FormPrin extends javax.swing.JFrame {
         ////
 
         ////
-        controlCli.agregarLista(new DataCliente("Heisenberg"), new DataListaParticular("Música Inspiradora"));
+        controlCli.agregarLista(new DataCliente("Heisenberg"), new DataListaParticular("Música Inspiradora", new DataCliente("el_padrino")));
         ////
 
         ////

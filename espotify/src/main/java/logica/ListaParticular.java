@@ -16,7 +16,7 @@ public class ListaParticular extends ListaReproduccion implements Serializable {
     private Cliente creador;
 
     public ListaParticular() {
-
+        super();
     }
     
     public ListaParticular(String nombre, boolean visibilidad) {

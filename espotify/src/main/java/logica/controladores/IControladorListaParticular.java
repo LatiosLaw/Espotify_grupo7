@@ -27,9 +27,11 @@ public interface IControladorListaParticular {
     
     Collection<String> devolverListasParticularesPublicasString(String nickname);
     
-    DataListaParticular retornarlista(String nickname);
+    DataListaParticular retornarlista(String nickname, String nombreCliente);
 
    public DataListaReproduccion devolverInformacionListaRepro(String coso);
     
     void actualizarLista(DataListaParticular lista);
+    
+     
 }

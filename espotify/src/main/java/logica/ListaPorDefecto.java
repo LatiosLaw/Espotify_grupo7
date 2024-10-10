@@ -11,7 +11,7 @@ public class ListaPorDefecto extends ListaReproduccion implements Serializable {
    private Genero genero;
    
    public ListaPorDefecto(){
-   
+        super();
    }
    
    public ListaPorDefecto(String nombre){

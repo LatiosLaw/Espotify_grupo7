@@ -21,7 +21,11 @@ public class DataListaPorDefecto extends DataListaReproduccion {
     public DataListaPorDefecto(String nombre) {
         super(nombre);
     }
-
+    public DataListaPorDefecto(String nombre,DataCliente creador) {
+        super(nombre);
+    }
+    
+    
     public DataGenero getGenero() {
         return genero;
     }

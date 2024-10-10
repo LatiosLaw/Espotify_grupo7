@@ -14,7 +14,7 @@ import logica.dt.DT_IdLista;
 public abstract class ListaReproduccion implements Serializable {
 
     @EmbeddedId
-    private DT_IdLista identificador = new DT_IdLista();
+    protected DT_IdLista identificador;
     
     protected String foto;
     
@@ -22,7 +22,7 @@ public abstract class ListaReproduccion implements Serializable {
     private Collection<tema> temas;
 
     public ListaReproduccion() {
-
+          this.identificador = new DT_IdLista();
     }
     
     public ListaReproduccion(String nombreLista) {

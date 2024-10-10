@@ -28,18 +28,15 @@ public class DAO_ListaReproduccion {
         entityManager.getTransaction().commit();
     }
 
-    public ListaReproduccion find(String nombre) {
-        return entityManager.find(ListaReproduccion.class, nombre);
-    }
-
+   
     public List<ListaParticular> findAllListasParticulares() {
         return entityManager.createQuery("SELECT lp FROM ListaParticular lp", ListaParticular.class).getResultList();
     }
 
     public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
-        try {
+      try {
             return entityManager.createQuery(
-                    "SELECT u FROM ListaParticular u WHERE u.nombre = :nick_lista AND u.creador.nickname = :nick_creador",
+                    "SELECT u FROM ListaParticular u WHERE u.identificador.nombre_lista = :nick_lista AND u.identificador.nombre_cliente = :nick_creador",
                     ListaParticular.class)
                     .setParameter("nick_creador", nick_creador)
                     .setParameter("nick_lista", nick_lista)
@@ -70,7 +67,7 @@ public class DAO_ListaReproduccion {
     public ListaPorDefecto findListaPorGeneroYNombre(String generoNombre, String nombreLista) {
         try {
             return entityManager.createQuery(
-                    "SELECT u FROM ListaPorDefecto u WHERE u.genero.nombre = :generoNombre AND u.nombre = :nombreLista",
+                    "SELECT u FROM ListaReproduccion u WHERE u.genero.nombre = :generoNombre AND u.identificador.nombre_lista = :nombreLista",
                     ListaPorDefecto.class)
                     .setParameter("generoNombre", generoNombre)
                     .setParameter("nombreLista", nombreLista)
@@ -98,21 +95,37 @@ public class DAO_ListaReproduccion {
         }
     }
 
-    public ListaReproduccion findListaReproduccionPorNombre(String nombreLista) {
+    public ListaReproduccion findListaReproduccionPorNombre(String nombreLista, String nombreCliente) {
         try {
             return entityManager.createQuery(
-                    "SELECT u FROM ListaReproduccion u WHERE u.nombre = :nombreLista",
-                    ListaReproduccion.class)
-                    .setParameter("nombreLista", nombreLista)
+                    "SELECT u FROM ListaReproduccion u WHERE u.identificador.nombre_lista = :nick_lista AND u.identificador.nombre_cliente = :nick_creador",
+                    ListaParticular.class)
+                    .setParameter("nick_creador", nombreCliente)
+                    .setParameter("nick_lista", nombreLista)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return null;
+            return null; // No se encontró ninguna lista con esos parámetros
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Para depuración
             return null;
         }
     }
-
+    public ListaPorDefecto findListaPorDefectoPorNombre(String nombreLista) {
+       try {
+           String nick_creador = "none";
+            return entityManager.createQuery(
+                    "SELECT u FROM ListaPorDefecto u WHERE u.identificador.nombre_lista = :nick_lista AND u.identificador.nombre_cliente = :nick_creador",
+                    ListaPorDefecto.class)
+                    .setParameter("nick_creador", nick_creador)
+                    .setParameter("nick_lista", nombreLista)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró ninguna lista con esos parámetros
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depuración
+            return null;
+        }
+    }
     public Collection<ListaPorDefecto> findListasPorGeneros(String generoNombre) {
         try {
             return entityManager.createQuery(
@@ -135,7 +148,8 @@ public class DAO_ListaReproduccion {
     }
 
     public void delete(String nombre) {
-        ListaReproduccion entity = find(nombre);
+        ListaReproduccion entity = this.findListaPorNombre(nombre);
+        
         if (entity != null) {
             entityManager.getTransaction().begin();
             entityManager.remove(entity);

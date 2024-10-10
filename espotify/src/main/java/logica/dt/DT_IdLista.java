@@ -11,9 +11,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class DT_IdLista implements Serializable {
 
-    @Column(length = 255)
+    @Column(length = 100)
     private String nombre_lista;
-    @Column(length = 255)
+    @Column(length = 100)
     private String nombre_cliente;
     
     public DT_IdLista(){
