@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -24,7 +26,6 @@ import logica.dt.DataGenero;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataTema;
-import static presentacion.AgregarFavoritos.separarTemaAlbum;
 
 public class ConsultarLista extends javax.swing.JPanel {
 
@@ -51,6 +52,7 @@ public class ConsultarLista extends javax.swing.JPanel {
         txtNomTemLista.setEditable(false);
         txtDurTem.setEditable(false);
         txtDurTem.setEditable(false);
+        JLABELFOTOLISTA.setText("");
         
         ListaGenerosOClientes.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -93,8 +95,6 @@ public class ConsultarLista extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel1 = new java.awt.Panel();
-        txtIMAGEN_AFUTURO = new javax.swing.JLabel();
         txtGeneroLista = new javax.swing.JTextField();
         txtDefinidoPor = new javax.swing.JTextField();
         cbxOpt = new javax.swing.JComboBox<>();
@@ -117,31 +117,9 @@ public class ConsultarLista extends javax.swing.JPanel {
         ListaTemasLista = new javax.swing.JList<>();
         lblConAlb = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        JLABELFOTOLISTA = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(860, 471));
-
-        panel1.setBackground(new java.awt.Color(204, 204, 204));
-        panel1.setPreferredSize(new java.awt.Dimension(149, 149));
-
-        txtIMAGEN_AFUTURO.setForeground(new java.awt.Color(0, 0, 0));
-        txtIMAGEN_AFUTURO.setText("IMAGEN");
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(txtIMAGEN_AFUTURO)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(txtIMAGEN_AFUTURO)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
 
         txtGeneroLista.setEditable(false);
 
@@ -219,6 +197,14 @@ public class ConsultarLista extends javax.swing.JPanel {
 
         jLabel1.setText("Temas de la Lista :");
 
+        JLABELFOTOLISTA.setBackground(new java.awt.Color(0, 0, 0));
+        JLABELFOTOLISTA.setText("Imagen");
+        JLABELFOTOLISTA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        JLABELFOTOLISTA.setIconTextGap(0);
+        JLABELFOTOLISTA.setMaximumSize(new java.awt.Dimension(148, 148));
+        JLABELFOTOLISTA.setMinimumSize(new java.awt.Dimension(148, 148));
+        JLABELFOTOLISTA.setPreferredSize(new java.awt.Dimension(148, 148));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,7 +222,7 @@ public class ConsultarLista extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtListaElegida))
-                .addGap(140, 140, 140)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDescargarTema1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,19 +231,19 @@ public class ConsultarLista extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDurTem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(JLABELFOTOLISTA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
                             .addComponent(txtNombreLista, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(txtDefinidoPor)
                             .addComponent(txtGeneroLista)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(txtNomTemLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDireccionTema, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNomTemLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,32 +251,32 @@ public class ConsultarLista extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblConAlb)
-                                    .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblGeneroOCliente))
-                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblConAlb)
+                            .addComponent(cbxOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGeneroOCliente)
+                        .addGap(2, 2, 2)
                         .addComponent(txtFiltrarPorEsteGeneroOCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLista))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDefinidoPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtGeneroLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDefinidoPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtGeneroLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JLABELFOTOLISTA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addComponent(txtNomTemLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,6 +369,10 @@ public class ConsultarLista extends javax.swing.JPanel {
 
     public void buscarInfoLista(){
         if (!txtListaElegida.getText().isEmpty()) {
+            ImageIcon defaultIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\listas\\Default.png");
+            Image DefaultImage = defaultIcon.getImage();
+            Image resizedDefault = DefaultImage.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
+            ImageIcon resizedIconDefault = new ImageIcon(resizedDefault);
             if(cbxOpt.getSelectedIndex() == 1){
                 DataListaPorDefecto lista = controlListPD.devolverInformacion(txtListaElegida.getText(), nombre_genero);
                 txtNombreLista.setText(lista.getNombre());
@@ -390,6 +380,20 @@ public class ConsultarLista extends javax.swing.JPanel {
                 DataGenero gen = lista.getGenero();
                 txtGeneroLista.setText(gen.getNombre());
                 cargarTemasDeLaLista(lista.getNombre(), 1);
+                System.out.print(lista.getFoto());
+                if(lista.getFoto()!="default" && lista.getFoto()!=null && (lista.getFoto().endsWith(".png") || lista.getFoto().endsWith(".jpg"))){
+            ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\listaS\\"+lista.getFoto());
+            if(imageIcon.getImage()!=null){
+                Image DefaultProfile = imageIcon.getImage();
+            Image resizedProfile = DefaultProfile.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
+            ImageIcon resizedIconProfile = new ImageIcon(resizedProfile);
+            JLABELFOTOLISTA.setIcon(resizedIconProfile);
+            }else{
+            JLABELFOTOLISTA.setIcon(resizedIconDefault);    
+            }
+            }else{
+            JLABELFOTOLISTA.setIcon(resizedIconDefault);
+            }
             }else if(cbxOpt.getSelectedIndex() == 2){
                 DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
                 txtNombreLista.setText(lista.getNombre());
@@ -397,6 +401,20 @@ public class ConsultarLista extends javax.swing.JPanel {
                 txtDefinidoPor.setText(cli.getNickname());
                 txtGeneroLista.setText(" - ");
                 cargarTemasDeLaLista(lista.getNombre(), 2);
+                System.out.print(lista.getFoto());
+                if(lista.getFoto()!="default" && lista.getFoto()!=null && (lista.getFoto().endsWith(".png") || lista.getFoto().endsWith(".jpg"))){
+            ImageIcon imageIcon = new ImageIcon("espotify\\src\\main\\java\\imagenes\\listas\\"+lista.getFoto());
+            if(imageIcon.getImage()!=null){
+                Image DefaultProfile = imageIcon.getImage();
+            Image resizedProfile = DefaultProfile.getScaledInstance(148, 148, Image.SCALE_SMOOTH);
+            ImageIcon resizedIconProfile = new ImageIcon(resizedProfile);
+            JLABELFOTOLISTA.setIcon(resizedIconProfile);
+            }else{
+            JLABELFOTOLISTA.setIcon(resizedIconDefault);    
+            }
+            }else{
+            JLABELFOTOLISTA.setIcon(resizedIconDefault);
+            }
             }else{
                 JOptionPane.showMessageDialog(null, "Disculpe, un error ha ocurrido.");
             }
@@ -477,9 +495,11 @@ public class ConsultarLista extends javax.swing.JPanel {
         DefaultListModel<String> model;
         model = new DefaultListModel<>();
         ListaTemasLista.setModel(model);
+        JLABELFOTOLISTA.setIcon(null);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLABELFOTOLISTA;
     private javax.swing.JList<String> JListasFiltradas;
     private javax.swing.JList<String> ListaGenerosOClientes;
     private javax.swing.JList<String> ListaTemasLista;
@@ -494,13 +514,11 @@ public class ConsultarLista extends javax.swing.JPanel {
     private javax.swing.JLabel lblDurTem;
     private javax.swing.JLabel lblGeneroOCliente;
     private javax.swing.JLabel lblLista;
-    private java.awt.Panel panel1;
     private javax.swing.JTextField txtDefinidoPor;
     private javax.swing.JTextField txtDireccionTema;
     private javax.swing.JTextField txtDurTem;
     private javax.swing.JTextField txtFiltrarPorEsteGeneroOCliente;
     private javax.swing.JTextField txtGeneroLista;
-    private javax.swing.JLabel txtIMAGEN_AFUTURO;
     private javax.swing.JTextField txtListaElegida;
     private javax.swing.JTextField txtNomTemLista;
     private javax.swing.JTextField txtNombreLista;
