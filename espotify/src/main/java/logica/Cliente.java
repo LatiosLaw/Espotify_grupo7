@@ -3,15 +3,22 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Cliente extends Usuario {
-
+    
+    @OneToOne(mappedBy = "cli", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Suscripcion sus;
+  
     @ManyToMany
     @JoinTable(name = "seguidos",
             joinColumns = @JoinColumn(name = "nick_seguidor"), // El que sigue

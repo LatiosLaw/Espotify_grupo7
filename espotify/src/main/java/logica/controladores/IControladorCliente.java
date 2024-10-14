@@ -2,12 +2,14 @@ package logica.controladores;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import logica.Suscripcion;
 import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataSus;
 
 public interface IControladorCliente {
 
@@ -52,4 +54,8 @@ public interface IControladorCliente {
     public Collection<String> mostrarUsuarios();
 
     public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido);
+    
+    public DataSus devolverSus(String nick);
+    
+    
 }

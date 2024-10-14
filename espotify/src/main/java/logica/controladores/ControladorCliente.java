@@ -12,6 +12,7 @@ import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
+import logica.Suscripcion;
 import logica.tema;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
@@ -21,6 +22,7 @@ import logica.dt.DataListaParticular;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataSus;
 import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Tema;
@@ -368,4 +370,16 @@ public class ControladorCliente implements IControladorCliente {
         }
         return token;
     }
+     @Override
+     public DataSus devolverSus(String nick){
+         DAO_Usuario persistence = new DAO_Usuario();
+         Suscripcion sus = persistence.devovlerSus(nick);
+         DataSus dtSus = new DataSus(sus.getUser().getNickname(),sus.getFecha() ,sus.getEstado());
+         //dtSus.
+         
+         return dtSus;
+         
+     }
+    
+    
 }

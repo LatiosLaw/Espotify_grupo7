@@ -6,7 +6,10 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public abstract class Usuario implements Serializable {
@@ -22,6 +25,7 @@ public abstract class Usuario implements Serializable {
     @ManyToMany(mappedBy = "seguidos")
     protected Collection<Cliente> seguidores = new ArrayList<Cliente>();
 
+    
     public Usuario() {
     }
     

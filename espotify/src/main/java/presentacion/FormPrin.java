@@ -10,6 +10,7 @@ import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
+import logica.dt.DataSus;
 import logica.dt.DataTema;
 import logica.factory.Fabrica;
 
@@ -22,6 +23,8 @@ public class FormPrin extends javax.swing.JFrame {
     private final IControladorTema controlTem;
     private final IControladorListaParticular controlListPar;
     private final IControladorListaPorDefecto controlListPD;
+    private final IControladorSuscripcion controlSus;
+    
 
     public FormPrin() {
         Fabrica factory = Fabrica.getInstance();
@@ -32,6 +35,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlTem = factory.getIControladorTema();
         controlListPD = factory.getIControladorListaPorDefecto();
         controlListPar = factory.getIControladorListaParticular();
+        controlSus = factory.getIControladorSuscripcion();
         initComponents();
         lblCargando.setVisible(false);
         jProgressBar1.setVisible(false);
@@ -238,6 +242,7 @@ public class FormPrin extends javax.swing.JFrame {
                 jProgressBar1.setValue(81);
                 lblProgreso.setText("81%");
                 cargarFavoritos();
+                cargarSuscripciones();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
@@ -682,7 +687,15 @@ public class FormPrin extends javax.swing.JFrame {
 
         System.out.println("FAVORITOS CARGADOS");
     }
-
+    private void cargarSuscripciones(){
+        
+        controlSus.agregarSus("el_padrino");
+       DataSus dtSus = controlCli.devolverSus("el_padrino");
+       
+       System.out.println("Nick del Cliente: "+dtSus.getUserNick());
+       System.out.println("Fecha: "+dtSus.getFecha());
+       System.out.println("Estado: "+dtSus.getEstado());
+    }
     private void cargarAlbumes() {
         Collection<DataTema> temas = new ArrayList<>();
         Collection<DataGenero> genVPL = new ArrayList<>();

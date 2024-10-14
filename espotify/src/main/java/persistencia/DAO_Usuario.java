@@ -8,8 +8,10 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Cliente;
+import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
+import logica.dt.DataSus;
 
 public class DAO_Usuario {
 
@@ -225,6 +227,17 @@ public class DAO_Usuario {
             return null;
         } finally {
             entityManager.close();
+        }
+    }
+
+    public Suscripcion devovlerSus(String nick) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT c.sus FROM Cliente c WHERE c.nickname = :nick", Suscripcion.class)
+                    .setParameter("nick", nick)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún usuario con ese correo
         }
     }
 }

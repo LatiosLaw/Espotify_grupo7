@@ -45,4 +45,9 @@ public class Fabrica {
     public IControladorTema getIControladorTema() {
         return new ControladorTema();
     }
+    public IControladorSuscripcion getIControladorSuscripcion() {
+        return new ControladorSuscripcion();
+    }
+    
+    
 }
