@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Suscripcion;
+import logica.Usuario;
 
 public class DAO_Suscripcion {
 
@@ -51,6 +52,12 @@ public class DAO_Suscripcion {
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
         }
+    }
+    
+    public void update(Suscripcion entity) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
     }
 
    

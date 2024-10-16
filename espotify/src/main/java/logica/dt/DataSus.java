@@ -1,8 +1,6 @@
 package logica.dt;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class DataSus {
 

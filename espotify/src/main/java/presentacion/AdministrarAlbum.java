@@ -35,7 +35,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(872, 579));
 
-        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Album", "Consultar Album" }));
+        cbxOPT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Consultar Album" }));
         cbxOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxOPTActionPerformed(evt);
@@ -94,7 +94,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 pnlAdAl.revalidate();
                 pnlAdAl.repaint();
             }
-            case "Agregar Album" -> {
+            /*case "Agregar Album" -> {
                 AltaDeAlbum ada = new AltaDeAlbum(controlAlb, controlGen, controlTem, controlArt);
                 ada.setLocation(0, 0);
                 ada.setSize(860, 471);
@@ -103,7 +103,7 @@ public class AdministrarAlbum extends javax.swing.JPanel {
                 pnlAdAl.add(ada);
                 pnlAdAl.revalidate();
                 pnlAdAl.repaint();
-            }
+            }*/
             case "Consultar Album" -> {
                 ConsultaDeAlbum cda = new ConsultaDeAlbum(controlAlb, controlArt, controlGen, controlTem);
                 cda.setLocation(0, 0);
