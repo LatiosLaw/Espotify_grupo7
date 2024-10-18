@@ -184,7 +184,7 @@ public class FormPrin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdUsActionPerformed
-        AdministrarUsuario au = new AdministrarUsuario(controlCli, controlArt, controlTem, controlListPar, controlListPD, controlAlb);
+        AdministrarUsuario au = new AdministrarUsuario(controlCli, controlArt, controlTem, controlListPar, controlListPD, controlAlb, controlSus);
         au.setLocation(0, 0);
         au.setSize(872, 579);
         pnlPrin.removeAll();
@@ -689,12 +689,18 @@ public class FormPrin extends javax.swing.JFrame {
     }
     private void cargarSuscripciones(){
         
-        controlSus.agregarSus("el_padrino");
-       DataSus dtSus = controlCli.devolverSus("el_padrino");
+       controlSus.agregarSus("el_padrino");
+       controlSus.agregarSus("Heisenberg");
+       controlSus.agregarSus("Eleven11");
+       controlSus.agregarSus("ppArgento");
+       controlSus.agregarSus("scarlettO");
+       
+       
+      /* DataSus dtSus = controlCli.devolverSus("el_padrino");
        
        System.out.println("Nick del Cliente: "+dtSus.getUserNick());
        System.out.println("Fecha: "+dtSus.getFecha());
-       System.out.println("Estado: "+dtSus.getEstado());
+       System.out.println("Estado: "+dtSus.getEstado());*/
     }
     private void cargarAlbumes() {
         Collection<DataTema> temas = new ArrayList<>();

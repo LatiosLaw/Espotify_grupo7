@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,10 +42,28 @@ public class DAO_Suscripcion {
     }
 
     public List<Suscripcion> findAll() {
-       List<Suscripcion> albums = entityManager.createQuery("SELECT s FROM Suscripcion s", Suscripcion.class).getResultList();
-       return albums.isEmpty() ? null : albums;
+       List<Suscripcion> sus = entityManager.createQuery("SELECT s FROM Suscripcion s", Suscripcion.class).getResultList();
+       return sus.isEmpty() ? null : sus;
     }
-
+    public Collection<String> findAllString() {
+        List<String> sus = entityManager.createQuery("SELECT s.userNick FROM Suscripcion s", String.class).getResultList();
+       return sus.isEmpty() ? null : sus;
+    
+    }
+    public Collection<String> findPendientesString() {
+        List<String> sus = entityManager.createQuery("SELECT s.userNick FROM Suscripcion s where s.estado = 'Pendiente'", String.class).getResultList();
+       return sus.isEmpty() ? null : sus;
+    
+    }
+     public List<Suscripcion> findVigentes() {
+       List<Suscripcion> sus = entityManager.createQuery("SELECT s FROM Suscripcion s where s.estado = 'Vigente'", Suscripcion.class).getResultList();
+       return sus.isEmpty() ? null : sus;
+    }
+    
+    
+    
+    
+    
     public void delete(String nombre) {
         Suscripcion entity = find(nombre);
         if (entity != null) {
@@ -59,6 +78,8 @@ public class DAO_Suscripcion {
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
     }
+
+    
 
    
 }

@@ -461,10 +461,6 @@ public class AgregarUsuario extends javax.swing.JPanel {
         cbxTipoUsr.setSelectedIndex(0);
     }
 
-    private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNickNameActionPerformed
-
     private void cbxTipoUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUsrActionPerformed
         int token = cbxTipoUsr.getSelectedIndex();
         switch (token) {
@@ -507,6 +503,10 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private void txtVercontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVercontraseñaActionPerformed
 
     }//GEN-LAST:event_txtVercontraseñaActionPerformed
+
+    private void txtNickNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNickNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNickNameActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;

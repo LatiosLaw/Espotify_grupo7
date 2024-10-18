@@ -7,6 +7,7 @@ import logica.controladores.IControladorCliente;
 import logica.controladores.IControladorListaParticular;
 import logica.controladores.IControladorListaPorDefecto;
 import logica.controladores.IControladorTema;
+import logica.controladores.IControladorSuscripcion;
 
 public class AdministrarUsuario extends javax.swing.JPanel {
 
@@ -16,14 +17,16 @@ public class AdministrarUsuario extends javax.swing.JPanel {
     private final IControladorAlbum controlAlb;
     private final IControladorListaParticular controlListPar;
     private final IControladorListaPorDefecto controlListPD;
+    private final IControladorSuscripcion controlSus;
 
-    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorAlbum icalb) {
+    public AdministrarUsuario(IControladorCliente icc, IControladorArtista ica, IControladorTema ict, IControladorListaParticular iclp, IControladorListaPorDefecto icld, IControladorAlbum icalb, IControladorSuscripcion ics) {
         controlCli = icc;
         controlArt = ica;
         controlTem = ict;
         controlAlb = icalb;
         controlListPar = iclp;
         controlListPD = icld;
+        controlSus = ics;
         initComponents();
     }
 
@@ -56,7 +59,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos", "Actualizar estado de Suscripcion" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -87,7 +90,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(pnlAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -159,6 +162,18 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
+            case "Actualizar estado de Suscripcion" -> {
+                ActualizarEstadoSuscripcion aes = new ActualizarEstadoSuscripcion(controlSus);
+                aes.setLocation(0, 0);
+                aes.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(aes);
+                pnlAU.revalidate();
+                pnlAU.repaint();
+            }
+            
+            
             default ->
                 jComboBox1.setSelectedIndex(0);
         }

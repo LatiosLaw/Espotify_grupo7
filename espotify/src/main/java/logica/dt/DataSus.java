@@ -7,7 +7,7 @@ public class DataSus {
    protected String userNick;
     protected String estado;
     protected LocalDate ultiFechaHabi;
-    
+    protected String tipoSus;
     
     
     public DataSus(){
@@ -15,19 +15,27 @@ public class DataSus {
     }
    public DataSus(String usrNick){
         this.userNick = usrNick;
-        this.ultiFechaHabi = LocalDate.now(); 
-        this.estado = "Vigente";
     }
     public DataSus(String usrNick, LocalDate fecha){
         this.userNick = usrNick;
         this.ultiFechaHabi = fecha; 
-        this.estado = "Vigente";
     }
     public DataSus(String usrNick, LocalDate fecha, String estado){
         this.userNick = usrNick;
         this.ultiFechaHabi = fecha; 
         this.estado = estado;
     }
+    public DataSus(String usrNick, LocalDate fecha, String estado, String tipo){
+        this.userNick = usrNick;
+        this.ultiFechaHabi = fecha; 
+        this.estado = estado;
+        this.tipoSus = tipo;
+    }
+     public DataSus(String usrNick, String tipo){
+        this.userNick = usrNick;
+        this.tipoSus = tipo;
+    }
+    
     
     public String getUserNick(){
         return this.userNick;
@@ -38,4 +46,9 @@ public class DataSus {
     public LocalDate getFecha(){
         return this.ultiFechaHabi;
     }
+    public String getTipo(){
+        return this.tipoSus;
+    }
+    
+    
 }
