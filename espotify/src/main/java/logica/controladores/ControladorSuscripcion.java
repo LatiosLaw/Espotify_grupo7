@@ -36,12 +36,44 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         
     }
     @Override
-    public void agregarSus(String nick, String esrado){
+    public void agregarSus(String nick, String tipo){
+        DAO_Suscripcion daoSus = new DAO_Suscripcion();
+        Suscripcion sus = new Suscripcion(nick, tipo);
+        Cliente cli = new Cliente();
+        cli.setNickname(nick);
         
+        sus.setUser(cli);
+        try {
+            daoSus.save(sus);
+            System.out.println("Suscripcion agregada exitosamente.");
+           // return new DataErrorBundle(true, null);
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar la Suscripcion: " + e.getMessage());
+           /* if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
+            }
+            return new DataErrorBundle(true, null);*/
+        }
     }
     @Override
-    public void agregarSus(String nick, String esrado, LocalDate fecha){
+    public void agregarSus(String nick, String esrado, LocalDate fecha, String tipo){
+        DAO_Suscripcion daoSus = new DAO_Suscripcion();
+        Suscripcion sus = new Suscripcion(nick, fecha, esrado, tipo);
+        Cliente cli = new Cliente();
+        cli.setNickname(nick);
         
+        sus.setUser(cli);
+        try {
+            daoSus.save(sus);
+            System.out.println("Suscripcion agregada exitosamente.");
+           // return new DataErrorBundle(true, null);
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar la Suscripcion: " + e.getMessage());
+           /* if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
+            }
+            return new DataErrorBundle(true, null);*/
+        }
     }
     @Override
     public DataSus retornarSus(String nick){
@@ -187,14 +219,12 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
         
         Collection<Suscripcion> coleSus = daoSus.findVigentes();
-        Iterator<Suscripcion> ite = coleSus.iterator();
-        while(ite.hasNext()){
-            Suscripcion sus = ite.next();
-            
+      //  Iterator<Suscripcion> ite = coleSus.iterator();
+        
+        for(Suscripcion coso : coleSus){
+            Suscripcion sus = coso;
             this.cancelarAutomatic(sus.getUserNick());
         }
-        
-        
     }
     
     

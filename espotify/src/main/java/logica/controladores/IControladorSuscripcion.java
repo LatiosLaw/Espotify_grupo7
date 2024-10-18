@@ -12,9 +12,9 @@ public interface IControladorSuscripcion {
     
     public void agregarSus(String nick);
     
-    public void agregarSus(String nick, String esrado);
+    public void agregarSus(String nick, String tipo);
     
-    public void agregarSus(String nick, String esrado, LocalDate fecha);
+    public void agregarSus(String nick, String esrado, LocalDate fecha, String tipo);
     
     public DataSus retornarSus(String nick);
     

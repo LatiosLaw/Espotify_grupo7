@@ -688,12 +688,21 @@ public class FormPrin extends javax.swing.JFrame {
         System.out.println("FAVORITOS CARGADOS");
     }
     private void cargarSuscripciones(){
-        
-       controlSus.agregarSus("el_padrino");
-       controlSus.agregarSus("Heisenberg");
-       controlSus.agregarSus("Eleven11");
-       controlSus.agregarSus("ppArgento");
-       controlSus.agregarSus("scarlettO");
+        //benKenobi,cbochinche,lachiqui
+       controlSus.agregarSus("el_padrino","Vigente",LocalDate.of(1972, 3, 8),"Anual");
+       controlSus.agregarSus("Heisenberg","Vigente",LocalDate.of(2024, 3, 8),"Anual");
+       
+       
+       controlSus.agregarSus("Eleven11","Vigente",LocalDate.of(2024, 10, 1),"Semanal");
+       controlSus.agregarSus("benKenobi","Vigente",LocalDate.of(2024, 10, 14),"Semanal");
+       
+       controlSus.agregarSus("cbochinche","Vigente",LocalDate.of(2024, 9, 1),"Mensual");
+       controlSus.agregarSus("lachiqui","Vigente",LocalDate.of(2024, 10, 8),"Mensual");
+       
+       
+       
+       controlSus.agregarSus("ppArgento","Pendiente",LocalDate.of(1972, 3, 8),"Mensual");
+       controlSus.agregarSus("scarlettO","Pendiente",LocalDate.of(1972, 3, 8),"Mensual");
        
        
       /* DataSus dtSus = controlCli.devolverSus("el_padrino");
