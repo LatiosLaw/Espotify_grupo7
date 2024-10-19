@@ -2,9 +2,9 @@ package logica;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,6 +15,7 @@ public class tema implements Serializable {
 
     @EmbeddedId
     private DT_IdTema identificador;
+    @Column(name = "METODO_DE_ACCESO", length = 255)
     private String metodo_de_acceso;
     private String identificador_archivo;
     private Integer duracion;
