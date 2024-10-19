@@ -6,6 +6,7 @@ import java.util.Iterator;
 import logica.Album;
 import logica.Artista;
 import logica.Genero;
+import logica.Usuario;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
@@ -13,13 +14,19 @@ import logica.dt.DataGenero;
 import logica.dt.DataTema;
 import persistencia.DAO_Album;
 import persistencia.DAO_Genero;
+import persistencia.DAO_Usuario;
 
 public class ControladorAlbum implements IControladorAlbum {
 
     @Override
     public DataAlbum agregarAlbum(String artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataTema> temas) {
-        Artista art = new Artista(artista);
-        Album nuevo_album = new Album(nombAlbum, imagen, anioCreacion, art);
+        
+        DAO_Usuario artistaPersistence = new DAO_Usuario();
+        
+        Usuario art = artistaPersistence.findUsuarioByNick(artista);
+        
+        if(art instanceof Artista artista1){
+            Album nuevo_album = new Album(nombAlbum, imagen, anioCreacion, artista1);
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
@@ -32,11 +39,13 @@ public class ControladorAlbum implements IControladorAlbum {
         persistence.update(nuevo_album);
         if (persistence.find(nuevo_album.getNombre()) != null) {
             System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
-            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), artista1.getBiografia(), artista1.getDirWeb()));
         } else {
             System.out.println("El album no fue persistido correctamente.");
             return null;
         }
+      } 
+        return null;
     }
 
     @Override
