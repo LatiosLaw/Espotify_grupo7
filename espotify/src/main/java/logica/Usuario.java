@@ -28,6 +28,7 @@ public abstract class Usuario implements Serializable {
     protected String contraseña;
     protected String foto_perfil;
     protected LocalDate fecha_nac;
+    protected String DTYPE;
     @ManyToMany(mappedBy = "seguidos")
     protected Collection<Cliente> seguidores = new ArrayList<Cliente>();
 
@@ -111,6 +112,9 @@ public abstract class Usuario implements Serializable {
         return DTYPE;
     }
 
+    public boolean verificarContraseña(String pass){
+        return this.contraseña.equals(pass);
+    }
 
     public abstract void mostrarInformacion();
 }
