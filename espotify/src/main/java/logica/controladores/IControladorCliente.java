@@ -19,6 +19,10 @@ public interface IControladorCliente {
 
     public void dejarDeSeguirUsuario(String nick1, String nick2);
 
+    public boolean seguirUsuarioWeb(String nick1, String nick2);
+    
+    public boolean dejarDeSeguirUsuarioWeb(String nick1, String nick2);
+
     public DataCliente consultarPerfilCliente(String nick_cli);
 
     public void agregarTema(DataCliente nickcli, DataTema nicktem);
@@ -52,6 +56,8 @@ public interface IControladorCliente {
     public Collection<String> obtenerAlbumFavCliente(String nick);
 
     public Collection<String> mostrarUsuarios();
+
+    public DataErrorBundle iniciarSesion(String nickOmail, String pass);
 
     public boolean corroborarSiEstaenSeguidos(String nickCliente, String nickSeguido);
     

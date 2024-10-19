@@ -10,8 +10,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Usuario implements Serializable {
 
     @Id
@@ -99,6 +105,10 @@ public abstract class Usuario implements Serializable {
 
     public void setFechaNac(LocalDate fecha_nac) {
         this.fecha_nac = fecha_nac;
+    }
+
+    public String getDTYPE(){
+        return DTYPE;
     }
 
 

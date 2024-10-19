@@ -10,6 +10,7 @@ public class DataUsuario {
     private String contraseña;
     private String correo;
     private String foto_perfil;
+    private String DTYPE;
     private LocalDate fechaNac;
 
     public DataUsuario(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac) {
@@ -29,6 +30,11 @@ public class DataUsuario {
         this.setCorreo(new String());
         this.setFoto(new String());
         this.setFechaNac(null);
+    }
+
+    public DataUsuario(String nickname, String DTYPE){
+        this.nickname = nickname;
+        this.DTYPE = DTYPE;
     }
 
     public DataUsuario(String nickname){
@@ -61,6 +67,10 @@ public class DataUsuario {
     
     public String getContra() {
         return contraseña;
+    }
+
+    public String getDTYPE(){
+        return DTYPE;
     }
 
     public void setContra(String contraseña) {

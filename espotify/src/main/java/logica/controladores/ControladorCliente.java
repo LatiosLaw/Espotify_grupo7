@@ -85,6 +85,43 @@ public class ControladorCliente implements IControladorCliente {
     }
 
     @Override
+    public boolean seguirUsuarioWeb(String nick1, String nick2) {
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        // Obtener Usuario usando nick1
+        Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
+        if (usuarioBase == null) {
+            return false; // Usuario no encontrado
+        }
+
+        // Hacer el cast a Cliente
+        if (!(usuarioBase instanceof Cliente cliente)) {
+            return false; // El usuario encontrado no es un cliente
+        }
+
+        Usuario usuario = persistence.findUsuarioByNick(nick2);
+        if (usuario == null) {
+            return false; // Usuario a seguir no encontrado
+        }
+
+        try {
+            if (usuario instanceof Cliente dataCliente) {
+                cliente.seguir(new Cliente(dataCliente.getNickname(), dataCliente.getNombre(), dataCliente.getApellido(), dataCliente.getContra(), dataCliente.getEmail(), dataCliente.getFoto(), dataCliente.getNacimiento()));
+            } else if (usuario instanceof Artista dataArtista) {
+                cliente.seguir(new Artista(dataArtista.getNickname(), dataArtista.getNombre(), dataArtista.getApellido(), dataArtista.getContra(), dataArtista.getEmail(), dataArtista.getFoto(), dataArtista.getNacimiento(), dataArtista.getBiografia(), dataArtista.getDirWeb()));
+            } else {
+                return false;
+            }
+
+            persistence.update(cliente);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al seguir al usuario: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     public void dejarDeSeguirUsuario(String nick1, String nick2) {
         DAO_Usuario persistence = new DAO_Usuario();
         // Obtener Usuario usando nick1
@@ -103,6 +140,28 @@ public class ControladorCliente implements IControladorCliente {
         cliente.dejarDeSeguir(usuario);
         // Actualizar la tabla
         persistence.update(cliente);
+    }
+
+    @Override
+    public boolean dejarDeSeguirUsuarioWeb(String nick1, String nick2) {
+        DAO_Usuario persistence = new DAO_Usuario();
+        // Obtener Usuario usando nick1
+        Usuario usuarioBase = persistence.findUsuarioByNick(nick1);
+        if (usuarioBase == null) {
+            throw new IllegalArgumentException("Cliente no encontrado.");
+        }
+        // Hacer el cast a Cliente
+        if (!(usuarioBase instanceof Cliente cliente)) {
+            throw new IllegalArgumentException("El usuario encontrado no es un cliente.");
+        }
+        Usuario usuario = persistence.findUsuarioByNick(nick2);
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuario a dejar de seguir no encontrado.");
+        }
+        cliente.dejarDeSeguir(usuario);
+        // Actualizar la tabla
+        persistence.update(cliente);
+        return true;
     }
 
     @Override
@@ -354,6 +413,31 @@ public class ControladorCliente implements IControladorCliente {
             lista.add(usr.getNickname());
         }
         return lista;
+    }
+
+    @Override
+    public DataErrorBundle iniciarSesion(String nickOmail, String pass) {
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        Usuario usr = persistence.findUsuarioByNickOrMail(nickOmail);
+
+        if (usr != null) {
+            if (usr.verificarContraseña(pass)) {
+                System.out.println("User logged in successfully:");
+                System.out.println("Nickname: " + usr.getNickname());
+                System.out.println("Email: " + usr.getEmail());
+
+                return new DataErrorBundle(true, null);
+            } else {
+
+                System.out.println("Invalid password for user: " + usr.getNickname());
+                return new DataErrorBundle(false, 2);
+            }
+        } else {
+            
+            System.out.println("No user found with nickname/email: " + nickOmail);
+            return new DataErrorBundle(false, 1);
+        }
     }
 
     @Override

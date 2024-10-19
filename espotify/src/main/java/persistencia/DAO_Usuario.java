@@ -12,6 +12,7 @@ import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
 import logica.dt.DataSus;
+import logica.dt.DataUsuario;
 
 public class DAO_Usuario {
 
@@ -64,6 +65,48 @@ public class DAO_Usuario {
         try {
             return entityManager.createQuery(
                     "SELECT u.nickname FROM Usuario u JOIN u.seguidores s WHERE s.nickname = :nickname ", String.class)
+                    .setParameter("nickname", nick_usuario)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    }
+
+     public Collection<Usuario> obtenerNoSeguidosDeUsuario(String nick_usuario) {
+        try {
+            // Obtener la lista de usuarios que el usuario actual sigue
+            Collection<String> seguidos = obtenerSeguidosDeUsuario(nick_usuario);
+
+            // Construir la consulta
+            String queryString = "SELECT u FROM Usuario u WHERE u.nickname != :nickname";
+
+            // Si hay seguidos, agregar la cláusula NOT IN para excluirlos
+            if (seguidos != null && !seguidos.isEmpty()) {
+                queryString += " AND u.nickname NOT IN :seguidos"; // Excluir a los seguidos
+            }
+
+            // Crear la consulta
+            var query = entityManager.createQuery(queryString, Usuario.class)
+                    .setParameter("nickname", nick_usuario);
+
+            // Si hay seguidos, agregar el parámetro a la consulta
+            if (seguidos != null && !seguidos.isEmpty()) {
+                query.setParameter("seguidos", seguidos);
+            }
+
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<>(); // Retornar una lista vacía si no se encontraron resultados
+        } catch (Exception e) {
+            System.err.println("Error en la consulta: " + e.getMessage());
+            return new ArrayList<>(); // Manejo de otros errores
+        }
+    }
+
+     public Collection<Usuario> obtenerSeguidosDeUsuarioObjetos(String nick_usuario) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM Usuario u JOIN u.seguidores s WHERE s.nickname = :nickname ", Usuario.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {
@@ -169,6 +212,17 @@ public class DAO_Usuario {
                     .getSingleResult();
         } catch (NoResultException e) {
             return null; // No se encontro ningún usuario con ese correo
+        }
+    }
+
+    public Usuario findUsuarioByNickOrMail(String nickOrMail) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM Usuario u WHERE u.correo = :nickOrMail OR u.nickname = :nickOrMail", Usuario.class)
+                    .setParameter("nickOrMail", nickOrMail)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No user found with those credentials
         }
     }
 
