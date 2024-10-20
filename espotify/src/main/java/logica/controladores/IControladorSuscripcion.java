@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import logica.Suscripcion;
 import logica.Usuario;
+import logica.dt.DataErrorBundle;
 import logica.dt.DataSus;
 
 public interface IControladorSuscripcion {
@@ -14,7 +15,7 @@ public interface IControladorSuscripcion {
     
     public void agregarSus(String nick, String tipo);
     
-    public void agregarSus(String nick, String esrado, LocalDate fecha, String tipo);
+    public DataErrorBundle agregarSus(String nick, String esrado, LocalDate fecha, String tipo);
     
     public DataSus retornarSus(String nick);
     

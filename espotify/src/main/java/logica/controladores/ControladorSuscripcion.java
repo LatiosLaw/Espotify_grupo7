@@ -1,16 +1,17 @@
 package logica.controladores;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Suscripcion;
 import logica.Cliente;
+import logica.Usuario;
+import logica.dt.DataErrorBundle;
 import logica.dt.DataSus;
 
 import persistencia.DAO_Suscripcion;
+import persistencia.DAO_Usuario;
 
 public class ControladorSuscripcion implements IControladorSuscripcion {
     @Override
@@ -56,24 +57,30 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         }
     }
     @Override
-    public void agregarSus(String nick, String esrado, LocalDate fecha, String tipo){
+    public DataErrorBundle agregarSus(String nick, String estado, LocalDate fecha, String tipo) {
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
-        Suscripcion sus = new Suscripcion(nick, fecha, esrado, tipo);
-        Cliente cli = new Cliente();
-        cli.setNickname(nick);
-        
-        sus.setUser(cli);
-        try {
-            daoSus.save(sus);
-            System.out.println("Suscripcion agregada exitosamente.");
-           // return new DataErrorBundle(true, null);
-        } catch (PersistenceException e) {
-            System.out.println("Error al guardar la Suscripcion: " + e.getMessage());
-           /* if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+        Suscripcion sus = new Suscripcion(nick, fecha, estado, tipo);
+
+        DAO_Usuario daoUser = new DAO_Usuario();
+
+        Usuario cliente = daoUser.findUsuarioByNick(nick);
+
+        if (cliente instanceof Cliente cli) {
+            sus.setUser(cli);
+            try {
+                daoSus.save(sus);
+                System.out.println("Suscripcion agregada exitosamente.");
+                return new DataErrorBundle(true, 0);
+                // return new DataErrorBundle(true, null);
+            } catch (PersistenceException e) {
+                System.out.println("Error al guardar la Suscripcion: " + e.getMessage());
+                /* if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 System.out.println("El nickname ya esta en uso. Por favor, elige otro.");
             }
             return new DataErrorBundle(true, null);*/
+            }
         }
+        return new DataErrorBundle(false, 1);
     }
     @Override
     public DataSus retornarSus(String nick){
