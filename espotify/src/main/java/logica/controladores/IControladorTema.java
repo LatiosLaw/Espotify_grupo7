@@ -9,7 +9,9 @@ public interface IControladorTema {
     public boolean crearTemaDefault(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo);
 
     boolean crearTemaCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album);
-            
+    
+    boolean crearTemaCasiCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion);        
+    
     public DataTema retornarTema(String nickname, String nombre_album);
     
     Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista);
