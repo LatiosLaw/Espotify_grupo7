@@ -74,6 +74,10 @@ public class DataListaReproduccion {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public void setCreador(DataCliente creador) {
         this.creador = creador;

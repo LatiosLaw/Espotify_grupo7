@@ -230,12 +230,17 @@ DAO_Tema daoTema = new DAO_Tema();
       }
     @Override
     public DataListaParticular retornarlista(String nickname, String nombreCliente){
+        DAO_Usuario persistence2 = new DAO_Usuario();
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         ListaReproduccion lista = persistence.findListaPorNicks(nombreCliente, nickname);
         if(lista != null){
             if(lista instanceof ListaParticular listaP){
+                Cliente cli = listaP.getCliente();
                 DataListaParticular listaRetorno = new DataListaParticular();
                 listaRetorno.setNombre(listaP.getNombreLista());
+                listaRetorno.setCreador(new DataCliente(cli.getNickname(), cli.getNombre(), cli.getApellido(), cli.getContra(), cli.getEmail(), cli.getFoto(), cli.getNacimiento()));
+                listaRetorno.setFoto(listaP.getFoto());
+                listaRetorno.setVisibilidad(listaP.getVisibilidad());
                 System.out.println("Listas retornadas correctamente.");
                 return listaRetorno;
             }

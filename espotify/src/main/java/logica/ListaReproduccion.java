@@ -35,6 +35,12 @@ public abstract class ListaReproduccion implements Serializable {
         this.identificador.setNombre_lista(nombreLista);
         identificador.setNombre_cliente(nombreCliente);
     }
+     public ListaReproduccion(String nombreLista, String nombreCliente, String foto) {
+        this.identificador = new DT_IdLista();
+        this.identificador.setNombre_lista(nombreLista);
+        identificador.setNombre_cliente(nombreCliente);
+        this.foto = foto;
+    }
     public String getNombreCliente() {
         return identificador.getNombre_cliente();
     }
