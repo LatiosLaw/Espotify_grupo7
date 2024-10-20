@@ -14,6 +14,7 @@ import logica.dt.DataGenero;
 import logica.dt.DataTema;
 import persistencia.DAO_Album;
 import persistencia.DAO_Genero;
+import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
 
 public class ControladorAlbum implements IControladorAlbum {
@@ -23,6 +24,8 @@ public class ControladorAlbum implements IControladorAlbum {
         
         DAO_Usuario artistaPersistence = new DAO_Usuario();
         
+        DAO_Tema temaPersistence = new DAO_Tema();
+        
         Usuario art = artistaPersistence.findUsuarioByNick(artista);
         
         if(art instanceof Artista artista1){
@@ -30,7 +33,7 @@ public class ControladorAlbum implements IControladorAlbum {
         Iterator<DataTema> iterator2 = temas.iterator();
         while (iterator2.hasNext()) {
             DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(new tema(tema.getNickname(), tema.getNomAlb(), tema.getDuracion(), tema.getPos(), tema.getAccess(), tema.getArchivo()));
+            nuevo_album.agregarTema(temaPersistence.find(tema.getNickname(), tema.getNomAlb()));
         }
         DAO_Album persistence = new DAO_Album();
         Album album_vacio = new Album();

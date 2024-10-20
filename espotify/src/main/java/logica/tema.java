@@ -91,6 +91,16 @@ public class tema implements Serializable {
         this.identificador_archivo = archivo;
         this.album = album;
     }
+    
+    public tema(String nickname, String nombre_album, Integer duracion, String metodo_de_acceso, String archivo, Integer posicion) {
+        this.identificador = new DT_IdTema();
+        this.identificador.setNombreTema(nickname);
+        this.identificador.setNombreAlbumTema(nombre_album);
+        this.duracion = duracion;
+        this.posicion_album = posicion;
+        this.metodo_de_acceso = metodo_de_acceso;
+        this.identificador_archivo = archivo;
+    }
 
     public String getNickname() {
         return identificador.getNombreTema();

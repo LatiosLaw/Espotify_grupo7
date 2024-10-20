@@ -54,6 +54,16 @@ public class DataTema {
         this.identificador_archivo = archivo;
     }
     
+    public DataTema(String nickname, String nombre_album, Integer duracion, DataAlbum dataAlbum, String acceso, String archivo, Integer posic) {
+        this.nickname = nickname;
+        this.nombre_album = nombre_album;
+        this.duracion = duracion;
+        this.album = dataAlbum;
+        this.metodo_de_acceso = acceso;
+        this.identificador_archivo = archivo;
+        this.posicion_album = posic;
+    }
+    
     public DataTema(String nickname, String nombre_album) {
         this.nickname = nickname;
         this.nombre_album = nombre_album;
