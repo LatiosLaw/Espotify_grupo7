@@ -143,7 +143,7 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
         boolean tokenSus = false;
         Suscripcion sus = daoSus.find(nick);
-        if("Vigente".equals(sus.getEstado())){
+        if(sus != null && "Vigente".equals(sus.getEstado())){
             tokenSus = true;
         } 
         return tokenSus;
