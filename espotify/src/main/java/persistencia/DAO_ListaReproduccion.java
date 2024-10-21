@@ -32,6 +32,10 @@ public class DAO_ListaReproduccion {
     public List<ListaParticular> findAllListasParticulares() {
         return entityManager.createQuery("SELECT lp FROM ListaParticular lp", ListaParticular.class).getResultList();
     }
+    
+    public List<ListaParticular> findAllListasParticularesPublicas() {
+        return entityManager.createQuery("SELECT lp FROM ListaParticular lp WHERE lp.visibilidad=true", ListaParticular.class).getResultList();
+    }
 
     public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
       try {

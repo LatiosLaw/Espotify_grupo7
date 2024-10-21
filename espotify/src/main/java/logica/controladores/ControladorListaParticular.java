@@ -99,7 +99,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
         while (iterator.hasNext()) {
             lista = iterator.next();
             String nombrel = lista.getNombreLista();
-            if(nombrel == nombre_lista){
+            if(nombrel.equals(nombre_lista)){
                 if(lista == null){
                     System.out.println("No existen listas en el sistema."); 
                 }else{
