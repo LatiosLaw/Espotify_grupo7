@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
@@ -24,14 +25,13 @@ import javax.persistence.OneToOne;
 public class Suscripcion implements Serializable {
     
     @Id
-    @Column(name = "userNick")
+    protected int id;
     protected String userNick;
     protected String estado; // Cancelada, Vigente, Vencida y Pendiente
     protected LocalDate ultiFechaHabi;
     protected String tipoSus; // Anual, Mensual y Semanal
     
-    @OneToOne
-    @MapsId
+    @ManyToOne
     Cliente cli;
     public Suscripcion(){
         
@@ -65,7 +65,9 @@ public class Suscripcion implements Serializable {
     }
     
     
-    
+    public void setId(int id){
+        this.id = id;
+    }
     
     
     public void setUserNick(String usrNick){
@@ -98,7 +100,9 @@ public class Suscripcion implements Serializable {
     public String getTipo(){
         return this.tipoSus;
     }
-    
+    public int getId(){
+        return this.id;
+    }
     
     @Override
     public int hashCode() {

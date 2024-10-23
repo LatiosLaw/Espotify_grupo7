@@ -163,7 +163,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.repaint();
             }
             case "Actualizar estado de Suscripcion" -> {
-                ActualizarEstadoSuscripcion aes = new ActualizarEstadoSuscripcion(controlSus);
+                ActualizarEstadoSuscripcion aes = new ActualizarEstadoSuscripcion(controlSus, controlCli);
                 aes.setLocation(0, 0);
                 aes.setSize(860, 471);
 

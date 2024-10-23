@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class DataSus {
 
+    protected int id;
    protected String userNick;
     protected String estado;
     protected LocalDate ultiFechaHabi;
@@ -15,7 +16,7 @@ public class DataSus {
     }
    public DataSus(String usrNick){
         this.userNick = usrNick;
-    }
+   }
     public DataSus(String usrNick, LocalDate fecha){
         this.userNick = usrNick;
         this.ultiFechaHabi = fecha; 
@@ -31,6 +32,15 @@ public class DataSus {
         this.estado = estado;
         this.tipoSus = tipo;
     }
+     public DataSus(String usrNick, LocalDate fecha, String estado, String tipo, int id){
+        this.userNick = usrNick;
+        this.ultiFechaHabi = fecha; 
+        this.estado = estado;
+        this.tipoSus = tipo;
+        this.id = id;
+    }
+    
+    
      public DataSus(String usrNick, String tipo){
         this.userNick = usrNick;
         this.tipoSus = tipo;
@@ -48,6 +58,9 @@ public class DataSus {
     }
     public String getTipo(){
         return this.tipoSus;
+    }
+    public int getid(){
+        return this.id;
     }
     
     

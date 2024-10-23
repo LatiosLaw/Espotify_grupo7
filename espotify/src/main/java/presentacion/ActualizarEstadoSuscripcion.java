@@ -13,16 +13,18 @@ import logica.dt.DataListaReproduccion;
 import logica.dt.DataSus;
 import logica.dt.DataTema;
 import static presentacion.AgregarFavoritos.separarTemaAlbum;
+import logica.controladores.IControladorCliente;
 
 public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
  
     private final IControladorSuscripcion controlSus;
-    
-
-    public ActualizarEstadoSuscripcion( IControladorSuscripcion ics ) {
+    private final IControladorCliente controlCli;
+    int idSecretosa = 0;
+    public ActualizarEstadoSuscripcion( IControladorSuscripcion ics, IControladorCliente icc ) {
         initComponents();
         controlSus = ics;
-        cargarDatos();
+        controlCli = icc;
+        cargarClientes();
     }
 
     /**
@@ -48,6 +50,7 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
         lblTipo = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         lblFecha1 = new javax.swing.JLabel();
+        cbxClientes = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
@@ -96,14 +99,22 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
 
         lblFecha1.setText("Ultima Fecha de  ");
 
+        cbxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
+                .addComponent(cbxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -134,30 +145,33 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNick))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblFecha1)
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFecha2))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipo))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEstado))
-                        .addGap(26, 26, 26)
-                        .addComponent(cbxNuevoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNick))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblFecha1)
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFecha2))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTipo))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEstado))
+                                .addGap(26, 26, 26)
+                                .addComponent(cbxNuevoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,10 +181,10 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         String token = String.valueOf(this.cbxNuevoEstado.getSelectedItem());
-            if(txtNick.getText().isBlank()){
+            if(idSecretosa == 0){
                 JOptionPane.showMessageDialog(null, "Seleccione una suscripcion de la lista");
             }else{
-                 this.controlSus.actualizarEstado(txtNick.getText(), token);
+                 this.controlSus.actualizarEstado(idSecretosa, token);
                  JOptionPane.showMessageDialog(null, "Se cambio el estado de la suscripcion");
                  cargarDatos();
             }
@@ -180,15 +194,26 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
 
     private void lstListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstListaMouseClicked
         String token = this.lstLista.getSelectedValue();
-        DataSus sus = this.controlSus.retornarSus(token);
+        int token2 = 0;
+        if(token != null){
+             token2 = Integer.parseInt(token);
+        }
+       
+        idSecretosa = token2;
+        DataSus sus = this.controlSus.retornarSus(token2);
         this.txtEstado.setText(sus.getEstado());
         this.txtFecha.setText(String.valueOf(sus.getFecha()));
         this.txtTipo.setText(sus.getTipo());
         this.txtNick.setText(sus.getUserNick());
     }//GEN-LAST:event_lstListaMouseClicked
 
+    private void cbxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClientesActionPerformed
+            this.cargarSus(String.valueOf(this.cbxClientes.getSelectedItem()));
+    }//GEN-LAST:event_cbxClientesActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
+    private javax.swing.JComboBox<String> cbxClientes;
     private javax.swing.JComboBox<String> cbxNuevoEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -206,11 +231,31 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
     
    private void cargarDatos(){
        
-       Collection<String> cole = this.controlSus.findPendientesString();
+      
+        
+   }
+   private void cargarClientes(){
+       Collection<DataCliente> cole = this.controlCli.mostrarClientes();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        if(cole == null){
+             JOptionPane.showMessageDialog(null, "No hay Clientes en el Sistema");
+        }else{ 
+        for (DataCliente elemento : cole) {
+            String nick = elemento.getNickname();
+            model.addElement(nick);
+        }
+        this.cbxClientes.setModel(model);
+        } 
+   }
+   private void cargarSus(String nick){
+        Collection<String> cole = this.controlSus.findPendientesString(nick);
+        System.out.print("nick es " +nick);
         DefaultListModel<String> model;
         model = new DefaultListModel<>();
-        if(cole == null){
-            JOptionPane.showMessageDialog(null, "No hay Suscripciones pendientes en el Sistema");
+        if(cole == null || cole.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No hay Suscripciones pendientes de ese cliente");
         }else{
             for (String elemento : cole) {
             String nombre = elemento;
@@ -218,6 +263,10 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
         }
          this.lstLista.setModel(model);
         }
-        
+       
+       
+       
    }
+   
+   
 }
