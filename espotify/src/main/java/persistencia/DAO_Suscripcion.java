@@ -63,6 +63,33 @@ public class DAO_Suscripcion {
         }
 
     }
+    public Collection<Suscripcion> findPendientesVencidasString(String nick){
+        try {
+            return entityManager.createQuery(
+                    "SELECT s FROM Suscripcion s where s.estado = 'Pendiente' OR s.estado = 'Vencida' AND s.userNick = :nick", Suscripcion.class)
+                    .setParameter("nick", nick)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // Sus?
+        }
+        
+    }
+
+    
+     public Collection<Integer> findAllPorNombre(String nick) {
+       try {
+            return entityManager.createQuery(
+                    "SELECT s.id FROM Suscripcion s where s.userNick = :nick", Integer.class)
+                    .setParameter("nick", nick)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // Sus?
+        }
+
+    }
+    
+    
+    
      public List<Suscripcion> findVigentes() {
        List<Suscripcion> sus = entityManager.createQuery("SELECT s FROM Suscripcion s where s.estado = 'Vigente'", Suscripcion.class).getResultList();
        return sus.isEmpty() ? null : sus;

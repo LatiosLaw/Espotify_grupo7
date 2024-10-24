@@ -170,6 +170,7 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
     
     @Override
     public boolean isVigente(int id){
+       
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
         boolean tokenSus = false;
         Suscripcion sus = daoSus.find(id);
@@ -240,17 +241,28 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         }
     }
     @Override
-    public Collection <String> retornarSuscripcionesString(){
+    public Collection <Integer> retornarSuscripcionesInteger(String nick){
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
-        Collection<Integer> cola = daoSus.findAllInteger();
-        Collection <String> coleString = new ArrayList<>();
-        for(int id:cola){
-            coleString.add(String.valueOf(id));
-        }
- 
-        return coleString;
-        
+        Collection<Integer> cola = daoSus.findAllPorNombre(nick);
+
+        return cola; 
     }
+    @Override
+    public boolean tieneSusValida(String nick){
+        boolean isValida = false;
+        Collection <Integer> cole = retornarSuscripcionesInteger(nick);
+        
+        for(Integer sus:cole){
+            if(this.isVigente(sus) == true){
+                isValida = true;
+                return isValida;
+            }
+        }
+        return isValida;
+    }
+    
+    
+    
     @Override
     public Collection<String> findPendientesString(String nick){
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
@@ -263,6 +275,22 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         return colestring;
         
     }
+    @Override
+     public Collection<DataSus> findPendientesVencidasString(String nick){
+         DAO_Suscripcion daoSus = new DAO_Suscripcion();
+        Collection<Suscripcion> cole = daoSus.findPendientesVencidasString(nick);
+        Collection<DataSus> coleData = new ArrayList<>();
+        for(Suscripcion sus:cole){
+            DataSus susiData = new DataSus(sus.getUserNick(),sus.getFecha(),sus.getEstado(),sus.getTipo(),sus.getId());
+            coleData.add(susiData);
+        }
+        
+        return coleData;
+     }
+    
+    
+    
+    
     @Override
     public void cancelarAutomaticAll(){
         DAO_Suscripcion daoSus = new DAO_Suscripcion();

@@ -39,9 +39,13 @@ public interface IControladorSuscripcion {
     
     public void cancelarAutomatic(int id);
     
-    public Collection <String> retornarSuscripcionesString();
+    public Collection <Integer> retornarSuscripcionesInteger(String nick);
     
     public Collection<String> findPendientesString(String nick);
     
+    public Collection<DataSus> findPendientesVencidasString(String nick);
+    
     public void cancelarAutomaticAll();
+    
+    public boolean tieneSusValida(String nick);
 }

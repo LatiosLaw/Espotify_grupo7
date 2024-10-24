@@ -704,7 +704,12 @@ public class FormPrin extends javax.swing.JFrame {
        controlSus.agregarSus("ppArgento","Pendiente",LocalDate.of(1972, 3, 8),"Mensual");
        controlSus.agregarSus("ppArgento","Pendiente",LocalDate.of(1972, 3, 8),"Mensual");
        
-       
+       boolean token = controlSus.tieneSusValida("benKenobi");
+       if(token == true){
+           System.out.print("Si");
+       }else if(token == false){
+           System.out.print("No");
+       }
       /* DataSus dtSus = controlCli.devolverSus("el_padrino");
        
        System.out.println("Nick del Cliente: "+dtSus.getUserNick());
