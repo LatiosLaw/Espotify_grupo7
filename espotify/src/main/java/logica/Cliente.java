@@ -15,9 +15,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class Cliente extends Usuario {
     
-    @OneToOne(mappedBy = "cli", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cli", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private Suscripcion sus;
+    protected Collection<Suscripcion> sus = new ArrayList<>();
   
     @ManyToMany
     @JoinTable(name = "seguidos",

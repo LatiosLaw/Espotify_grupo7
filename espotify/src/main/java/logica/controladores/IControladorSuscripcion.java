@@ -17,31 +17,31 @@ public interface IControladorSuscripcion {
     
     public DataErrorBundle agregarSus(String nick, String esrado, LocalDate fecha, String tipo);
     
-    public DataSus retornarSus(String nick);
+    public DataSus retornarSus(int id);
     
-    public void modificarFechaSus(String nick, LocalDate fecha);
+    public void modificarFechaSus(int id, LocalDate fecha);
     
-    public void cambiarEstadoPendienteSus(String nick);
+    public void cambiarEstadoPendienteSus(int id);
     
-    public void cambiarEstadoVigenteSus(String nick);
+    public void cambiarEstadoVigenteSus(int id);
      
-    public void cambiarEstadoVencidaSus(String nick);
+    public void cambiarEstadoVencidaSus(int id);
     
-    public void cambiarEstadoCancelarSus(String nick);
+    public void cambiarEstadoCancelarSus(int id);
     
-    public void eliminarSus(String nick);
+    public void eliminarSus(int id);
     
-    public boolean isVigente(String nick);
+    public boolean isVigente(int id);
     
-    public void actualizarEstado(String nick, String nuevoEstado);
+    public void actualizarEstado(int id, String nuevoEstado);
     
-    public void actualizarSusCliente(String nick, String nuevoEstado);
+    public void actualizarSusCliente(int id, String nuevoEstado);
     
-    public void cancelarAutomatic(String nick);
+    public void cancelarAutomatic(int id);
     
     public Collection <String> retornarSuscripcionesString();
     
-    public Collection<String> findPendientesString();
+    public Collection<String> findPendientesString(String nick);
     
     public void cancelarAutomaticAll();
 }
