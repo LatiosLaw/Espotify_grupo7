@@ -66,7 +66,7 @@ public class DAO_Suscripcion {
     public Collection<Suscripcion> findPendientesVencidasString(String nick){
         try {
             return entityManager.createQuery(
-                    "SELECT s FROM Suscripcion s where s.estado = 'Pendiente' OR s.estado = 'Vencida' AND s.userNick = :nick", Suscripcion.class)
+                    "SELECT s FROM Suscripcion s where s.userNick = :nick AND s.estado = 'Pendiente' OR s.estado = 'Vencida'", Suscripcion.class)
                     .setParameter("nick", nick)
                     .getResultList();
         } catch (NoResultException e) {
