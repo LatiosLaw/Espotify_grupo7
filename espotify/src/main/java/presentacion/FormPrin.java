@@ -41,6 +41,7 @@ public class FormPrin extends javax.swing.JFrame {
         jProgressBar1.setVisible(false);
         lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
+        this.controlSus.actualizarSusCliente(8, "Vigente");
     }
 
     /**
@@ -688,7 +689,7 @@ public class FormPrin extends javax.swing.JFrame {
     }
     private void cargarSuscripciones(){
         //benKenobi,cbochinche,lachiqui
-       controlSus.agregarSus("el_padrino","Vigente",LocalDate.of(1972, 3, 8),"Anual");
+       controlSus.agregarSus("el_padrino","Pendiente",LocalDate.of(1972, 3, 8),"Anual");
        controlSus.agregarSus("Heisenberg","Vigente",LocalDate.of(2024, 3, 8),"Anual");
        
        
@@ -709,11 +710,10 @@ public class FormPrin extends javax.swing.JFrame {
        }else if(token == false){
            System.out.print("No");
        }
-      /* DataSus dtSus = controlCli.devolverSus("el_padrino");
        
-       System.out.println("Nick del Cliente: "+dtSus.getUserNick());
-       System.out.println("Fecha: "+dtSus.getFecha());
-       System.out.println("Estado: "+dtSus.getEstado());*/
+       
+       
+       
     }
     private void cargarAlbumes() {
         Collection<DataTema> temas = new ArrayList<>();

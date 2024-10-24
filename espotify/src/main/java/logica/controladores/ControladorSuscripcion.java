@@ -200,12 +200,18 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
     public void actualizarSusCliente(int id, String nuevoEstado){
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
         Suscripcion sus = daoSus.find(id);
+        System.out.println(sus.getId() + "/" + sus.getEstado());
+         System.out.println(nuevoEstado);
         if("Pendiente".equals(sus.getEstado())){
             if(nuevoEstado.equals("Cancelada")){
                 this.cambiarEstadoCancelarSus(id);
             }
         }else if("Vencida".equals(sus.getEstado())){
-            
+            if(nuevoEstado.equals("Cancelada")){
+                this.cambiarEstadoCancelarSus(id);
+            }else if(nuevoEstado.equals("Vigente")){
+                this.cambiarEstadoVigenteSus(id);
+            }
         }
     }
     @Override
