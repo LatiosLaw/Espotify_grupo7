@@ -104,7 +104,7 @@ public class ControladorTema implements IControladorTema {
             Iterator<tema> iterator = retorno.iterator();
             while (iterator.hasNext()) {
                 tema temazo = iterator.next();
-                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getNombreAlbum(), temazo.getDuracion()));
+                listaDeTemas.add(new DataTema(temazo.getNickname(), temazo.getNombreAlbum(), temazo.getDuracion(), temazo.getArchivo(), temazo.getAcceso()));
             }
             return listaDeTemas;
         } else {

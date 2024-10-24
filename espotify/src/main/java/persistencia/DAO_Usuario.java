@@ -25,11 +25,28 @@ public class DAO_Usuario {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
-    public void save(Usuario entity) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
+    // Metodo para reconectarse a la bd
+    public void reconnect() {
+        if (entityManager != null && entityManager.isOpen()) {
+            entityManager.close();
+        }
+        entityManager = entityManagerFactory.createEntityManager();
     }
+
+    public void save(Usuario entity) {
+        reconnect();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
 
     public Usuario find(Usuario user) {
         return entityManager.find(Usuario.class, user);
@@ -194,14 +211,17 @@ public class DAO_Usuario {
     }
 
     public Usuario findUsuarioByNick(String nick_ingresado) {
+        reconnect();
+        Usuario usuario = null;
         try {
-            return entityManager.createQuery(
+            usuario = entityManager.createQuery(
                     "SELECT u FROM Usuario u WHERE u.nickname = :nick_ingresado", Usuario.class)
                     .setParameter("nick_ingresado", nick_ingresado)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontro ningún cliente con ese nombre
+            System.out.println("No se encontró ningún usuario con el nickname: " + nick_ingresado);
         }
+        return usuario;
     }
 
     public Usuario findUsuarioByMail(String mail_ingresado) {

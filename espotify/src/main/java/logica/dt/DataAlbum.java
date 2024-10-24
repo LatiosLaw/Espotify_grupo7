@@ -12,12 +12,12 @@ public class DataAlbum {
     private Collection<DataGenero> generos = new ArrayList<>();
     private Collection<DataTema> temas = new ArrayList<>();
 
-    public DataAlbum(String nombre, String imagen, int anioCreacion, DataArtista creador) {
+    public DataAlbum(String nombre, String imagen, int anioCreacion, DataArtista creador, Collection<DataGenero> generos) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.anioCreacion = anioCreacion;
         this.creador = creador;
-        this.generos = new ArrayList<>();
+        this.generos = generos;
         this.temas = new ArrayList<>();
     }
 
@@ -35,6 +35,10 @@ public class DataAlbum {
 
     public String getNombre() {
         return nombre;
+    }
+    
+    public DataArtista getCreador() {
+        return creador;
     }
 
     public int getAnioCreacion() {
