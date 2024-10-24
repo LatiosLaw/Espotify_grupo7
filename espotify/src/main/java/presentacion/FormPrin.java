@@ -41,7 +41,6 @@ public class FormPrin extends javax.swing.JFrame {
         jProgressBar1.setVisible(false);
         lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
-        this.controlSus.actualizarSusCliente(8, "Vigente");
     }
 
     /**
