@@ -40,9 +40,10 @@ public class ControladorAlbum implements IControladorAlbum {
         album_vacio.setNombre(nuevo_album.getNombre());
         persistence.save(album_vacio);
         persistence.update(nuevo_album);
+        Collection<DataGenero> generos_vacios = new ArrayList<>();
         if (persistence.find(nuevo_album.getNombre()) != null) {
             System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
-            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), artista1.getBiografia(), artista1.getDirWeb()));
+            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), artista1.getBiografia(), artista1.getDirWeb()),generos_vacios);
         } else {
             System.out.println("El album no fue persistido correctamente.");
             return null;
@@ -81,8 +82,12 @@ public class ControladorAlbum implements IControladorAlbum {
         DAO_Album persistence = new DAO_Album();
         Album album = persistence.findAlbumByName(nombre_album);
         if (album != null) {
+            Collection<DataGenero> generos_album = new ArrayList<>();
+            for(Genero genero : album.getGeneros()){
+                generos_album.add(new DataGenero(genero.getNombre()));
+            }
             Artista art = album.getCreador();
-            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(),  art.getContra(),  art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()));
+            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(),  art.getContra(),  art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()),generos_album);
         } else {
             return new DataAlbum("ALBUM NO EXISTE");
         }
