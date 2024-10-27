@@ -54,12 +54,35 @@ public class DAO_Album {
             return null; // No se encontro ningún album con ese genero
         }
     }
+    
+    public List<Album> findAllPorGeneroCompleto(String nombre_genero) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT a FROM Album a JOIN a.generos g WHERE g.nombre = :nombre_genero", Album.class)
+                    .setParameter("nombre_genero", nombre_genero)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese genero
+        }
+    }
 
     public List<Album> findAllPorArtista(String nick_artista) {
         try {
             return entityManager.createQuery(
                     "SELECT a FROM Album a JOIN a.creador c WHERE c.nickname = :nick_artista", Album.class)
                     .setParameter("nick_artista", nick_artista)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese artista
+        }
+    }
+    
+    public List<Album> findAllPorParecido(String busqueda) {
+        String pattern = busqueda + "%";
+        try {
+            return entityManager.createQuery(
+                    "SELECT a FROM Album a WHERE a.nombre LIKE :ValBusqueda", Album.class)
+                    .setParameter("ValBusqueda", pattern)
                     .getResultList();
         } catch (NoResultException e) {
             return null; // No se encontro ningún album con ese artista

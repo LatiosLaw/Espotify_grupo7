@@ -10,6 +10,7 @@ import logica.Usuario;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
+import logica.dt.DataCliente;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
 import persistencia.DAO_Album;
@@ -74,6 +75,24 @@ public class ControladorAlbum implements IControladorAlbum {
         while (iterator.hasNext()) {
             Album album = iterator.next();
             lista.add(album.getNombre());
+        }
+        return lista;
+    }
+    
+    @Override
+    public Collection<DataAlbum> retornarAlbumsDelGeneroDT(String genero) {
+        Collection<DataAlbum> lista = new ArrayList<>();
+        DAO_Album persistence = new DAO_Album();
+        Collection<Album> lista_albumes = persistence.findAllPorGeneroCompleto(genero);
+        Iterator<Album> iterator = lista_albumes.iterator();
+        while (iterator.hasNext()) {
+            Album albu = iterator.next();
+            DataAlbum album_insertable = new DataAlbum(
+                        albu.getNombre(),
+                        albu.getImagen(),
+                        albu.getanioCreacion(),
+                        new DataArtista(albu.getCreador().getNickname()));
+            lista.add(album_insertable);
         }
         return lista;
     }

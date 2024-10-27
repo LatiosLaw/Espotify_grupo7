@@ -36,7 +36,7 @@ public class DAO_ListaReproduccion {
     public List<ListaParticular> findAllListasParticularesPublicas() {
         return entityManager.createQuery("SELECT lp FROM ListaParticular lp WHERE lp.visibilidad=true", ListaParticular.class).getResultList();
     }
-
+   
     public ListaParticular findListaPorNicks(String nick_creador, String nick_lista) {
       try {
             return entityManager.createQuery(
@@ -192,6 +192,22 @@ public class DAO_ListaReproduccion {
         Collection<ListaPorDefecto> listas = 
         entityManager.createQuery("SELECT l FROM ListaPorDefecto l", ListaPorDefecto.class).getResultList();
         return listas;
+    }
+    
+        public List<ListaParticular> findAllListasParticularesPublicasParecidasA(String busqueda) {
+        String pattern = busqueda + "%";
+            return entityManager.createQuery(
+                "SELECT lp FROM ListaParticular lp WHERE lp.visibilidad=true AND lp.identificador.nombre_lista LIKE :valorDeBusqueda", ListaParticular.class)
+                    .setParameter("valorDeBusqueda", pattern)
+                    .getResultList();
+    }
+    
+    public List<ListaPorDefecto> devolverListasPorDefectoParecidasA(String busqueda) {
+        String pattern = busqueda + "%";
+            return entityManager.createQuery(
+                "SELECT ld FROM ListaPorDefecto ld WHERE ld.identificador.nombre_lista LIKE :valorDeBusqueda", ListaPorDefecto.class)
+                    .setParameter("valorDeBusqueda", pattern)
+                    .getResultList();
     }
     
 }

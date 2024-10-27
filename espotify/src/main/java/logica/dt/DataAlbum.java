@@ -20,6 +20,15 @@ public class DataAlbum {
         this.generos = generos;
         this.temas = new ArrayList<>();
     }
+    
+    public DataAlbum(String nombre, String imagen, int anioCreacion, DataArtista creador) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.anioCreacion = anioCreacion;
+        this.creador = creador;
+        this.generos = generos;
+        this.temas = new ArrayList<>();
+    }
 
     public DataAlbum() {
         this.setNombre(new String());

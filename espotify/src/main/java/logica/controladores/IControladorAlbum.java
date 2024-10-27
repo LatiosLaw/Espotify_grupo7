@@ -10,6 +10,8 @@ public interface IControladorAlbum {
     public DataAlbum agregarAlbum(String artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataTema> temas);
 
     public Collection<String> retornarAlbumsDelGenero(String genero);
+    
+    public Collection<DataAlbum> retornarAlbumsDelGeneroDT(String genero);
 
     public Collection<String> retornarAlbumsDelArtista(String nick_arti);
 

@@ -20,6 +20,10 @@ public class DataArtista extends DataUsuario {
         this.dirWeb = dirWeb;
         this.albumes = new ArrayList<>();
     }
+    
+    public DataArtista(String nickname) {
+        super(nickname);
+    }
 
     public String getBiografia() {
         return biografia;

@@ -23,5 +23,7 @@ public interface IControladorListaPorDefecto {
     
     DataListaPorDefecto devolverInformacionChu(String nombre_lista);   
      
-    public Collection<String> retornarListasDelGenero(String genero);
+    Collection<String> retornarListasDelGenero(String genero);
+    
+    Collection<DataListaPorDefecto> retornarListasDelGeneroDT(String genero);
 }

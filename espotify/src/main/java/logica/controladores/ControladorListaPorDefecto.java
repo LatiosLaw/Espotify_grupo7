@@ -96,6 +96,19 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         }
         return lista_final;
     }
+    
+    @Override
+    public Collection<DataListaPorDefecto> retornarListasDelGeneroDT(String genero){
+        Collection<DataListaPorDefecto> lista_final = new ArrayList<>();
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        Collection<ListaPorDefecto> albu = persistence.findListasPorGeneros(genero);
+        Iterator<ListaPorDefecto> iterator = albu.iterator();
+        while (iterator.hasNext()) {
+            ListaPorDefecto lista = iterator.next();
+            lista_final.add(new DataListaPorDefecto(lista.getNombreLista(), lista.getFoto(), 1, new DataGenero(lista.getGenero().getNombre())));
+        }
+        return lista_final;
+    }
 
     @Override
     public DataListaPorDefecto devolverInformacion(String nombre_lista, String nombre_genero) {
