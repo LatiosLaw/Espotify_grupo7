@@ -44,11 +44,11 @@ public class EspotifyMain {
              
              Scanner s = new Scanner(System.in);
              
-             int token2 = s.nextInt();
+             String token2 = s.nextLine();
              switch (token2) {
                  
-                 case 1 ->{
-                     s.nextLine();
+                 case "1" ->{
+                     //s.nextLine();
                       System.out.println("//Ingresar Clientes//");
                      System.out.println("Ingrese nombre del usuario nuevo");
                      String nombre = s.nextLine();
@@ -63,8 +63,8 @@ public class EspotifyMain {
 
                      controlCli.agregarCliente(nickname, nombre, apellido, contra, mail, "poto", LocalDate.now());
                  }
-                 case 2 ->{
-                     s.nextLine();
+                 case "2" ->{
+                     //s.nextLine();
                              
                       System.out.println("//Ingresar Artistas//");
                      System.out.println("Ingrese nombre del usuario nuevo");
@@ -84,13 +84,14 @@ public class EspotifyMain {
                      String dirweb = s.nextLine();
                      
                      
-                     controlArt.agregarArtista(nickname, nombre, apellido, contra, mail, "poto", LocalDate.MIN, bio, dirweb );
+                     controlArt.agregarArtista(nickname, nombre, apellido, contra, mail, "poto", LocalDate.now(), bio, dirweb );
                  }
-                 case 3 ->{
-                     s.nextLine();
+                 case "3" ->{
+                     //s.nextLine();
+                     System.out.println("No lo hice");
                  }
-                 case 4 ->{
-                     s.nextLine();
+                 case "4" ->{
+                     //s.nextLine();
                      System.out.println("//Listar Clientes//");
                      Collection <String> cole = controlCli.mostrarUsuarios();
                      int tokenInt = 0;
@@ -101,7 +102,7 @@ public class EspotifyMain {
                      
                      
                  }
-                 case 5 ->{
+                 case "5" ->{
                     // s.nextLine();
                      System.out.println("//Listar Artistas//");
                      Collection <String> cole = controlArt.mostrarNicksArtistas();
@@ -111,8 +112,8 @@ public class EspotifyMain {
                          System.out.println(tokenInt + "-" + cosa);
                      }
                  }
-                 case 6 ->{
-                     s.nextLine();
+                 case "6" ->{
+                     //s.nextLine();
                      System.out.println("Ingrese nombre del Cliente");
                      String nick_cli = s.nextLine();
                      
@@ -131,11 +132,11 @@ public class EspotifyMain {
                      
                      
                  }
-                 case 7 ->{
+                 case "7" ->{
                      token = false;
                       crearPoggers();
                  }
-                 case 8 ->{
+                 case "8" ->{
                       crearPoggers();
                  }
                  default ->{
