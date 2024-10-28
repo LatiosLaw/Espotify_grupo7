@@ -299,12 +299,12 @@ public class FormPrin extends javax.swing.JFrame {
         listaLD1.agregarTema(controlTem.retornarTema("YMCA", "Village People Live and Sleazy")); // VPL-T11
         listaLD1.agregarTema(controlTem.retornarTema("Macho Man", "Village People Live and Sleazy")); // VPL-T12
         listaLD1.agregarTema(controlTem.retornarTema("In the Navy", "Village People Live and Sleazy")); // VPL-T13
-        listaLD1.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "She’s So Unusual")); // CLU-T31
-        listaLD1.agregarTema(controlTem.retornarTema("Time After Time", "She’s So Unusual")); // CLU-T32
+        listaLD1.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "Shes So Unusual")); // CLU-T31
+        listaLD1.agregarTema(controlTem.retornarTema("Time After Time", "Shes So Unusual")); // CLU-T32
         listaLD1.agregarTema(controlTem.retornarTema("Born In The U.S.A.", "Born In The U.S.A.")); // USA-T41
         listaLD1.agregarTema(controlTem.retornarTema("Glory Days", "Born In The U.S.A.")); // USA-T42
         listaLD1.agregarTema(controlTem.retornarTema("Dancing In The Park", "Born In The U.S.A.")); // USA-T43
-        listaLD1.agregarTema(controlTem.retornarTema("It’s Not Unusual", "It’s Not Unusual")); // INU-T51
+        listaLD1.agregarTema(controlTem.retornarTema("Its Not Unusual", "Its Not Unusual")); // INU-T51
         controlListPD.actualizarLista(listaLD1);
 
         // Agregar temas a LD2
@@ -347,9 +347,9 @@ public class FormPrin extends javax.swing.JFrame {
 
             // LP2
             DataListaParticular listaLP2 = controlListPar.devolverInformacion("De Todo Un Poco", "scarlettO");
-            listaLP2.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "She’s So Unusual")); // CLU-T31
-            listaLP2.agregarTema(controlTem.retornarTema("Time After Time", "She’s So Unusual")); // CLU-T32
-            listaLP2.agregarTema(controlTem.retornarTema("It’s Not Unusual", "It’s Not Unusual")); // INU-T51
+            listaLP2.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "Shes So Unusual")); // CLU-T31
+            listaLP2.agregarTema(controlTem.retornarTema("Time After Time", "Shes So Unusual")); // CLU-T32
+            listaLP2.agregarTema(controlTem.retornarTema("Its Not Unusual", "Its Not Unusual")); // INU-T51
             listaLP2.agregarTema(controlTem.retornarTema("El Duelo", "MTV Unplugged")); // LDC-T81
             controlListPar.actualizarLista(listaLP2);
 
@@ -363,8 +363,8 @@ public class FormPrin extends javax.swing.JFrame {
 
             // LP4
             DataListaParticular listaLP4 = controlListPar.devolverInformacion("Para Las Chicas", "lachiqui");
-            listaLP4.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "She’s So Unusual")); // CLU-T31
-            listaLP4.agregarTema(controlTem.retornarTema("It’s Not Unusual", "It’s Not Unusual")); // INU-T51
+            listaLP4.agregarTema(controlTem.retornarTema("Girls Just Want To Have Fun", "Shes So Unusual")); // CLU-T31
+            listaLP4.agregarTema(controlTem.retornarTema("Its Not Unusual", "Its Not Unusual")); // INU-T51
             listaLP4.agregarTema(controlTem.retornarTema("Primer Movimiento (Allegro non troppo e molto maestoso – Allegro con spirito)", "Concierto Para Piano No. 1 En Si Menor, Opus 23")); // CPP-T91
             listaLP4.agregarTema(controlTem.retornarTema("No Quiero Estudiar", "Primer Amor")); // PAM-T101
             listaLP4.agregarTema(controlTem.retornarTema("Por Ese Hombre", "Un Loco Como Yo")); // LOC-T121
@@ -405,9 +405,9 @@ public class FormPrin extends javax.swing.JFrame {
 
         controlTem.crearTemaCompleto("Enjoy The Silence", controlAlb.retornarInfoAlbum("Violator").getNombre(), 4 * 60 + 21, "mp3", "Enjoy The Silence.mp3", 2, controlAlb.retornarInfoAlbum("Violator")); // T22
 
-        controlTem.crearTemaCompleto("Girls Just Want To Have Fun", controlAlb.retornarInfoAlbum("She’s So Unusual").getNombre(), 3 * 60 + 15, "web", "picosong.com/download/zfER", 1, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T31
+        controlTem.crearTemaCompleto("Girls Just Want To Have Fun", controlAlb.retornarInfoAlbum("Shes So Unusual").getNombre(), 3 * 60 + 15, "web", "picosong.com/download/zfER", 1, controlAlb.retornarInfoAlbum("Shes So Unusual")); // T31
 
-        controlTem.crearTemaCompleto("Time After Time", controlAlb.retornarInfoAlbum("She’s So Unusual").getNombre(), 5 * 60 + 12, "web", "picosong.com/download/zfER", 2, controlAlb.retornarInfoAlbum("She’s So Unusual")); // T32
+        controlTem.crearTemaCompleto("Time After Time", controlAlb.retornarInfoAlbum("Shes So Unusual").getNombre(), 5 * 60 + 12, "web", "picosong.com/download/zfER", 2, controlAlb.retornarInfoAlbum("Shes So Unusual")); // T32
 
         controlTem.crearTemaCompleto("Born In The U.S.A.", controlAlb.retornarInfoAlbum("Born In The U.S.A.").getNombre(), 4 * 60 + 58, "web", "bit.ly/SCbsborninusa", 1, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T41
 
@@ -415,7 +415,7 @@ public class FormPrin extends javax.swing.JFrame {
 
         controlTem.crearTemaCompleto("Dancing In The Park", controlAlb.retornarInfoAlbum("Born In The U.S.A.").getNombre(), 3 * 60 + 58, "mp3", "Dancing In The Park.mp3", 3, controlAlb.retornarInfoAlbum("Born In The U.S.A.")); // T43
 
-        controlTem.crearTemaCompleto("It’s Not Unusual", controlAlb.retornarInfoAlbum("It’s Not Unusual").getNombre(), 2 * 60 + 0, "mp3", "It’s Not Unusual.mp3", 1, controlAlb.retornarInfoAlbum("It’s Not Unusual")); // T51
+        controlTem.crearTemaCompleto("Its Not Unusual", controlAlb.retornarInfoAlbum("Its Not Unusual").getNombre(), 2 * 60 + 0, "mp3", "Its Not Unusual.mp3", 1, controlAlb.retornarInfoAlbum("Its Not Unusual")); // T51
 
         controlTem.crearTemaCompleto("Adagio De Mi Pais", controlAlb.retornarInfoAlbum("Agua Y Sal").getNombre(), 4 * 60 + 50, "web", "bit.ly/SCtnadagiopais", 1, controlAlb.retornarInfoAlbum("Agua Y Sal")); // T61
 
@@ -542,7 +542,7 @@ public class FormPrin extends javax.swing.JFrame {
         controlCli.agregarCliente("benKenobi", "Obi-Wan", "Kenobi", "123", "benKenobi@gmail.com", "bit.ly/benKenobi", LocalDate.of(1914, 4, 2)); //OK
         controlCli.agregarCliente("Heisenberg", "Walter", "White", "123", "Heisenberg@tuta.io", "bit.ly/heisenbergWW", LocalDate.of(1956, 3, 7)); //WW
         controlCli.agregarCliente("ppArgento", "Pepe", "Argento", "123", "ppArgento@hotmail.com", "bit.ly/ppArgento", LocalDate.of(1955, 2, 14)); //PA
-        controlCli.agregarCliente("scarlettO", "Scarlett", "O’Hara", "123", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
+        controlCli.agregarCliente("scarlettO", "Scarlett", "OHara", "123", "scarlettO@tuta.io", "bit.ly/scarlettO", LocalDate.of(1984, 11, 27)); //SO
         controlCli.agregarCliente("el_padrino", "Vito", "Corleone", "123", "el_padrino@tuta.io", "bit.ly/vitoCorleone", LocalDate.of(1972, 3, 8)); //VC
         //-------//
         System.out.println("CLIENTES CARGADOS");
@@ -573,7 +573,7 @@ public class FormPrin extends javax.swing.JFrame {
                                                                                                                                         Blue Angel, en 1983 firm\u00f3 con
                                                                                                                                         Portrait Records (filial de Epic
                                                                                                                                         Records) y lanz\u00f3 su exitoso
-                                                                                                                                        \u00e1lbum debut She's So Unusual a
+                                                                                                                                        \u00e1lbum debut Shes So Unusual a
                                                                                                                                         finales de ese mismo a\u00f1o.
                                                                                                                                         Sigui\u00f3 lanzando una serie de
                                                                                                                                         \u00e1lbumes en los que encontr\u00f3
@@ -757,8 +757,8 @@ public class FormPrin extends javax.swing.JFrame {
         genDMV.add(EPO);
         controlAlb.actualizarAlbum(DMV, genDMV);
 
-        controlAlb.agregarAlbum("clauper", "She’s So Unusual", "bit.ly/shesunusual", 1983, temas); //CLU
-        DataAlbum CLU = controlAlb.retornarInfoAlbum("She’s So Unusual");
+        controlAlb.agregarAlbum("clauper", "Shes So Unusual", "bit.ly/shesunusual", 1983, temas); //CLU
+        DataAlbum CLU = controlAlb.retornarInfoAlbum("Shes So Unusual");
         genCLU.add(PCL);
         genCLU.add(DPO);
         controlAlb.actualizarAlbum(CLU, genCLU);
@@ -770,8 +770,8 @@ public class FormPrin extends javax.swing.JFrame {
         genUSA.add(PCL);
         controlAlb.actualizarAlbum(USA, genUSA);
 
-        controlAlb.agregarAlbum("tigerOfWales", "It’s Not Unusual", "bit.ly/itsNotUnusual", 1965, temas); //INU
-        DataAlbum INU = controlAlb.retornarInfoAlbum("It’s Not Unusual");
+        controlAlb.agregarAlbum("tigerOfWales", "Its Not Unusual", "bit.ly/itsNotUnusual", 1965, temas); //INU
+        DataAlbum INU = controlAlb.retornarInfoAlbum("Its Not Unusual");
         genINU.add(RCL);
         genINU.add(PCL);
         controlAlb.actualizarAlbum(INU, genINU);
