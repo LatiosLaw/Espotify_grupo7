@@ -328,7 +328,7 @@ public class FormPrin extends javax.swing.JFrame {
             controlListPar.crearListaConVisibilidad("De Todo Un Poco", SO, true, null);
 
             DataCliente WW = controlCli.consultarPerfilCliente("Heisenberg");
-            controlListPar.crearListaConVisibilidad("Para Cocinaro", WW, false, "bit.ly/ParaCocinar");
+            controlListPar.crearListaConVisibilidad("Para Cocinar", WW, false, "bit.ly/ParaCocinar");
 
             DataCliente ML = controlCli.consultarPerfilCliente("lachiqui");
             controlListPar.crearListaConVisibilidad("Para Las Chicas", ML, true, null);
@@ -354,7 +354,7 @@ public class FormPrin extends javax.swing.JFrame {
             controlListPar.actualizarLista(listaLP2);
 
             // LP3
-            DataListaParticular listaLP3 = controlListPar.devolverInformacion("Para Cocinaro", "Heisenberg");
+            DataListaParticular listaLP3 = controlListPar.devolverInformacion("Para Cocinar", "Heisenberg");
             listaLP3.agregarTema(controlTem.retornarTema("Personal Jesus", "Violator")); // DMV-T21
             listaLP3.agregarTema(controlTem.retornarTema("Enjoy The Silence", "Violator")); // DMV-T22
             listaLP3.agregarTema(controlTem.retornarTema("Born In The U.S.A.", "Born In The U.S.A.")); // USA-T41

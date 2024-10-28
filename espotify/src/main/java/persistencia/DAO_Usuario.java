@@ -211,7 +211,6 @@ public class DAO_Usuario {
     }
 
     public Usuario findUsuarioByNick(String nick_ingresado) {
-        reconnect();
         Usuario usuario = null;
         try {
             usuario = entityManager.createQuery(
