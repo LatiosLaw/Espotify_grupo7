@@ -29,7 +29,7 @@ public class EspotifyMain {
     public static void main(String[] args) {
         
         cargarControladores();
-        crearPoggers();
+       
         boolean token = true;
         while(token == true){
             System.out.println("------------------------------------------------");
@@ -133,6 +133,10 @@ public class EspotifyMain {
                  }
                  case 7 ->{
                      token = false;
+                      crearPoggers();
+                 }
+                 case 8 ->{
+                      crearPoggers();
                  }
                  default ->{
                       System.out.println("Defoault momento.");
