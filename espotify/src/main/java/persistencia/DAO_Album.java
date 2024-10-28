@@ -13,7 +13,7 @@ public class DAO_Album {
     private final EntityManager entityManager;
 
     public DAO_Album() {
-        DatabaseInitializer.createDatabaseIfNotExists();
+        DatabaseInitializer.createDatabase();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

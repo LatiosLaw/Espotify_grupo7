@@ -464,6 +464,14 @@ public class ControladorCliente implements IControladorCliente {
          return dtSus;
          
      }
-    
+    @Override
+     public void inicializarBaseDeDatos(){
+       
+          DAO_Usuario persistence = new DAO_Usuario(); 
+         persistence.nukeTime();
+         
+         
+         
+    }
     
 }

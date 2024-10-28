@@ -63,5 +63,5 @@ public interface IControladorCliente {
     
     public DataSus devolverSus(String nick);
     
-    
+    public void inicializarBaseDeDatos();
 }

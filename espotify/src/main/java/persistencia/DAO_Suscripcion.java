@@ -16,7 +16,7 @@ public class DAO_Suscripcion {
     private final EntityManager entityManager;
 
     public DAO_Suscripcion() {
-        DatabaseInitializer.createDatabaseIfNotExists();
+       DatabaseInitializer.createDatabase();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

@@ -20,11 +20,13 @@ public class DAO_Usuario {
     private EntityManager entityManager;
 
     public DAO_Usuario() {
-        DatabaseInitializer.createDatabaseIfNotExists();
+        DatabaseInitializer.createDatabase();
         entityManagerFactory = Persistence.createEntityManagerFactory("espotifyPU");
         entityManager = entityManagerFactory.createEntityManager();
     }
-
+    public void nukeTime() {
+        DatabaseInitializer.createDatabase();
+    }
     // Metodo para reconectarse a la bd
     public void reconnect() {
         if (entityManager != null && entityManager.isOpen()) {
@@ -314,4 +316,6 @@ public class DAO_Usuario {
             return null; // No se encontro ningún usuario con ese correo
         }
     }
+
+    
 }
