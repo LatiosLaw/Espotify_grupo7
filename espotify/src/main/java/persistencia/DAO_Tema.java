@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
+import logica.Album;
 import logica.dt.DT_IdTema;
 import logica.tema;
 
@@ -38,6 +39,18 @@ public class DAO_Tema {
 
     public List<tema> findAll() {
         return entityManager.createQuery("SELECT e FROM TEMA e", tema.class).getResultList();
+    }
+    
+    public List<tema> findAllPorParecido(String busqueda) {
+        String pattern = busqueda + "%";
+        try {
+            return entityManager.createQuery(
+                    "SELECT t FROM tema t WHERE t.identificador.nombre_tema LIKE :ValBusqueda", tema.class)
+                    .setParameter("ValBusqueda", pattern)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún album con ese artista
+        }
     }
 
     public List<tema> findFromAlbum(String nombre_album) {
