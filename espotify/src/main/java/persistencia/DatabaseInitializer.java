@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseInitializer {
-                                        //jdbc:postgresql://localhost:5432/postgres
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/";
+                                        //jdbc:postgresql://db:5432/espotify21
+    private static final String DB_URL = "jdbc:postgresql://db:5432/";
     private static final String USER = "postgres";
     private static final String PASSWORD = "121212";
 
