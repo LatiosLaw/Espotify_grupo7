@@ -13,7 +13,7 @@ import logica.controladores.IControladorSuscripcion;
 import logica.controladores.IControladorTema;
 
 import logica.factory.Fabrica;
-import java.util.Scanner;
+//import java.util.Scanner;
 import logica.dt.DataCliente;
 
 
@@ -29,8 +29,69 @@ public class EspotifyMain {
     public static void main(String[] args) {
         
         cargarControladores();
-       
-        boolean token = true;
+        //elmain();
+        elNOmain();
+        
+        
+    
+    }
+
+    private static void cargarControladores() {
+        Fabrica factory = Fabrica.getInstance();
+        controlCli = factory.getIControladorCliente();
+        controlArt = factory.getIControladorArtista();
+        controlAlb = factory.getIControladorAlbum();
+        controlGen = factory.getIControladorGenero();
+        controlTem = factory.getIControladorTema();
+        controlListPD = factory.getIControladorListaPorDefecto();
+        controlListPar = factory.getIControladorListaParticular();
+        controlSus = factory.getIControladorSuscripcion();
+    }
+    
+    
+    private static void crearPoggers(){
+        
+        controlCli.inicializarBaseDeDatos();
+        
+        
+    }
+     private static void elNOmain(){
+         
+            
+            System.out.println("Se crea la base de datos llamada espotify21");
+            crearPoggers();
+            
+            System.out.println("------------------------------------------------");
+            System.out.println("Crear 3 Clientes");
+            controlCli.agregarCliente("Popo", "Mr", "Popo", "Hay", "mrdotpopo@gmai.com", "popo", LocalDate.now());
+            controlCli.agregarCliente("El Listo", "Larry", "Capasta", "pastalarry", "larricapasta@gmail.com", "pasto", LocalDate.now());
+            controlCli.agregarCliente("EstoyCansado", "Esto no", "Es", "Un", "Meme", "Aruda", LocalDate.now());
+            System.out.println("------------------------------------------------");  
+            System.out.println("Se listan los clientes");
+            Collection <String> cole = controlCli.mostrarUsuarios();
+                     int tokenInt = 0;
+                     for(String cosa:cole){
+                         tokenInt ++;
+                         System.out.println(tokenInt + "-" + cosa);
+                     }
+            System.out.println("------------------------------------------------");  
+            System.out.println("Se muestra la info de uno"); 
+            DataCliente cliente = controlCli.consultarPerfilCliente("El Listo");
+                     
+                     if(cliente == null){
+                         System.out.println("No existe cliente con ese nick");
+                     }else{
+                         System.out.println("nick: " + cliente.getNickname());
+                         System.out.println("nombre: " + cliente.getNombre());
+                         System.out.println("apelloido: " + cliente.getApellido());
+                         System.out.println("contra: " + cliente.getContra());
+                         System.out.println("mail: " + cliente.getCorreo()); 
+                     }
+            
+            
+     }
+    private static void elmain(){
+        /*boolean token = true;
         while(token == true){
             System.out.println("------------------------------------------------");
             System.out.println("Bienvenido a el menu no grafico");
@@ -148,32 +209,7 @@ public class EspotifyMain {
              
              
              
-        }
-        
-        
-    
+        }*/
     }
-
-    private static void cargarControladores() {
-        Fabrica factory = Fabrica.getInstance();
-        controlCli = factory.getIControladorCliente();
-        controlArt = factory.getIControladorArtista();
-        controlAlb = factory.getIControladorAlbum();
-        controlGen = factory.getIControladorGenero();
-        controlTem = factory.getIControladorTema();
-        controlListPD = factory.getIControladorListaPorDefecto();
-        controlListPar = factory.getIControladorListaParticular();
-        controlSus = factory.getIControladorSuscripcion();
-    }
-    
-    
-    private static void crearPoggers(){
-        
-        controlCli.inicializarBaseDeDatos();
-        
-        
-    }
-    
-    
-    
+   
 }
