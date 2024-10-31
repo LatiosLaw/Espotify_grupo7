@@ -8,11 +8,10 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Cliente;
+import logica.ListaParticular;
 import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
-import logica.dt.DataSus;
-import logica.dt.DataUsuario;
 
 public class DAO_Usuario {
 
@@ -184,6 +183,18 @@ public class DAO_Usuario {
            }
            
             return coleDef;
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    }
+    
+    public Collection<ListaParticular> obtenerListasParticularesFavCliente2(String nick_usuario) {
+        try {
+        return entityManager.createQuery(
+                    "SELECT l FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname AND l.identificador.nombre_cliente != 'none' ", ListaParticular.class)
+                    .setParameter("nickname", nick_usuario)
+                    .getResultList();
+
         } catch (NoResultException e) {
             return null; // No se encontro ningún cliente con ese nombre
         }
