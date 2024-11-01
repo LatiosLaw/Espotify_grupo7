@@ -63,5 +63,9 @@ public interface IControladorCliente {
     
     public DataSus devolverSus(String nick);
     
+    public String corroborarTemaEnFav(String nombreTema, Collection<String> temasCole);
     
+    public String corroborarAlbumEnFav(String nombreAlbum,Collection<String> albumsCole);
+    
+    public String corroborarListaEnFav(String nombreLista, String nombreUsuario,Collection<String> listasCole);
 }

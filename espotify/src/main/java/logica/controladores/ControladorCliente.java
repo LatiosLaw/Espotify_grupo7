@@ -464,6 +464,70 @@ public class ControladorCliente implements IControladorCliente {
          return dtSus;
          
      }
+     
+     @Override
+     public String corroborarTemaEnFav(String nombreTema, Collection<String> temasCole){
+        String tieneLaik = "noFav";
+                    for(String temEnFav : temasCole){
+                        String[] partesDeTemEnFav = temEnFav.split("/");
+                        String temaDeVerda = partesDeTemEnFav[0];
+                        
+                        System.out.println("*************************************************");
+                        System.out.println("Nombre del tema: " +nombreTema);
+                        System.out.println("Nombre del tema sacdo de la lista: " +temaDeVerda);
+                        System.out.println("*************************************************");
+                        if(temaDeVerda.equals(nombreTema)){
+                            tieneLaik = "fav";
+                        }
+                    }
+        return tieneLaik;
+     }
+     
+    @Override
+    public String corroborarAlbumEnFav(String nombreAlbum, Collection<String> albumCole){
+          String tieneLaik = "noFav";
+                    for(String albEnFav : albumCole){
+                            System.out.println("en fav:" + albEnFav);
+                            System.out.println("nombre album:" + nombreAlbum);
+                        if(albEnFav.equals(nombreAlbum)){
+                            tieneLaik = "fav";
+                        }
+                    }
+        return tieneLaik;
+ 
+    }
+    
+    @Override
+    public String corroborarListaEnFav(String nombreLista, String nombreUsuario, Collection<String> listasCole){
+       String tieneLaik = "noFav";
+                    for(String temEnFav : listasCole){
+                        String[] partesDeTemEnFav = temEnFav.split("/");
+                        String nombreListaDeVerda = partesDeTemEnFav[0];
+                        String nombreCreador = partesDeTemEnFav[1];
+                        /*
+                        System.out.println("NombreLista: " +nombreLista);
+                         System.out.println("NombreUsuario: " +nombreUsuario);
+                          System.out.println("Nombre Lista De Verda: " +nombreLista);
+                           System.out.println("NombreCreador: " +nombreCreador);
+                         
+                         */
+                        
+                        if(nombreListaDeVerda.equals(nombreLista) && nombreUsuario.equals(nombreCreador)){
+                            tieneLaik = "fav";
+                        }
+                    }
+        return tieneLaik;
+        
+
+        
+        
+    }
+     
+     
+     
+     
+     
+     
     
     
 }
