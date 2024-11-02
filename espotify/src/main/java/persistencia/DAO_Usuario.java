@@ -7,8 +7,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
+import logica.Album;
 import logica.Cliente;
 import logica.ListaParticular;
+import logica.ListaPorDefecto;
 import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
@@ -163,6 +165,17 @@ public class DAO_Usuario {
             return null; // No se encontro ningún cliente con ese nombre
         }
     }
+    
+    public Collection<ListaPorDefecto> obtenerListasFavPorDefectoCliente2(String nick_usuario) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT l FROM Cliente u JOIN u.listas_favoritas l WHERE u.nickname = :nickname AND l.identificador.nombre_cliente = 'none' ", ListaPorDefecto.class)
+                    .setParameter("nickname", nick_usuario)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    }
     public Collection<String> obtenerListasParticularesFavCliente(String nick_usuario) {
         try {
         Collection<String> cole1 =  entityManager.createQuery(
@@ -214,6 +227,17 @@ public class DAO_Usuario {
         try {
             return entityManager.createQuery(
                     "SELECT a.nombre FROM Cliente u JOIN u.albumes_favoritos a WHERE u.nickname = :nickname ", String.class)
+                    .setParameter("nickname", nick_usuario)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // No se encontro ningún cliente con ese nombre
+        }
+    }
+    
+    public Collection<Album> obtenerAlbumFavCliente2(String nick_usuario) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT a FROM Cliente u JOIN u.albumes_favoritos a WHERE u.nickname = :nickname ", Album.class)
                     .setParameter("nickname", nick_usuario)
                     .getResultList();
         } catch (NoResultException e) {
