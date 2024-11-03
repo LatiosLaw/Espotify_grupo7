@@ -459,19 +459,19 @@ public class FormPrin extends javax.swing.JFrame {
                 1,
                 controlAlb.retornarInfoAlbum("20 Grandes Exitos")); // T131
         
-        controlTem.crearTemaCompleto("Ya No Se Que Hacer Conmigo", controlAlb.retornarInfoAlbum("Ramdom Album").getNombre(),
+        controlTem.crearTemaCompleto("Ya No Se Que Hacer Conmigo", controlAlb.retornarInfoAlbum("Random Album").getNombre(),
                 4 * 60 + 1,
                 "YaNoSeQueHacerConmigo.mp3",
                 null,
                 1,
-                controlAlb.retornarInfoAlbum("Ramdom Album")); // T132
+                controlAlb.retornarInfoAlbum("Random Album")); // T132
         
-        controlTem.crearTemaCompleto("El Hijo De Hernandez", controlAlb.retornarInfoAlbum("Ramdom Album").getNombre(),
+        controlTem.crearTemaCompleto("El Hijo De Hernandez", controlAlb.retornarInfoAlbum("Random Album").getNombre(),
                 4 * 60 + 20,
                 "HijoHernandez.mp3",
                 null,
                 1,
-                controlAlb.retornarInfoAlbum("Ramdom Album")); // T133
+                controlAlb.retornarInfoAlbum("Random Album")); // T133
         
         controlTem.crearTemaCompleto("Grimm Troupe", controlAlb.retornarInfoAlbum("Soundtracks").getNombre(),
                 2 * 60 + 18,
