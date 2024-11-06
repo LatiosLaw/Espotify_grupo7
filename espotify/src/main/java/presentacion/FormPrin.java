@@ -458,6 +458,41 @@ public class FormPrin extends javax.swing.JFrame {
                 "bit.ly/SCvioleta",
                 1,
                 controlAlb.retornarInfoAlbum("20 Grandes Exitos")); // T131
+        
+        controlTem.crearTemaCompleto("Ya No Se Que Hacer Conmigo", controlAlb.retornarInfoAlbum("Random Album").getNombre(),
+                4 * 60 + 1,
+                "YaNoSeQueHacerConmigo.mp3",
+                null,
+                1,
+                controlAlb.retornarInfoAlbum("Random Album")); // T132
+        
+        controlTem.crearTemaCompleto("El Hijo De Hernandez", controlAlb.retornarInfoAlbum("Random Album").getNombre(),
+                4 * 60 + 20,
+                "HijoHernandez.mp3",
+                null,
+                1,
+                controlAlb.retornarInfoAlbum("Random Album")); // T133
+        
+        controlTem.crearTemaCompleto("Grimm Troupe", controlAlb.retornarInfoAlbum("Soundtracks").getNombre(),
+                2 * 60 + 18,
+                "GrimmTheme.mp3",
+                null,
+                1,
+                controlAlb.retornarInfoAlbum("Soundtracks")); // T134
+        
+        controlTem.crearTemaCompleto("LR INT SSJ Trunks & SSB Vegeta", controlAlb.retornarInfoAlbum("Soundtracks").getNombre(),
+                3 * 60 + 20,
+                "Dokkan.mp3",
+                null,
+                1,
+                controlAlb.retornarInfoAlbum("Soundtracks")); // T135
+        
+        controlTem.crearTemaCompleto("Phantasmal Phunk", controlAlb.retornarInfoAlbum("Soundtracks").getNombre(),
+                3 * 60 + 8,
+                "Phantasmal Phunk.mp3",
+                null,
+                1,
+                controlAlb.retornarInfoAlbum("Soundtracks")); // T135
 
         System.out.println("TEMAS CARGADOS");
     }
@@ -550,6 +585,8 @@ public class FormPrin extends javax.swing.JFrame {
 
     private void cargarArtistas() {
 
+        controlArt.agregarArtista("Havoc", "Artista", "Promedio", "123", "avocado@gmail.com", "avocado.png", LocalDate.of(2000, 11, 27), "Vibes.", "www.avocado.com"); //DM
+        
         //ARTISTAS//
         controlArt.agregarArtista("vpeople", "Village", "People", "123", "vpeople@tuta.io", "bit.ly/vpeople", LocalDate.of(1977, 1, 1), """
                                                                                                                                      Village People es una
@@ -729,6 +766,8 @@ public class FormPrin extends javax.swing.JFrame {
         Collection<DataGenero> genAMA = new ArrayList<>();
         Collection<DataGenero> genLOC = new ArrayList<>();
         Collection<DataGenero> genVIO = new ArrayList<>();
+        Collection<DataGenero> genAVC = new ArrayList<>();
+        Collection<DataGenero> genAVC2 = new ArrayList<>();
 
         DataGenero POP = new DataGenero("Pop");
         DataGenero EPO = new DataGenero("Electropop");
@@ -744,6 +783,20 @@ public class FormPrin extends javax.swing.JFrame {
         DataGenero DIS = new DataGenero("Disco");
         DataGenero BAL = new DataGenero("Balada");
         DataGenero CUM = new DataGenero("Cumbia");
+        
+        controlAlb.agregarAlbum("Havoc", "Random Album", "palta.jpg", 2015, temas); //VPL
+        DataAlbum AVC = controlAlb.retornarInfoAlbum("Random Album");
+        genAVC.add(ROK);
+        genAVC.add(DIS);
+        genAVC.add(BAL);
+        controlAlb.actualizarAlbum(AVC, genAVC);
+        
+        controlAlb.agregarAlbum("Havoc", "Soundtracks", "aguacate.png", 2020, temas); //VPL
+        DataAlbum AVC2 = controlAlb.retornarInfoAlbum("Soundtracks");
+        genAVC2.add(EPO);
+        genAVC2.add(POP);
+        genAVC2.add(CUM);
+        controlAlb.actualizarAlbum(AVC2, genAVC2);
 
         controlAlb.agregarAlbum("vpeople", "Village People Live and Sleazy", null, 1980, temas); //VPL
         DataAlbum VPL = controlAlb.retornarInfoAlbum("Village People Live and Sleazy");
