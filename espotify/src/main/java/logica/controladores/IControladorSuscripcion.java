@@ -48,4 +48,6 @@ public interface IControladorSuscripcion {
     public void cancelarAutomaticAll();
     
     public boolean tieneSusValida(String nick);
+    
+    public Collection<DataSus> findAllSus(String nick);
 }

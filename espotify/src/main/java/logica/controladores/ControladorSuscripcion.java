@@ -293,7 +293,18 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         
         return coleData;
      }
-    
+    @Override
+    public Collection<DataSus> findAllSus(String nick){
+         DAO_Suscripcion daoSus = new DAO_Suscripcion();
+        Collection<Suscripcion> cole = daoSus.findAllPorCliente(nick);
+        Collection<DataSus> coleData = new ArrayList<>();
+        for(Suscripcion sus:cole){
+            DataSus susiData = new DataSus(sus.getUserNick(),sus.getFecha(),sus.getEstado(),sus.getTipo(),sus.getId());
+            coleData.add(susiData);
+        }
+        
+        return coleData;
+     }
     
     
     

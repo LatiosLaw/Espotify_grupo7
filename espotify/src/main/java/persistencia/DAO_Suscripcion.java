@@ -87,18 +87,12 @@ public class DAO_Suscripcion {
         }
 
     }
-    
-    
-    
+
      public List<Suscripcion> findVigentes() {
        List<Suscripcion> sus = entityManager.createQuery("SELECT s FROM Suscripcion s where s.estado = 'Vigente'", Suscripcion.class).getResultList();
        return sus.isEmpty() ? null : sus;
     }
-    
-    
-    
-    
-    
+
     public void delete(int id) {
         Suscripcion entity = find(id);
         if (entity != null) {
@@ -122,6 +116,17 @@ public class DAO_Suscripcion {
        return sus;
     
     
+    }
+
+    public Collection<Suscripcion> findAllPorCliente(String nick) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT s FROM Suscripcion s where s.userNick = :nick", Suscripcion.class)
+                    .setParameter("nick", nick)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null; // Sus?
+        }
     }
 
     
