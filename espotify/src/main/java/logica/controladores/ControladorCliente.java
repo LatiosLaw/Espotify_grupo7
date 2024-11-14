@@ -524,7 +524,13 @@ public class ControladorCliente implements IControladorCliente {
     }
      
      
-     
+    @Override
+    public void agregarRegistro(String nick, String os, String nave, LocalDate hoy){
+         DAO_Usuario persistence = new DAO_Usuario();
+         //persistence.agregarRegistro(nick,os,nave,hoy);
+        
+        
+    }
      
      
      

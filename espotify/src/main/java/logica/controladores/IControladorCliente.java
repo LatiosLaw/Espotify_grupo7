@@ -68,4 +68,6 @@ public interface IControladorCliente {
     public String corroborarAlbumEnFav(String nombreAlbum,Collection<String> albumsCole);
     
     public String corroborarListaEnFav(String nombreLista, String nombreUsuario,Collection<String> listasCole);
+    
+    public void agregarRegistro(String nick, String os, String nave, LocalDate hoy);
 }
