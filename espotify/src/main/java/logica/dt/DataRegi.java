@@ -12,6 +12,7 @@ public class DataRegi {
     protected LocalDate  fehca;
     protected String nave;
     protected Cliente cli = null;
+    protected String ip;
 
     public DataRegi(){
         
@@ -72,5 +73,13 @@ public class DataRegi {
     }
     public int getId(){
         return this.id;
+    }
+    
+    public void setIp(String ip) {
+       this.ip = ip;
+    }
+    
+    public String getIp(){
+        return this.ip;
     }
 }

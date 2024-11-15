@@ -41,17 +41,17 @@ public class ListarRegistro extends javax.swing.JPanel {
 
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "O.S", "Navegador", "Fecha", "Cliente"
+                "Id", "O.S", "Navegador", "Fecha", "Cliente", "IP"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -68,8 +68,8 @@ public class ListarRegistro extends javax.swing.JPanel {
                 .addGap(62, 62, 62)
                 .addComponent(lblCoso)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,13 +96,13 @@ public class ListarRegistro extends javax.swing.JPanel {
         Collection <DataRegi> cole = this.controlCli.retornarRegistros(); 
         
        DefaultTableModel model;  
-       model = new DefaultTableModel(new String[] {"Id", "O.S", "Navegador", "Fecha", "Cliente"}, 0);
+       model = new DefaultTableModel(new String[] {"Id", "O.S", "Navegador", "Fecha", "Cliente", "IP"}, 0);
         if(cole == null || cole.isEmpty()){
             JOptionPane.showMessageDialog(null, "No hay Registros");
         }else{
             
         for(DataRegi coso: cole){
-        model.addRow(new Object[]{String.valueOf(coso.getId()), coso.getOs(), coso.getNave(), String.valueOf(coso.getFecha()),coso.getUserNick()});  
+        model.addRow(new Object[]{String.valueOf(coso.getId()), coso.getOs(), coso.getNave(), String.valueOf(coso.getFecha()),coso.getUserNick(), coso.getIp()});  
         }
              tblTabla.setModel(model);
         }

@@ -31,6 +31,7 @@ public class Registro implements Serializable {
     protected String os; 
     protected LocalDate  fehca;
     protected String nave; 
+    protected String ip; 
     
     @OneToOne
     Cliente cli;
@@ -43,18 +44,23 @@ public class Registro implements Serializable {
         this.fehca = LocalDate.now(); 
     }
     
-    public Registro(String usrNick, String os, String nave){
+    public Registro(String usrNick, String os, String nave, String ip){
         this.userNick = usrNick;
         this.fehca = LocalDate.now(); 
         this.os = os;
         this.nave = nave;
+        this.ip = ip;
     }
     
     
     public void setId(int id){
         this.id = id;
     }
-  
+    
+    public void setIp(String ip){
+        this.ip = ip;
+    }
+    
     public void setUserNick(String usrNick){
         this.userNick = usrNick;
     }
@@ -88,6 +94,10 @@ public class Registro implements Serializable {
     public int getId(){
         return this.id;
     }
+    public String getIp(){
+        return this.ip;
+    }
+    
      @Override
     public int hashCode() {
         int hash = 0;

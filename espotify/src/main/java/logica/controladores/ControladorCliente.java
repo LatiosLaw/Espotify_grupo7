@@ -528,7 +528,7 @@ public class ControladorCliente implements IControladorCliente {
      
      
     @Override
-    public void agregarRegistro(String nick, String os, String nave){
+    public void agregarRegistro(String nick, String os, String nave, String ip){
          DAO_Usuario persistence = new DAO_Usuario();
          
         Registro regi = new Registro();
@@ -541,6 +541,7 @@ public class ControladorCliente implements IControladorCliente {
         regi.setNave(nave);
         regi.setUserNick(nick);
         regi.setFecha(LocalDate.now());
+        regi.setIp(ip);
         if(persistence.findAllRegi() == null){
             idSus = 1;
         }else{
@@ -571,6 +572,7 @@ public class ControladorCliente implements IControladorCliente {
         Collection<DataRegi> dataRegis = new ArrayList<>();
         for(Registro reg:regis){
             DataRegi newRegi = new DataRegi(reg.getId(),reg.getUserNick(), reg.getOs(),reg.getNave(), reg.getFecha());
+            newRegi.setIp(reg.getIp());
             dataRegis.add(newRegi);
         }
         
@@ -581,8 +583,8 @@ public class ControladorCliente implements IControladorCliente {
     public void nukearAlosViejos(){
         DAO_Usuario persistence = new DAO_Usuario();
         Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
-        
-        for(Registro regi:regis){
+        if( regis != null){
+            for(Registro regi:regis){
             
             long chronoTriggerDays = ChronoUnit.DAYS.between(regi.getFecha(), LocalDate.now());
             System.out.println("Chrono Trigger: " + chronoTriggerDays);
@@ -590,18 +592,22 @@ public class ControladorCliente implements IControladorCliente {
                 persistence.deleteRegi(regi.getId());
             }
         }
+        }else{System.out.println("Is empty");}
+        
     }
     @Override
     public void controlDePoblacion(){
         DAO_Usuario persistence = new DAO_Usuario();
         Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
-        
-         int cantidad = regis.size();
+        if(regis != null){
+          int cantidad = regis.size();
          if(cantidad >9999){
             for(Registro regi:regis){
                 persistence.deleteRegi(regi.getId());
             }  
-         }
+         }  
+        }else{System.out.println("Is empty");}
+         
     }
     
     @Override

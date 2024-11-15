@@ -219,22 +219,22 @@ public class FormPrin extends javax.swing.JFrame {
         lblProgreso.setVisible(true);
         new Thread(() -> {
             try {
-              //  cargarClientes();
+              // cargarClientes();
                 jProgressBar1.setValue(8);
                 lblProgreso.setText("8%");
-               // cargarArtistas();
+              //  cargarArtistas();
                 jProgressBar1.setValue(19);
                 lblProgreso.setText("19%");
-             //  cargarGeneros();
+              // cargarGeneros();
                 jProgressBar1.setValue(27);
                 lblProgreso.setText("27%");
-               // cargarAlbumes();
+              //  cargarAlbumes();
                 jProgressBar1.setValue(35);
                 lblProgreso.setText("35%");
               //  cargarTemas();
                 jProgressBar1.setValue(44);
                 lblProgreso.setText("44%");
-              //  cargarSeguimientos();
+                //cargarSeguimientos();
                 jProgressBar1.setValue(62);
                 lblProgreso.setText("67%");
                 //cargarListas();
@@ -725,9 +725,9 @@ public class FormPrin extends javax.swing.JFrame {
     }
     private void cargarSuscripciones(){
         //benKenobi,cbochinche,lachiqui
-        
-       controlCli.agregarRegistro("benKenobi","Guindou", "faier focs");
-       controlCli.agregarRegistro("benKenobi","Guindous", "faier focs");
+       controlCli.hiroshimaYnagasaki();
+       controlCli.agregarRegistro("benKenobi","Guindou", "faier focs","10.0.0.1");
+       controlCli.agregarRegistro("benKenobi","Guindous", "faier focs","198.168.1.777");
        
        
        controlSus.agregarSus("el_padrino","Pendiente",LocalDate.of(1972, 3, 8),"Anual");

@@ -70,7 +70,7 @@ public interface IControladorCliente {
     
     public String corroborarListaEnFav(String nombreLista, String nombreUsuario,Collection<String> listasCole);
     
-    public void agregarRegistro(String nick, String os, String nave);
+    public void agregarRegistro(String nick, String os, String nave, String ip);
     
     public Collection<DataRegi> retornarRegistros();
     
