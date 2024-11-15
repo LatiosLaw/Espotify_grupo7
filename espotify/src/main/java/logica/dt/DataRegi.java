@@ -13,6 +13,7 @@ public class DataRegi {
     protected String nave;
     protected Cliente cli = null;
     protected String ip;
+    protected String url;
 
     public DataRegi(){
         
@@ -47,6 +48,9 @@ public class DataRegi {
     public void setOs(String os){
          this.os = os;
     }
+     public void setUrl(String url){
+         this.url = url;
+    }
     public void setFecha(LocalDate fecha){
         this.fehca = fecha; 
     }
@@ -71,6 +75,10 @@ public class DataRegi {
     public String getNave(){
         return this.nave;
     }
+    public String getUrl(){
+        return this.url;
+    }
+    
     public int getId(){
         return this.id;
     }

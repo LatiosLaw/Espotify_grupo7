@@ -41,17 +41,17 @@ public class ListarRegistro extends javax.swing.JPanel {
 
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "O.S", "Navegador", "Fecha", "Cliente", "IP"
+                "Id", "O.S", "Navegador", "Fecha", "Cliente", "IP", "URL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -65,20 +65,20 @@ public class ListarRegistro extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(lblCoso)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCoso)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCoso))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(lblCoso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -96,13 +96,13 @@ public class ListarRegistro extends javax.swing.JPanel {
         Collection <DataRegi> cole = this.controlCli.retornarRegistros(); 
         
        DefaultTableModel model;  
-       model = new DefaultTableModel(new String[] {"Id", "O.S", "Navegador", "Fecha", "Cliente", "IP"}, 0);
+       model = new DefaultTableModel(new String[] {"Id", "O.S", "Navegador", "Fecha", "Cliente", "IP", "URL"}, 0);
         if(cole == null || cole.isEmpty()){
             JOptionPane.showMessageDialog(null, "No hay Registros");
         }else{
             
         for(DataRegi coso: cole){
-        model.addRow(new Object[]{String.valueOf(coso.getId()), coso.getOs(), coso.getNave(), String.valueOf(coso.getFecha()),coso.getUserNick(), coso.getIp()});  
+        model.addRow(new Object[]{String.valueOf(coso.getId()), coso.getOs(), coso.getNave(), String.valueOf(coso.getFecha()),coso.getUserNick(), coso.getIp(), coso.getUrl()});  
         }
              tblTabla.setModel(model);
         }

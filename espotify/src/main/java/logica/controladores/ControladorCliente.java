@@ -528,7 +528,7 @@ public class ControladorCliente implements IControladorCliente {
      
      
     @Override
-    public void agregarRegistro(String nick, String os, String nave, String ip){
+    public void agregarRegistro(String nick, String os, String nave, String ip, String url){
          DAO_Usuario persistence = new DAO_Usuario();
          
         Registro regi = new Registro();
@@ -542,6 +542,7 @@ public class ControladorCliente implements IControladorCliente {
         regi.setUserNick(nick);
         regi.setFecha(LocalDate.now());
         regi.setIp(ip);
+        regi.setUrl(url);
         if(persistence.findAllRegi() == null){
             idSus = 1;
         }else{
@@ -573,6 +574,7 @@ public class ControladorCliente implements IControladorCliente {
         for(Registro reg:regis){
             DataRegi newRegi = new DataRegi(reg.getId(),reg.getUserNick(), reg.getOs(),reg.getNave(), reg.getFecha());
             newRegi.setIp(reg.getIp());
+            newRegi.setUrl(reg.getUrl());
             dataRegis.add(newRegi);
         }
         
