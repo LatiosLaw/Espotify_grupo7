@@ -27,7 +27,14 @@ public class DataRegi {
         this.os = os;
         this.nave = nave;
     }
-    
+     public DataRegi(int id, String usrNick, String os, String nave, LocalDate fecha){
+        this.id = id;
+        this.userNick = usrNick;
+        this.fehca = fecha; 
+        this.os = os;
+        this.nave = nave;
+        
+    }
     
     public void setId(int id){
         this.id = id;

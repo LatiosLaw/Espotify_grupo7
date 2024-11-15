@@ -9,6 +9,7 @@ import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataRegi;
 import logica.dt.DataSus;
 
 public interface IControladorCliente {
@@ -70,4 +71,6 @@ public interface IControladorCliente {
     public String corroborarListaEnFav(String nombreLista, String nombreUsuario,Collection<String> listasCole);
     
     public void agregarRegistro(String nick, String os, String nave, LocalDate hoy);
+    
+    public Collection<DataRegi> retornarRegistros();
 }

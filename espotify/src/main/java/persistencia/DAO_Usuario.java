@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import logica.Album;
 import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
+import logica.Registro;
 import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
@@ -47,7 +49,19 @@ public class DAO_Usuario {
             e.printStackTrace();
         }
     }
-
+    public void saveRegi(Registro entity) {
+        reconnect();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 
     public Usuario find(Usuario user) {
         return entityManager.find(Usuario.class, user);
@@ -347,5 +361,28 @@ public class DAO_Usuario {
         } catch (NoResultException e) {
             return null; // No se encontro ningún usuario con ese correo
         }
+    }
+
+    public void agregarRegistro(String nick, String os, String nave, LocalDate hoy) {
+        
+    }
+
+    public Object findAllRegi() {
+       List<Integer> regi = entityManager.createQuery("SELECT r.id FROM Registro r ORDER BY r", Integer.class).getResultList();
+       return regi.isEmpty() ? null : regi;
+    
+    }
+
+    public int darIdRegi() {
+       int sus = entityManager.createQuery("SELECT max(r.id) FROM Registro r"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+    }
+
+    public Collection<Registro> retornarRegistrosOrdenados() {
+         List<Registro> regi = entityManager.createQuery("SELECT r FROM Registro r ORDER BY r.fehca", Registro.class).getResultList();
+       return regi.isEmpty() ? null : regi;
     }
 }

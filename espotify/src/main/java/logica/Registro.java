@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.controladores;
+package logica;
 
 import logica.*;
 import java.io.Serializable;
@@ -34,6 +34,7 @@ public class Registro implements Serializable {
     
     @OneToOne
     Cliente cli;
+    
     public Registro(){
         
     }
@@ -87,5 +88,28 @@ public class Registro implements Serializable {
     public int getId(){
         return this.id;
     }
+     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (userNick != null ? userNick.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Registro)) {
+            return false;
+        }
+        Registro other = (Registro) object;
+        if ((this.userNick == null && other.userNick != null) || (this.userNick!= null && !this.userNick.equals(other.userNick))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "logica.Registro[ userNick=" + userNick + " ]";
+    }
 }

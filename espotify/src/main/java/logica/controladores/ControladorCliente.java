@@ -12,6 +12,7 @@ import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
+import logica.Registro;
 import logica.Suscripcion;
 import logica.tema;
 import logica.Usuario;
@@ -22,6 +23,7 @@ import logica.dt.DataListaParticular;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataRegi;
 import logica.dt.DataSus;
 import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
@@ -527,12 +529,52 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public void agregarRegistro(String nick, String os, String nave, LocalDate hoy){
          DAO_Usuario persistence = new DAO_Usuario();
-         //persistence.agregarRegistro(nick,os,nave,hoy);
+         
+        Registro regi = new Registro();
+        
+        Cliente cli = new Cliente();
+        cli.setNickname(nick);
+        int idSus = 0;
+        regi.setUser(cli);
+        regi.setOs(os);
+        regi.setNave(nave);
+        regi.setUserNick(nick);
+        regi.setFecha(hoy);
+        if(persistence.findAllRegi() == null){
+            idSus = 1;
+        }else{
+            idSus = persistence.darIdRegi();
+            idSus ++;
+        }
+        regi.setId(idSus);
+        //System.out.println("id-" + regi.getId());
+       // System.out.println("id-" + regi.getUserNick());
+        //System.out.println("Nave-" + regi.getNave());
+       // System.out.println("OS-" + regi.getOs());
+        
+        try {
+            persistence.saveRegi(regi);
+            System.out.println("Registro agregado exitosamente.");
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar la Registro: " + e.getMessage());
+        }
+         
         
         
     }
-     
-     
+    @Override
+    public Collection<DataRegi> retornarRegistros(){
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
+        
+        Collection<DataRegi> dataRegis = new ArrayList<>();
+        for(Registro reg:regis){
+            DataRegi newRegi = new DataRegi(reg.getId(),reg.getUserNick(), reg.getOs(),reg.getNave(), reg.getFecha());
+            dataRegis.add(newRegi);
+        }
+        
+        return dataRegis;
+    }
      
     
     
