@@ -92,7 +92,9 @@ public class ListarRegistro extends javax.swing.JPanel {
 
 
    private void cargarDatos(){
+        controlCli.hiroshimaYnagasaki();
         Collection <DataRegi> cole = this.controlCli.retornarRegistros(); 
+        
        DefaultTableModel model;  
        model = new DefaultTableModel(new String[] {"Id", "O.S", "Navegador", "Fecha", "Cliente"}, 0);
         if(cole == null || cole.isEmpty()){

@@ -726,8 +726,8 @@ public class FormPrin extends javax.swing.JFrame {
     private void cargarSuscripciones(){
         //benKenobi,cbochinche,lachiqui
         
-       controlCli.agregarRegistro("benKenobi","Guindou", "faier focs", LocalDate.now());
-       controlCli.agregarRegistro("benKenobi","Guindous", "faier focs",LocalDate.of(2024, 3, 8));
+       controlCli.agregarRegistro("benKenobi","Guindou", "faier focs");
+       controlCli.agregarRegistro("benKenobi","Guindous", "faier focs");
        
        
        controlSus.agregarSus("el_padrino","Pendiente",LocalDate.of(1972, 3, 8),"Anual");

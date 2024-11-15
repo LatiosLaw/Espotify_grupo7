@@ -385,4 +385,21 @@ public class DAO_Usuario {
          List<Registro> regi = entityManager.createQuery("SELECT r FROM Registro r ORDER BY r.fehca", Registro.class).getResultList();
        return regi.isEmpty() ? null : regi;
     }
+
+    public Registro findRegistro(int id) {
+        return entityManager.find(Registro.class, id);
+    }
+    public void deleteRegi(int id) {
+        Registro entity = findRegistro(id);
+        if (entity != null) {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        }else{
+        System.out.println("Algo mal con el find");
+    }
+    }
+    
+    
+    
 }

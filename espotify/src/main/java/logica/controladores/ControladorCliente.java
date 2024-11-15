@@ -2,6 +2,7 @@ package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -527,7 +528,7 @@ public class ControladorCliente implements IControladorCliente {
      
      
     @Override
-    public void agregarRegistro(String nick, String os, String nave, LocalDate hoy){
+    public void agregarRegistro(String nick, String os, String nave){
          DAO_Usuario persistence = new DAO_Usuario();
          
         Registro regi = new Registro();
@@ -539,7 +540,7 @@ public class ControladorCliente implements IControladorCliente {
         regi.setOs(os);
         regi.setNave(nave);
         regi.setUserNick(nick);
-        regi.setFecha(hoy);
+        regi.setFecha(LocalDate.now());
         if(persistence.findAllRegi() == null){
             idSus = 1;
         }else{
@@ -575,7 +576,39 @@ public class ControladorCliente implements IControladorCliente {
         
         return dataRegis;
     }
-     
+    
+    @Override
+    public void nukearAlosViejos(){
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
+        
+        for(Registro regi:regis){
+            
+            long chronoTriggerDays = ChronoUnit.DAYS.between(regi.getFecha(), LocalDate.now());
+            System.out.println("Chrono Trigger: " + chronoTriggerDays);
+            if(chronoTriggerDays>=30){
+                persistence.deleteRegi(regi.getId());
+            }
+        }
+    }
+    @Override
+    public void controlDePoblacion(){
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
+        
+         int cantidad = regis.size();
+         if(cantidad >9999){
+            for(Registro regi:regis){
+                persistence.deleteRegi(regi.getId());
+            }  
+         }
+    }
+    
+    @Override
+    public void hiroshimaYnagasaki(){
+         controlDePoblacion();
+         nukearAlosViejos();
+    }
     
     
 }
