@@ -104,6 +104,8 @@ public class ControladorListaParticular implements IControladorListaParticular {
                     System.out.println("No existen listas en el sistema."); 
                 }else{
                     lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
+                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                    registro.incrementarInfoAgregadoALista(temazo.getNickname(), temazo.getNomAlb());
                     daoLista.update(lista);
                 }
                 break;
@@ -127,6 +129,8 @@ DAO_Tema daoTema = new DAO_Tema();
                     System.out.println("No existen listas en el sistema."); 
                 }else{
                     lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
+                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                    registro.reducirInfoAgregadoALista(temazo.getNickname(), temazo.getNombreAlbum());
                     daoLista.update(lista);
                 }
                 break;

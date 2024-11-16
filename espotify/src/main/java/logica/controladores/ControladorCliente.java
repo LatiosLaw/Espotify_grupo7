@@ -200,6 +200,8 @@ public class ControladorCliente implements IControladorCliente {
         if (cli != null) {
             if (cli instanceof Cliente cliente) {
                 tema t = persistence2.find(nicktem.getNickname(), nicktem.getNomAlb());
+                IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                registro.incrementarInfoFavorito(t.getNickname(), t.getNombreAlbum());
                 cliente.temaFav(t);
                 persistence.update(cli);
             }
@@ -263,6 +265,8 @@ public class ControladorCliente implements IControladorCliente {
             if (tem != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarTemaFav(tem);
+                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                    registro.reducirInfoFavorito(tem.getNickname(), tem.getNombreAlbum());
                     persistence.update(cliente);
                 }
             } else {
