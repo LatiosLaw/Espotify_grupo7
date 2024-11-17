@@ -27,6 +27,10 @@ public class ControladorTema implements IControladorTema {
             persistence.save(nuevo_tema);
             if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                System.out.println("NOMBRE " + nuevo_tema.getNickname());
+                System.out.println("ALBUM " + nuevo_tema.getNombreAlbum());
+                registro.crearRegistroTema(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum());
                 return true;
             } else {
                 System.out.println("Un error ha ocurrido.");
@@ -46,6 +50,8 @@ public class ControladorTema implements IControladorTema {
             persistence.save(nuevo_tema);
             if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                registro.crearRegistroTema(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum());
                 return true;
             } else {
                 System.out.println("Un error ha ocurrido.");
@@ -66,6 +72,8 @@ public class ControladorTema implements IControladorTema {
             persistence.save(nuevo_tema);
             if (persistence.find(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum()) != null) {
                 System.out.println("El tema con nickname " + nuevo_tema.getNickname() + " fue persistido correctamente.");
+                IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                registro.crearRegistroTema(nuevo_tema.getNickname(), nuevo_tema.getNombreAlbum());
                 return true;
             } else {
                 System.out.println("Un error ha ocurrido.");

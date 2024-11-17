@@ -2,6 +2,8 @@ package logica.dt;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import logica.controladores.ControladorAdicionalTema;
+import logica.controladores.IControladorAdicionalTema;
 
 public class DataListaReproduccion {
 
@@ -68,6 +70,8 @@ public class DataListaReproduccion {
     }
 
     public void agregarTema(DataTema tema) {
+        IControladorAdicionalTema registro = new ControladorAdicionalTema();
+        registro.incrementarInfoAgregadoALista(tema.getNickname(), tema.getNomAlb());
         this.temas.add(tema);
     }
 
