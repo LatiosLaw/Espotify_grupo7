@@ -49,6 +49,18 @@ public class ControladorAdicionalTema implements IControladorAdicionalTema {
      }
      
      @Override
+     public void incrementarInfoDescarga(String nombre_tema, String nombre_album){
+         DAO_RegistroTema persistence = new DAO_RegistroTema();
+        Registro_tema verif = persistence.find(nombre_tema, nombre_album);
+        if(verif!=null){
+            verif.sumarDescarga();
+            persistence.update(verif);
+        }else{
+            // Por si pinta hacer algo con el caso de que el registro no exista.
+        }
+     }
+     
+     @Override
      public void reducirInfoReproduccion(String nombre_tema, String nombre_album){
          DAO_RegistroTema persistence = new DAO_RegistroTema();
         Registro_tema verif = persistence.find(nombre_tema, nombre_album);
@@ -78,6 +90,18 @@ public class ControladorAdicionalTema implements IControladorAdicionalTema {
         Registro_tema verif = persistence.find(nombre_tema, nombre_album);
         if(verif!=null){
             verif.restarFavoritos();
+            persistence.update(verif);
+        }else{
+            // Por si pinta hacer algo con el caso de que el registro no exista.
+        }
+     }
+     
+     @Override
+     public void reducirInfoDescarga(String nombre_tema, String nombre_album){
+         DAO_RegistroTema persistence = new DAO_RegistroTema();
+        Registro_tema verif = persistence.find(nombre_tema, nombre_album);
+        if(verif!=null){
+            verif.restarDescarga();
             persistence.update(verif);
         }else{
             // Por si pinta hacer algo con el caso de que el registro no exista.

@@ -10,9 +10,13 @@ public interface IControladorAdicionalTema {
      
      public void incrementarInfoFavorito(String nombre_tema, String nombre_album);
      
+     public void incrementarInfoDescarga(String nombre_tema, String nombre_album);
+     
      public void reducirInfoReproduccion(String nombre_tema, String nombre_album);
      
      public void reducirInfoAgregadoALista(String nombre_tema, String nombre_album);
      
      public void reducirInfoFavorito(String nombre_tema, String nombre_album);
+     
+     public void reducirInfoDescarga(String nombre_tema, String nombre_album);
 }

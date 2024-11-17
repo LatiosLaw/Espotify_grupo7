@@ -13,6 +13,7 @@ public class Registro_tema implements Serializable {
     private Integer reproducciones;
     private Integer favoritos;
     private Integer agregado_a_lista;
+    private Integer descargas;
     
      public Registro_tema(){
         
@@ -25,6 +26,7 @@ public class Registro_tema implements Serializable {
         this.reproducciones = 0;
         this.favoritos = 0;
         this.agregado_a_lista = 0;
+        this.descargas = 0;
     }
 
     public String getNombre() {
@@ -62,6 +64,27 @@ public class Registro_tema implements Serializable {
 
     public void setRepro(Integer reproducciones) {
         this.reproducciones = reproducciones;
+    }
+    
+    public void sumarDescarga() {
+        this.descargas = getDescarga() + 1;
+    }
+    
+    public void restarDescarga() {
+        int desc = getDescarga();
+        if(desc<=0){
+           this.descargas = getDescarga();
+        }else{
+           this.descargas = getDescarga() - 1; 
+        }
+    }
+    
+    public Integer getDescarga() {
+        return descargas;
+    }
+
+    public void setDescarga(Integer descargas) {
+        this.descargas = descargas;
     }
     
     public void sumarFavoritos() {
