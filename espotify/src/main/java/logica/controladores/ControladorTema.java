@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.PersistenceException;
 import logica.Album;
+import logica.AlbumEliminados;
 import logica.tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataTema;
+import logica.temasEliminados;
 import persistencia.DAO_Album;
 import persistencia.DAO_Tema;
 
@@ -178,6 +181,66 @@ public class ControladorTema implements IControladorTema {
         } else {
             return null;
         }
+    }
+    @Override
+    public void elminiarDelMapaTemas(String albu , ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo) {
+        
+        DAO_Tema persistence = new DAO_Tema();
+        Collection<tema> temas = persistence.findFromAlbum(albu);
+      
+        for(tema temon: temas){
+            
+            DataTema dtTema = new DataTema();
+           
+            dtTema.setNickname(temon.getNickname());
+            dtTema.setNomAlb(albu);
+           
+            
+             System.out.println("eliminarTemaDeTodos()");
+            controlCli.eliminarTemaDeTodos(dtTema);
+            
+             System.out.println("eliminarTemaDeTodasLasListas1()");
+            controlLipa.eliminarTemaDeTodasLasListas(dtTema);
+            
+             System.out.println("eliminarTemaDeTodasLasListas2()");
+            controlLipo.eliminarTemaDeTodasLasListas(dtTema);
+            
+            persistence.delete(dtTema.getNickname(), albu);
+            System.out.println("Se elimino el tema: " + dtTema.getNickname());
+        }
+    
+    }
+    @Override
+    public void agregarTemaAeliminados(AlbumEliminados albEli) {
+          DAO_Tema persistence = new DAO_Tema();
+          
+          Collection<tema> temas = persistence.findFromAlbum(albEli.getNombre());
+          
+          for(tema temon:temas){
+
+              temasEliminados teEl = new temasEliminados(temon.getNickname(),temon.getNombreAlbum(),temon.getDuracion(),temon.getAcceso(),temon.getArchivo());
+             
+              int idEl = 0;
+
+        if(persistence.findAllIntegerEli() == null){
+            idEl = 1;
+        }else{
+            idEl = persistence.darIdEli();
+            idEl ++;
+        }
+        teEl.setId(idEl);
+             
+        try {
+            persistence.saveEl(teEl);
+            System.out.println("Eliminado guardado(Tema: " + teEl.getNickname()+ ") exitosamente.");
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar el eliminado: " + e.getMessage());
+        }  
+ 
+          }
+          
+    
     }
     
     

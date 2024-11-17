@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -8,6 +9,7 @@ import javax.persistence.NoResultException;
 import logica.Album;
 import logica.dt.DT_IdTema;
 import logica.tema;
+import logica.temasEliminados;
 
 public class DAO_Tema {
 
@@ -108,4 +110,28 @@ public class DAO_Tema {
             entityManagerFactory.close();
         }
     }
+
+    public void saveEl(temasEliminados entity) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(entity);
+        entityManager.getTransaction().commit();
+    }
+    
+    public int darIdEli() {
+       int sus = entityManager.createQuery("SELECT max(s.id) FROM temasEliminados s"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+
+    }
+    public Collection<Integer> findAllIntegerEli() {
+        List<Integer> eli = entityManager.createQuery("SELECT s.id FROM temasEliminados s", Integer.class).getResultList();
+       return eli.isEmpty() ? null : eli;
+    
+    }
+    
+    
+    
+    
 }

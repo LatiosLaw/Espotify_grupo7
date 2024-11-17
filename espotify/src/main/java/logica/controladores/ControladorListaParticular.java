@@ -261,4 +261,22 @@ DAO_Tema daoTema = new DAO_Tema();
         }
         dao_l.update(lista_actualizable);
     }
+    @Override
+    public void eliminarTemaDeTodasLasListas(DataTema dtTema) {
+         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
+         
+         Collection<ListaParticular> listas = dao.findAllListasParticulares();
+                 
+         for(ListaParticular lista : listas){
+             Collection<tema> temas = lista.getTemas();
+             for(tema temon: temas){
+                 if(temon.getNickname().equals(dtTema.getNickname())){
+                     this.quitarTema(lista.getNombreCliente(), lista.getNombreLista(), temon.getNickname(), temon.getNombreAlbum());
+                 } 
+             }
+             
+         }
+         
+         
+    }
 }

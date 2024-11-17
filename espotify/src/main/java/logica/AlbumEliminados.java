@@ -9,43 +9,55 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Album implements Serializable {
+public class AlbumEliminados implements Serializable {
 
     @Id
+    private int id;
     private String nombre;
     private String imagen;
     private int anioCreacion;
-    @ManyToOne
-    private Artista creador;
     
-    @ManyToMany(mappedBy = "albumes_del_genero", cascade = CascadeType.MERGE)
+    @ManyToOne
+    private ArtistasEliminados creador;
+    
+    @ManyToMany(mappedBy = "albumes_del_generoEli", cascade = CascadeType.MERGE)
     private Collection<Genero> generos = new ArrayList<Genero>();
     
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
-    private Collection<tema> temas = new ArrayList<tema>();
+     @OneToMany(mappedBy = "albumEli")
+    private Collection<temasEliminados> temasEli = new ArrayList<temasEliminados>();
 
-    public Album(){
+    public AlbumEliminados(){
         
     }
     
-    public Album(String nombre){
+    public AlbumEliminados(String nombre){
         this.nombre = nombre;
     }
     
-    public Album(String nombre, int anioCreacion){
+    public AlbumEliminados(String nombre, int anioCreacion){
         this.nombre = nombre;
         this.anioCreacion = anioCreacion;
     }
     
-    public Album(String nombre, String imagen, int anioCreacion, Artista artista){
+    public AlbumEliminados(String nombre, String imagen, int anioCreacion, ArtistasEliminados artista){
         this.nombre = nombre;
         this.imagen = imagen;
         this.anioCreacion = anioCreacion;
         this.creador = artista;
     }
-
+    
+     public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    
     public String getNombre() {
         return nombre;
     }
@@ -62,7 +74,7 @@ public class Album implements Serializable {
         this.anioCreacion = anio;
     }
     
-    public void setCreador(Artista artista) {
+    public void setCreador(ArtistasEliminados artista) {
         this.creador = artista;
     }
 
@@ -74,17 +86,16 @@ public class Album implements Serializable {
         return imagen;
     }
 
-    public Artista getCreador() {
+    public ArtistasEliminados getCreador() {
         return creador;
     }
     
-    public void agregarTema(tema t) {
+    public void agregarTema(temasEliminados t) {
         t.setAlbum(this);
-        this.temas.add(t);
+        this.temasEli.add(t);
     }
     
     public void agregarGenero(Genero g) {
-        g.agregarAlbumDelGenero(this);
         this.generos.add(g);
     }
     
@@ -92,5 +103,15 @@ public class Album implements Serializable {
         return this.generos;
     }
 
-    
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof AlbumEliminados)) {
+            return false;
+        }
+        AlbumEliminados other = (AlbumEliminados) object;
+        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
+            return false;
+        }
+        return true;
+    }
 }

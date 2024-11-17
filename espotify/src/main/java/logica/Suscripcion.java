@@ -31,7 +31,7 @@ public class Suscripcion implements Serializable {
     protected LocalDate ultiFechaHabi;
     protected String tipoSus; // Anual, Mensual y Semanal
     
-    @OneToOne
+    @ManyToOne
     Cliente cli;
     public Suscripcion(){
         

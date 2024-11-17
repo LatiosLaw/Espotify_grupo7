@@ -79,5 +79,11 @@ public interface IControladorCliente {
     public void controlDePoblacion();
     
      public void hiroshimaYnagasaki();
+     
+     public void eliminarTemaDeTodos(DataTema nicktem);
+     
+    public void eliminarAlbumDeTodos(DataAlbum nomalbum) ;
+    
+    public void eliminarAlbum2(DataCliente nickcli, DataAlbum nomalbum);
     
 }

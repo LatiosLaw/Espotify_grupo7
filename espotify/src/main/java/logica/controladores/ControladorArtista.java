@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Artista;
+import logica.ArtistasEliminados;
 import logica.Usuario;
 import logica.dt.DataArtista;
 import logica.dt.DataErrorBundle;
@@ -115,4 +116,71 @@ public class ControladorArtista implements IControladorArtista {
         DAO_Usuario dao = new DAO_Usuario();
         return dao.obtenerSeguidoresDeUsuario(nick);
     }
+     @Override
+     public void eliminarDelMapaArtista2(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo){
+         DAO_Usuario dao = new DAO_Usuario();
+         Usuario retorno = dao.findUsuarioByNick(nickArt);
+            if (retorno != null && retorno instanceof Artista artista) {
+                Collection<String> coleAlb = dao.obtenerAlbumArt(nickArt);
+                System.out.println("eliminarDelMapaAlbums()");
+                controlAl.eliminarDelMapaAlbums(coleAlb,controlTema,controlCli,controlLipa,controlLipo);
+                dao.delete2(retorno.getNickname());
+                System.out.println("Se elimino el Artista: " + retorno.getNickname());
+            } else {
+                System.out.println("El usuario con nickname " + nickArt + " no es un Artista.");
+            }
+         
+         
+         
+     }
+     @Override
+     public void agregarArtistaAeliminados(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli){
+         DAO_Usuario dao = new DAO_Usuario();
+         DataArtista art = this.retornarArtista(nickArt);
+
+         ArtistasEliminados artEl = new ArtistasEliminados(art.getNickname(),art.getNombre(),art.getApellido(),art.getCorreo(),art.getContra(),art.getFechaNac(),art.getBiografia(), art.getDirWeb());
+         if(artEl != null){
+             
+              int idEl = 0;
+
+        if(dao.findAllIntegerEli() == null){
+            idEl = 1;
+        }else{
+            idEl = dao.darIdEli();
+            idEl ++;
+        }
+        artEl.setId(idEl);
+             
+            try {
+             dao.saveEli(artEl);
+            System.out.println("Eliminado guardado(Artista: "+artEl.getNickname() + ") exitosamente.");
+        } catch (PersistenceException e) {
+            System.out.println("Error al guardar el eliminado: " + e.getMessage());
+        }  
+             
+          
+         
+         //-------------------------------
+         
+         Collection<String> coleAlbums =  dao.obtenerAlbumArt(nickArt);
+         
+         controlAl.agregarAlbumAeliminados(coleAlbums,controlTema,artEl);
+         
+         }else{System.out.println("Es nulo el artista");}
+         
+         
+         
+     }
+     @Override
+     public void eliminarArtitsta(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo){
+         
+         //copiar
+         this.agregarArtistaAeliminados(nickArt, controlAl, controlTema, controlCli);
+         
+         //eliminar
+         this.eliminarDelMapaArtista2(nickArt, controlAl, controlTema, controlCli, controlLipa, controlLipo);
+         
+     }
 }

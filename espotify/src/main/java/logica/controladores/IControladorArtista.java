@@ -20,4 +20,12 @@ public interface IControladorArtista {
     public Collection<String> obtenerSeguidoresArt(String nick);
 
     public Collection<String> obtenerAlbumsArt(String nick);
+    
+    public void eliminarDelMapaArtista2(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
+
+    public void agregarArtistaAeliminados(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli);
+
+    public void eliminarArtitsta(String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
 }

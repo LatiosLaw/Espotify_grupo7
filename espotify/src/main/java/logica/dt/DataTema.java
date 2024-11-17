@@ -57,7 +57,7 @@ public class DataTema {
         this.setNickname(new String());
         this.setNomAlb(null);
         this.setDuracion(null);
-        this.album = new DataAlbum();
+        //this.album = new DataAlbum();
     }
 
     public DataTema(String nickname, String nombre_album, Integer duracion, DataAlbum dataAlbum, String acceso, String archivo) {

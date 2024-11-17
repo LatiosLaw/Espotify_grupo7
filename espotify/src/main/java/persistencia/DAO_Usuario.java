@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Album;
+import logica.ArtistasEliminados;
 import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
@@ -312,7 +313,17 @@ public class DAO_Usuario {
             entityManager.getTransaction().commit();
         }
     }
-
+    public void delete2(String user) {
+        Usuario entity = find2(user);
+        if (entity != null) {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        }
+    }
+     public Usuario find2(String nombre) {
+        return entityManager.find(Usuario.class, nombre);
+    }
     public void close() {
         if (entityManager != null) {
             entityManager.close();
@@ -399,7 +410,32 @@ public class DAO_Usuario {
         System.out.println("Algo mal con el find");
     }
     }
+
+    public void saveEli(ArtistasEliminados entity) {
+        reconnect();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+     public int darIdEli() {
+       int sus = entityManager.createQuery("SELECT max(s.id) FROM ArtistasEliminados s"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+
+    }
+    public Collection<Integer> findAllIntegerEli() {
+        List<Integer> eli = entityManager.createQuery("SELECT s.id FROM ArtistasEliminados s", Integer.class).getResultList();
+       return eli.isEmpty() ? null : eli;
     
-    
+    }
     
 }

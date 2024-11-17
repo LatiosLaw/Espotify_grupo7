@@ -41,6 +41,15 @@ public class FormPrin extends javax.swing.JFrame {
         jProgressBar1.setVisible(false);
         lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
+        
+        
+        
+        /*
+        String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
+            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo
+        
+        */
+        
     }
 
     /**
@@ -219,28 +228,28 @@ public class FormPrin extends javax.swing.JFrame {
         lblProgreso.setVisible(true);
         new Thread(() -> {
             try {
-               cargarClientes();
+               //cargarClientes();
                 jProgressBar1.setValue(8);
                 lblProgreso.setText("8%");
-                cargarArtistas();
+               // cargarArtistas();
                 jProgressBar1.setValue(19);
                 lblProgreso.setText("19%");
-               cargarGeneros();
+              // cargarGeneros();
                 jProgressBar1.setValue(27);
                 lblProgreso.setText("27%");
-                cargarAlbumes();
+              // cargarAlbumes();
                 jProgressBar1.setValue(35);
                 lblProgreso.setText("35%");
-                cargarTemas();
+              //  cargarTemas();
                 jProgressBar1.setValue(44);
                 lblProgreso.setText("44%");
-                cargarSeguimientos();
+               // cargarSeguimientos();
                 jProgressBar1.setValue(62);
                 lblProgreso.setText("67%");
-                cargarListas();
+               // cargarListas();
                 jProgressBar1.setValue(81);
                 lblProgreso.setText("81%");
-                cargarFavoritos();
+              //  cargarFavoritos();
                 cargarSuscripciones();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
@@ -752,7 +761,16 @@ public class FormPrin extends javax.swing.JFrame {
            System.out.print("No");
        }
        
-       
+       //
+            ControladorAlbum controlAlb2 = new ControladorAlbum();
+            ControladorTema controlTem2 = new ControladorTema();
+            ControladorCliente controlCli2 = new ControladorCliente();
+            ControladorListaParticular controlListPar2 = new ControladorListaParticular();
+            ControladorListaPorDefecto controlListPD2 = new ControladorListaPorDefecto();
+        //
+        
+        
+        controlArt.eliminarArtitsta("lospimpi",controlAlb2,controlTem2,controlCli2,controlListPar2,controlListPD2);
        
        
     }
