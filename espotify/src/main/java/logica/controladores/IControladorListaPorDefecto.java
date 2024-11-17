@@ -27,5 +27,5 @@ public interface IControladorListaPorDefecto {
     
     Collection<DataListaPorDefecto> retornarListasDelGeneroDT(String genero);
     
-    Collection<DataListaPorDefecto> retornarListasPorDefecto();
+    public void eliminarTemaDeTodasLasListas(DataTema dtTema) ;
 }

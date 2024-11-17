@@ -1,11 +1,13 @@
 package persistencia;
 
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Album;
+import logica.AlbumEliminados;
 
 public class DAO_Album {
 
@@ -112,4 +114,27 @@ public class DAO_Album {
             entityManagerFactory.close();
         }
     }
+
+    public void saveEl(AlbumEliminados entity) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(entity);
+        entityManager.getTransaction().commit();
+    }
+    
+    public int darIdEli() {
+       int sus = entityManager.createQuery("SELECT max(s.id) FROM AlbumEliminados s"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+
+    }
+    public Collection<Integer> findAllIntegerEli() {
+        List<Integer> eli = entityManager.createQuery("SELECT s.id FROM AlbumEliminados s", Integer.class).getResultList();
+       return eli.isEmpty() ? null : eli;
+    
+    }
+    
+    
+    
 }

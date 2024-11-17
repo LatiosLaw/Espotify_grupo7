@@ -104,6 +104,8 @@ public class ControladorListaParticular implements IControladorListaParticular {
                     System.out.println("No existen listas en el sistema."); 
                 }else{
                     lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
+                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                    registro.incrementarInfoAgregadoALista(temazo.getNickname(), temazo.getNomAlb());
                     daoLista.update(lista);
                 }
                 break;
@@ -127,6 +129,8 @@ DAO_Tema daoTema = new DAO_Tema();
                     System.out.println("No existen listas en el sistema."); 
                 }else{
                     lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
+                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
+                    registro.reducirInfoAgregadoALista(temazo.getNickname(), temazo.getNombreAlbum());
                     daoLista.update(lista);
                 }
                 break;
@@ -253,12 +257,30 @@ DAO_Tema daoTema = new DAO_Tema();
     public void actualizarLista(DataListaParticular lista){
         DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
         DAO_Tema dao_t = new DAO_Tema();
-        ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreador().getNickname(), lista.getNombre());
+        ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreadorNickname().getNickname(), lista.getNombre());
         Iterator<DataTema> iterator = lista.getTemas().iterator();
         while (iterator.hasNext()) {
             DataTema tema = iterator.next();
             lista_actualizable.agregarTema(dao_t.find(tema.getNickname(), tema.getNomAlb()));
         }
         dao_l.update(lista_actualizable);
+    }
+    @Override
+    public void eliminarTemaDeTodasLasListas(DataTema dtTema) {
+         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
+         
+         Collection<ListaParticular> listas = dao.findAllListasParticulares();
+                 
+         for(ListaParticular lista : listas){
+             Collection<tema> temas = lista.getTemas();
+             for(tema temon: temas){
+                 if(temon.getNickname().equals(dtTema.getNickname())){
+                     this.quitarTema(lista.getNombreCliente(), lista.getNombreLista(), temon.getNickname(), temon.getNombreAlbum());
+                 } 
+             }
+             
+         }
+         
+         
     }
 }

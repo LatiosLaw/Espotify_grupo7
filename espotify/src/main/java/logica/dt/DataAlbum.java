@@ -1,13 +1,8 @@
 package logica.dt;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@XmlRootElement(name = "DataAlbum")
-@XmlType(propOrder = {"nombre", "imagen", "anioCreacion", "creador", "generos", "temas"})
 public class DataAlbum {
 
     private String nombre;
@@ -25,7 +20,7 @@ public class DataAlbum {
         this.generos = generos;
         this.temas = new ArrayList<>();
     }
-
+    
     public DataAlbum(String nombre, String imagen, int anioCreacion, DataArtista creador) {
         this.nombre = nombre;
         this.imagen = imagen;
@@ -47,32 +42,26 @@ public class DataAlbum {
         this.nombre = nombre;
     }
 
-    @XmlElement(name = "nombre")
     public String getNombre() {
         return nombre;
     }
-
-    @XmlElement(name = "creador")
+    
     public DataArtista getCreador() {
         return creador;
     }
 
-    @XmlElement(name = "anioCreacion")
     public int getAnioCreacion() {
         return anioCreacion;
     }
 
-    @XmlElement(name = "generos")
     public Collection<DataGenero> getGeneros() {
         return generos;
     }
 
-    @XmlElement(name = "temas")
     public Collection<DataTema> getTemas() {
         return temas;
     }
 
-    @XmlElement(name = "imagen")
     public String getImagen() {
         return imagen;
     }
@@ -87,10 +76,6 @@ public class DataAlbum {
 
     public void setAnioCreacion(int anioCreacion) {
         this.anioCreacion = anioCreacion;
-    }
-
-    public void setCreador(DataArtista creador) {
-        this.creador = creador;
     }
 
     public void agregarGenero(DataGenero genero) {

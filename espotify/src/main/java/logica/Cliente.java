@@ -15,6 +15,10 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class Cliente extends Usuario {
     
+    @OneToOne(mappedBy = "cli", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Registro regi;
+
     @OneToMany(mappedBy = "cli", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     protected Collection<Suscripcion> sus = new ArrayList<>();
