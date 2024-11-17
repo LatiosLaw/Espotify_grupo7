@@ -298,7 +298,6 @@ public class DAO_Usuario {
     public List<Usuario> findAll() {
         return entityManager.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
-
     public void update(Usuario entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);

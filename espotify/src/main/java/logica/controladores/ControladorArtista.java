@@ -125,8 +125,10 @@ public class ControladorArtista implements IControladorArtista {
                 Collection<String> coleAlb = dao.obtenerAlbumArt(nickArt);
                 System.out.println("eliminarDelMapaAlbums()");
                 controlAl.eliminarDelMapaAlbums(coleAlb,controlTema,controlCli,controlLipa,controlLipo);
+                //controlCli.eliminarDeTodosAlrtista();
+                
                 dao.delete2(retorno.getNickname());
-                System.out.println("Se elimino el Artista: " + retorno.getNickname());
+               // System.out.println("Se elimino el Artista: " + retorno.getNickname());
             } else {
                 System.out.println("El usuario con nickname " + nickArt + " no es un Artista.");
             }

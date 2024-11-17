@@ -48,7 +48,9 @@ public class Genero implements Serializable {
     public void agregarAlbumDelGenero(Album album) {
         this.albumes_del_genero.add(album);
     }
-
+     public void agregarAlbumDelGeneroEli(AlbumEliminados album) {
+        this.albumes_del_generoEli.add(album);
+    }
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Genero)) {

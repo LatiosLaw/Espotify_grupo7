@@ -162,20 +162,22 @@ public class ControladorAlbum implements IControladorAlbum {
     public void eliminarDelMapaAlbums(Collection<String> albs, ControladorTema controlTema, ControladorCliente controlCli, 
             ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo){
         DAO_Album daoAl = new DAO_Album();
-      //  for(String albu:albs){
+        for(String albu:albs){
             System.out.println("eliminarAlbumDeTodos()");
-            controlCli.eliminarAlbumDeTodos(this.retornarInfoAlbum("Hay Amores Que Matan"));
-            System.out.println("elminiarDelMapaTemas()");
-            //controlTema.elminiarDelMapaTemas(albu,controlCli,controlLipa,controlLipo);
-            daoAl.delete("Hay Amores Que Matan");
-            System.out.println("Se elimino el Album: " + "Hay Amores Que Matan");
-       // }
+            controlCli.eliminarAlbumDeTodos(this.retornarInfoAlbum(albu));
+           
+            
+           System.out.println("elminiarDelMapaTemas()");
+           controlTema.elminiarDelMapaTemas(albu,controlCli,controlLipa,controlLipo);
+            daoAl.delete(albu);
+            System.out.println("Se elimino el Album: " + albu);
+        }
         
         
     }
     @Override
     public void agregarAlbumAeliminados(Collection<String> coleAlbums, ControladorTema controlTema, ArtistasEliminados artEl) {
-    
+        DAO_Genero persistence2 = new DAO_Genero();
         DAO_Album daoAl = new DAO_Album();
         for(String album : coleAlbums){
             Album alb = daoAl.find(album);
@@ -194,7 +196,9 @@ public class ControladorAlbum implements IControladorAlbum {
         Collection<Genero> genes = alb.getGeneros();
         if(genes != null){
            for(Genero gen:genes){
+               Genero genero = persistence2.find(gen.getNombre());
                 albEli.agregarGenero(gen);
+                genero.agregarAlbumDelGeneroEli(albEli);
             } 
         }
         try {

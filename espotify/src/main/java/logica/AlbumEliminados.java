@@ -96,7 +96,9 @@ public class AlbumEliminados implements Serializable {
     }
     
     public void agregarGenero(Genero g) {
+        g.agregarAlbumDelGeneroEli(this);
         this.generos.add(g);
+        
     }
     
     public Collection<Genero> getGeneros(){

@@ -313,20 +313,18 @@ public class ControladorCliente implements IControladorCliente {
 
     @Override
     public void eliminarAlbum(DataCliente nickcli, DataAlbum nomalbum) {
-        DAO_Usuario persistence = new DAO_Usuario();
+          DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
-            DAO_Album albumPersistence = new DAO_Album();
-            Album alb = albumPersistence.findAlbumByName(nomalbum.getNombre());
+            DAO_Album Persistence2 = new DAO_Album();
+            Album alb = Persistence2.findAlbumByName(nomalbum.getNombre());
             if (alb != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarAlbumFav(alb);
-                    persistence.update(cliente);
-                  //  Scanner in = new Scanner(System.in);
-                    // String s = in.nextLine();
                 }
+                persistence.update(cli);
             } else {
-                System.out.println("El álbum no existe.");
+                System.out.println("El Album no existe.");
             }
         } else {
             System.out.println("Cliente no encontrado.");
@@ -337,39 +335,39 @@ public class ControladorCliente implements IControladorCliente {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
-            DAO_Album albumPersistence = new DAO_Album();
-            Album alb = albumPersistence.findAlbumByName(nomalbum.getNombre());
+            DAO_Album Persistence2 = new DAO_Album();
+            Album alb = Persistence2.findAlbumByName(nomalbum.getNombre());
             if (alb != null) {
-                Collection<String> cole = this.obtenerAlbumFavCliente(cli.getNickname());
-               System.out.println("Antes del for");
-                for(String album: cole){
-                     System.out.println("Comparaciom: album:" + album + "// alb.getNombre: " + alb.getNombre());
-                    if(album.equals(alb.getNombre())){
-                        if (cli instanceof Cliente cliente) {
-                            cliente.quitarAlbumFav(alb);
-                            persistence.update(cliente);
-                            System.out.println("Se acyualizo para: " + nickcli.getNickname());
-                        }   
-                    }
+                if (cli instanceof Cliente cliente) {
+                    cliente.quitarAlbumFav(alb);
                 }
+                persistence.update(cli);
             } else {
-                System.out.println("El álbum no existe.");
+                System.out.println("El Album no existe.");
             }
         } else {
             System.out.println("Cliente no encontrado.");
         }
+        
     }
     @Override
     public void eliminarAlbumDeTodos(DataAlbum nomalbum) {
         DAO_Usuario persistence = new DAO_Usuario();
-       Collection <Usuario> usrs = persistence.findAll();
-       //for(Usuario usr:usrs){
-           if(this.consultarPerfilCliente("cbochinche") != null){
-                 eliminarAlbum(this.consultarPerfilCliente("cbochinche"),nomalbum);
-           }
-       
-          
-      // }
+
+        Collection<Usuario> usrs = persistence.findAll();
+        for(Usuario usr:usrs){
+            if (usr instanceof Cliente cliente) {
+                
+                this.eliminarAlbum2(this.consultarPerfilCliente(usr.getNickname()), nomalbum);
+            
+            }
+        }  
+           
+           
+           
+           
+           
+           
     }
     
     @Override
