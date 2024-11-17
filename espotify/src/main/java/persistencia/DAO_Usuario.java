@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
@@ -8,9 +9,11 @@ import javax.persistence.Persistence;
 import java.util.List;
 import javax.persistence.NoResultException;
 import logica.Album;
+import logica.ArtistasEliminados;
 import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
+import logica.Registro;
 import logica.Suscripcion;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
@@ -47,7 +50,19 @@ public class DAO_Usuario {
             e.printStackTrace();
         }
     }
-
+    public void saveRegi(Registro entity) {
+        reconnect();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 
     public Usuario find(Usuario user) {
         return entityManager.find(Usuario.class, user);
@@ -298,7 +313,17 @@ public class DAO_Usuario {
             entityManager.getTransaction().commit();
         }
     }
-
+    public void delete2(String user) {
+        Usuario entity = find2(user);
+        if (entity != null) {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        }
+    }
+     public Usuario find2(String nombre) {
+        return entityManager.find(Usuario.class, nombre);
+    }
     public void close() {
         if (entityManager != null) {
             entityManager.close();
@@ -348,4 +373,69 @@ public class DAO_Usuario {
             return null; // No se encontro ningún usuario con ese correo
         }
     }
+
+    public void agregarRegistro(String nick, String os, String nave, LocalDate hoy) {
+        
+    }
+
+    public Object findAllRegi() {
+       List<Integer> regi = entityManager.createQuery("SELECT r.id FROM Registro r ORDER BY r", Integer.class).getResultList();
+       return regi.isEmpty() ? null : regi;
+    
+    }
+
+    public int darIdRegi() {
+       int sus = entityManager.createQuery("SELECT max(r.id) FROM Registro r"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+    }
+
+    public Collection<Registro> retornarRegistrosOrdenados() {
+         List<Registro> regi = entityManager.createQuery("SELECT r FROM Registro r ORDER BY r.fehca", Registro.class).getResultList();
+       return regi.isEmpty() ? null : regi;
+    }
+
+    public Registro findRegistro(int id) {
+        return entityManager.find(Registro.class, id);
+    }
+    public void deleteRegi(int id) {
+        Registro entity = findRegistro(id);
+        if (entity != null) {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        }else{
+        System.out.println("Algo mal con el find");
+    }
+    }
+
+    public void saveEli(ArtistasEliminados entity) {
+        reconnect();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+     public int darIdEli() {
+       int sus = entityManager.createQuery("SELECT max(s.id) FROM ArtistasEliminados s"
+               ,int.class)
+               .getSingleResult();
+
+       return sus;
+
+    }
+    public Collection<Integer> findAllIntegerEli() {
+        List<Integer> eli = entityManager.createQuery("SELECT s.id FROM ArtistasEliminados s", Integer.class).getResultList();
+       return eli.isEmpty() ? null : eli;
+    
+    }
+    
 }

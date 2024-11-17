@@ -396,7 +396,7 @@ public class ConsultarLista extends javax.swing.JPanel {
             }else if(cbxOpt.getSelectedIndex() == 2){
                 DataListaParticular lista = controlListPar.devolverInformacion(txtListaElegida.getText(), nombre_cliente);
                 txtNombreLista.setText(lista.getNombre());
-                DataCliente cli = lista.getCreador();
+                DataCliente cli = lista.getCreadorNickname();
                 txtDefinidoPor.setText(cli.getNickname());
                 txtGeneroLista.setText(" - ");
                 cargarTemasDeLaLista(lista.getNombre(), 2);

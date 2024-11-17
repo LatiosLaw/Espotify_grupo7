@@ -9,6 +9,7 @@ import logica.dt.DataCliente;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataRegi;
 import logica.dt.DataSus;
 
 public interface IControladorCliente {
@@ -68,4 +69,21 @@ public interface IControladorCliente {
     public String corroborarAlbumEnFav(String nombreAlbum,Collection<String> albumsCole);
     
     public String corroborarListaEnFav(String nombreLista, String nombreUsuario,Collection<String> listasCole);
+    
+    public void agregarRegistro(String nick, String os, String nave, String ip, String url);
+    
+    public Collection<DataRegi> retornarRegistros();
+    
+    public void nukearAlosViejos();
+    
+    public void controlDePoblacion();
+    
+     public void hiroshimaYnagasaki();
+     
+     public void eliminarTemaDeTodos(DataTema nicktem);
+     
+    public void eliminarAlbumDeTodos(DataAlbum nomalbum) ;
+    
+    public void eliminarAlbum2(DataCliente nickcli, DataAlbum nomalbum);
+    
 }

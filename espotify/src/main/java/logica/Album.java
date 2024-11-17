@@ -92,15 +92,5 @@ public class Album implements Serializable {
         return this.generos;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Album)) {
-            return false;
-        }
-        Album other = (Album) object;
-        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
-            return false;
-        }
-        return true;
-    }
+    
 }

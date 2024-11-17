@@ -202,8 +202,8 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
         idSecretosa = token2;
         DataSus sus = this.controlSus.retornarSus(token2);
         this.txtEstado.setText(sus.getEstado());
-        this.txtFecha.setText(String.valueOf(sus.getUltiFechaHabi()));
-        this.txtTipo.setText(sus.getTipoSus());
+        this.txtFecha.setText(String.valueOf(sus.getFecha()));
+        this.txtTipo.setText(sus.getTipo());
         this.txtNick.setText(sus.getUserNick());
     }//GEN-LAST:event_lstListaMouseClicked
 
