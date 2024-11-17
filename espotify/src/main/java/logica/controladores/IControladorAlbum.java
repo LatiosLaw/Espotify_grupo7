@@ -1,7 +1,6 @@
 package logica.controladores;
 
 import java.util.Collection;
-import logica.ArtistasEliminados;
 import logica.dt.DataAlbum;
 import logica.dt.DataGenero;
 import logica.dt.DataTema;
@@ -13,6 +12,8 @@ public interface IControladorAlbum {
     public Collection<String> retornarAlbumsDelGenero(String genero);
     
     public Collection<DataAlbum> retornarAlbumsDelGeneroDT(String genero);
+    
+    public Collection<DataAlbum> retornarDataAlbumes();
 
     public Collection<String> retornarAlbumsDelArtista(String nick_arti);
 
@@ -21,9 +22,4 @@ public interface IControladorAlbum {
     public Collection<String> retornarAlbumsString();
     
     public void actualizarAlbum(DataAlbum dataAlbum, Collection<DataGenero> nuevosGeneros);
-    
-    public void eliminarDelMapaAlbums(Collection<String> albs, ControladorTema controlTema, ControladorCliente controlCli,ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
-
-    public void agregarAlbumAeliminados(Collection<String> coleAlbums, ControladorTema controlTema, ArtistasEliminados artEl);
-
 }

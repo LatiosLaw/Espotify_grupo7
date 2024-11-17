@@ -2,11 +2,9 @@ package logica.controladores;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Scanner;
 import javax.persistence.PersistenceException;
 import logica.Album;
 import logica.Artista;
@@ -14,7 +12,6 @@ import logica.Cliente;
 import logica.ListaParticular;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
-import logica.Registro;
 import logica.Suscripcion;
 import logica.tema;
 import logica.Usuario;
@@ -25,7 +22,6 @@ import logica.dt.DataListaParticular;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
-import logica.dt.DataRegi;
 import logica.dt.DataSus;
 import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
@@ -201,8 +197,6 @@ public class ControladorCliente implements IControladorCliente {
         if (cli != null) {
             if (cli instanceof Cliente cliente) {
                 tema t = persistence2.find(nicktem.getNickname(), nicktem.getNomAlb());
-                IControladorAdicionalTema registro = new ControladorAdicionalTema();
-                registro.incrementarInfoFavorito(t.getNickname(), t.getNombreAlbum());
                 cliente.temaFav(t);
                 persistence.update(cli);
             }
@@ -219,19 +213,19 @@ public class ControladorCliente implements IControladorCliente {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
             ListaReproduccion lis;
             //if (lis == null) {
-                if (nomlista instanceof DataListaParticular) {
-                     lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreadorNickname().getNickname());
-                     if (lis == null) {
-                          lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
-                     }
-                } else {
-                    lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), "none");
-                     if (lis == null) {
-                           lis = new ListaPorDefecto(nomlista.getNombre());
-                     }
+            if (nomlista instanceof DataListaParticular) {
+                lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreador().getNickname());
+                if (lis == null) {
+                    lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
                 }
-                listaPersistence.save(lis);
-           // }
+            } else {
+                lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), "none");
+                if (lis == null) {
+                    lis = new ListaPorDefecto(nomlista.getNombre());
+                }
+            }
+            listaPersistence.save(lis);
+            // }
             if (cli instanceof Cliente cliente) {
                 cliente.listasFav(lis);
                 persistence.update(cli);
@@ -266,8 +260,6 @@ public class ControladorCliente implements IControladorCliente {
             if (tem != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarTemaFav(tem);
-                    IControladorAdicionalTema registro = new ControladorAdicionalTema();
-                    registro.reducirInfoFavorito(tem.getNickname(), tem.getNombreAlbum());
                     persistence.update(cliente);
                 }
             } else {
@@ -279,25 +271,12 @@ public class ControladorCliente implements IControladorCliente {
     }
 
     @Override
-    public void eliminarTemaDeTodos(DataTema nicktem) {
-        DAO_Usuario persistence = new DAO_Usuario();
-        Collection<Usuario> usrs = persistence.findAll();
-        for(Usuario usr:usrs){
-            if (usr instanceof Cliente cliente) {
-                
-                eliminarTema(this.consultarPerfilCliente(usr.getNickname()),nicktem);
-                
-            }
-        }
-    }
-    
-    @Override
     public void eliminarLista(DataCliente nickcli, DataListaReproduccion nomlista) {
         DAO_Usuario persistence = new DAO_Usuario();
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
-            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(),nomlista.getCreadorNickname().getNickname());
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreador().getNickname());
             if (lis != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarListasFav(lis);
@@ -321,8 +300,8 @@ public class ControladorCliente implements IControladorCliente {
             if (alb != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarAlbumFav(alb);
+                    persistence.update(cliente);
                 }
-                persistence.update(cli);
             } else {
                 System.out.println("El Album no existe.");
             }
@@ -430,30 +409,32 @@ public class ControladorCliente implements IControladorCliente {
         DAO_Usuario dao = new DAO_Usuario();
         Collection<String> listDef = dao.obtenerListasFavPorDefectoCliente(nick);
         Collection<String> listPar = dao.obtenerListasParticularesFavCliente(nick);
-        
+
         Collection<String> listaDefi = new ArrayList<>();
-         for (String elemento : listDef) {
+        for (String elemento : listDef) {
             listaDefi.add(elemento + "/Por Defecto");
         }
         for (String elemento : listPar) {
             listaDefi.add(elemento);
         }
-         
-         
-         return listaDefi;
+
+        return listaDefi;
     }
 
     @Override
     public Collection<String> obtenerTemaFavCliente(String nick) {
         DAO_Usuario dao = new DAO_Usuario();
-        Collection<DT_IdTema> lista =  dao.obtenerTemaFavCliente(nick);
-        Collection<String> retornable = new ArrayList<>();
-        Iterator<DT_IdTema> iterator = lista.iterator();
-                while (iterator.hasNext()) {
-                    DT_IdTema temazo = iterator.next();
-                    retornable.add(temazo.getNombreTema().concat("/").concat(temazo.getNombreAlbumTema()));
+        Collection<DT_IdTema> lista = dao.obtenerTemaFavCliente(nick);
+
+        if (lista == null) {
+            return new ArrayList<>();
         }
-                return retornable;
+
+        Collection<String> retornable = new ArrayList<>();
+        for (DT_IdTema temazo : lista) {
+            retornable.add(temazo.getNombreTema().concat("/").concat(temazo.getNombreAlbumTema()));
+        }
+        return retornable;
     }
 
     @Override
@@ -494,7 +475,7 @@ public class ControladorCliente implements IControladorCliente {
                 return new DataErrorBundle(false, 2);
             }
         } else {
-            
+
             System.out.println("No user found with nickname/email: " + nickOmail);
             return new DataErrorBundle(false, 1);
         }
@@ -514,166 +495,71 @@ public class ControladorCliente implements IControladorCliente {
         }
         return token;
     }
-     @Override
-     public DataSus devolverSus(String nick){
-         DAO_Usuario persistence = new DAO_Usuario();
-         Suscripcion sus = persistence.devovlerSus(nick);
-         DataSus dtSus = new DataSus(sus.getUser().getNickname(),sus.getFecha() ,sus.getEstado());
-         //dtSus.
-         
-         return dtSus;
-         
-     }
-     
-     @Override
-     public String corroborarTemaEnFav(String nombreTema, Collection<String> temasCole){
-        String tieneLaik = "noFav";
-                    for(String temEnFav : temasCole){
-                        String[] partesDeTemEnFav = temEnFav.split("/");
-                        String temaDeVerda = partesDeTemEnFav[0];
-                        
-                        System.out.println("*************************************************");
-                        System.out.println("Nombre del tema: " +nombreTema);
-                        System.out.println("Nombre del tema sacdo de la lista: " +temaDeVerda);
-                        System.out.println("*************************************************");
-                        if(temaDeVerda.equals(nombreTema)){
-                            tieneLaik = "fav";
-                        }
-                    }
-        return tieneLaik;
-     }
-     
+
     @Override
-    public String corroborarAlbumEnFav(String nombreAlbum, Collection<String> albumCole){
-          String tieneLaik = "noFav";
-                    for(String albEnFav : albumCole){
-                            System.out.println("en fav:" + albEnFav);
-                            System.out.println("nombre album:" + nombreAlbum);
-                        if(albEnFav.equals(nombreAlbum)){
-                            tieneLaik = "fav";
-                        }
-                    }
-        return tieneLaik;
- 
+    public DataSus devolverSus(String nick) {
+        DAO_Usuario persistence = new DAO_Usuario();
+        Suscripcion sus = persistence.devovlerSus(nick);
+        DataSus dtSus = new DataSus(sus.getUser().getNickname(), sus.getFecha(), sus.getEstado());
+        //dtSus.
+
+        return dtSus;
+
     }
-    
+
     @Override
-    public String corroborarListaEnFav(String nombreLista, String nombreUsuario, Collection<String> listasCole){
-       String tieneLaik = "noFav";
-                    for(String temEnFav : listasCole){
-                        String[] partesDeTemEnFav = temEnFav.split("/");
-                        String nombreListaDeVerda = partesDeTemEnFav[0];
-                        String nombreCreador = partesDeTemEnFav[1];
-                        /*
+    public String corroborarTemaEnFav(String nombreTema, Collection<String> temasCole) {
+        String tieneLaik = "noFav";
+        for (String temEnFav : temasCole) {
+            String[] partesDeTemEnFav = temEnFav.split("/");
+            String temaDeVerda = partesDeTemEnFav[0];
+
+            System.out.println("*************************************************");
+            System.out.println("Nombre del tema: " + nombreTema);
+            System.out.println("Nombre del tema sacdo de la lista: " + temaDeVerda);
+            System.out.println("*************************************************");
+            if (temaDeVerda.equals(nombreTema)) {
+                tieneLaik = "fav";
+            }
+        }
+        return tieneLaik;
+    }
+
+    @Override
+    public String corroborarAlbumEnFav(String nombreAlbum, Collection<String> albumCole) {
+        String tieneLaik = "noFav";
+        for (String albEnFav : albumCole) {
+            System.out.println("en fav:" + albEnFav);
+            System.out.println("nombre album:" + nombreAlbum);
+            if (albEnFav.equals(nombreAlbum)) {
+                tieneLaik = "fav";
+            }
+        }
+        return tieneLaik;
+
+    }
+
+    @Override
+    public String corroborarListaEnFav(String nombreLista, String nombreUsuario, Collection<String> listasCole) {
+        String tieneLaik = "noFav";
+        for (String temEnFav : listasCole) {
+            String[] partesDeTemEnFav = temEnFav.split("/");
+            String nombreListaDeVerda = partesDeTemEnFav[0];
+            String nombreCreador = partesDeTemEnFav[1];
+            /*
                         System.out.println("NombreLista: " +nombreLista);
                          System.out.println("NombreUsuario: " +nombreUsuario);
                           System.out.println("Nombre Lista De Verda: " +nombreLista);
                            System.out.println("NombreCreador: " +nombreCreador);
                          
-                         */
-                        
-                        if(nombreListaDeVerda.equals(nombreLista) && nombreUsuario.equals(nombreCreador)){
-                            tieneLaik = "fav";
-                        }
-                    }
-        return tieneLaik;
-        
+             */
 
-        
-        
-    }
-     
-     
-    @Override
-    public void agregarRegistro(String nick, String os, String nave, String ip, String url){
-         DAO_Usuario persistence = new DAO_Usuario();
-         
-        Registro regi = new Registro();
-        
-        Cliente cli = new Cliente();
-        cli.setNickname(nick);
-        int idSus = 0;
-        regi.setUser(cli);
-        regi.setOs(os);
-        regi.setNave(nave);
-        regi.setUserNick(nick);
-        regi.setFecha(LocalDate.now());
-        regi.setIp(ip);
-        regi.setUrl(url);
-        if(persistence.findAllRegi() == null){
-            idSus = 1;
-        }else{
-            idSus = persistence.darIdRegi();
-            idSus ++;
-        }
-        regi.setId(idSus);
-        //System.out.println("id-" + regi.getId());
-       // System.out.println("id-" + regi.getUserNick());
-        //System.out.println("Nave-" + regi.getNave());
-       // System.out.println("OS-" + regi.getOs());
-        
-        try {
-            persistence.saveRegi(regi);
-            System.out.println("Registro agregado exitosamente.");
-        } catch (PersistenceException e) {
-            System.out.println("Error al guardar la Registro: " + e.getMessage());
-        }
-         
-        
-        
-    }
-    @Override
-    public Collection<DataRegi> retornarRegistros(){
-        DAO_Usuario persistence = new DAO_Usuario();
-        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
-        
-        Collection<DataRegi> dataRegis = new ArrayList<>();
-        for(Registro reg:regis){
-            DataRegi newRegi = new DataRegi(reg.getId(),reg.getUserNick(), reg.getOs(),reg.getNave(), reg.getFecha());
-            newRegi.setIp(reg.getIp());
-            newRegi.setUrl(reg.getUrl());
-            dataRegis.add(newRegi);
-        }
-        
-        return dataRegis;
-    }
-    
-    @Override
-    public void nukearAlosViejos(){
-        DAO_Usuario persistence = new DAO_Usuario();
-        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
-        if( regis != null){
-            for(Registro regi:regis){
-            
-            long chronoTriggerDays = ChronoUnit.DAYS.between(regi.getFecha(), LocalDate.now());
-            System.out.println("Chrono Trigger: " + chronoTriggerDays);
-            if(chronoTriggerDays>=30){
-                persistence.deleteRegi(regi.getId());
+            if (nombreListaDeVerda.equals(nombreLista) && nombreUsuario.equals(nombreCreador)) {
+                tieneLaik = "fav";
             }
         }
-        }else{System.out.println("Is empty");}
-        
+        return tieneLaik;
+
     }
-    @Override
-    public void controlDePoblacion(){
-        DAO_Usuario persistence = new DAO_Usuario();
-        Collection<Registro> regis = persistence.retornarRegistrosOrdenados();
-        if(regis != null){
-          int cantidad = regis.size();
-         if(cantidad >9999){
-            for(Registro regi:regis){
-                persistence.deleteRegi(regi.getId());
-            }  
-         }  
-        }else{System.out.println("Is empty");}
-         
-    }
-    
-    @Override
-    public void hiroshimaYnagasaki(){
-         controlDePoblacion();
-         nukearAlosViejos();
-    }
-    
-    
+
 }

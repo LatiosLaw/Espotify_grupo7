@@ -32,8 +32,6 @@ public interface IControladorListaParticular {
    public DataListaReproduccion devolverInformacionListaRepro(String coso, String nombre);
     
     void actualizarLista(DataListaParticular lista);
-   
-    public void eliminarTemaDeTodasLasListas(DataTema dtTema);
     
      
 }

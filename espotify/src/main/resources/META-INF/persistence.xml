@@ -12,11 +12,6 @@
     <class>logica.Album</class>
     <class>logica.tema</class>
     <class>logica.Suscripcion</class>
-    <class>logica.Registro</class>
-    <class>logica.AlbumEliminados</class>
-    <class>logica.ArtistasEliminados</class>
-    <class>logica.temasEliminados</class>
-    <class>logica.Registro_tema</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/espotify?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -59,7 +59,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos", "Actualizar estado de Suscripcion", "Lista de Registros" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos", "Actualizar estado de Suscripcion" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -172,16 +172,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
-            case "Lista de Registros" -> {
-                ListarRegistro lrg = new ListarRegistro(controlCli);
-                lrg.setLocation(0, 0);
-                lrg.setSize(860, 471);
-
-                pnlAU.removeAll();
-                pnlAU.add(lrg);
-                pnlAU.revalidate();
-                pnlAU.repaint();
-            }
+            
             
             default ->
                 jComboBox1.setSelectedIndex(0);

@@ -42,15 +42,6 @@ public class FormPrin extends javax.swing.JFrame {
         jProgressBar1.setVisible(false);
         lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
-        
-        
-        
-        /*
-        String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
-            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo
-        
-        */
-        
     }
 
     /**
@@ -740,11 +731,6 @@ public class FormPrin extends javax.swing.JFrame {
     }
     private void cargarSuscripciones(){
         //benKenobi,cbochinche,lachiqui
-       controlCli.hiroshimaYnagasaki();
-       controlCli.agregarRegistro("benKenobi","Guindou", "faier focs","10.0.0.1","Laricapasta.com");
-       controlCli.agregarRegistro("benKenobi","Guindous", "faier focs","198.168.1.777","Laricapasta.com");
-       
-       
        controlSus.agregarSus("el_padrino","Pendiente",LocalDate.of(1972, 3, 8),"Anual");
        controlSus.agregarSus("Heisenberg","Vigente",LocalDate.of(2024, 3, 8),"Anual");
        
