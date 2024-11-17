@@ -3,11 +3,8 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import javax.persistence.PersistenceException;
 import logica.Album;
-import logica.AlbumEliminados;
 import logica.Artista;
-import logica.ArtistasEliminados;
 import logica.Genero;
 import logica.Usuario;
 import logica.tema;
@@ -25,34 +22,32 @@ public class ControladorAlbum implements IControladorAlbum {
 
     @Override
     public DataAlbum agregarAlbum(String artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataTema> temas) {
-        
+
         DAO_Usuario artistaPersistence = new DAO_Usuario();
-        
+
         DAO_Tema temaPersistence = new DAO_Tema();
-        
+
         Usuario art = artistaPersistence.findUsuarioByNick(artista);
-        
-        if(art instanceof Artista artista1){
+
+        if (art instanceof Artista artista1) {
             Album nuevo_album = new Album(nombAlbum, imagen, anioCreacion, artista1);
-        Iterator<DataTema> iterator2 = temas.iterator();
-        while (iterator2.hasNext()) {
-            DataTema tema = iterator2.next();
-            nuevo_album.agregarTema(temaPersistence.find(tema.getNickname(), tema.getNomAlb()));
+            for (DataTema tema : temas) {
+                nuevo_album.agregarTema(temaPersistence.find(tema.getNickname(), tema.getNomAlb()));
+            }
+            DAO_Album persistence = new DAO_Album();
+            Album album_vacio = new Album();
+            album_vacio.setNombre(nuevo_album.getNombre());
+            persistence.save(album_vacio);
+            persistence.update(nuevo_album);
+            Collection<DataGenero> generos_vacios = new ArrayList<>();
+            if (persistence.find(nuevo_album.getNombre()) != null) {
+                System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
+                return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), artista1.getBiografia(), artista1.getDirWeb()), generos_vacios);
+            } else {
+                System.out.println("El album no fue persistido correctamente.");
+                return null;
+            }
         }
-        DAO_Album persistence = new DAO_Album();
-        Album album_vacio = new Album();
-        album_vacio.setNombre(nuevo_album.getNombre());
-        persistence.save(album_vacio);
-        persistence.update(nuevo_album);
-        Collection<DataGenero> generos_vacios = new ArrayList<>();
-        if (persistence.find(nuevo_album.getNombre()) != null) {
-            System.out.println("El album con nickname: " + nuevo_album.getNombre() + " fue persistido correctamente.");
-            return new DataAlbum(nuevo_album.getNombre(), nuevo_album.getImagen(), nuevo_album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), artista1.getBiografia(), artista1.getDirWeb()),generos_vacios);
-        } else {
-            System.out.println("El album no fue persistido correctamente.");
-            return null;
-        }
-      } 
         return null;
     }
 
@@ -68,6 +63,21 @@ public class ControladorAlbum implements IControladorAlbum {
         }
         return lista;
     }
+    
+    @Override
+    public Collection<DataAlbum> retornarDataAlbumes(){
+        DAO_Album persistence = new DAO_Album();
+        
+        Collection<Album> albumes = persistence.findAll();
+        
+        Collection<DataAlbum> albumesRetornables = new ArrayList<>();
+        
+        for(Album album : albumes){
+            albumesRetornables.add(new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(album.getCreador().getNickname())));
+        }
+        
+        return albumesRetornables;
+    }
 
     @Override
     public Collection<String> retornarAlbumsDelArtista(String nick_arti) {
@@ -81,7 +91,7 @@ public class ControladorAlbum implements IControladorAlbum {
         }
         return lista;
     }
-    
+
     @Override
     public Collection<DataAlbum> retornarAlbumsDelGeneroDT(String genero) {
         Collection<DataAlbum> lista = new ArrayList<>();
@@ -91,10 +101,10 @@ public class ControladorAlbum implements IControladorAlbum {
         while (iterator.hasNext()) {
             Album albu = iterator.next();
             DataAlbum album_insertable = new DataAlbum(
-                        albu.getNombre(),
-                        albu.getImagen(),
-                        albu.getanioCreacion(),
-                        new DataArtista(albu.getCreador().getNickname()));
+                    albu.getNombre(),
+                    albu.getImagen(),
+                    albu.getanioCreacion(),
+                    new DataArtista(albu.getCreador().getNickname()));
             lista.add(album_insertable);
         }
         return lista;
@@ -105,11 +115,11 @@ public class ControladorAlbum implements IControladorAlbum {
         Album album = persistence.findAlbumByName(nombre_album);
         if (album != null) {
             Collection<DataGenero> generos_album = new ArrayList<>();
-            for(Genero genero : album.getGeneros()){
+            for (Genero genero : album.getGeneros()) {
                 generos_album.add(new DataGenero(genero.getNombre()));
             }
             Artista art = album.getCreador();
-            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(),  art.getContra(),  art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()),generos_album);
+            return new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(art.getNickname(), art.getNombre(), art.getApellido(), art.getContra(), art.getEmail(), art.getFoto(), art.getNacimiento(), art.getBiografia(), art.getDirWeb()), generos_album);
         } else {
             return new DataAlbum("ALBUM NO EXISTE");
         }
@@ -131,7 +141,6 @@ public class ControladorAlbum implements IControladorAlbum {
     }
 
     //probablemente agregar como parametro coleccion de temas
-    @Override
     public void actualizarAlbum(DataAlbum dataAlbum, Collection<DataGenero> nuevosGeneros) {
         DAO_Album persistence = new DAO_Album();
         DAO_Genero persistence2 = new DAO_Genero();
@@ -158,61 +167,4 @@ public class ControladorAlbum implements IControladorAlbum {
             System.out.println("El álbum con nombre: " + dataAlbum.getNombre() + " no existe.");
         }
     }
-    @Override
-    public void eliminarDelMapaAlbums(Collection<String> albs, ControladorTema controlTema, ControladorCliente controlCli, 
-            ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo){
-        DAO_Album daoAl = new DAO_Album();
-      //  for(String albu:albs){
-            System.out.println("eliminarAlbumDeTodos()");
-            controlCli.eliminarAlbumDeTodos(this.retornarInfoAlbum("Hay Amores Que Matan"));
-            System.out.println("elminiarDelMapaTemas()");
-            //controlTema.elminiarDelMapaTemas(albu,controlCli,controlLipa,controlLipo);
-            daoAl.delete("Hay Amores Que Matan");
-            System.out.println("Se elimino el Album: " + "Hay Amores Que Matan");
-       // }
-        
-        
-    }
-    @Override
-    public void agregarAlbumAeliminados(Collection<String> coleAlbums, ControladorTema controlTema, ArtistasEliminados artEl) {
-    
-        DAO_Album daoAl = new DAO_Album();
-        for(String album : coleAlbums){
-            Album alb = daoAl.find(album);
-            
-            AlbumEliminados albEli = new AlbumEliminados(alb.getNombre(),alb.getImagen(),alb.getanioCreacion(),artEl);
-           
-        int idEl = 0;
-
-        if(daoAl.findAllIntegerEli() == null){
-            idEl = 1;
-        }else{
-            idEl = daoAl.darIdEli();
-            idEl ++;
-        }
-        albEli.setId(idEl);
-        Collection<Genero> genes = alb.getGeneros();
-        if(genes != null){
-           for(Genero gen:genes){
-                albEli.agregarGenero(gen);
-            } 
-        }
-        try {
-            daoAl.saveEl(albEli);
-            System.out.println("Eliminado guardado(Album: "+albEli.getNombre() +") exitosamente.");
-        } catch (PersistenceException e) {
-            System.out.println("Error al guardar el eliminado: " + e.getMessage());
-        }  
-            
-            //String nombre, String imagen, int anioCreacion, ArtistasEliminados artista
-            controlTema.agregarTemaAeliminados(albEli);
-            
-        }
-        
-        
-    }
-    
-    
-    
-    
 }

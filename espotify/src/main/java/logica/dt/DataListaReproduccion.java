@@ -1,10 +1,13 @@
 package logica.dt;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collection;
-import logica.controladores.ControladorAdicionalTema;
-import logica.controladores.IControladorAdicionalTema;
 
+@XmlRootElement(name = "DataListaReproduccion")
+@XmlType(propOrder = { "nombre", "foto", "creador", "temas" })
 public class DataListaReproduccion {
 
     private String nombre;
@@ -51,27 +54,30 @@ public class DataListaReproduccion {
     }
 
     public DataListaReproduccion() {
-        this.setNombre(new String());
+        this.temas = new ArrayList<>(); // Inicializa la colección
     }
 
+    @XmlElement(name = "nombre") // Anotación para el campo nombre
     public String getNombre() {
         return nombre;
     }
 
-    public DataCliente getCreadorNickname() {
+    @XmlElement(name = "creador") // Anotación para el campo creador
+    public DataCliente getCreador() {
         return creador;
     }
     
+    @XmlElement(name = "foto") // Anotación para el campo foto
     public String getFoto() {
         return foto;
     }
+
+    @XmlElement(name = "temas") // Anotación para el campo temas
     public Collection<DataTema> getTemas() {
         return temas;
     }
 
     public void agregarTema(DataTema tema) {
-        IControladorAdicionalTema registro = new ControladorAdicionalTema();
-        registro.incrementarInfoAgregadoALista(tema.getNickname(), tema.getNomAlb());
         this.temas.add(tema);
     }
 

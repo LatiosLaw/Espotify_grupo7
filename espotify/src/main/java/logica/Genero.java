@@ -16,9 +16,6 @@ public class Genero implements Serializable {
     
     @ManyToMany
     private Collection<Album> albumes_del_genero = new ArrayList<Album>();
-    
-    @ManyToMany
-    private Collection<AlbumEliminados> albumes_del_generoEli = new ArrayList<AlbumEliminados>();
             
     public Genero(){
     

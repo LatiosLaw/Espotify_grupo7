@@ -1,7 +1,6 @@
 package logica.controladores;
 
 import java.util.Collection;
-import logica.AlbumEliminados;
 import logica.dt.DataAlbum;
 import logica.dt.DataTema;
 
@@ -25,9 +24,5 @@ public interface IControladorTema {
     
     public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album);
     
-    public DataTema retornarTema2LaSecuela(String nickname, String nombre_album);
-     
-    public void elminiarDelMapaTemas(String albu , ControladorCliente controlCli,ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
-
-    public void agregarTemaAeliminados(AlbumEliminados albEli);
+     public DataTema retornarTema2LaSecuela(String nickname, String nombre_album);
 }

@@ -178,24 +178,20 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return null;
         }
     }
+    
     @Override
-    public void eliminarTemaDeTodasLasListas(DataTema dtTema) {
+    public Collection<DataListaPorDefecto> retornarListasPorDefecto(){
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         
-        DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
-         
-         Collection<ListaPorDefecto> listas = dao.devolverListasPorDefecto();
-                 
-         for(ListaPorDefecto lista : listas){
-             Collection<tema> temas = lista.getTemas();
-             for(tema temon: temas){
-                 if(temon.getNickname().equals(dtTema.getNickname())){
-                     this.quitarTema(lista.getNombreLista(), lista.getGenero().getNombre(), temon.getNickname(), temon.getNombreAlbum());
-                 } 
-             }
-             
-         }
+        Collection<ListaPorDefecto> listas =  persistence.devolverListasPorDefecto();
         
+        Collection<DataListaPorDefecto> dataListas = new ArrayList<>();
         
+        for(ListaPorDefecto lista : listas){
+            dataListas.add(new DataListaPorDefecto(lista.getNombreLista(), lista.getFoto(), 0, new DataGenero(lista.getGenero().getNombre())));
+        }
+        
+        return dataListas;
     }
     
 }

@@ -1,5 +1,4 @@
-package presentacion;
-
+import presentacion.FormPrin;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +17,8 @@ public class EspotifyMain {
         FormPrin fp = new FormPrin();
         fp.setVisible(true);
         
-        Publicador publicador = new Publicador();
+        Publicador servicio = new Publicador();
         
-        publicador.publicar();
+        servicio.publicar();
     }
 }
