@@ -257,7 +257,7 @@ DAO_Tema daoTema = new DAO_Tema();
     public void actualizarLista(DataListaParticular lista){
         DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
         DAO_Tema dao_t = new DAO_Tema();
-        ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreadorNickname().getNickname(), lista.getNombre());
+        ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreador().getNickname(), lista.getNombre());
         Iterator<DataTema> iterator = lista.getTemas().iterator();
         while (iterator.hasNext()) {
             DataTema tema = iterator.next();

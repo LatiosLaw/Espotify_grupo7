@@ -1,6 +1,7 @@
 package logica.dt;
 
 import java.time.LocalDate;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 public class DataUsuario {
 
@@ -24,12 +25,7 @@ public class DataUsuario {
     }
 
     public DataUsuario() {
-        this.setNickname(new String());
-        this.setNombre(new String());
-        this.setApellido(new String());
-        this.setCorreo(new String());
-        this.setFoto(new String());
-        this.setFechaNac(null);
+
     }
 
     public DataUsuario(String nickname, String DTYPE){
@@ -57,6 +53,7 @@ public class DataUsuario {
         return correo;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getFechaNac() {
         return fechaNac;
     }

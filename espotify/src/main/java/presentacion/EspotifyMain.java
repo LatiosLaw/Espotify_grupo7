@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import servicios.Publicador;
 
 public class EspotifyMain {
 
@@ -16,5 +17,9 @@ public class EspotifyMain {
         }
         FormPrin fp = new FormPrin();
         fp.setVisible(true);
+        
+        Publicador publicador = new Publicador();
+        
+        publicador.publicar();
     }
 }
