@@ -8,10 +8,13 @@ import java.util.Iterator;
 import javax.persistence.PersistenceException;
 import logica.Artista;
 import logica.ArtistasEliminados;
+import logica.Cliente;
 import logica.Usuario;
 import logica.dt.DataArtista;
 import logica.dt.DataArtistaEli;
+import logica.dt.DataCliente;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataUsuario;
 import persistencia.DAO_Usuario;
 
 public class ControladorArtista implements IControladorArtista {
@@ -186,6 +189,42 @@ public class ControladorArtista implements IControladorArtista {
          this.eliminarDelMapaArtista2(nickArt, controlAl, controlTema, controlCli, controlLipa, controlLipo);
          
      }
+     
+     @Override
+    public DataUsuario retornarUsuario(String nickname){
+        Usuario retorno;
+        DAO_Usuario persistence = new DAO_Usuario();
+        try {
+            retorno = persistence.findUsuarioByNick(nickname);
+            if (retorno != null && retorno instanceof Artista artista) {
+                return new DataArtista(
+                        retorno.getNickname(),
+                        retorno.getNombre(),
+                        retorno.getApellido(),
+                        retorno.getContra(),
+                        retorno.getEmail(),
+                        retorno.getFoto(),
+                        retorno.getNacimiento(),
+                        artista.getBiografia(),
+                        artista.getDirWeb());
+            } else if (retorno != null && retorno instanceof Cliente cliente){
+                return new DataCliente(
+                        retorno.getNickname(),
+                        retorno.getNombre(),
+                        retorno.getApellido(),
+                        retorno.getContra(),
+                        retorno.getEmail(),
+                        retorno.getFoto(),
+                        retorno.getNacimiento());
+            } else {
+                System.out.println("El usuario con nickname " + nickname + " no es un Artista.");
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("Error al buscar el artista: " + e.getMessage());
+            return null;
+        }
+    }
       @Override
      public Collection<DataArtistaEli> findAllEli(){
          
@@ -225,6 +264,4 @@ public class ControladorArtista implements IControladorArtista {
          Collection<String> cole = dao.findAlbumsFavStringEli(nick);
           return cole;
      }
-     
-     
 }

@@ -216,7 +216,20 @@ public class ControladorAlbum implements IControladorAlbum {
         
     }
 
-
+    @Override
+    public Collection<DataAlbum> retornarDataAlbumes(){
+        DAO_Album persistence = new DAO_Album();
+        
+        Collection<Album> albumes = persistence.findAll();
+        
+        Collection<DataAlbum> albumesRetornables = new ArrayList<>();
+        
+        for(Album album : albumes){
+            albumesRetornables.add(new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(album.getCreador().getNickname())));
+        }
+        
+        return albumesRetornables;
+    }
 
 
 }

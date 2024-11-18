@@ -26,4 +26,5 @@ public interface IControladorAlbum {
 
     public void agregarAlbumAeliminados(Collection<String> coleAlbums, ControladorTema controlTema, ArtistasEliminados artEl);
 
+    public Collection<DataAlbum> retornarDataAlbumes();
 }

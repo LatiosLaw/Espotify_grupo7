@@ -3,7 +3,12 @@ package logica.dt;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.time.LocalDate;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlRootElement(name = "DataCliente") // Define el elemento raíz en el XML
+@XmlType(propOrder = {"seguidos", "temasFavoritos", "albumesFavoritos", "listasFavoritas"}) // Define el orden de los elementos
 public class DataCliente extends DataUsuario {
 
     private Collection<DataUsuario> seguidos;
@@ -12,7 +17,7 @@ public class DataCliente extends DataUsuario {
     private Collection<DataListaReproduccion> listasFavoritas;
 
     public DataCliente() {
-
+        // Constructor por defecto requerido por JAXB
     }
 
     public DataCliente(String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac) {
@@ -23,22 +28,26 @@ public class DataCliente extends DataUsuario {
         this.listasFavoritas = new ArrayList<>();
     }
     
-    public DataCliente(String nombre){
+    public DataCliente(String nombre) {
         super(nombre);
     }
 
+    @XmlElement(name = "seguidos") // Mapea la colección a un elemento XML
     public Collection<DataUsuario> getSeguidos() {
         return seguidos;
     }
 
+    @XmlElement(name = "temasFavoritos") // Mapea la colección a un elemento XML
     public Collection<DataTema> getTemasFavoritos() {
         return temasFavoritos;
     }
 
+    @XmlElement(name = "albumesFavoritos") // Mapea la colección a un elemento XML
     public Collection<DataAlbum> getAlbumesFavoritos() {
         return albumesFavoritos;
     }
 
+    @XmlElement(name = "listasFavoritas") // Mapea la colección a un elemento XML
     public Collection<DataListaReproduccion> getListasFavoritas() {
         return listasFavoritas;
     }

@@ -220,7 +220,7 @@ public class ControladorCliente implements IControladorCliente {
             ListaReproduccion lis;
             //if (lis == null) {
                 if (nomlista instanceof DataListaParticular) {
-                     lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreadorNickname().getNickname());
+                     lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(), nomlista.getCreador().getNickname());
                      if (lis == null) {
                           lis = new ListaParticular(nomlista.getNombre(), ((DataListaParticular) nomlista).getVisibilidad());
                      }
@@ -297,7 +297,7 @@ public class ControladorCliente implements IControladorCliente {
         Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
         if (cli != null) {
             DAO_ListaReproduccion listaPersistence = new DAO_ListaReproduccion();
-            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(),nomlista.getCreadorNickname().getNickname());
+            ListaReproduccion lis = listaPersistence.findListaReproduccionPorNombre(nomlista.getNombre(),nomlista.getCreador().getNickname());
             if (lis != null) {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarListasFav(lis);
