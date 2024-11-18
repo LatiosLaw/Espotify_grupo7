@@ -76,7 +76,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
+          <StringArray count="10">
             <StringItem index="0" value="OPT"/>
             <StringItem index="1" value="Agregar Usuario"/>
             <StringItem index="2" value="Seguir Usuario"/>
@@ -86,6 +86,7 @@
             <StringItem index="6" value="Agregar a Favoritos"/>
             <StringItem index="7" value="Actualizar estado de Suscripcion"/>
             <StringItem index="8" value="Lista de Registros"/>
+            <StringItem index="9" value="Lista de Artistas Eliminados"/>
           </StringArray>
         </Property>
       </Properties>

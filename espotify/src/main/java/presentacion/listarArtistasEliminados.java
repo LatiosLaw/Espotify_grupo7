@@ -2,15 +2,19 @@ package presentacion;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.controladores.IControladorArtista;
 import logica.controladores.IControladorCliente;
+import logica.dt.DataArtista;
+import logica.dt.DataArtistaEli;
 import logica.dt.DataRegi;
 
 public class listarArtistasEliminados extends javax.swing.JPanel {
  
-   
+   int id=0;
     private final IControladorArtista controlArt;
     public listarArtistasEliminados( IControladorArtista ica ) {
         initComponents();
@@ -38,25 +42,41 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
         txtNombre = new javax.swing.JTextField();
         txtFechaNaci1 = new javax.swing.JTextField();
         jScrollPane7 = new javax.swing.JScrollPane();
-        lstListas = new javax.swing.JList<>();
+        lstTemas = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtaBiografia = new javax.swing.JTextArea();
         txtPaginaWeb = new javax.swing.JTextField();
         lblAlbumSiguiendo = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         lstAlbumSiguiendo1 = new javax.swing.JList<>();
+        txtFechaEli = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
         setPreferredSize(new java.awt.Dimension(860, 471));
 
         cbxArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", " " }));
+        cbxArtistas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxArtistasMouseClicked(evt);
+            }
+        });
+        cbxArtistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxArtistasActionPerformed(evt);
+            }
+        });
 
         txtNickName.setEditable(false);
 
         lblListas.setText("Temas");
 
         txtApellido.setEditable(false);
+        txtApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidoActionPerformed(evt);
+            }
+        });
 
         txtCorreoElectronico.setEditable(false);
         txtCorreoElectronico.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +89,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
 
         txtFechaNaci1.setEditable(false);
 
-        jScrollPane7.setViewportView(lstListas);
+        jScrollPane7.setViewportView(lstTemas);
 
         txtaBiografia.setEditable(false);
         txtaBiografia.setColumns(20);
@@ -83,73 +103,122 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
 
         jScrollPane9.setViewportView(lstAlbumSiguiendo1);
 
+        txtFechaEli.setEditable(false);
+        txtFechaEli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaEliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(cbxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblListas)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAlbumSiguiendo))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNickName)
+                                .addComponent(txtNombre)
+                                .addComponent(txtApellido)
+                                .addComponent(txtFechaNaci1)
+                                .addComponent(txtCorreoElectronico)
+                                .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFechaEli, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(105, 105, 105)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblListas)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlbumSiguiendo))))
                 .addGap(245, 245, 245))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(217, 217, 217)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtFechaNaci1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtPaginaWeb, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNickName))
-                    .addContainerGap(409, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(cbxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lblAlbumSiguiendo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(lblAlbumSiguiendo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(cbxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(lblListas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(188, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txtFechaNaci1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(84, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(txtNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFechaNaci1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPaginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFechaEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCorreoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoElectronicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
+
+    private void cbxArtistasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxArtistasMouseClicked
+       
+    }//GEN-LAST:event_cbxArtistasMouseClicked
+
+    private void cbxArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxArtistasActionPerformed
+          
+        String token = String.valueOf(this.cbxArtistas.getSelectedItem());
+        String[] rokenDivide = token.split("/");
+        
+      if(token.equals("OPT")){
+        JOptionPane.showMessageDialog(null, "Elija otra opcion aparte de OPT");
+        }else{
+          
+          DataArtistaEli eli = this.controlArt.findEli(rokenDivide[0]);
+          id = eli.getId();
+          this.txtNickName.setText(eli.getNickname());
+          this.txtNombre.setText(eli.getNombre());
+          this.txtApellido.setText(eli.getApellido());
+          this.txtCorreoElectronico.setText(eli.getCorreo());
+          this.txtPaginaWeb.setText(eli.getDirWeb());
+          this.txtFechaNaci1.setText(String.valueOf(eli.getFechaNac()));
+          this.txtaBiografia.setText(eli.getBiografia());
+          this.txtFechaEli.setText(String.valueOf(eli.GetFehcaEli()));
+          
+          cargarDatosListas();
+          
+          
+      }
+
+    }//GEN-LAST:event_cbxArtistasActionPerformed
+
+    private void txtFechaEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaEliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaEliActionPerformed
+
+    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxArtistas;
@@ -160,9 +229,10 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
     private javax.swing.JLabel lblAlbumSiguiendo;
     private javax.swing.JLabel lblListas;
     private javax.swing.JList<String> lstAlbumSiguiendo1;
-    private javax.swing.JList<String> lstListas;
+    private javax.swing.JList<String> lstTemas;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreoElectronico;
+    private javax.swing.JTextField txtFechaEli;
     private javax.swing.JTextField txtFechaNaci1;
     private javax.swing.JTextField txtNickName;
     private javax.swing.JTextField txtNombre;
@@ -173,9 +243,47 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
 
 
    private void cargarDatos(){
-        
+        Collection<DataArtistaEli> cole = this.controlArt.findAllEli();
+        DefaultComboBoxModel<String> model;
+        model = new DefaultComboBoxModel<>();
+        model.addElement("OPT");
+        for (DataArtistaEli elemento : cole) {
+            String idPosta = String.valueOf(elemento.getId()) + "/" +elemento.getNickname();
+            model.addElement(idPosta);
+        }
+        this.cbxArtistas.setModel(model);
 
    }
+
+    private void cargarDatosListas() {
+
+        Collection<String> coleTemas = this.controlArt.listarTemasEli(String.valueOf(id));
+        
+        Collection<String> coleAlbums = this.controlArt.listarTemasEli(String.valueOf(id));
+        
+        DefaultListModel<String> model;
+
+        model = new DefaultListModel<>();
+        
+        DefaultListModel<String> model2;
+
+        model2 = new DefaultListModel<>();
+
+        for (String elemento : coleTemas) {
+            //  System.out.print("Elemento de lstSeguidos"+elemento);
+            String nombre = elemento;
+            model.addElement(nombre);
+        }
+        lstTemas.setModel(model);
+        
+        for (String elemento : coleAlbums) {
+            //  System.out.print("Elemento de lstSeguidos"+elemento);
+            String nombre = elemento;
+            model2.addElement(nombre);
+        }
+        lstTemas.setModel(model2);
+        
+    }
    
    
 }

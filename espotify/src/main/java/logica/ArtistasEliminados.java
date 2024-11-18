@@ -39,6 +39,7 @@ public class ArtistasEliminados implements Serializable {
     //Cosas de artista 
     private String biografia;
     private String dirWeb;
+    private LocalDate fechaEli;
     
      @OneToMany(mappedBy = "creador")
     private Collection<AlbumEliminados> albumes = new ArrayList<AlbumEliminados>();
@@ -68,6 +69,12 @@ public class ArtistasEliminados implements Serializable {
     }
     public void setId(int id){
         this.id = id;
+    } 
+      public LocalDate getFechaEli() {
+        return fechaEli;
+    }
+    public void setFechaEli(LocalDate fecha){
+        this.fechaEli = fecha;
     } 
      
     public String getNombre() {

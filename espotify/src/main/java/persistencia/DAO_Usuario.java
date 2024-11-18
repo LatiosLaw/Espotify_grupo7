@@ -436,5 +436,32 @@ public class DAO_Usuario {
        return eli.isEmpty() ? null : eli;
     
     }
+    public Collection<ArtistasEliminados> findAllStringEli() {
+        List<ArtistasEliminados> eli = entityManager.createQuery("SELECT s FROM ArtistasEliminados s", ArtistasEliminados.class).getResultList();
+       return eli.isEmpty() ? null : eli;
     
+    }
+    public ArtistasEliminados findEli(String nick) {
+        int token = Integer.parseInt(nick);
+         ArtistasEliminados eli = entityManager.createQuery("SELECT s FROM ArtistasEliminados s WHERE s.id = :token", ArtistasEliminados.class)
+                 .setParameter("token", token)
+                 .getSingleResult();
+       return eli;
+    }
+    public Collection<String> findAlbumsFavStringEli(String nick) {
+        int token = Integer.parseInt(nick);
+        List<String> eli = entityManager.createQuery("SELECT s.nickname FROM ArtistasEliminados s JOIN s.albumes a where s.id = :token", String.class)
+                .setParameter("token", token)
+                .getResultList();
+       return eli.isEmpty() ? null : eli;
+    
+    }
+     public Collection<String> findTemasFavStringEli(String nick) {
+        int token = Integer.parseInt(nick);
+         List<String> eli = entityManager.createQuery("SELECT s.nombreTema from temasEliminados s JOIN s.albumEli a JOIN a.creador c where c.id = :token", String.class)
+                .setParameter("token", token)
+                .getResultList();
+       return eli.isEmpty() ? null : eli;
+    
+    }
 }
