@@ -322,8 +322,6 @@ public class ControladorCliente implements IControladorCliente {
                 if (cli instanceof Cliente cliente) {
                     cliente.quitarAlbumFav(alb);
                     persistence.update(cliente);
-                  //  Scanner in = new Scanner(System.in);
-                    // String s = in.nextLine();
                 }
             } else {
                 System.out.println("El Album no existe.");
@@ -334,30 +332,7 @@ public class ControladorCliente implements IControladorCliente {
     }
     @Override
     public void eliminarAlbum2(DataCliente nickcli, DataAlbum nomalbum) {
-        DAO_Usuario persistence = new DAO_Usuario();
-        Usuario cli = persistence.findUsuarioByNick(nickcli.getNickname());
-        if (cli != null) {
-            DAO_Album albumPersistence = new DAO_Album();
-            Album alb = albumPersistence.findAlbumByName(nomalbum.getNombre());
-            if (alb != null) {
-                Collection<String> cole = this.obtenerAlbumFavCliente(cli.getNickname());
-               System.out.println("Antes del for");
-                for(String album: cole){
-                     System.out.println("Comparaciom: album:" + album + "// alb.getNombre: " + alb.getNombre());
-                    if(album.equals(alb.getNombre())){
-                        if (cli instanceof Cliente cliente) {
-                            cliente.quitarAlbumFav(alb);
-                            persistence.update(cliente);
-                            System.out.println("Se acyualizo para: " + nickcli.getNickname());
-                        }   
-                    }
-                }
-            } else {
-                System.out.println("El álbum no existe.");
-            }
-        } else {
-            System.out.println("Cliente no encontrado.");
-        }
+      
     }
     @Override
     public void eliminarAlbumDeTodos(DataAlbum nomalbum) {
@@ -367,16 +342,11 @@ public class ControladorCliente implements IControladorCliente {
         for(Usuario usr:usrs){
             if (usr instanceof Cliente cliente) {
                 
-                this.eliminarAlbum2(this.consultarPerfilCliente(usr.getNickname()), nomalbum);
-            
+                this.eliminarAlbum(this.consultarPerfilCliente(usr.getNickname()), nomalbum);
+                
             }
         }  
-           
-           
-           
-           
-           
-           
+   
     }
     
     @Override

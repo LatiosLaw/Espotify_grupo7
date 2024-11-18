@@ -11,6 +11,7 @@ import logica.ArtistasEliminados;
 import logica.Cliente;
 import logica.Usuario;
 import logica.dt.DataArtista;
+import logica.dt.DataArtistaEli;
 import logica.dt.DataCliente;
 import logica.dt.DataErrorBundle;
 import logica.dt.DataUsuario;
@@ -156,7 +157,7 @@ public class ControladorArtista implements IControladorArtista {
             idEl ++;
         }
         artEl.setId(idEl);
-             
+            artEl.setFechaEli(LocalDate.now());
             try {
              dao.saveEli(artEl);
             System.out.println("Eliminado guardado(Artista: "+artEl.getNickname() + ") exitosamente.");
@@ -224,4 +225,43 @@ public class ControladorArtista implements IControladorArtista {
             return null;
         }
     }
+      @Override
+     public Collection<DataArtistaEli> findAllEli(){
+         
+         DAO_Usuario dao = new DAO_Usuario();
+          Collection<ArtistasEliminados> cole =  dao.findAllStringEli();
+          Collection<DataArtistaEli> coleString = new ArrayList<>();
+         for(ArtistasEliminados eli: cole){
+             DataArtistaEli arti =  new DataArtistaEli(eli.getNickname(), eli.getNombre(),eli.getApellido(),eli.getContra(),eli.getEmail(),eli.getFoto(),eli.getNacimiento(),eli.getBiografia(),eli.getDirWeb(), eli.getFechaEli());
+             arti.setId(eli.getId());
+             coleString.add(arti);
+         }
+         return  coleString;
+     }
+     @Override
+     public DataArtistaEli findEli(String nick){
+        DAO_Usuario dao = new DAO_Usuario();
+         ArtistasEliminados eli = dao.findEli(nick);
+         DataArtistaEli arti = new DataArtistaEli(eli.getNickname(), eli.getNombre(),eli.getApellido(),eli.getContra(),eli.getEmail(),eli.getFoto(),eli.getNacimiento(),eli.getBiografia(),eli.getDirWeb(), eli.getFechaEli());
+         arti.setId(eli.getId());
+
+//String nickname, String nombre, String apellido, String contraseña, String correo, String foto_perfil, LocalDate fechaNac, String biografia, String dirWeb) {
+       
+         
+         return arti;
+     }
+     @Override
+     public Collection<String> listarTemasEli(String nick){
+          DAO_Usuario dao = new DAO_Usuario();
+         
+          Collection<String> cole = dao.findTemasFavStringEli(nick);
+          
+         return cole;
+     }
+     @Override
+     public Collection<String> listarAlbumsEli(String nick){
+          DAO_Usuario dao = new DAO_Usuario();
+         Collection<String> cole = dao.findAlbumsFavStringEli(nick);
+          return cole;
+     }
 }

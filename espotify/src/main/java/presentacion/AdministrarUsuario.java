@@ -59,7 +59,7 @@ public class AdministrarUsuario extends javax.swing.JPanel {
             .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos", "Actualizar estado de Suscripcion", "Lista de Registros" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OPT", "Agregar Usuario", "Seguir Usuario", "Dejar de seguir Usuario", "Consultar Perfil de Usuario", "Eliminar de Favoritos", "Agregar a Favoritos", "Actualizar estado de Suscripcion", "Lista de Registros", "Lista de Artistas Eliminados" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -179,6 +179,16 @@ public class AdministrarUsuario extends javax.swing.JPanel {
 
                 pnlAU.removeAll();
                 pnlAU.add(lrg);
+                pnlAU.revalidate();
+                pnlAU.repaint();
+            }
+            case "Lista de Artistas Eliminados" -> {
+                listarArtistasEliminados lae = new listarArtistasEliminados(controlArt);
+                lae.setLocation(0, 0);
+                lae.setSize(860, 471);
+
+                pnlAU.removeAll();
+                pnlAU.add(lae);
                 pnlAU.revalidate();
                 pnlAU.repaint();
             }
