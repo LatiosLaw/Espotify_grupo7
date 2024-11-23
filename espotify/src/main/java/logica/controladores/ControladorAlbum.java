@@ -204,12 +204,13 @@ public class ControladorAlbum implements IControladorAlbum {
         try {
             daoAl.saveEl(albEli);
             System.out.println("Eliminado guardado(Album: "+albEli.getNombre() +") exitosamente.");
+            controlTema.agregarTemaAeliminados(albEli);
         } catch (PersistenceException e) {
             System.out.println("Error al guardar el eliminado: " + e.getMessage());
         }  
             
             //String nombre, String imagen, int anioCreacion, ArtistasEliminados artista
-            controlTema.agregarTemaAeliminados(albEli);
+            
             
         }
         

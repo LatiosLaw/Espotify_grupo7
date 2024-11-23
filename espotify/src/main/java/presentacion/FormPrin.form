@@ -47,7 +47,7 @@
                   <Component id="btnAdLi" alignment="3" pref="28" max="32767" attributes="0"/>
                   <Component id="btnAdAl" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnAdUs" alignment="3" max="32767" attributes="0"/>
-                  <Component id="btnCarDat" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnCarDat" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAdGn" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

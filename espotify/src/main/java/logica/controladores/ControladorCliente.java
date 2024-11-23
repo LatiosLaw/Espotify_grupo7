@@ -320,7 +320,23 @@ public class ControladorCliente implements IControladorCliente {
             Album alb = Persistence2.findAlbumByName(nomalbum.getNombre());
             if (alb != null) {
                 if (cli instanceof Cliente cliente) {
+                    System.out.println("EliminarAlbum");
+                    System.out.println("**************************************");
+                      System.out.print("Album a eliminar:");
+                      System.out.println(alb.getNombre());
+                      System.out.print("Del cliente:");
+                      System.out.println(cliente.getNickname());
+                      System.out.println("**************************************");
                     cliente.quitarAlbumFav(alb);
+                    Collection<Album> alms = cliente.getAlbumFav();
+                    System.out.println("Albums post eliminar");
+                    System.out.println("------------------------------------------");
+                    for(Album album: alms){
+                        
+                        System.out.println(album.getNombre());
+                        
+                    }
+                    System.out.println("------------------------------------------");
                     persistence.update(cliente);
                 }
             } else {
@@ -653,6 +669,19 @@ public class ControladorCliente implements IControladorCliente {
          controlDePoblacion();
          nukearAlosViejos();
     }
-    
+    @Override
+    public void eliminarDeTodosAlrtista(String nickArt){
+        
+        DAO_Usuario persistence = new DAO_Usuario();
+        Collection<Usuario> clis = persistence.findAll();
+        for(Usuario usr : clis){
+            if (usr != null && usr instanceof Cliente cliente) {
+                if(corroborarSiEstaenSeguidos(usr.getNickname(),nickArt) == true){
+                    this.dejarDeSeguirUsuario(usr.getNickname(), nickArt);
+                }
+            }
+        }
+         
+    }
     
 }

@@ -78,7 +78,9 @@ public class Cliente extends Usuario {
     public void albumFav(Album album) {
         this.albumes_favoritos.add(album);
     }
-    
+    public Collection<Album> getAlbumFav() {
+        return this.albumes_favoritos;
+    }
     public void listasFav(ListaReproduccion lista) {
         if(lista instanceof ListaParticular listaParticular){
             System.out.println("La visibilidad de la lista: " + lista.getNombreLista() + " es: " + listaParticular.getVisibilidad());
@@ -97,7 +99,22 @@ public class Cliente extends Usuario {
     }
     
     public void quitarAlbumFav(Album album) {
-        this.albumes_favoritos.remove(album);
+        boolean tokenBool = false;
+        Album tokenAl = null;
+        for(Album token: this.albumes_favoritos){
+            
+            if(album.getNombre().equals(token.getNombre())){
+               tokenBool = true;
+               tokenAl = token;
+            }else{System.out.println("No se encontro ese Album en favs:" + token.getNombre());}
+            
+        }
+        
+            if(tokenBool == true){
+                 this.albumes_favoritos.remove(tokenAl);
+            }
+        
+        
     }
     
     public void quitarListasFav(ListaReproduccion lista) {

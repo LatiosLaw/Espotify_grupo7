@@ -86,4 +86,6 @@ public interface IControladorCliente {
     
     public void eliminarAlbum2(DataCliente nickcli, DataAlbum nomalbum);
     
+    public void eliminarDeTodosAlrtista(String nickArt);
+    
 }
