@@ -180,4 +180,10 @@ public interface IPublicador {
     @WebMethod
     public Collection<DataTema> obtenerTemasDeAlbumes(String nombreAlbum);
     
+    @WebMethod
+    public void hiroshimaYNagasaki();
+    
+    @WebMethod
+    public void agregarRegistro(String nickname, String os, String navegador, String ip, String url);
+    
 }

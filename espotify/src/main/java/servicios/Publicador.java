@@ -472,6 +472,18 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
         ControladorTema controlador = new ControladorTema();
         return controlador.retornarTemasDeAlbum(nombreAlbum);
     }
+    
+    @Override
+    public void hiroshimaYNagasaki(){
+        ControladorCliente controlador = new ControladorCliente();
+        controlador.hiroshimaYnagasaki();
+    }
+    
+    @Override
+    public void agregarRegistro(String nickname, String os, String navegador, String ip, String url){
+        ControladorCliente controlador = new ControladorCliente();
+        controlador.agregarRegistro(nickname, os, navegador, ip, url);
+    }
 
     @WebMethod(exclude = true)
     public void publicar() {
