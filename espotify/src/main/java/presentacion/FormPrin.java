@@ -83,11 +83,9 @@ public class FormPrin extends javax.swing.JFrame {
         jProgressBar1.setForeground(new java.awt.Color(51, 255, 51));
 
         lblCargando.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
-        lblCargando.setForeground(new java.awt.Color(0, 0, 0));
         lblCargando.setText("Cargando Datos");
 
         lblProgreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblProgreso.setForeground(new java.awt.Color(0, 0, 0));
         lblProgreso.setText("0%");
 
         javax.swing.GroupLayout pnlPrinLayout = new javax.swing.GroupLayout(pnlPrin);
@@ -184,7 +182,7 @@ public class FormPrin extends javax.swing.JFrame {
                     .addComponent(btnAdLi, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(btnAdAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdUs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCarDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCarDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdGn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

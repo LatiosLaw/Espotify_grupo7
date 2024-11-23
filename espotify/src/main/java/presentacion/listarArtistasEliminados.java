@@ -48,7 +48,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
         txtPaginaWeb = new javax.swing.JTextField();
         lblAlbumSiguiendo = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        lstAlbumSiguiendo1 = new javax.swing.JList<>();
+        lstAlbum = new javax.swing.JList<>();
         txtFechaEli = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
@@ -101,7 +101,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
 
         lblAlbumSiguiendo.setText("Albumes :");
 
-        jScrollPane9.setViewportView(lstAlbumSiguiendo1);
+        jScrollPane9.setViewportView(lstAlbum);
 
         txtFechaEli.setEditable(false);
         txtFechaEli.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +228,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblAlbumSiguiendo;
     private javax.swing.JLabel lblListas;
-    private javax.swing.JList<String> lstAlbumSiguiendo1;
+    private javax.swing.JList<String> lstAlbum;
     private javax.swing.JList<String> lstTemas;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreoElectronico;
@@ -259,7 +259,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
 
         Collection<String> coleTemas = this.controlArt.listarTemasEli(String.valueOf(id));
         
-        Collection<String> coleAlbums = this.controlArt.listarTemasEli(String.valueOf(id));
+        Collection<String> coleAlbums = this.controlArt.listarAlbumsEli(String.valueOf(id));
         
         DefaultListModel<String> model;
 
@@ -281,7 +281,7 @@ public class listarArtistasEliminados extends javax.swing.JPanel {
             String nombre = elemento;
             model2.addElement(nombre);
         }
-        lstTemas.setModel(model2);
+        lstAlbum.setModel(model2);
         
     }
    

@@ -238,7 +238,7 @@ public class ControladorTema implements IControladorTema {
             idEl ++;
         }
         teEl.setId(idEl);
-             
+        teEl.setAlbum(albEli);
         try {
             persistence.saveEl(teEl);
             System.out.println("Eliminado guardado(Tema: " + teEl.getNickname()+ ") exitosamente.");

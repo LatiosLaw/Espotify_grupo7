@@ -450,7 +450,7 @@ public class DAO_Usuario {
     }
     public Collection<String> findAlbumsFavStringEli(String nick) {
         int token = Integer.parseInt(nick);
-        List<String> eli = entityManager.createQuery("SELECT s.nickname FROM ArtistasEliminados s JOIN s.albumes a where s.id = :token", String.class)
+        List<String> eli = entityManager.createQuery("SELECT a.nombre FROM ArtistasEliminados s JOIN s.albumes a where s.id = :token", String.class)
                 .setParameter("token", token)
                 .getResultList();
        return eli.isEmpty() ? null : eli;
