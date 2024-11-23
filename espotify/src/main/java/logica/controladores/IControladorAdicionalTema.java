@@ -1,8 +1,12 @@
 package logica.controladores;
 
+import logica.Registro_tema;
+
 public interface IControladorAdicionalTema {
 
     public void crearRegistroTema(String nombre_tema, String nombre_album_tema);
+    
+    public Registro_tema devolverRegistroTema(String nombre_tema, String nombre_album_tema);
      
      public void incrementarInfoReproduccion(String nombre_tema, String nombre_album);
      

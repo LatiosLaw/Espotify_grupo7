@@ -6,6 +6,13 @@ import persistencia.DAO_RegistroTema;
 public class ControladorAdicionalTema implements IControladorAdicionalTema {
 
     @Override
+    public Registro_tema devolverRegistroTema(String nombre_tema, String nombre_album_tema){
+        DAO_RegistroTema persistence = new DAO_RegistroTema();
+        Registro_tema nuevo = persistence.find(nombre_tema, nombre_album_tema);
+        return nuevo;
+    }
+    
+    @Override
     public void crearRegistroTema(String nombre_tema, String nombre_album_tema){
         DAO_RegistroTema persistence = new DAO_RegistroTema();
         Registro_tema nuevo = new Registro_tema(nombre_tema, nombre_album_tema);
