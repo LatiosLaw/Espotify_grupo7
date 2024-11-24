@@ -9,6 +9,7 @@ import logica.Album;
 import logica.AlbumEliminados;
 import logica.tema;
 import logica.dt.DataAlbum;
+import logica.dt.DataArtista;
 import logica.dt.DataTema;
 import logica.temasEliminados;
 import persistencia.DAO_Album;
@@ -38,7 +39,7 @@ public class ControladorTema implements IControladorTema {
             }
         }
     }
-    
+
     @Override
     public boolean crearTemaCasiCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion) {
         tema nuevo_tema = new tema(nombre_tema, nombre_album, duracion, metodo_de_acceso, archivo, posicion);
@@ -59,7 +60,7 @@ public class ControladorTema implements IControladorTema {
             }
         }
     }
-    
+
     @Override
     public boolean crearTemaCompleto(String nombre_tema, String nombre_album, int duracion, String metodo_de_acceso, String archivo, Integer posicion, DataAlbum album) {
         DAO_Album persistence_alb = new DAO_Album();
@@ -93,7 +94,8 @@ public class ControladorTema implements IControladorTema {
             throw new IllegalArgumentException("El tema con nickname " + nickname + " no existe.");
         }
     }
-     @Override
+
+    @Override
     public DataTema retornarTema2LaSecuela(String nickname, String nombre_album) {
         tema retorno;
         DAO_Tema persistence = new DAO_Tema();
@@ -102,9 +104,10 @@ public class ControladorTema implements IControladorTema {
             return new DataTema(retorno.getNickname(), retorno.getNombreAlbum(), retorno.getDuracion(), new DataAlbum(retorno.getNombreAlbum()), retorno.getAcceso(), retorno.getArchivo());
         } else {
             return null;
-           
+
         }
     }
+
     @Override
     public Collection<DataTema> retornarTemasDeAlbum(String nombre_album) {
         Collection<DataTema> listaDeTemas = new ArrayList<>();
@@ -122,10 +125,10 @@ public class ControladorTema implements IControladorTema {
             return null;
         }
     }
-    
+
     @Override
-    public Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista){
-        if(tipo_lista == 1){ // CASO POR DEFECTO
+    public Collection<DataTema> retornarTemasDeLaLista(String nombre_lista, Integer tipo_lista) {
+        if (tipo_lista == 1) { // CASO POR DEFECTO
             Collection<DataTema> listaDeTemas = new ArrayList<>();
             List<tema> retorno;
             DAO_Tema persistence = new DAO_Tema();
@@ -140,7 +143,7 @@ public class ControladorTema implements IControladorTema {
             } else {
                 return null;
             }
-        }else{ // CASO PARTICULAR
+        } else { // CASO PARTICULAR
             Collection<DataTema> listaDeTemas = new ArrayList<>();
             List<tema> retorno;
             DAO_Tema persistence = new DAO_Tema();
@@ -172,7 +175,7 @@ public class ControladorTema implements IControladorTema {
         DAO_Tema persistence = new DAO_Tema();
         persistence.delete(nickname, nombre_album);
     }
-    
+
     @Override
     public Collection<String> retornarTemasDeAlbumStringEdition(String nombre_album) {
         Collection<String> listaDeTemas = new ArrayList<>();
@@ -190,67 +193,76 @@ public class ControladorTema implements IControladorTema {
             return null;
         }
     }
+
     @Override
-    public void elminiarDelMapaTemas(String albu , ControladorCliente controlCli, 
+    public void elminiarDelMapaTemas(String albu, ControladorCliente controlCli,
             ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo) {
-        
+
         DAO_Tema persistence = new DAO_Tema();
         Collection<tema> temas = persistence.findFromAlbum(albu);
-      
-        for(tema temon: temas){
-            
+
+        for (tema temon : temas) {
+
             DataTema dtTema = new DataTema();
-           
+
             dtTema.setNickname(temon.getNickname());
             dtTema.setNomAlb(albu);
-           
-            
-             System.out.println("eliminarTemaDeTodos()");
+
+            System.out.println("eliminarTemaDeTodos()");
             controlCli.eliminarTemaDeTodos(dtTema);
-            
-             System.out.println("eliminarTemaDeTodasLasListas1()");
+
+            System.out.println("eliminarTemaDeTodasLasListas1()");
             controlLipa.eliminarTemaDeTodasLasListas(dtTema);
-            
-             System.out.println("eliminarTemaDeTodasLasListas2()");
+
+            System.out.println("eliminarTemaDeTodasLasListas2()");
             controlLipo.eliminarTemaDeTodasLasListas(dtTema);
-            
+
             persistence.delete(dtTema.getNickname(), albu);
             System.out.println("Se elimino el tema: " + dtTema.getNickname());
         }
-    
+
     }
+
     @Override
     public void agregarTemaAeliminados(AlbumEliminados albEli) {
-          DAO_Tema persistence = new DAO_Tema();
-          
-          Collection<tema> temas = persistence.findFromAlbum(albEli.getNombre());
-          
-          for(tema temon:temas){
+        DAO_Tema persistence = new DAO_Tema();
 
-              temasEliminados teEl = new temasEliminados(temon.getNickname(),temon.getNombreAlbum(),temon.getDuracion(),temon.getAcceso(),temon.getArchivo());
-             
-              int idEl = 0;
+        Collection<tema> temas = persistence.findFromAlbum(albEli.getNombre());
 
-        if(persistence.findAllIntegerEli() == null){
-            idEl = 1;
-        }else{
-            idEl = persistence.darIdEli();
-            idEl ++;
+        for (tema temon : temas) {
+
+            temasEliminados teEl = new temasEliminados(temon.getNickname(), temon.getNombreAlbum(), temon.getDuracion(), temon.getAcceso(), temon.getArchivo());
+
+            int idEl = 0;
+
+            if (persistence.findAllIntegerEli() == null) {
+                idEl = 1;
+            } else {
+                idEl = persistence.darIdEli();
+                idEl++;
+            }
+            teEl.setId(idEl);
+            teEl.setAlbum(albEli);
+            try {
+                persistence.saveEl(teEl);
+                System.out.println("Eliminado guardado(Tema: " + teEl.getNickname() + ") exitosamente.");
+            } catch (PersistenceException e) {
+                System.out.println("Error al guardar el eliminado: " + e.getMessage());
+            }
         }
-        teEl.setId(idEl);
-        teEl.setAlbum(albEli);
-        try {
-            persistence.saveEl(teEl);
-            System.out.println("Eliminado guardado(Tema: " + teEl.getNickname()+ ") exitosamente.");
-        } catch (PersistenceException e) {
-            System.out.println("Error al guardar el eliminado: " + e.getMessage());
-        }  
- 
-          }
-          
-    
     }
-    
-    
-    
+
+    @Override
+    public Collection<DataTema> retornarDataTemasParecidosA(String busqueda) {
+        DAO_Tema persistence = new DAO_Tema();
+
+        Collection<tema> temasObjeto = persistence.findAllPorParecido(busqueda);
+
+        Collection<DataTema> temas = new ArrayList<>();
+
+        for (tema temazo : temasObjeto) {
+            temas.add(new DataTema(temazo.getNickname(), temazo.getDuracion(), new DataAlbum(temazo.getAlbum().getNombre(), temazo.getAlbum().getImagen(), temazo.getAlbum().getanioCreacion(), new DataArtista(temazo.getAlbum().getCreador().getNickname()))));
+        }
+        return temas;
+    }
 }

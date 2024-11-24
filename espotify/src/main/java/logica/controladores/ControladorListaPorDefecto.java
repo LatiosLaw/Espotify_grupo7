@@ -3,6 +3,7 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import logica.Genero;
 import logica.ListaPorDefecto;
 import logica.ListaReproduccion;
@@ -36,9 +37,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         ListaPorDefecto nuevaLista = new ListaPorDefecto(nombre, generoExistente);
         nuevaLista.setFoto(foto);
         // Guardar la nueva lista en la base de datos
-       // System.out.println("Antes del try");
+        // System.out.println("Antes del try");
         try {
-           
+
             ListaPorDefecto ls = new ListaPorDefecto();
             ls.setNombreLista(nuevaLista.getNombreLista());
             ls.setNombreCliente(nuevaLista.getNombreCliente());
@@ -50,14 +51,13 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             System.err.println("Error al guardar la lista: " + e.getMessage());
         }
     }
-    
+
     @Override
-    public void actualizarLista(DataListaPorDefecto lista){
+    public void actualizarLista(DataListaPorDefecto lista) {
         DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
         DAO_Tema dao_t = new DAO_Tema();
         ListaPorDefecto lista_actualizable = dao_l.findListaPorDefectoPorNombre(lista.getNombre());
-        
-        
+
         Iterator<DataTema> iterator = lista.getTemas().iterator();
         while (iterator.hasNext()) {
             DataTema tema = iterator.next();
@@ -83,9 +83,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
         daoLista.update(lista);
     }
-    
+
     @Override
-    public Collection<String> retornarListasDelGenero(String genero){
+    public Collection<String> retornarListasDelGenero(String genero) {
         Collection<String> lista_final = new ArrayList<>();
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         Collection<ListaPorDefecto> albu = persistence.findListasPorGeneros(genero);
@@ -96,9 +96,9 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         }
         return lista_final;
     }
-    
+
     @Override
-    public Collection<DataListaPorDefecto> retornarListasDelGeneroDT(String genero){
+    public Collection<DataListaPorDefecto> retornarListasDelGeneroDT(String genero) {
         Collection<DataListaPorDefecto> lista_final = new ArrayList<>();
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         Collection<ListaPorDefecto> albu = persistence.findListasPorGeneros(genero);
@@ -135,13 +135,13 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return null;
         }
     }
-    
+
     @Override
     public Collection<String> listarListasPorDefecto() {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-       return persistence.devolverListasPorDefectoString();   
+        return persistence.devolverListasPorDefectoString();
     }
-    
+
     @Override
     public Collection<String> listarListasPorDefectoConGenero() {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
@@ -154,7 +154,7 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
         }
         return retorno;
     }
-    
+
     @Override
     public DataListaPorDefecto devolverInformacionChu(String nombre_lista) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
@@ -178,40 +178,51 @@ public class ControladorListaPorDefecto implements IControladorListaPorDefecto {
             return null;
         }
     }
-    
+
     @Override
-    public Collection<DataListaPorDefecto> retornarListasPorDefecto(){
+    public Collection<DataListaPorDefecto> retornarListasPorDefecto() {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-        
-        Collection<ListaPorDefecto> listas =  persistence.devolverListasPorDefecto();
-        
+
+        Collection<ListaPorDefecto> listas = persistence.devolverListasPorDefecto();
+
         Collection<DataListaPorDefecto> dataListas = new ArrayList<>();
-        
-        for(ListaPorDefecto lista : listas){
+
+        for (ListaPorDefecto lista : listas) {
             dataListas.add(new DataListaPorDefecto(lista.getNombreLista(), lista.getFoto(), 0, new DataGenero(lista.getGenero().getNombre())));
         }
-        
+
         return dataListas;
     }
-    
+
     @Override
     public void eliminarTemaDeTodasLasListas(DataTema dtTema) {
-        
+
         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
-         
-         Collection<ListaPorDefecto> listas = dao.devolverListasPorDefecto();
-                 
-         for(ListaPorDefecto lista : listas){
-             Collection<tema> temas = lista.getTemas();
-             for(tema temon: temas){
-                 if(temon.getNickname().equals(dtTema.getNickname())){
-                     this.quitarTema(lista.getNombreLista(), lista.getGenero().getNombre(), temon.getNickname(), temon.getNombreAlbum());
-                 } 
-             }
-             
-         }
-        
-        
+
+        Collection<ListaPorDefecto> listas = dao.devolverListasPorDefecto();
+
+        for (ListaPorDefecto lista : listas) {
+            Collection<tema> temas = lista.getTemas();
+            for (tema temon : temas) {
+                if (temon.getNickname().equals(dtTema.getNickname())) {
+                    this.quitarTema(lista.getNombreLista(), lista.getGenero().getNombre(), temon.getNickname(), temon.getNombreAlbum());
+                }
+            }
+        }
     }
-    
+
+    @Override
+    public Collection<DataListaPorDefecto> retornarDataListasParecidasA(String busqueda) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+
+        List<ListaPorDefecto> listasObjeto = persistence.devolverListasPorDefectoParecidasA(busqueda);
+
+        Collection<DataListaPorDefecto> listas = new ArrayList<>();
+
+        for (ListaPorDefecto lista : listasObjeto) {
+            listas.add(new DataListaPorDefecto(lista.getNombreLista(), lista.getFoto(), 0, new DataGenero(lista.getGenero().getNombre())));
+        }
+        return listas;
+    }
+
 }

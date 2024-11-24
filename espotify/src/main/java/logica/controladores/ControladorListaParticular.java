@@ -19,18 +19,18 @@ import persistencia.DAO_Usuario;
 public class ControladorListaParticular implements IControladorListaParticular {
 
     @Override
-    public Collection<String> retornarListasPublicas(){
+    public Collection<String> retornarListasPublicas() {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         Collection<ListaParticular> listas = persistence.findAllListasParticulares();
         Collection<String> coleString = new ArrayList<>();
-        for(ListaParticular listaP : listas){
-                if(listaP.getVisibilidad() == true){
+        for (ListaParticular listaP : listas) {
+            if (listaP.getVisibilidad() == true) {
                 coleString.add(listaP.getNombreLista());
-                }
+            }
         }
-       return coleString;
+        return coleString;
     }
-    
+
     @Override
     public void crearLista(String nombre, DataCliente dataCliente) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
@@ -41,31 +41,31 @@ public class ControladorListaParticular implements IControladorListaParticular {
             throw new IllegalArgumentException("No se encontro el cliente con el nickname: " + dataCliente.getNickname());
         }
         // Verificar si la lista ya existe
-        ListaReproduccion listaExistente = daoLista.findListaPorNicks(clienteExistente.getNickname(),nombre);
+        ListaReproduccion listaExistente = daoLista.findListaPorNicks(clienteExistente.getNickname(), nombre);
         if (listaExistente != null) {
             throw new IllegalArgumentException("La lista de reproduccion ya existe.");
         }
-        
+
         // Crear la nueva lista particular y asociar el cliente existente
         //System.out.println("Antes");
         ListaParticular nuevaLista = new ListaParticular(nombre, (Cliente) clienteExistente);
-       // System.out.println("Despues");
+        // System.out.println("Despues");
         nuevaLista.setVisibilidad(false);
-       // System.out.println("Despues2");
+        // System.out.println("Despues2");
         ListaParticular ls = new ListaParticular();
-       // System.out.println("Despues3");
+        // System.out.println("Despues3");
         ls.setNombreLista(nuevaLista.getNombreLista());
         ls.setNombreCliente(nuevaLista.getNombreCliente());
         //System.out.println("Despues4");
         daoLista.save(ls);
-       // System.out.println("Despues5");
+        // System.out.println("Despues5");
         daoLista.update(nuevaLista);
         //System.out.println("Despues6");
         System.out.println("Lista Particular creada exitosamente.");
     }
-    
+
     @Override
-    public void crearListaConVisibilidad(String nombre, DataCliente cli, boolean publica, String foto){
+    public void crearListaConVisibilidad(String nombre, DataCliente cli, boolean publica, String foto) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         DAO_Usuario daoUsuario = new DAO_Usuario();
         // Buscar el usuario existente usando el nickname
@@ -91,7 +91,7 @@ public class ControladorListaParticular implements IControladorListaParticular {
     }
 
     @Override
-    public void agregarTema(String nick_cliente, String nombre_lista, DataTema temazo){
+    public void agregarTema(String nick_cliente, String nombre_lista, DataTema temazo) {
         DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
         ListaParticular lista = null;
         Collection<ListaParticular> listas = daoLista.findListaPorCliente(nick_cliente);
@@ -99,10 +99,10 @@ public class ControladorListaParticular implements IControladorListaParticular {
         while (iterator.hasNext()) {
             lista = iterator.next();
             String nombrel = lista.getNombreLista();
-            if(nombrel.equals(nombre_lista)){
-                if(lista == null){
-                    System.out.println("No existen listas en el sistema."); 
-                }else{
+            if (nombrel.equals(nombre_lista)) {
+                if (lista == null) {
+                    System.out.println("No existen listas en el sistema.");
+                } else {
                     lista.agregarTema(new tema(temazo.getNickname(), temazo.getNomAlb(), temazo.getDuracion()));
                     IControladorAdicionalTema registro = new ControladorAdicionalTema();
                     registro.incrementarInfoAgregadoALista(temazo.getNickname(), temazo.getNomAlb());
@@ -115,8 +115,8 @@ public class ControladorListaParticular implements IControladorListaParticular {
 
     @Override
     public void quitarTema(String nick_cliente, String nombre_lista, String nombre_tema, String nombre_album_tema) {
-DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
-DAO_Tema daoTema = new DAO_Tema();
+        DAO_ListaReproduccion daoLista = new DAO_ListaReproduccion();
+        DAO_Tema daoTema = new DAO_Tema();
         ListaParticular lista = null;
         Collection<ListaParticular> listas = daoLista.findListaPorCliente(nick_cliente);
         tema temazo = daoTema.find(nombre_tema, nombre_album_tema);
@@ -124,10 +124,10 @@ DAO_Tema daoTema = new DAO_Tema();
         while (iterator.hasNext()) {
             lista = iterator.next();
             String nombrel = lista.getNombreLista();
-            if(nombrel == nombre_lista){
-                if(lista == null){
-                    System.out.println("No existen listas en el sistema."); 
-                }else{
+            if (nombrel == nombre_lista) {
+                if (lista == null) {
+                    System.out.println("No existen listas en el sistema.");
+                } else {
                     lista.eliminarTema(new tema(temazo.getNickname(), temazo.getNombreAlbum()));
                     IControladorAdicionalTema registro = new ControladorAdicionalTema();
                     registro.reducirInfoAgregadoALista(temazo.getNickname(), temazo.getNombreAlbum());
@@ -206,39 +206,40 @@ DAO_Tema daoTema = new DAO_Tema();
         }
         return dataListas;
     }
-    
+
     @Override
-     public Collection<String> devolverListasParticularesPublicasString(String nickname) {
+    public Collection<String> devolverListasParticularesPublicasString(String nickname) {
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         Collection<ListaParticular> listas = persistence.findListaPorCliente(nickname);
         Collection<String> coleString = new ArrayList<>();
-        for(ListaParticular listaP : listas){
-            if(listaP.getVisibilidad() == true){
+        for (ListaParticular listaP : listas) {
+            if (listaP.getVisibilidad() == true) {
                 coleString.add(listaP.getNombreLista());
             }
         }
-       return coleString;
+        return coleString;
     }
-    
+
     @Override
-      public DataListaReproduccion devolverInformacionListaRepro(String coso, String nombre){
-          DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
-          ListaReproduccion token = persistence.findListaReproduccionPorNombre(coso,nombre);
-            //WARNINMG
-          if(token == null){
-              return null;
-          }else{
-               DataListaReproduccion token2 = new DataListaReproduccion(token.getNombreLista(), token.getNombreCliente());
-               return token2;
-          }
-      }
+    public DataListaReproduccion devolverInformacionListaRepro(String coso, String nombre) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+        ListaReproduccion token = persistence.findListaReproduccionPorNombre(coso, nombre);
+        //WARNINMG
+        if (token == null) {
+            return null;
+        } else {
+            DataListaReproduccion token2 = new DataListaReproduccion(token.getNombreLista(), token.getNombreCliente());
+            return token2;
+        }
+    }
+
     @Override
-    public DataListaParticular retornarlista(String nickname, String nombreCliente){
+    public DataListaParticular retornarlista(String nickname, String nombreCliente) {
         DAO_Usuario persistence2 = new DAO_Usuario();
         DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
         ListaReproduccion lista = persistence.findListaPorNicks(nombreCliente, nickname);
-        if(lista != null){
-            if(lista instanceof ListaParticular listaP){
+        if (lista != null) {
+            if (lista instanceof ListaParticular listaP) {
                 Cliente cli = listaP.getCliente();
                 DataListaParticular listaRetorno = new DataListaParticular();
                 listaRetorno.setNombre(listaP.getNombreLista());
@@ -252,9 +253,9 @@ DAO_Tema daoTema = new DAO_Tema();
         System.out.println("Error al retornar Lista.");
         return null;
     }
-    
+
     @Override
-    public void actualizarLista(DataListaParticular lista){
+    public void actualizarLista(DataListaParticular lista) {
         DAO_ListaReproduccion dao_l = new DAO_ListaReproduccion();
         DAO_Tema dao_t = new DAO_Tema();
         ListaParticular lista_actualizable = dao_l.findListaPorNicks(lista.getCreador().getNickname(), lista.getNombre());
@@ -265,22 +266,34 @@ DAO_Tema daoTema = new DAO_Tema();
         }
         dao_l.update(lista_actualizable);
     }
+
     @Override
     public void eliminarTemaDeTodasLasListas(DataTema dtTema) {
-         DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
-         
-         Collection<ListaParticular> listas = dao.findAllListasParticulares();
-                 
-         for(ListaParticular lista : listas){
-             Collection<tema> temas = lista.getTemas();
-             for(tema temon: temas){
-                 if(temon.getNickname().equals(dtTema.getNickname())){
-                     this.quitarTema(lista.getNombreCliente(), lista.getNombreLista(), temon.getNickname(), temon.getNombreAlbum());
-                 } 
-             }
-             
-         }
-         
-         
+        DAO_ListaReproduccion dao = new DAO_ListaReproduccion();
+
+        Collection<ListaParticular> listas = dao.findAllListasParticulares();
+
+        for (ListaParticular lista : listas) {
+            Collection<tema> temas = lista.getTemas();
+            for (tema temon : temas) {
+                if (temon.getNickname().equals(dtTema.getNickname())) {
+                    this.quitarTema(lista.getNombreCliente(), lista.getNombreLista(), temon.getNickname(), temon.getNombreAlbum());
+                }
+            }
+        }
+    }
+
+    @Override
+    public Collection<DataListaParticular> retornarDataListasParecidasA(String busqueda) {
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+
+        Collection<ListaParticular> listasObjeto = persistence.findAllListasParticularesPublicasParecidasA(busqueda);
+
+        Collection<DataListaParticular> listas = new ArrayList<>();
+
+        for (ListaParticular lista : listasObjeto) {
+            listas.add(new DataListaParticular(lista.getNombreLista(), new DataCliente(lista.getCliente().getNickname()), lista.getFoto(), lista.getVisibilidad()));
+        }
+        return listas;
     }
 }

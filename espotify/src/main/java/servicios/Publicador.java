@@ -533,6 +533,30 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
         }
         return false;
     }
+    
+    @Override
+    public Collection<DataListaPorDefecto> obtenerDataListaPorDefectoPorParecido(String busqueda){
+        ControladorListaPorDefecto controlador = new ControladorListaPorDefecto();
+        return controlador.retornarDataListasParecidasA(busqueda);
+    }
+    
+    @Override
+    public Collection<DataListaParticular> obtenerDataListaParticularPorParecido(String busqueda){
+        ControladorListaParticular controlador = new ControladorListaParticular();
+        return controlador.retornarDataListasParecidasA(busqueda);
+    }
+    
+    @Override
+    public Collection<DataAlbum> obtenerDataAlbumPorParecido(String busqueda){
+        ControladorAlbum controlador = new ControladorAlbum();
+        return controlador.retornarDataAlbumesParecidosA(busqueda);
+    }
+    
+    @Override
+    public Collection<DataTema> obtenerDataTemaPorParecido(String busqueda){
+        ControladorTema controlador = new ControladorTema();
+        return controlador.retornarDataTemasParecidosA(busqueda);
+    }
 
     @WebMethod(exclude = true)
     public void publicar() {

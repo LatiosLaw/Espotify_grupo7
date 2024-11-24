@@ -204,4 +204,17 @@ public interface IPublicador {
     
     @WebMethod
     public void eliminarArtista(String nickname);
+    
+    @WebMethod
+    public Collection<DataListaPorDefecto> obtenerDataListaPorDefectoPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataListaParticular> obtenerDataListaParticularPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataAlbum> obtenerDataAlbumPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataTema> obtenerDataTemaPorParecido(String busqueda);
+    
 }
