@@ -201,4 +201,7 @@ public interface IPublicador {
     
     @WebMethod
     public Collection<Registro_tema> obtenerLos100MasPopulares();
+    
+    @WebMethod
+    public void eliminarArtista(String nickname);
 }

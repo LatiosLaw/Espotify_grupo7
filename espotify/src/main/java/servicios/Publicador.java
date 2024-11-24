@@ -513,6 +513,18 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
     }
     
     @Override
+    public void eliminarArtista(String nickname){
+        ControladorAlbum controlAl = new ControladorAlbum();
+        ControladorTema controlTema = new ControladorTema();
+        ControladorCliente controlCli = new ControladorCliente();
+        ControladorListaParticular controlLipa = new ControladorListaParticular();
+        ControladorListaPorDefecto controlLipo = new ControladorListaPorDefecto();
+        ControladorArtista controlador = new ControladorArtista();
+        
+        controlador.eliminarArtitsta(nickname, controlAl, controlTema, controlCli, controlLipa, controlLipo);
+    }
+    
+    @Override
     public Boolean checkSiEsGenero(String nombreGenero){
         DAO_Genero gen = new DAO_Genero();
         Genero genero = gen.find(nombreGenero);
