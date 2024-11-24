@@ -3,6 +3,7 @@ package servicios;
 import java.util.Collection;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import logica.Registro_tema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataCliente;
@@ -194,4 +195,10 @@ public interface IPublicador {
     
     @WebMethod
     public Boolean checkSiEsGenero(String nombreGenero);
+    
+    @WebMethod
+    public Registro_tema devolverRegistroTema(String nombreTema, String albumName);
+    
+    @WebMethod
+    public Collection<Registro_tema> obtenerLos100MasPopulares();
 }

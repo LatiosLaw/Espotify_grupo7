@@ -10,7 +10,9 @@ import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 import logica.Genero;
+import logica.Registro_tema;
 import logica.Usuario;
+import logica.controladores.ControladorAdicionalTema;
 import logica.controladores.ControladorAlbum;
 import logica.controladores.ControladorArtista;
 import logica.controladores.ControladorCliente;
@@ -31,7 +33,6 @@ import logica.dt.DataSus;
 import logica.dt.DataTema;
 import logica.dt.DataUsuario;
 import persistencia.DAO_Genero;
-import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Usuario;
 
 @WebService
@@ -497,6 +498,18 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
     public void actualizarListaParticular(DataListaParticular lista){
         ControladorListaParticular controlador = new ControladorListaParticular();
         controlador.actualizarLista(lista); //a ver que tul
+    }
+    
+    @Override
+    public Registro_tema devolverRegistroTema(String nombreTema, String albumName){
+        ControladorAdicionalTema controlador = new ControladorAdicionalTema();
+        return controlador.devolverRegistroTema(nombreTema, albumName);
+    }
+    
+    @Override
+    public Collection<Registro_tema> obtenerLos100MasPopulares(){
+        ControladorAdicionalTema controlador = new ControladorAdicionalTema();
+        return controlador.buscarLos100MasPopulares();
     }
     
     @Override
