@@ -192,4 +192,6 @@ public interface IPublicador {
     @WebMethod
     public void actualizarListaParticular(DataListaParticular lista);
     
+    @WebMethod
+    public Boolean checkSiEsGenero(String nombreGenero);
 }
