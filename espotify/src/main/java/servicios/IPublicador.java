@@ -186,4 +186,10 @@ public interface IPublicador {
     @WebMethod
     public void agregarRegistro(String nickname, String os, String navegador, String ip, String url);
     
+    @WebMethod
+    public void crearListaParticular(String nombreLista, DataCliente cliente);
+    
+    @WebMethod
+    public void actualizarListaParticular(DataListaParticular lista);
+    
 }

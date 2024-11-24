@@ -484,6 +484,18 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
         ControladorCliente controlador = new ControladorCliente();
         controlador.agregarRegistro(nickname, os, navegador, ip, url);
     }
+    
+    @Override
+    public void crearListaParticular(String nombreLista, DataCliente cliente){
+        ControladorListaParticular controlador = new ControladorListaParticular();
+        controlador.crearLista(nombreLista, cliente);
+    }
+    
+    @Override
+    public void actualizarListaParticular(DataListaParticular lista){
+        ControladorListaParticular controlador = new ControladorListaParticular();
+        controlador.actualizarLista(lista); //a ver que tul
+    }
 
     @WebMethod(exclude = true)
     public void publicar() {
