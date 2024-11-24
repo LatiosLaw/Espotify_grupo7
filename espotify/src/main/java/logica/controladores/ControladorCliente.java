@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Scanner;
 import javax.persistence.PersistenceException;
 import logica.Album;
 import logica.Artista;
@@ -20,11 +19,14 @@ import logica.tema;
 import logica.Usuario;
 import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
+import logica.dt.DataArtista;
 import logica.dt.DataCliente;
 import logica.dt.DataListaParticular;
 import logica.dt.DataListaReproduccion;
 import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
+import logica.dt.DataGenero;
+import logica.dt.DataListaPorDefecto;
 import logica.dt.DataRegi;
 import logica.dt.DataSus;
 import persistencia.DAO_Album;
@@ -681,7 +683,67 @@ public class ControladorCliente implements IControladorCliente {
                 }
             }
         }
-         
     }
     
+    @Override
+    public Collection<DataAlbum> obtenerDataAlbumesFavoritos(String nickname){
+        DAO_Usuario persistence = new DAO_Usuario();
+         
+         Collection<Album> albumesObjeto = persistence.obtenerAlbumFavCliente2(nickname);
+         Collection<DataAlbum> albumes = new ArrayList<>();
+         
+         for(Album album : albumesObjeto){
+             albumes.add(new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(album.getCreador().getNickname())));
+         }
+         
+         return albumes;
+    }
+    
+    @Override
+    public Collection<DataListaParticular> obtenerDataListasDeClientes(String nickname){
+        DAO_ListaReproduccion persistence = new DAO_ListaReproduccion();
+
+        Collection<ListaParticular> listasObjeto = persistence.findListaPorCliente(nickname);
+
+        Collection<DataListaParticular> listas = new ArrayList<>();
+
+        for (ListaParticular lista : listasObjeto) {
+            listas.add(new DataListaParticular(lista.getNombreLista(), new DataCliente(lista.getCliente().getNickname()), lista.getFoto(), lista.getVisibilidad()));
+        }
+        return listas;
+    }
+    
+    @Override
+    public Collection<DataListaParticular> obtenerDataListasParticularesFavoritas(String nickname){
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        Collection<ListaParticular> listasObjeto = persistence.obtenerListasParticularesFavCliente2(nickname);
+
+        Collection<DataListaParticular> listas = new ArrayList<>();
+
+        for (ListaParticular lista : listasObjeto) {
+            listas.add(new DataListaParticular(lista.getNombreLista(), new DataCliente(lista.getCliente().getNickname()), lista.getFoto(), lista.getVisibilidad()));
+        }
+        return listas;
+    }
+    
+    @Override
+    public Collection<DataListaPorDefecto> obtenerDataListasPorDefectoFavoritas(String nickname){
+        DAO_Usuario persistence = new DAO_Usuario();
+
+        Collection<ListaPorDefecto> listasObjeto = persistence.obtenerListasFavPorDefectoCliente2(nickname);
+
+        Collection<DataListaPorDefecto> listas = new ArrayList<>();
+
+        for (ListaPorDefecto lista : listasObjeto) {
+            listas.add(new DataListaPorDefecto(lista.getNombreLista(), lista.getFoto(), 0, new DataGenero(lista.getGenero().getNombre())));
+        }
+        return listas;
+    }
+    
+    @Override
+    public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname){
+        DAO_Usuario persistence = new DAO_Usuario();
+        return persistence.obtenerTemaFavCliente(nickname);
+    }
 }

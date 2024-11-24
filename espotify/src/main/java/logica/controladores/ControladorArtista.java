@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.persistence.PersistenceException;
+import logica.Album;
 import logica.Artista;
 import logica.ArtistasEliminados;
 import logica.Cliente;
 import logica.Usuario;
+import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataArtistaEli;
 import logica.dt.DataCliente;
 import logica.dt.DataErrorBundle;
 import logica.dt.DataUsuario;
+import persistencia.DAO_Album;
 import persistencia.DAO_Usuario;
 
 public class ControladorArtista implements IControladorArtista {
@@ -263,5 +266,19 @@ public class ControladorArtista implements IControladorArtista {
           DAO_Usuario dao = new DAO_Usuario();
          Collection<String> cole = dao.findAlbumsFavStringEli(nick);
           return cole;
+     }
+     
+     @Override
+     public Collection<DataAlbum> obtenerDataAlbumesDeArtista(String nickname){
+         DAO_Album persistence = new DAO_Album();
+         
+         Collection<Album> albumesObjeto = persistence.findAllPorArtista(nickname);
+         Collection<DataAlbum> albumes = new ArrayList<>();
+         
+         for(Album album : albumesObjeto){
+             albumes.add(new DataAlbum(album.getNombre(), album.getImagen(), album.getanioCreacion(), new DataArtista(album.getCreador().getNickname())));
+         }
+         
+         return albumes;
      }
 }
