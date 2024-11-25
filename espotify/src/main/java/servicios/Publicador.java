@@ -21,6 +21,7 @@ import logica.controladores.ControladorListaParticular;
 import logica.controladores.ControladorListaPorDefecto;
 import logica.controladores.ControladorSuscripcion;
 import logica.controladores.ControladorTema;
+import logica.controladores.IControladorAdicionalTema;
 import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
@@ -603,6 +604,18 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
     public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname) {
         ControladorCliente controlador = new ControladorCliente();
         return controlador.obtenerDataIdTemasFavoritos(nickname);
+    }
+    
+    @Override
+    public void incrementarInfoDescarga(String nombreTema, String nombreAlbum){
+        IControladorAdicionalTema registro = new ControladorAdicionalTema();
+        registro.incrementarInfoDescarga(nombreTema, nombreAlbum);
+    }
+    
+    @WebMethod
+    public void incrementarInfoReproduccion(String nombreTema, String nombreAlbum){
+        IControladorAdicionalTema registro = new ControladorAdicionalTema();
+        registro.incrementarInfoReproduccion(nombreTema, nombreAlbum);
     }
 
     @WebMethod(exclude = true)

@@ -241,4 +241,11 @@ public interface IPublicador {
     
     @WebMethod
     public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname);
+    
+    @WebMethod
+    public void incrementarInfoDescarga(String nombreTema, String nombreAlbum);
+    
+    @WebMethod
+    public void incrementarInfoReproduccion(String nombreTema, String nombreAlbum);
+    
 }
