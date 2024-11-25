@@ -11,20 +11,22 @@ public interface IControladorAlbum {
     public DataAlbum agregarAlbum(String artista, String nombAlbum, String imagen, int anioCreacion, Collection<DataTema> temas);
 
     public Collection<String> retornarAlbumsDelGenero(String genero);
-    
+
     public Collection<DataAlbum> retornarAlbumsDelGeneroDT(String genero);
 
     public Collection<String> retornarAlbumsDelArtista(String nick_arti);
 
     public DataAlbum retornarInfoAlbum(String nombre_album);
-    
+
     public Collection<String> retornarAlbumsString();
-    
+
     public void actualizarAlbum(DataAlbum dataAlbum, Collection<DataGenero> nuevosGeneros);
-    
-    public void eliminarDelMapaAlbums(Collection<String> albs, ControladorTema controlTema, ControladorCliente controlCli,ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
+
+    public void eliminarDelMapaAlbums(Collection<String> albs, ControladorTema controlTema, ControladorCliente controlCli, ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo);
 
     public void agregarAlbumAeliminados(Collection<String> coleAlbums, ControladorTema controlTema, ArtistasEliminados artEl);
 
     public Collection<DataAlbum> retornarDataAlbumes();
+
+    public Collection<DataAlbum> retornarDataAlbumesParecidosA(String busqueda);
 }

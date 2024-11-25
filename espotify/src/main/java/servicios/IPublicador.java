@@ -4,6 +4,7 @@ import java.util.Collection;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import logica.Registro_tema;
+import logica.dt.DT_IdTema;
 import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataCliente;
@@ -204,4 +205,40 @@ public interface IPublicador {
     
     @WebMethod
     public void eliminarArtista(String nickname);
+    
+    @WebMethod
+    public Collection<DataListaPorDefecto> obtenerDataListaPorDefectoPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataListaParticular> obtenerDataListaParticularPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataAlbum> obtenerDataAlbumPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<DataTema> obtenerDataTemaPorParecido(String busqueda);
+    
+    @WebMethod
+    public Collection<String> obtenerSeguidoresDeUsuario(String nickname);
+    
+    @WebMethod
+    public Collection<String> obtenerSeguidosDeUsuario(String nickname);
+      
+    @WebMethod
+    public Collection<DataAlbum> obtenerDataAlbumesDeArtista(String nickname);
+    
+    @WebMethod
+    public Collection<DataListaParticular> obtenerDataListasDeClientes(String nickname);
+    
+    @WebMethod
+    public Collection<DataAlbum> obtenerDataAlbumesFavoritos(String nickname);
+    
+    @WebMethod
+    public Collection<DataListaParticular> obtenerDataListasParticularesFavoritas(String nickname);
+    
+    @WebMethod
+    public Collection<DataListaPorDefecto> obtenerDataListasPorDefectoFavoritas(String nickname);
+    
+    @WebMethod
+    public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname);
 }

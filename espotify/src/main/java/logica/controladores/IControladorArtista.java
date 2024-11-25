@@ -3,6 +3,7 @@ package logica.controladores;
 import java.time.LocalDate;
 import java.util.Collection;
 import logica.ArtistasEliminados;
+import logica.dt.DataAlbum;
 import logica.dt.DataArtista;
 import logica.dt.DataArtistaEli;
 import logica.dt.DataErrorBundle;
@@ -42,5 +43,5 @@ public interface IControladorArtista {
      
      public Collection<String> listarAlbumsEli(String nick);
 
-
+     public Collection<DataAlbum> obtenerDataAlbumesDeArtista(String nickname);
 }
