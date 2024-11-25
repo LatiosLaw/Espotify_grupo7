@@ -227,7 +227,7 @@ public class FormPrin extends javax.swing.JFrame {
         lblProgreso.setVisible(true);
         new Thread(() -> {
             try {
-               if(true)//para "comentar" codigo mas rapido
+               if(false)//para "comentar" codigo mas rapido
                {
                 cargarClientes();
                 jProgressBar1.setValue(8);
@@ -252,7 +252,7 @@ public class FormPrin extends javax.swing.JFrame {
                 lblProgreso.setText("81%");
                 cargarFavoritos();
                }
-                cargarSuscripciones();
+                cargarSuscripcionesANDMORE();
                 lblProgreso.setText("100%");
                 jProgressBar1.setValue(100);
                 JOptionPane.showMessageDialog(this, "Datos cargados correctamente.");
@@ -736,7 +736,7 @@ public class FormPrin extends javax.swing.JFrame {
 
         System.out.println("FAVORITOS CARGADOS");
     }
-    private void cargarSuscripciones(){
+    private void cargarSuscripcionesANDMORE(){
         //benKenobi,cbochinche,lachiqui
        controlCli.hiroshimaYnagasaki();
        controlCli.agregarRegistro("benKenobi","Guindou", "faier focs","10.0.0.1","Laricapasta.com");
@@ -774,9 +774,9 @@ public class FormPrin extends javax.swing.JFrame {
         //
         
         
-        controlArt.eliminarArtitsta("lospimpi",controlAlb2,controlTem2,controlCli2,controlListPar2,controlListPD2);
+        //controlArt.eliminarArtitsta("lospimpi",controlAlb2,controlTem2,controlCli2,controlListPar2,controlListPD2);
    
-       
+       this.controlCli.listarUsuariosPorFama();
        
        
     }

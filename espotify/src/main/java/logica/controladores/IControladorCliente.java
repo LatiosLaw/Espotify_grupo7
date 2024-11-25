@@ -12,6 +12,7 @@ import logica.dt.DataListaParticular;
 import logica.dt.DataListaPorDefecto;
 import logica.dt.DataRegi;
 import logica.dt.DataSus;
+import logica.dt.DataUsuario;
 
 public interface IControladorCliente {
 
@@ -98,5 +99,7 @@ public interface IControladorCliente {
     public Collection<DataListaPorDefecto> obtenerDataListasPorDefectoFavoritas(String nickname);
     
     public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname);
+
+    public Collection<DataUsuario> listarUsuariosPorFama();
 
 }
