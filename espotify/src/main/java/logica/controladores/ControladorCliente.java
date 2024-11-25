@@ -27,6 +27,7 @@ import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
 import logica.dt.DataRegi;
 import logica.dt.DataSus;
+import logica.dt.DataUsuario;
 import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Tema;
@@ -683,5 +684,55 @@ public class ControladorCliente implements IControladorCliente {
         }
          
     }
+    @Override
+     public Collection<DataUsuario> listarUsuariosPorFama(){
+        DAO_Usuario persistence = new DAO_Usuario();
+        
+        Collection<Usuario> cole = persistence.findAll();
+        ArrayList<Usuario> cole2 = new ArrayList<>();
+        for(Usuario usrrr:cole){
+            Usuario user = usrrr;
+            cole2.add(user);
+        }
+
+        ArrayList<Usuario> coleOrdenada = new ArrayList<>();
+        Usuario token = new Cliente();
+        
+        token.setNickname("Sir.Token");
+        coleOrdenada.add(token);
+        Collection<DataUsuario> coleDef = new ArrayList<>();
+        
+        for(int i = 0; i<cole2.size();i++){
+                    int size2 =coleOrdenada.size();
+                    for(int n = 0; n<size2;n++){
+                        if(cole2.get(i).getNumSeguidores() > coleOrdenada.get(n).getNumSeguidores()){
+                            coleOrdenada.add(n, cole2.get(i));
+                       
+                            break;
+                        }else if(cole2.get(i).getNumSeguidores() == 0){
+                            coleOrdenada.add(cole2.get(i));
+                            break;
+                        }
+                    }
+                
+            
+        }
+        coleOrdenada.remove(token);
+        for(int i = 0; i<coleOrdenada.size(); i++){
+            System.out.println("Nickanme: " + coleOrdenada.get(i).getNickname() + "/Cant Seguidores: " + coleOrdenada.get(i).getNumSeguidores());
+            
+            DataUsuario tokenDta = new DataUsuario();
+            
+            tokenDta.setNickname(coleOrdenada.get(i).getNickname());
+            
+            tokenDta.setFoto(coleOrdenada.get(i).getFoto());
+            
+            coleDef.add(tokenDta);
+        }
+        
+         return coleDef;
+     }
+    
+    
     
 }

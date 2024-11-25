@@ -11,6 +11,7 @@ import logica.dt.DataTema;
 import logica.dt.DataErrorBundle;
 import logica.dt.DataRegi;
 import logica.dt.DataSus;
+import logica.dt.DataUsuario;
 
 public interface IControladorCliente {
 
@@ -87,5 +88,7 @@ public interface IControladorCliente {
     public void eliminarAlbum2(DataCliente nickcli, DataAlbum nomalbum);
     
     public void eliminarDeTodosAlrtista(String nickArt);
+    
+    public Collection<DataUsuario> listarUsuariosPorFama();
     
 }

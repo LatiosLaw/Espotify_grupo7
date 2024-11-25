@@ -111,7 +111,15 @@ public abstract class Usuario implements Serializable {
     public String getDTYPE(){
         return DTYPE;
     }
-
+    
+    public int getNumSeguidores(){
+        int token = 0;
+        if(this.seguidores != null || !this.seguidores.isEmpty()){
+            token = seguidores.size();
+        }
+        return token;
+    }
+    
     public boolean verificarContraseña(String pass){
         return this.contraseña.equals(pass);
     }
