@@ -43,7 +43,7 @@ public class FormPrin extends javax.swing.JFrame {
         lblProgreso.setVisible(false);
         setLocationRelativeTo(null);
         
-        
+        controlCli.mailMomento();
         
         /*
         String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
