@@ -248,4 +248,7 @@ public interface IPublicador {
     @WebMethod
     public void incrementarInfoReproduccion(String nombreTema, String nombreAlbum);
     
+    @WebMethod
+    public Collection<DataUsuario> listarUsuariosPorFama();
+    
 }
