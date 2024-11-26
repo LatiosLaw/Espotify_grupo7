@@ -101,5 +101,7 @@ public interface IControladorCliente {
     public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname);
 
     public Collection<DataUsuario> listarUsuariosPorFama();
+    
+     public void mailMomento();
 
 }

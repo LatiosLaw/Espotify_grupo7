@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Properties;
 import javax.persistence.PersistenceException;
 import logica.Album;
 import logica.Artista;
@@ -34,6 +35,11 @@ import persistencia.DAO_Album;
 import persistencia.DAO_ListaReproduccion;
 import persistencia.DAO_Tema;
 import persistencia.DAO_Usuario;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
 
 public class ControladorCliente implements IControladorCliente {
 
@@ -797,4 +803,44 @@ public class ControladorCliente implements IControladorCliente {
         DAO_Usuario persistence = new DAO_Usuario();
         return persistence.obtenerTemaFavCliente(nickname);
     }
+    @Override
+    public void mailMomento(){
+         final String username = "andresferreira05@gmail.com";
+        final String password = "fvly hipq jwom ppqw";
+
+        Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        
+        Session sessionG = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(sessionG);
+            message.setFrom(new InternetAddress("andresferreira05@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("luquitacrespi@gmail.com")
+            );
+            message.setSubject("Sexo");
+            message.setText("Te falta."
+                    + "\n\n Fraca");
+
+            Transport.send(message);
+
+            System.out.println("Done");
+    }catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    
+    }
+    
+    
 }
