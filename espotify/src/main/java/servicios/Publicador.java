@@ -612,10 +612,16 @@ public class Publicador implements IPublicador { // Implementa la interfaz IPubl
         registro.incrementarInfoDescarga(nombreTema, nombreAlbum);
     }
     
-    @WebMethod
+    @Override
     public void incrementarInfoReproduccion(String nombreTema, String nombreAlbum){
         IControladorAdicionalTema registro = new ControladorAdicionalTema();
         registro.incrementarInfoReproduccion(nombreTema, nombreAlbum);
+    }
+    
+    @Override
+    public Collection<DataUsuario> listarUsuariosPorFama(){
+        ControladorCliente controlador = new ControladorCliente();
+        return controlador.listarUsuariosPorFama();
     }
 
     @WebMethod(exclude = true)

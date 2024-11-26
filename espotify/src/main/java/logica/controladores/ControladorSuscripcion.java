@@ -117,6 +117,7 @@ public class ControladorSuscripcion implements IControladorSuscripcion {
         DAO_Suscripcion daoSus = new DAO_Suscripcion();
         Suscripcion sus = daoSus.find(id);
         DataSus re_sus = new DataSus(sus.getUserNick(), sus.getFecha(), sus.getEstado());
+        re_sus.setTipoSus(sus.getTipo());
         return re_sus;
     }
     @Override
