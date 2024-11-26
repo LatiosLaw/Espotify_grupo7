@@ -102,6 +102,6 @@ public interface IControladorCliente {
 
     public Collection<DataUsuario> listarUsuariosPorFama();
     
-     public void mailMomento();
+     public void mailMomento(IControladorSuscripcion controlSus, String nick, int idSus);
 
 }

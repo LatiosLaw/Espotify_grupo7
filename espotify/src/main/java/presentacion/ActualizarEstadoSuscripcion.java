@@ -186,6 +186,7 @@ public class ActualizarEstadoSuscripcion extends javax.swing.JPanel {
             }else{
                  this.controlSus.actualizarEstado(idSecretosa, token);
                  JOptionPane.showMessageDialog(null, "Se cambio el estado de la suscripcion");
+                 controlCli.mailMomento(controlSus, txtNick.getText(), idSecretosa);
                  cargarDatos();
             }
            

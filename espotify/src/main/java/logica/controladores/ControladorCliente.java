@@ -801,13 +801,58 @@ public class ControladorCliente implements IControladorCliente {
     @Override
     public Collection<DT_IdTema> obtenerDataIdTemasFavoritos(String nickname){
         DAO_Usuario persistence = new DAO_Usuario();
+        
         return persistence.obtenerTemaFavCliente(nickname);
     }
     @Override
-    public void mailMomento(){
-         final String username = "andresferreira05@gmail.com";
+    public void mailMomento(IControladorSuscripcion controlSus, String nick, int idSus){
+        DataSus dtaSus = controlSus.retornarSus(idSus);
+        DataCliente cliente = this.consultarPerfilCliente(nick);
+        LocalDate today = LocalDate.now();
+        LocalDate fechaFint = LocalDate.now();
+        LocalDate fechaFin;
+        String precio = "5 pesos";
+        String texto = "El listo nunca te abandona";
+        if("Menusal".equals(dtaSus.getTipoSus())){
+            precio = "15 pesos";
+           fechaFin = fechaFint.plusMonths(1);
+        }else if("Anual".equals(dtaSus.getTipoSus())){
+            precio = "150 Pesos";
+           fechaFin = fechaFint.plusYears(1);
+        }else{fechaFin = fechaFint.plusWeeks(1);}
+        
+        if("Cancelada".equals(dtaSus.getEstado())){
+            texto = "Estimado/a ," + cliente.getNombre() +" "+ cliente.getApellido() + ". Su suscpripcion en Espotify del Equipo 7 a sido Cancelada" + "."
+                    + "\n\n "
+                     + "\n\n Detalles de la suscrpcion"
+                     + "\n\n Tipo:"
+                     + "\n\n" + dtaSus.getTipoSus() + ": " + precio 
+                     + "\n\n Fecha de la cancelacion:"
+                     + "\n\n" + dtaSus.getUltiFechaHabi()
+                     +"\n\n"
+                     +"\n\n Gracias por preferirnos,"
+                     +"\n\n Saludos."
+                     +"\n\n Espotify del grupo-7.";
+        }else{
+            texto = "Estimado/a ," + cliente.getNombre() +" "+ cliente.getApellido() + ". Su suscpripcion en Espotify del Equipo 7 a sido aprobada y se encuentra en " + dtaSus.getEstado() + "."
+                    + "\n\n "
+                     + "\n\n Detalles de la suscrpcion"
+                     + "\n\n Tipo:"
+                     + "\n\n" + dtaSus.getTipoSus() + ": " + precio 
+                     + "\n\n Fecha inicio:"
+                     + "\n\n" + dtaSus.getUltiFechaHabi()
+                     + "\n\n Fecha fin:"
+                     +"\n\n" + String.valueOf(fechaFin)
+                     +"\n\n"
+                     +"\n\n Gracias por preferirnos,"
+                     +"\n\n Saludos."
+                     +"\n\n Espotify del grupo-7.";
+        }
+        
+        
+        final String username = "andresferreira05@gmail.com";
         final String password = "fvly hipq jwom ppqw";
-
+        
         Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -827,11 +872,10 @@ public class ControladorCliente implements IControladorCliente {
             message.setFrom(new InternetAddress("andresferreira05@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("luquitacrespi@gmail.com")
+                    InternetAddress.parse(cliente.getCorreo())
             );
-            message.setSubject("Sexo");
-            message.setText("Te falta."
-                    + "\n\n Fraca");
+            message.setSubject("[Esporify Grupo-7] [" +String.valueOf(today) + "]");
+            message.setText(texto);
 
             Transport.send(message);
 
