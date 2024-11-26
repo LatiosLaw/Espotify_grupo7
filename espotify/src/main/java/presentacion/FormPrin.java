@@ -44,7 +44,6 @@ public class FormPrin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         
-        
         /*
         String nickArt, ControladorAlbum controlAl,ControladorTema controlTema, ControladorCliente controlCli, 
             ControladorListaParticular controlLipa, ControladorListaPorDefecto controlLipo
@@ -227,7 +226,7 @@ public class FormPrin extends javax.swing.JFrame {
         lblProgreso.setVisible(true);
         new Thread(() -> {
             try {
-               if(false)//para "comentar" codigo mas rapido
+               if(true)//para "comentar" codigo mas rapido
                {
                 cargarClientes();
                 jProgressBar1.setValue(8);
