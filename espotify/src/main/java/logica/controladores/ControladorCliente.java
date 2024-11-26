@@ -822,7 +822,7 @@ public class ControladorCliente implements IControladorCliente {
         }else{fechaFin = fechaFint.plusWeeks(1);}
         
         if("Cancelada".equals(dtaSus.getEstado())){
-            texto = "Estimado/a ," + cliente.getNombre() +" "+ cliente.getApellido() + ". Su suscpripcion en Espotify del Equipo 7 a sido Cancelada" + "."
+            texto = "Estimado/a ," + cliente.getNombre() +" "+ cliente.getApellido() + ". Su suscpripcion en Espotify del Equipo 7 a sido Cancelada POR UN ADMINISTRADOR" + "."
                     + "\n\n "
                      + "\n\n Detalles de la suscrpcion"
                      + "\n\n Tipo:"
